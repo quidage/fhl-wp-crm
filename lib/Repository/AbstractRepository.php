@@ -12,7 +12,7 @@ class AbstractRepository {
 	protected $table;
 
 	/**
-	 *
+	 * @var mysql_resource
 	 */
 	protected $db;
 
@@ -33,15 +33,8 @@ class AbstractRepository {
 	 * @return array results
 	 */
 	public function findAll() {
-		$results = array();
 		$query = "SELECT * FROM " . $this->table . " WHERE deleted = 0";
-		$res = mysql_query($query) or die(mysql_error());
-		if ($res !== false) {
-			while ($row = mysql_fetch_assoc($res)) {
-				$results[] = $row;
-			}
-		}
-		return $results;
+		return $this->getResults($query);
 	}
 
 	/**
@@ -52,12 +45,7 @@ class AbstractRepository {
 	 */
 	public function findById($id) {
 		$query = "SELECT * FROM " . $this->table . " WHERE deleted = 0 AND id = " . $id;
-		$res = mysql_query($query) or die(mysql_error());
-		if ($res !== false) {
-			return mysql_fetch_assoc($res);
-		} else {
-			return false;
-		}
+		return $this->getResult($query);
 	}
 
 	/**
@@ -68,15 +56,7 @@ class AbstractRepository {
 	 */
 	public function findByParentId($id) {
 		$query = "SELECT * FROM " . $this->table . " WHERE deleted = 0 AND parent_id = " . intval($id);
-		$res = mysql_query($query) or die(mysql_error());
-		if ($res !== false) {
-			while ($row = mysql_fetch_assoc($res)) {
-				$results[] = $row;
-			}
-			return $results;
-		} else {
-			return false;
-		}
+		return $this->getResults($query);
 	}
 
 	/**
@@ -105,6 +85,38 @@ class AbstractRepository {
 		} else {
 			return false;
 		}
+	}
+	
+	/**
+	 * Get all results by SQL-Query
+	 * 
+	 * @param string $query
+	 * @return array
+	 */
+	public function getResults($query) {
+		$res = mysql_query($query) or die(mysql_error());
+		$results = array();
+		if ($res !== false) {
+			while ($row = mysql_fetch_assoc($res)) {
+				$results[] = $row;
+			}
+		}
+		return $results;		
+	}
+	
+	/**
+	 * Get first result by SQL-Query
+	 * 
+	 * @param string $query
+	 * @return array/boolean
+	 */
+	public function getResult($query) {
+		$res = mysql_query($query) or die(mysql_error());
+		if ($res !== false) {
+			return mysql_fetch_assoc($res);
+		} else {
+			return false;
+		}		
 	}
 
 }
