@@ -1,0 +1,27 @@
+/* 
+    Document   : screen
+    Created on : 19.03.2013, 20:47:49
+    Author     : Christian Hansen, Enrico Hausschildt        
+*/
+
+root { 
+    display: block;
+}
+
+body {
+	font-family: sans-serif;
+	font-size: 1em;
+}
+
+.inner {
+	margin: 0 auto;
+	width: 800px;
+}
+
+table {
+	border: 1px solid darkgray;
+}
+
+td {
+	border: 1px solid darkgray;
+}

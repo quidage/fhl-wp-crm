@@ -1,12 +1,46 @@
+<?php
+require_once 'lib/Repository/CustomerRepository.php';
+// Get all customers for listing
+$customerRepository = new CustomerRepository();
+$customers = $customerRepository->findAll();
+?>			
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Start</title>
+		<link rel="stylesheet" href="css/screen.css" />
+        <title>Übersicht</title>
     </head>
+
     <body>
-		<?php
-			echo "test";
-		?>
+		<div id="wrapper">
+			<div class="outer">
+				<div class="inner">				
+
+					<table>
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Adresse</th>
+								<th></th>
+							</tr>				
+						</thead>
+						<tbody>					
+							<?php foreach ($customers as $customer): ?>
+								<tr>
+									<td><?php echo $customer['id']; ?></td>
+									<td><?php echo $customer['name']; ?></td>
+									<td><?php echo $customer['street'] . "<br>" . $customer['zip'] . " " . $customer['city']; ?></td>
+									<td><a href="customer_edit.php?customer=<?php echo $customer['id']; ?>">bearbeiten</a></td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+
+
+				</div>
+			</div>
+		</div>
     </body>
 </html>

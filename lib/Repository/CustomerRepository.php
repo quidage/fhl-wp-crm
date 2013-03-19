@@ -1,9 +1,10 @@
 <?php
 
-require_once './AbstractRepository.php';
+require_once 'AbstractRepository.php';
 
 /**
  * 
+ * @package wp-crm
  */
 class CustomerRepository extends AbstractRepository {
 	
@@ -12,19 +13,9 @@ class CustomerRepository extends AbstractRepository {
 	 */
 	public function __construct() {
 		parent::__construct();
-	}
-	
-	/**
-	 * Returns array of all customer result-objects
-	 */
-	public function findAll() {
-		$results = array();
-		$query = "SELECT * FROM cumstomer WHERE deleted = 0";
-		$res = $this->mysqli->query($query);
-		while ($row = $res->fetch_object()) {
-			$results[] = $row;
-		}
-		return $results;
+		
+		// Set the table
+		$this->table = "customer";
 	}
 	
 }
