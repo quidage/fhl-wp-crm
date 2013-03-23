@@ -60,7 +60,7 @@ class AbstractRepository {
 	}
 
 	/**
-	 * Insert new 
+	 * Insert new record
 	 * 
 	 * @param array $record
 	 * @param int $parent_id
@@ -76,7 +76,8 @@ class AbstractRepository {
 		}
 
 		foreach ($record as $key => $value) {
-			
+			$columns .= $key . ",";
+			$values .= "'" . $value . "'";
 		}
 
 		$query = "INSERT INTO " . $this->table . " (" . $columns . ") VALUES (" . $values . ")";
