@@ -10,13 +10,16 @@ $customers = $customerRepository->findAll();
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="css/screen.css" />
+		<script src="js/main.js"></script>
         <title>Übersicht</title>
     </head>
 
     <body>
 		<div id="wrapper">
 			<div class="outer">
-				<div class="inner">				
+				<div class="inner">		
+					
+					<div id="ergebnis"></div>
 
 					<table>
 						<thead>
