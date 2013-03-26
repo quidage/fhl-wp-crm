@@ -19,7 +19,7 @@ $customers = $customerRepository->findAll();
 			<div class="outer">
 				<div class="inner">		
 					
-					<div id="ergebnis"></div>
+					<div id="ergebnis" class="test2"></div>
 
 					<table>
 						<thead>
