@@ -8,12 +8,13 @@
 
 
 /**
+ * Get an element by selector-string
  * 
  * @param {string} selector
  * @returns {object}
  */
 function $(selector) {
-	return dh.init(selector);
+    return dh.init(selector);
 };
 
 /**
@@ -22,73 +23,92 @@ function $(selector) {
  * @type object
  */
 var dh = {
+    
+    /**
+     * 
+     * @param {string} selector
+     * @returns {dh}
+     */
+    init: function(selector) {
+        this.elem = document.getElementById(selector);
+        return this;
+    },
+            
+    /**
+     * Adds a class to an element
+     * 
+     * @param {string} className
+     * @returns {dh}
+     */
+    addClass: function(className) {
+        if (this.elem.hasAttribute('class')) {
+            this.elem.setAttribute('class', this.elem.getAttribute('class') + " " + className);
+        } else {
+            this.elem.setAttribute('class', className);
+        }
+        return this;
+    },
 
-	/**
-	 * 
-	 * @param {string} selector
-	 * @returns {oject}
-	 */
-	init: function(selector) {
-		 this.elem = document.getElementById(selector);
-		 return this;
-	},
+    /**
+     * 
+     * @param {string} className
+     * @returns {dh}
+     */
+    removeClass: function(className) {
+        if (this.elem.hasAttribute('class')) {
+            var classes = this.elem.getAttribute('class').split(" ");
+            var classesString = "";
+            for(i = 0; i < classes.length; i++) {
+                if(classes[i] !== className) {
+                    classesString += classes[i] + " ";
+                }
+            }
+            this.elem.setAttribute('class', classesString.slice(0, classesString.length - 1));
+        }
+        return this;
+    },
+            
+    /**
+     * Make an AJAX-Call
+     * 
+     * @param {object} parameter
+     * @returns {string}
+     */
+    ajax: function(parameter) {
 
-	/**
-	 * Adds a class to an element
-	 * 
-	 * @param {string} className
-	 * @returns {oject}
-	 */
-	addClass: function(className) {
-		if (this.elem.hasAttribute('class')) {
-			this.elem.setAttribute('class', this.elem.getAttribute('class') + " " + className);
-		} else {
-			this.elem.setAttribute('class', className);
-		}
-		return this;
-	},
+        var request = null;
 
-	/**
-	 * Make an AJAX-Call
-	 * 
-	 * @param {object} parameter
-	 * @returns {string}
-	 */
-	ajax: function(parameter) {
+        // Internet Explorer
+        if (window.ActiveXObject) {
+            request = new ActiveXObject("Microsoft.XMLHTTP");
+        } else { // other browsers
+            request = new XMLHttpRequest();
+        }
 
-		var request = null;
+        var requestUri = parameter.url;
+        //console.log(parameter.params.length);
+        for (i = 0; i < parameter.params.length; i++) {
+            console.log(params.i.valueOf());
+        }
+        request.open("GET", requestUri, true);
+        request.onreadystatechange = function() {
 
-		// Internet Explorer
-		if (window.ActiveXObject) {
-			request = new ActiveXObject("Microsoft.XMLHTTP");
-		} else { // other browsers
-			request = new XMLHttpRequest();
-		}
+            if (request.readyState !== 4 && parameter.loading() !== undefined) {
+                parameter.loading();
+            }
 
-		var requestUri = parameter.url;
-		//console.log(parameter.params.length);
-		for (i = 0; i < parameter.params.length; i++) {
-			console.log(params.i.valueOf());
-		}
-		request.open("GET", requestUri, true);
-		request.onreadystatechange = function() {
+            if (request.readyState === 4 && request.status === 200 && parameter.success(request.response) !== undefined) {
+                if (parameter.type === 'json') {
+                    parameter.success();
+                } else {
+                    parameter.success(request.responseText);
+                }
+            }
 
-			if (request.readyState !== 4 && parameter.loading() !== undefined) {
-				parameter.loading();
-			}
+        };
 
-			if (request.readyState === 4 && request.status === 200 && parameter.success(request.response) !== undefined) {
-				if (parameter.type === 'json') {
-					parameter.success();
-				} else {
-					parameter.success(request.responseText);
-				}
-			}
-
-		};
-
-		request.send(null);
-	}
+        request.send(null);
+    }
 
 
 }; // var selection
@@ -103,7 +123,7 @@ var dh = {
 // exec functions when page is loaded
 window.onload = function() {
 
-	$('ergebnis').addClass('test');
+    $('ergebnis').removeClass('test');
 
 //	ejc.ajax({
 //		url: 'ajax/test.php',
