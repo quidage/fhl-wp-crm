@@ -35,6 +35,16 @@ var dh = {
     },
             
     /**
+     * Trim a string
+     * 
+     * @param {type} untrimmedString
+     * @returns {@exp;untrimmedString@call;replace}
+     */
+    trim: function(untrimmedString) {
+        return untrimmedString.replace(/^\s+|\s+$/g, '');
+    },
+            
+    /**
      * Adds a class to an element
      * 
      * @param {string} className
@@ -42,7 +52,7 @@ var dh = {
      */
     addClass: function(className) {
         if (this.elem.hasAttribute('class')) {
-            this.elem.setAttribute('class', this.elem.getAttribute('class') + " " + className);
+            this.elem.setAttribute('class', this.elem.getAttribute('class') + ' ' + className);
         } else {
             this.elem.setAttribute('class', className);
         }
@@ -50,21 +60,42 @@ var dh = {
     },
 
     /**
+     * Remove class from an element
      * 
      * @param {string} className
      * @returns {dh}
      */
     removeClass: function(className) {
         if (this.elem.hasAttribute('class')) {
-            var classes = this.elem.getAttribute('class').split(" ");
-            var classesString = "";
+            var classes = this.elem.getAttribute('class').split(' ');
+            var classesString = '';
             for(i = 0; i < classes.length; i++) {
-                if(classes[i] !== className) {
-                    classesString += classes[i] + " ";
+                if(this.trim(classes[i]) !== className) {
+                    classesString += this.trim(classes[i]) + ' ';
                 }
             }
-            this.elem.setAttribute('class', classesString.slice(0, classesString.length - 1));
+            this.elem.setAttribute('class', this.trim(classesString));
         }
+        return this;
+    },
+    
+    /**
+     * Show an element
+     * 
+     * @returns {dh}
+     */        
+    show: function() {
+        this.elem.style.display = "block";
+        return this;
+    },
+            
+    /**
+     * Hide an element
+     * 
+     * @returns {dh}
+     */        
+    hide: function() {
+        this.elem.style.display = "none";
         return this;
     },
             
@@ -86,9 +117,9 @@ var dh = {
         }
 
         var requestUri = parameter.url;
-        //console.log(parameter.params.length);
+        
         for (i = 0; i < parameter.params.length; i++) {
-            console.log(params.i.valueOf());
+
         }
         request.open("GET", requestUri, true);
         request.onreadystatechange = function() {
@@ -123,7 +154,7 @@ var dh = {
 // exec functions when page is loaded
 window.onload = function() {
 
-    $('ergebnis').removeClass('test');
+//    $('ergebnis').removeClass('test');
 
 //	ejc.ajax({
 //		url: 'ajax/test.php',
