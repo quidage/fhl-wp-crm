@@ -17,7 +17,7 @@ class AbstractRepository {
 	protected $db;
 
 	/**
-	 * Constructors
+	 * Constructor
 	 * 
 	 * @return void
 	 */
@@ -32,8 +32,14 @@ class AbstractRepository {
 	 * 
 	 * @return array results
 	 */
-	public function findAll() {
-		$query = "SELECT * FROM " . $this->table . " WHERE deleted = 0";
+	public function findAll($order = null, $limit = null) {
+		$query = " SELECT * FROM " . $this->table . " WHERE deleted = 0 ";
+        if ($order !== null) {
+            $query .= " ODER BY " . $order;
+        }
+        if($limit !== null) {
+            $query .= " LIMIT " . $limit;
+        }
 		return $this->getResults($query);
 	}
 
