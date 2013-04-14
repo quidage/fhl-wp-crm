@@ -1,6 +1,6 @@
 <?php
 require_once 'lib/Repository/CustomerRepository.php';
-// Get all customers for listing
+// Get all customers for listing 
 $customerRepository = new CustomerRepository();
 $customers = $customerRepository->findAll();
 ?>			
