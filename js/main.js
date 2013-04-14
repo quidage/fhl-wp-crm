@@ -2,7 +2,7 @@
  * create own namespace for this project
  * the $ is inspired by jQuery
  * 
- * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>, Julian Hilbers <hilbers.julian@gmail.com>
  * 
  */
 
