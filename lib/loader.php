@@ -16,6 +16,7 @@ function __autoload($className) {
 
 /**
  * Load Action by Request
+ * 
  * Loads default Actions for controllers when action parameter not set
  * 
  * @return void
@@ -52,7 +53,7 @@ function actionLoader() {
     // TODO catch Action not found
     $controllerName = '\\EJC\\Controller\\' . ucwords($controller) . 'Controller';
     $actionName = $action . 'Action'; 
-    $controllerInstance = new $controllerName;
+    $controllerInstance = new $controllerName($action, ucwords($controller));
     $controllerInstance->$actionName(); 
 }
 

@@ -11,17 +11,61 @@ class CustomerController extends AbstractController {
     
     protected $customerRepository;
 
-    public function __construct() {
+    public function __construct($controllerName = NULL, $actionName = NULL) { 
+        parent::__construct($actionName, $controllerName);
         $this->customerRepository = new \EJC\Repository\CustomerRepository();
     }
     
     /**
+     * Display list of customers
      * 
-     * 
-     * @return void
      */
     public function listAction() {
-       echo 'listAction'; 
+        $this->view->assign('title', 'test');
+        $this->view->render();
+    }
+    
+    /**
+     * Display customer data
+     * 
+     * @param string $customerID
+     */
+    public function showAction($customerID) {
+        
+    }
+
+    /**
+     * Display form for editing customer data
+     * 
+     * @param string $customerID
+     */
+    public function editAction($customerID) {
+        
+    }
+    
+    /**
+     * Update the customer data
+     * 
+     * @param array $customer
+     */
+    public function updateAction($customer) {
+        
+    }
+    
+    /**
+     * Display form for creating a new custormer
+     */
+    public function newAction() {
+        
+    }
+    
+    /**
+     * Create a new customer
+     * 
+     * @param array $customer
+     */
+    public function createAction($customer) {
+        
     }
     
 }
