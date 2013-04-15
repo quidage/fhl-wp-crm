@@ -7,7 +7,7 @@ namespace EJC\Controller;
  *
  * @author christian
  */
-class CustomerController {
+class AbstractController {
     //put your code here
 }
 

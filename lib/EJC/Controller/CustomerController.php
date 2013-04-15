@@ -8,7 +8,22 @@ namespace EJC\Controller;
  * @author christian
  */
 class CustomerController extends AbstractController {
-    //put your code here
+    
+    protected $customerRepository;
+
+    public function __construct() {
+        $this->customerRepository = new \EJC\Repository\CustomerRepository();
+    }
+    
+    /**
+     * 
+     * 
+     * @return void
+     */
+    public function listAction() {
+       echo 'listAction'; 
+    }
+    
 }
 
 ?>
