@@ -1,14 +1,25 @@
 <?php
 
-// autoloader for classes
-// TODO catch file not found
+/**
+ * Autoloader for classes
+ * path defined by namespace
+ * 
+ * @param type $className
+ */
 function __autoload($className) {
     $dirname = dirname(__FILE__);
     $filename = "" . str_replace('\\', '/', $className) . '.php';
+    
+    // TODO catch file not found
     require_once $dirname .  '/' . $filename;
 }
 
-// Load Action
+/**
+ * Load Action by Request
+ * Loads default Actions for controllers when action parameter not set
+ * 
+ * @return void
+ */
 function actionLoader() {
     
     // Default Actions for Controllers
@@ -20,8 +31,6 @@ function actionLoader() {
     
     // TODO clean up request
     $requestParams = $_GET;
-    
-    var_dump($requestParams);
     
     if (isset($requestParams['controller'])) { 
         $controller = $requestParams['controller'];
@@ -45,6 +54,6 @@ function actionLoader() {
     $actionName = $action . 'Action'; 
     $controllerInstance = new $controllerName;
     $controllerInstance->$actionName(); 
-    
 }
+
 ?>
