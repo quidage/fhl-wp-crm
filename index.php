@@ -1,5 +1,7 @@
 <?php
+
 require_once 'lib/loader.php';
+
 // Get all customers for listing
 $customerRepository = new \EJC\Repository\CustomerRepository();
 $customers = $customerRepository->findAll();
