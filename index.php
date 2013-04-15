@@ -1,7 +1,7 @@
 <?php
-require_once 'lib/Repository/CustomerRepository.php';
+require_once 'lib/loader.php';
 // Get all customers for listing
-$customerRepository = new CustomerRepository();
+$customerRepository = new \EJC\Repository\CustomerRepository();
 $customers = $customerRepository->findAll();
 ?>			
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ $customers = $customerRepository->findAll();
 									<td><?php echo $customer['id']; ?></td>
 									<td><?php echo $customer['name']; ?></td>
 									<td><?php echo $customer['street'] . "<br>" . $customer['zip'] . " " . $customer['city']; ?></td>
-									<td><a href="customer_edit.php?customer=<?php echo $customer['id']; ?>">bearbeiten</a></td>
+									<td><a href="customer_edit.php?controller=customer&action=edit&customer=<?php echo $customer['id']; ?>">bearbeiten</a></td>
 								</tr>
 							<?php endforeach; ?>
 						</tbody>
