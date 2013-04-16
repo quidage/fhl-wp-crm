@@ -9,19 +9,19 @@ $customers = $customerRepository->findAll();
 	
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<script type="text/javascript" src="js/js-extends.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/js-test.js"></script>
+		
 		<link rel="stylesheet" href="css/screen.css" />
-		<script src="js/main.js"></script>
         <title>Übersicht</title>
     </head>
-
     <body>
 		<div id="wrapper">
 			<div class="outer">
-				<div class="inner">		
-					
-					<div id="ergebnis" class="test noch mehr klassen"></div>
-
-					<table id="tabelle">
+				<div class="inner">				
+					<table>
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -32,8 +32,8 @@ $customers = $customerRepository->findAll();
 						</thead>
 						<tbody>					
 							<?php foreach ($customers as $customer): ?>
-								<tr>
-									<td><?php echo $customer['id']; ?></td>
+								<tr class="tr-test">
+									<td ><?php echo $customer['id']; ?></td>
 									<td><?php echo $customer['name']; ?></td>
 									<td><?php echo $customer['street'] . "<br>" . $customer['zip'] . " " . $customer['city']; ?></td>
 									<td><a href="customer_edit.php?customer=<?php echo $customer['id']; ?>">bearbeiten</a></td>
@@ -41,8 +41,6 @@ $customers = $customerRepository->findAll();
 							<?php endforeach; ?>
 						</tbody>
 					</table>
-
-
 				</div>
 			</div>
 		</div>
