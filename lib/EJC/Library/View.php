@@ -10,10 +10,12 @@ namespace EJC\Library;
 class View {
     
     protected $template;
+    protected $layout;
     protected $html;
     
     public function __construct($template = NULL) {
         if ($template !== NULL) $this->template = $template;
+        $this->layout = '/var/www/fhl-wp-crm/lib/EJC/Ressources/Layouts/Default.inc';
     }
     
     /**
@@ -41,8 +43,9 @@ class View {
      * @return void;
      */
     public function render() {
-        $this->loadTemplate();
-        echo $this->html;
+        include $this->template;
+        include $this->layout;
+        echo $layout;
     }
     
     /**
@@ -50,11 +53,8 @@ class View {
      * 
      * @return void
      */
-    public function loadTemplate() {
+    public function setLayout($layout) {
         
-        // TODO write template parser
-        $templateContent = file_get_contents($this->template);
-        $this->html = $templateContent;
     }  
     
 }

@@ -22,7 +22,17 @@ class UserController extends AbstractController {
      * @return void
      */
     public function startAction() {
-        echo 'Startseite';
+        $this->view->assign('title', 'Startseite');
+        $this->view->render();
+    }
+    
+    /**
+     * Display form to edit user-data
+     * 
+     * @param array $user
+     */
+    public function editAction($user) {
+        
     }
     
     

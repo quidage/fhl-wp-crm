@@ -61,10 +61,11 @@ class AbstractController {
          // Get path to template File for action
         $dirname = dirname(__FILE__);
         $templatesPath = substr($dirname, 0, (strripos($dirname, '/'))) . '/Ressources/Templates';
-        $template = $templatesPath . '/' . $this->controllerName . '/' . ucwords($this->actionName) . '.html';
+        $template = $templatesPath . '/' . $this->controllerName . '/' . ucwords($this->actionName) . '.inc';
         
         // Initialize the view
         $this->view = new \EJC\Library\View($template);
+       
     }
     
 }
