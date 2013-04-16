@@ -1,5 +1,7 @@
 <?php
 
+namespace EJC\Repository;
+
 /**
  * 
  * @package wp-crm
