@@ -21,12 +21,14 @@ class AbstractController {
     }
     
     /**
+     * Get the variables of the request
+     * 
      * 
      */
     public function initRequest() {
         $getParams = $_GET;
         
-        $this->controllerName = ucwords($getParams['controller']);
+        $this->controllerName = ucwords(\EJC\Library\StringFactory::cleanUp($getParams['controller']));
         $this->actionName = \EJC\Library\StringFactory::cleanUp($getParams['action']);
         unset($getParams['controller']);
         unset($getParams['action']);

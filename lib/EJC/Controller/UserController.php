@@ -5,10 +5,27 @@ namespace EJC\Controller;
 /**
  * Description of UserController
  *
- * @author christian
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  */
-class AbstractController extends AbstractController {
-    //put your code here
+class UserController extends AbstractController {
+    
+    /**
+     * 
+     */
+    public function __construct() {
+        parent::__construct();
+    }
+    
+    /**
+     * Action for the index page
+     * 
+     * @return void
+     */
+    public function startAction() {
+        echo 'Startseite';
+    }
+    
+    
 }
 
 ?>

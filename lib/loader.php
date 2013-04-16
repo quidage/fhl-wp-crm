@@ -34,13 +34,13 @@ function actionLoader() {
     $requestParams = $_GET;
     
     if (isset($requestParams['controller'])) { 
-        $controller = $requestParams['controller'];
+        $controller = \EJC\Library\StringFactory::cleanUp($requestParams['controller']);
 
         // Set default action if not set
         if (empty($requestParams['action'])) {
             $action = $defaultActions['controller'];
         } else {
-            $action = $requestParams['action'];
+            $action = \EJC\Library\StringFactory::cleanUp($requestParams['action']);
         }
         
     } else {
