@@ -10,13 +10,6 @@ namespace EJC\Controller;
 class UserController extends AbstractController {
     
     /**
-     * 
-     */
-    public function __construct() {
-        parent::__construct();
-    }
-    
-    /**
      * Action for the index page
      * 
      * @return void
@@ -31,8 +24,8 @@ class UserController extends AbstractController {
      * 
      * @param array $user
      */
-    public function editAction($user) {
-        
+    public function editAction() {
+        echo 'editAction';
     }
     
     

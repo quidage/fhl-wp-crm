@@ -8,48 +8,35 @@ namespace EJC\Controller;
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
  */
 class AbstractController {
-    
+
     protected $controllerName;
     protected $actionName;
     protected $view;
     protected $ajax;
+    
+    protected $userRepository;
+    protected $customerRepository;
+    
 
-
-    public function __construct() {
-        $this->initRequest();
+    /**
+     * Constructor
+     */
+    public function __construct($controllerName, $actionName, $ajax = FALSE) {
+        $this->controllerName = $controllerName;
+        $this->actionName = $actionName;
+        $this->ajax = $ajax;
         $this->initView();
+        $this->initRepositories();
     }
     
     /**
-     * Get the variables of the request
+     * Instantiate the Repositories
      * 
-     * 
+     * @return void
      */
-    public function initRequest() {
-        $getParams = $_GET;
-        
-        $this->controllerName = ucwords(\EJC\Library\StringFactory::cleanUp($getParams['controller']));
-        $this->actionName = \EJC\Library\StringFactory::cleanUp($getParams['action']);
-        unset($getParams['controller']);
-        unset($getParams['action']);
-        
-        // Set properties for each other parameter
-        foreach ($getParams AS $key => $value) {
-            if (is_string($value)) {
-                $this->$key = \EJC\Library\StringFactory::cleanUp($value);
-            } else {
-                
-            }
-        };
-    }
-    
-    /**
-     * Wether is AJAX-Call or not
-     * 
-     * @return boolean
-     */
-    public function isAjax() {
-        return $this->ajax;
+    public function initRepositories() {
+        $this->userRepository = new \EJC\Repository\UserRepository();
+        $this->customerRepository = new \EJC\Repository\CustomerRepository();
     }
     
     /**
@@ -59,13 +46,23 @@ class AbstractController {
      */
     public function initView() {
          // Get path to template File for action
-        $dirname = dirname(__FILE__);
-        $templatesPath = substr($dirname, 0, (strripos($dirname, '/'))) . '/Ressources/Templates';
-        $template = $templatesPath . '/' . $this->controllerName . '/' . ucwords($this->actionName) . '.inc';
-        
+        $template = $this->controllerName . '/' . ucwords($this->actionName) . '.inc';
+
         // Initialize the view
-        $this->view = new \EJC\Library\View($template);
-       
+        $this->view = new \EJC\View($this->ajax);
+        $this->view->setTemplate($template);
+    }  
+
+    /**
+     * Forward to another action
+     * 
+     * @param string $controller
+     * @param string $action
+     * @param array $params
+     */
+    public function forward($controller, $action, $params = NULL) {
+        $request = new \EJC\Request($action, $controller, $params);
+        $request->callAction();
     }
     
 }
