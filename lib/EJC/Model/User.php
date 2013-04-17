@@ -9,12 +9,7 @@ namespace EJC\Model;
  */
 class User extends AbstractModel {
     
-    
-    public function __construct() {
-        
-    }
-    
-    
+
 }
 
 ?>
