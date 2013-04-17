@@ -24,8 +24,8 @@ class Request {
         } else {
             // HTTP-Request
             $getParams = $_GET;
-            $this->controller = ucwords(\EJC\Library\StringFactory::cleanUp($getParams['controller']));
-            $this->action = \EJC\Library\StringFactory::cleanUp($getParams['action']);   
+            $this->controller = ucwords(\EJC\Helper\StringHelper::cleanUp($getParams['controller']));
+            $this->action = \EJC\Helper\StringHelper::cleanUp($getParams['action']);   
             unset ($getParams['controller']);
             unset ($getParams['actions']);
             $this->params = $getParams;

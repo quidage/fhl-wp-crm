@@ -1,13 +1,13 @@
 <?php
 
-namespace EJC\Library;
+namespace EJC\Helper;
 
 /**
  * Description of StringFactory
  *
- * @author Christian Hansen <christian.hansen@bildungsweb.net>
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  */
-class StringFactory {
+class StringHelper {
     
     /**
      * Clean up 

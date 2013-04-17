@@ -15,6 +15,8 @@ class UserController extends AbstractController {
      * @return void
      */
     public function startAction() {
+        $customers = $this->customerRepository->findAll();
+        var_dump($customers);
         $this->view->assign('title', 'Startseite');
         $this->view->render();
     }
