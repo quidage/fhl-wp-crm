@@ -2,10 +2,8 @@
  * create own namespace for this project
  * the $ is inspired by jQuery
  * 
- * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>, Julian Hilbers <hilbers.julian@gmail.com>
- * 
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>, Julian Hilbers <hilbers.juian@gmail.com>
  */
-
 
 /**
  * Get an element by selector-string
@@ -23,17 +21,60 @@ function $(selector) {
  * @type object
  */
 var dh = {
-    
+	elem: null,		// contains the selected element
+	clsArr: [],		// Array for selected classes
+	
     /**
+     * Selects an element by class or id
      * 
-     * @param {string} selector
+     * @param {string} 	selector, start for classes with . and id's with #
      * @returns {dh}
      */
     init: function(selector) {
-        this.elem = document.getElementById(selector);
-        return this;
+    	var sType = selector.charAt(0);
+    	selector = selector.substr(1,selector.length);
+    	
+    	if( sType === "#" ) {
+    		this.elem = document.getElementById(selector);
+    	} else if( sType === "." ) {
+    		this.clsArr = document.getElementsByClassName(selector);
+    		this.elem = this.clsArr[0];
+    	}
+    	
+    	return this;
     },
-            
+    
+    /**
+     * Works only with selected classes, delivers the element at the passed position
+     * 
+     * @param {int} 	Position of the element
+     * @returns {dh}
+     */
+    eq: function( no ) {
+    	no *= 1;	// Makes an int of it
+    	var c = this.clsArr.length;
+    	no = ( no < c ? no : c-1 );
+    	
+		this.elem = this.clsArr[no];
+		return this;
+    },
+    
+    /**
+     * Works only with selected classes, runs through every element and
+     * performs the passed event
+     * 
+     * @param {function} callback		Something that should happen with this element
+     */
+    each: function( callback ) {
+    	var c = this.clsArr.length;
+    	if( c > 0 && typeof(callback) === 'function' ) {
+    		for( var i = 0; i < c; i++ ) {
+    			this.elem = this.clsArr[i];
+    			callback(this);
+    		}
+    	}
+    },
+              
     /**
      * Trim a string
      * 
@@ -51,7 +92,7 @@ var dh = {
      * @returns {dh}
      */
     addClass: function(className) {
-        if (this.elem.hasAttribute('class')) {
+        if (this.elem.hasAttribute('class')) {	
             this.elem.setAttribute('class', this.elem.getAttribute('class') + ' ' + className);
         } else {
             this.elem.setAttribute('class', className);
@@ -143,38 +184,3 @@ var dh = {
 
 
 }; // var selection
-
-
-
-
-
-
-
-
-// exec functions when page is loaded
-window.onload = function() {
-
-//    $('ergebnis').removeClass('test');
-
-//	ejc.ajax({
-//		url: 'ajax/test.php',
-//		params: {
-//			'name': 'test',
-//			'param2': 'test2'
-//		},
-//		type: 'xml',
-//		loading: function() {
-//			ejc.getById('ergebnis').innerHTML = 'loading...';
-//		},
-//		finished: function() {
-//			ejc.getById('ergebnis').setAttribute('class', 'rest');
-//		},
-//		success: function(answer) {
-//			console.log(answer);
-//		}
-//	});
-
-};
-
-
-
