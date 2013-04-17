@@ -10,12 +10,24 @@ namespace EJC\Library;
 class View {
     
     protected $template;
+    protected $templateFile;
     protected $layout;
-    protected $html;
+    protected $layoutFile;
     
-    public function __construct($template = NULL) {
-        if ($template !== NULL) $this->template = $template;
-        $this->layout = '/var/www/fhl-wp-crm/lib/EJC/Ressources/Layouts/Default.inc';
+    /**
+     * Konstruktor
+     * 
+     * @param string $template
+     * @param string $layout
+     */
+    public function __construct($template = NULL, $layout = NULL) {
+        $this->templateFile = $template;
+        $layoutDir = '/var/www/fhl-wp-crm/lib/EJC/Ressources/Layouts/';
+        
+        if ($layout !== NULL) {
+            $this->layoutFile = $layoutDir . ucwords($layout) . '.inc';
+        }
+            $this->layoutFile = $layoutDir . 'Default.inc';
     }
     
     /**
@@ -23,8 +35,8 @@ class View {
      * 
      * @param string $template
      */
-    public function setTemplate($template) {
-        $this->template = $template;
+    public function setTemplateFile($templateFile) {
+        $this->templateFile = $templateFile;
     }
 
     /**
@@ -43,18 +55,21 @@ class View {
      * @return void;
      */
     public function render() {
-        include $this->template;
-        include $this->layout;
-        echo $layout;
+        
+        include $this->templateFile;
+        include $this->layoutFile;
+                
+        echo $this->layout;
     }
     
     /**
      * Read the content from the template file
      * 
+     * @param string $layout
      * @return void
      */
     public function setLayout($layout) {
-        
+        $this->layoutFile = $layout;
     }  
     
 }

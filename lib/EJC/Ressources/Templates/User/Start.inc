@@ -1,7 +1,7 @@
 <?php
-$template = <<<TEMPLATE
+$this->template = <<<TEMPLATE
         
-        Template Inhalt
+        Dies wird die Startseite
 
 TEMPLATE;
 ?>

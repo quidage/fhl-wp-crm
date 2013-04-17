@@ -1,6 +1,5 @@
 <?php
-$layout = <<<LAYOUT
-        
+$this->layout = <<<LAYOUT
 <!DOCTYPE html>
 <html>
     
@@ -14,12 +13,11 @@ $layout = <<<LAYOUT
     <body>
         <div>
         
-        {$template}
+            {$this->template}
    
         </div>
     </body>
     
 </html>             
-        
 LAYOUT;
 ?>
