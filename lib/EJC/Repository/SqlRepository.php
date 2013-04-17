@@ -15,15 +15,30 @@ class SqlRepository {
 	protected $mysqli;
 
     /**
-	 * Constructor
+	 * constructor
 	 * 
+     * connect to database, set character set
+     * 
 	 * @return void
 	 */
 	public function __construct() {
-		$this->mysqli = new \mysqli('localhost', 'wp-crm', 'aVtUtzruEn2c8EMT', 'wp-crm') or die($this->mysqli->connect_error);
+		$this->mysqli = new \mysqli('localhost', 'wp-crm', 'aVtUtzruEn2c8EMT', 'wp-crm');
 		$this->mysqli->query("SET NAMES 'utf8';");
 	}
     
+    /**
+     * destructor
+     * 
+     * throw exception if database errors occur
+     * 
+     * @throws \Exception
+     */
+    public function __destruct() {
+        if (!empty($this->mysqli->error_list)) {
+            throw new \Exception('mysql-errors occured: "' . $this->mysqli->error . '"', 1366213519);
+        }
+    }
+
     /**
      * Prepare string for database
      * 
@@ -34,7 +49,7 @@ class SqlRepository {
         return $this->mysqli->escape_string(\EJC\Helper\StringHelper::cleanUp($dirtyString));
     }    
     
-  /**
+    /**
      * @todo write list of properties and for writing in database
      * 
      * @param array $keysValues
@@ -189,7 +204,7 @@ class SqlRepository {
      */
     public function delete($id) {
         $query = $this->buildUpdateQuery($this->table, array('deleted' => 1), "id = " . intval($id));
-        $this->mysqli->query($query) or die($this->mysqli->error);
+        $this->mysqli->query($query);
     }
     
     /**
