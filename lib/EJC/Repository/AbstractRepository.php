@@ -11,6 +11,8 @@ namespace EJC\Repository;
  */
 class AbstractRepository extends SqlRepository {
     
+    protected  $notUpdateableKeys = array('id', 'tstamp', 'cr_date');
+    
     /**
      * define "magic" repository functions
      * 
@@ -64,15 +66,14 @@ class AbstractRepository extends SqlRepository {
      */
     public function add($object) {
         $objectArray = $object->toArray();
-
-        // some keys should not be inserted and some values must be set
-        $notUpdateableKeys = array('id', 'tstamp');
-        $objectArray['cr_date'] = time();
         
         // remove properties from array which should not be inserted in db
-        foreach ($notUpdateableKeys AS $notUpdateableKey) {
+        foreach ($this->notUpdateableKeys AS $notUpdateableKey) {
             unset($objectArray[$notUpdateableKey]);
-        }
+        }        
+
+        // some keys should not be inserted and some values must be converted or set
+        $objectArray['cr_date'] = date("Y-m-d H:i:s", time());
         
         return $this->insert($objectArray);
     }
@@ -85,6 +86,22 @@ class AbstractRepository extends SqlRepository {
      */
     public function remove($object) {
         $this->delete($object->getId());
+    }
+    
+    /**
+     * update object in repository
+     * 
+     * @param object $object
+     */
+    public function update($object) {
+        $objectArray = $object->toArray();
+        
+        // remove properties from array which should not be inserted in db
+        foreach ($this->notUpdateableKeys AS $notUpdateableKey) {
+            unset($objectArray[$notUpdateableKey]);
+        }        
+        
+        $this->updateOneById($object->getId(), $objectArray);
     }
 
 }

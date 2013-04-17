@@ -46,7 +46,7 @@ class SqlRepository {
      * @return string
      */
     public function prepareString($dirtyString) {
-        return $this->mysqli->escape_string(\EJC\Helper\StringHelper::cleanUp($dirtyString));
+        return $this->mysqli->escape_string(trim($dirtyString));
     }    
     
     /**
@@ -216,6 +216,18 @@ class SqlRepository {
         $query = $this->buildInsertQuery($this->table, $propertiesValues);
         $this->mysqli->query($query);
         return $this->mysqli->insert_id;
+    }
+    
+    /**
+     * update one element in database by id
+     * 
+     * @param int $id
+     * @param array $propertiesValues
+     * @return void
+     */
+    public function updateOneById($id, $propertiesValues) {
+        $query = $this->buildUpdateQuery($this->table, $propertiesValues, "id = " . intval($id));
+        $this->mysqli->query($query);
     }
 
 }

@@ -22,7 +22,8 @@ class AbstractModel {
     public function __construct() {
         $this->id = intval($this->id);
         $this->parent_id = intval($this->parent_id);
-        $this->cr_date = intval($this->cr_date);
+        $this->tstamp = new \DateTime($this->tstamp);
+        $this->cr_date = new \DateTime($this->cr_date);
         $this->deleted = filter_var($this->deleted, FILTER_VALIDATE_BOOLEAN);
     }
     
