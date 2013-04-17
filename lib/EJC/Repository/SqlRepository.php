@@ -31,7 +31,7 @@ class SqlRepository {
      * @return string
      */
     public function prepareString($dirtyString) {
-        return $this->mysqli->real_escape_string(\EJC\Helper\StringHelper::cleanUp($dirtyString));
+        return $this->mysqli->escape_string(\EJC\Helper\StringHelper::cleanUp($dirtyString));
     }    
 
     /**
@@ -99,6 +99,38 @@ class SqlRepository {
             }
         }
 		return $results;        
+    }
+    
+	/**
+	 * find one object by property
+     * 
+	 * @param string $property
+	 * @param string $value
+	 */
+	public function findOneByProperty($property, $value) {
+		$query = $this->buildSelectQuery("*", $this->table, $property . " = '" . $this->prepareString($value) . "'", NULL, NULL, "0,1");
+		return $this->getFirstResult($query);
+	}   
+    
+	/**
+	 * find objects by property
+     * 
+	 * @param string $property
+	 * @param string $value
+	 */
+	public function findByProperty($property, $value) {
+		$query = $this->buildSelectQuery("*", $this->table, $property . " = '" . $this->prepareString($value) . "'");
+		return $this->getResultArray($query);
+	}    
+
+	/**
+	 * Returns array of all results
+	 * 
+	 * @return array results
+	 */
+	public function findAll() {
+		$query = $this->buildSelectQuery("*", $this->table, "deleted = 0");
+        return $this->getResultArray($query);
     }
 
 	/**

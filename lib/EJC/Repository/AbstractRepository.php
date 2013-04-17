@@ -12,67 +12,49 @@ namespace EJC\Repository;
 class AbstractRepository extends SqlRepository {
     
     /**
+     * define "magic" repository functions
+     * 
+     * @param string $name
+     * @param array $arguments
+     * @return
+     */
+    public function __call($name, $arguments) {
+        
+        if (substr($name, 0, 6) === 'findBy') {
+            /*
+             * Magic findByProperty-Method
+             *
+             * examples:    findById(1)
+             *              findByName('Testname')
+             */            
+            $property = strtolower(substr($name, 6));
+            return $this->findByProperty($property, $arguments[0]);
+            
+            
+        } elseif (substr($name, 0, 9) === 'findOneBy') {
+            /*
+             * Magic findOneByProperty-Method
+             *
+             * examples:    findOneById(1)
+             *              findOneByName('Testname')
+             */            
+            $property = strtolower(substr($name, 6));
+            return $this->findOneByProperty($property, $arguments[0]);        
+            
+            
+        } else {
+            throw new \Exception('method "' . $name . '" not available in this repository', 1366208633);
+        }
+    }
+    
+    /**
      * Get the class name of the Model
      * 
      * @return string
      */
     public function getModelClassName() {
-        return '\\EJC\\Model\\' . ucwords($this->table);
+        return 'EJC\\Model\\' . ucwords($this->table);
     }
-       	 
-	/**
-	 * find one object by property
-     * 
-	 * @param string $property
-	 * @param string $value
-	 */
-	public function findOneByProperty($property, $value) {
-		$query = $this->buildSelectQuery("*", $this->table, $property . " = '" . $this->prepareString($value) . "'", NULL, NULL, "0,1");
-		return $this->getFirstResult($query);
-	}   
-    
-	/**
-	 * find objects by property
-     * 
-	 * @param string $property
-	 * @param string $value
-	 */
-	public function findByProperty($property, $value) {
-		$query = $this->buildSelectQuery("*", $this->table, $property . " = '" . $this->prepareString($value) . "'");
-		return $this->getResultArray($query);
-	}    
-
-	/**
-	 * Returns array of all results
-	 * 
-	 * @return array results
-	 */
-	public function findAll() {
-		$query = $this->buildSelectQuery("*", $this->table, "deleted = 0");
-        return $this->getResultArray($query);
-	}
-
-	/**
-	 * Returns one result by id
-	 * 
-	 * @param int $id id
-	 * @return array result
-	 */
-	public function findById($id) {
-		$query = $this->buildSelectQuery("*", $this->table, "deleted = 0 AND uid = " . intval($id));
-		return $this->getFirstByQuery($query);
-	}
-
-	/**
-	 * Returns one result by id
-	 * 
-	 * @param int $id id
-	 * @return array result
-	 */
-	public function findByParentId($id) {
-        $query = $this->buildSelectQuery("*", $this->table, "deleted = 0 AND parent_id = " . intval($id));
-		return $this->getResultArray($query);
-	}
 
 }
 
