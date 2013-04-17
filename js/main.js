@@ -22,7 +22,7 @@ function $(selector) {
  */
 var dh = {
 	elem: null,		// contains the selected element
-	clsArr: [],		// Array for selected classes
+	workArr: [],	// Array for selected classes
 	
     /**
      * Selects an element by class or id
@@ -37,39 +37,50 @@ var dh = {
     	if( sType === "#" ) {
     		this.elem = document.getElementById(selector);
     	} else if( sType === "." ) {
-    		this.clsArr = document.getElementsByClassName(selector);
-    		this.elem = this.clsArr[0];
+    		this.workArr = document.getElementsByClassName(selector);
+    		this.elem = this.workArr[0];
     	}
     	
     	return this;
     },
     
     /**
-     * Works only with selected classes, delivers the element at the passed position
+     * Finds an html tag within an selected element
+     * 
+     * @param {string} selector		
+     */
+    find: function( selector ) {
+    	this.workArr = this.elem.getElementsByTagName(selector)
+    	this.elem = this.workArr[0];
+    	return this; 
+    },
+    
+    /**
+     * Works only with selected classes and find, delivers the element at the passed position
      * 
      * @param {int} 	Position of the element
      * @returns {dh}
      */
     eq: function( no ) {
     	no *= 1;	// Makes an int of it
-    	var c = this.clsArr.length;
+    	var c = this.workArr.length;
     	no = ( no < c ? no : c-1 );
     	
-		this.elem = this.clsArr[no];
+		this.elem = this.workArr[no];
 		return this;
     },
     
     /**
-     * Works only with selected classes, runs through every element and
+     * Works only with selected classes and find, runs through every element and
      * performs the passed event
      * 
      * @param {function} callback		Something that should happen with this element
      */
     each: function( callback ) {
-    	var c = this.clsArr.length;
+    	var c = this.workArr.length;
     	if( c > 0 && typeof(callback) === 'function' ) {
     		for( var i = 0; i < c; i++ ) {
-    			this.elem = this.clsArr[i];
+    			this.elem = this.workArr[i];
     			callback(this);
     		}
     	}
@@ -118,6 +129,28 @@ var dh = {
             this.elem.setAttribute('class', this.trim(classesString));
         }
         return this;
+    },
+    
+    /**
+     * Fügt dem Element ein Klick Event hinzu
+     * 
+     * @param {function} callback
+     */
+    click: function( callback ) {
+    	if( typeof(callback) === 'function' ) {
+    		this.elem.addEventListener('click', callback, false);	
+    	}
+    },
+    
+    /**
+     * Fügt dem Element ein Mouseover Event hinzu
+     * 
+     * @param {function} callback
+     */
+    mouseover: function( callback ) {
+    	if( typeof(callback) === 'function' ) {
+    		this.elem.addEventListener('mouseover', callback, false);	
+    	}
     },
     
     /**
