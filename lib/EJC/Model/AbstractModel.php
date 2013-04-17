@@ -16,11 +16,27 @@ class AbstractModel {
     protected $deleted;
     protected $name;
 
+    /**
+     * constructor
+     */
     public function __construct() {
         $this->id = intval($this->id);
         $this->parent_id = intval($this->parent_id);
         $this->cr_date = intval($this->cr_date);
         $this->deleted = filter_var($this->deleted, FILTER_VALIDATE_BOOLEAN);
+    }
+    
+    /**
+     * convert object to an array
+     * 
+     * @return array
+     */
+    public function toArray() {
+        $objectArray = array();
+        foreach ($this AS $key => $value) {
+            $objectArray[$key] = $value;
+        }
+        return $objectArray;
     }
 
     public function getId() {

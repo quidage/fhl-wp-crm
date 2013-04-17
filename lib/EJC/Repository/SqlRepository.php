@@ -33,6 +33,18 @@ class SqlRepository {
     public function prepareString($dirtyString) {
         return $this->mysqli->escape_string(\EJC\Helper\StringHelper::cleanUp($dirtyString));
     }    
+    
+  /**
+     * @todo write list of properties and for writing in database
+     * 
+     * @param array $keysValues
+     * @return return array
+     */
+    public function preparePropertiesForInsert($keysValues) {
+        $keyString = (implode(',', array_keys($keysValues)));
+        $valueString = "'" . (implode("','",$keysValues)) . "'";
+        return array($keyString, $valueString);
+    }        
 
     /**
 	 * build select query
@@ -60,12 +72,26 @@ class SqlRepository {
 	 * @return string
 	 */
 	public function buildUpdateQuery($table, $propertiesValues, $where) {
-		$query = "UPDATE " . $table . " SET (";
+		$query = "UPDATE " . $table . " SET ";
         foreach ($propertiesValues AS $property => $value) {
             $query .= $this->prepareString($property) . " = '" . $this->prepareString($value) . "',";
         }
         $query = substr($query, 0, -1);
-        $query .= ") WHERE " . $where;
+        $query .= " WHERE " . $where;
+		return $query;
+	}
+    
+    /**
+	 * build insert query
+	 * 
+	 * @param string $table
+	 * @param string $where
+     * @param array $propertiesValues array($property => $value)
+	 * @return string
+	 */
+	public function buildInsertQuery($table, $propertiesValues) {
+        list ($properties, $values) = $this->preparePropertiesForInsert($propertiesValues);
+		$query = "INSERT INTO " . $table  . " (" . $properties . ") VALUES (" . $values . ")";
 		return $query;
 	}
        
@@ -107,6 +133,28 @@ class SqlRepository {
 	 * @param string $property
 	 * @param string $value
 	 */
+	public function findById($id) {
+		$query = $this->buildSelectQuery("*", $this->table," id = '" . intval($id) . "'");
+		return $this->getFirstResult($query);
+	}  
+    
+	/**
+	 * find one object by property
+     * 
+	 * @param string $property
+	 * @param string $value
+	 */
+	public function findByParent_id($parent_id) {
+		$query = $this->buildSelectQuery("*", $this->table, " parent_id= '" . intval($parent_id) . "'");
+		return $this->getFirstResult($query);
+	}       
+    
+	/**
+	 * find one object by property
+     * 
+	 * @param string $property
+	 * @param string $value
+	 */
 	public function findOneByProperty($property, $value) {
 		$query = $this->buildSelectQuery("*", $this->table, $property . " = '" . $this->prepareString($value) . "'", NULL, NULL, "0,1");
 		return $this->getFirstResult($query);
@@ -132,36 +180,28 @@ class SqlRepository {
 		$query = $this->buildSelectQuery("*", $this->table, "deleted = 0");
         return $this->getResultArray($query);
     }
-
-	/**
-	 * Insert new record
-	 * 
-	 * @param array $record
-	 * @param int $parent_id
-	 * @return int insert id
-	 */
-	public function add($record, $parent_id = NULL) {
-		$columns = '';
-		$values = '';
-
-		if ($parent_id !== NULL) {
-			$columns .= "parent_id,tstamp,";
-			$values .= "'$parent_id'," . time() . ",";
-		}
-
-		foreach ($record as $key => $value) {
-			$columns .= $key . ",";
-			$values .= "'" . $value . "'";
-		}
-
-		$query = "INSERT INTO " . $this->table . " (" . $columns . ") VALUES (" . $values . ")";
-		if (mysql_query($query)) {
-			return mysql_insert_id();
-		} else {
-			return false;
-		}
-	}
+    
+    /**
+     * set deleted = 1
+     * 
+     * @param int $id
+     * @return void
+     */
+    public function delete($id) {
+        $query = $this->buildUpdateQuery($this->table, array('deleted' => 1), "id = " . intval($id));
+        $this->mysqli->query($query) or die($this->mysqli->error);
+    }
+    
+    /**
+     * Insert in database
+     * 
+     * @param array $propertiesValues
+     */
+    public function insert($propertiesValues) {
+        $query = $this->buildInsertQuery($this->table, $propertiesValues);
+        $this->mysqli->query($query);
+        return $this->mysqli->insert_id;
+    }
 
 }
-
 ?>

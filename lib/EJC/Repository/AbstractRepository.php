@@ -55,6 +55,37 @@ class AbstractRepository extends SqlRepository {
     public function getModelClassName() {
         return 'EJC\\Model\\' . ucwords($this->table);
     }
+    
+    /**
+     * Add object to repository
+     * 
+     * @param type $object
+     * @return int Insert ID
+     */
+    public function add($object) {
+        $objectArray = $object->toArray();
+
+        // some keys should not be inserted and some values must be set
+        $notUpdateableKeys = array('id', 'tstamp');
+        $objectArray['cr_date'] = time();
+        
+        // remove properties from array which should not be inserted in db
+        foreach ($notUpdateableKeys AS $notUpdateableKey) {
+            unset($objectArray[$notUpdateableKey]);
+        }
+        
+        return $this->insert($objectArray);
+    }
+    
+    /**
+     * remove object from repository
+     * 
+     * @param type $object
+     * @return void
+     */
+    public function remove($object) {
+        $this->delete($object->getId());
+    }
 
 }
 

@@ -15,8 +15,8 @@ class UserController extends AbstractController {
      * @return void
      */
     public function startAction() {
-        $customers = $this->customerRepository->findById(1);
-        var_dump($customers);
+        $customers = $this->customerRepository->findAll();
+        
         $this->view->assign('title', 'Startseite');
         $this->view->render();
     }
@@ -30,7 +30,5 @@ class UserController extends AbstractController {
         echo 'editAction';
     }
     
-    
 }
-
 ?>
