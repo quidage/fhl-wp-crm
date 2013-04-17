@@ -14,7 +14,6 @@ $this->layout = <<<LAYOUT
     
     <body>
         <div id="wrapper">
-        
             {$this->template}
    
         </div>
