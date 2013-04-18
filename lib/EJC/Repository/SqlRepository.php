@@ -11,7 +11,7 @@ namespace EJC\Repository;
  */
 class SqlRepository {
 
-	protected $table;
+    protected $table;
 	protected $mysqli;
 
     /**
@@ -22,7 +22,8 @@ class SqlRepository {
 	 * @return void
 	 */
 	public function __construct() {
-		$this->mysqli = new \mysqli('localhost', 'wp-crm', 'aVtUtzruEn2c8EMT', 'wp-crm');
+        include __AppRoot__ . '/lib/config.php';
+		$this->mysqli = new \mysqli($config['db_host'], $config['db_user'], $config['db_password'], $config['db_name']);
 		$this->mysqli->query("SET NAMES 'utf8';");
 	}
     
@@ -34,8 +35,8 @@ class SqlRepository {
      * @throws \Exception
      */
     public function __destruct() {
-        if (!empty($this->mysqli->error_list)) {
-            throw new \Exception('mysql-errors occured: "' . $this->mysqli->error . '"', 1366213519);
+        if (!empty($this->mysqli->error)) {
+            throw new \EJC\Exception\RepositoryException('mysql error occured: "' . $this->mysqli->error . '"', 1366213519);
         }
     }
 
