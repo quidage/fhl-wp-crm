@@ -11,7 +11,15 @@ namespace EJC\Repository;
  */
 class AbstractRepository extends SqlRepository {
     
-    protected  $notUpdateableKeys = array('id', 'tstamp', 'cr_date');
+    protected  $notUpdateableKeys;
+    
+    /**
+     * constructor
+     */
+    public function __construct() {
+        parent::__construct();
+        $this->notUpdateableKeys = array('id', 'tstamp', 'cr_date');
+    }
     
     /**
      * define "magic" repository functions
@@ -40,7 +48,7 @@ class AbstractRepository extends SqlRepository {
              * examples:    findOneById(1)
              *              findOneByName('Testname')
              */            
-            $property = strtolower(substr($name, 6));
+            $property = strtolower(substr($name, 9));
             return $this->findOneByProperty($property, $arguments[0]);        
             
             

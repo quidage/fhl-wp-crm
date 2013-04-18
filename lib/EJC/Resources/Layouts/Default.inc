@@ -13,6 +13,10 @@ $this->layout = <<<LAYOUT
     <body>
         <div>
         
+            <div class="errors">
+                {$this->errors}
+            <div>
+        
             {$this->template}
    
         </div>

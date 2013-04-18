@@ -3,14 +3,15 @@
 namespace EJC\Controller;
 
 /**
- * Description of UserController
+ * Controller for user actions, like login, creation of new users
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
  */
 class UserController extends AbstractController {
     
     /**
-     * Action for the index page
+     * show the index page
      * 
      * @return void
      */
@@ -25,12 +26,41 @@ class UserController extends AbstractController {
     }
     
     /**
-     * Display form to edit user-data
+     * display form to edit user-data
      * 
      * @param array $user
      */
     public function editAction() {
         echo 'editAction';
+    }
+    
+    /**
+     * display page for login form
+     * 
+     * @return void
+     */
+    public function showLoginAction() {
+        $this->view->assign('title','Login');
+        $this->view->render();
+    }
+    
+    /**
+     * perform login of user
+     * 
+     * @return void
+     */
+    public function loginAction($params) {
+        $user = $this->userRepository->findOneByName($params['name']);
+               
+        // if user not exist show message
+        if ($user === NULL) {
+            $this->view->addErrorMessage('User nicht gefunden');
+            $this->forward('User', 'showLogin');
+            return;
+        } else {
+            // TODO passwort match check and start login-session
+            $this->forward('User', 'start');
+        }
     }
     
 }

@@ -12,23 +12,29 @@ class Request {
     protected $controller;
     protected $action;
     protected $params;
+    protected $view;
 
     /**
      * Konstruktor
      */
-    public function __construct($action = NULL, $controller = NULL, $params = NULL) {
-        if ($controller !== NULL && $action !== NULL) {
+    public function __construct($action = NULL, $controller = NULL, $params = NULL, $view = NULL) {
+       if ($controller !== NULL && $action !== NULL) {
             // forwarded request
             $this->controller = $controller;
             $this->action = $action;
+            $this->params = $params;
+            $this->view = $view;
         } else {
             // HTTP-Request
             $getParams = $_GET;
+            $postParams = $this->getPost();
+            
             $this->controller = ucwords(\EJC\Helper\StringHelper::cleanUp($getParams['controller']));
             $this->action = \EJC\Helper\StringHelper::cleanUp($getParams['action']);   
             unset ($getParams['controller']);
-            unset ($getParams['actions']);
-            $this->params = $getParams;
+            unset ($getParams['action']);
+            
+            $this->params = array_merge($getParams, $postParams);
         }
         
        
@@ -49,11 +55,11 @@ class Request {
         $controllerClassName = '\\EJC\\Controller\\' . $this->controller . 'Controller';
 
         // Instantiate Controller Object
-        $controller = new $controllerClassName($this->controller, $this->action, $this->isAjax());
+        $controller = new $controllerClassName($this->controller, $this->action, $this->isAjax(), $this->params, $this->view);
                
         // Call action
         $actionName = $this->action . 'Action';
-        $controller->$actionName();
+        $controller->$actionName($this->params);
     }
     
    /**
@@ -67,7 +73,16 @@ class Request {
         } else {
             return FALSE;
         }
-    }      
+    } 
+    
+    /**
+     * get data of the http-post
+     * 
+     * @return array
+     */
+    public function getPost() {
+        return $_POST;
+    }    
     
 }
 

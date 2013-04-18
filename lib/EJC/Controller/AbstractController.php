@@ -21,10 +21,12 @@ class AbstractController {
     /**
      * Constructor
      */
-    public function __construct($controllerName, $actionName, $ajax = FALSE) {
+    public function __construct($controllerName, $actionName, $ajax = FALSE, $params = array(), $view) {
         $this->controllerName = $controllerName;
         $this->actionName = $actionName;
         $this->ajax = $ajax;
+        $this->params = $params;
+        $this->view = $view;
         $this->initView();
         $this->initRepositories();
     }
@@ -47,9 +49,11 @@ class AbstractController {
     public function initView() {
          // Get path to template File for action
         $template = $this->controllerName . '/' . ucwords($this->actionName) . '.inc';
-
+        
         // Initialize the view
-        $this->view = new \EJC\View($this->ajax);
+        if ($this->view === NULL) {
+            $this->view = new \EJC\View($this->ajax);
+        }
         $this->view->setTemplate($template);
     }  
 
@@ -61,8 +65,26 @@ class AbstractController {
      * @param array $params
      */
     public function forward($controller, $action, $params = NULL) {
-        $request = new \EJC\Request($action, $controller, $params);
+        $request = new \EJC\Request($action, $controller, $params, $this->view);
         $request->callAction();
+    }
+    
+    /**
+     * http-redirect on action
+     * 
+     * @param string $controller
+     * @param string $action
+     * @param string $params
+     */
+    public function redirect($controller, $action, $params = NULL) {
+        $paramString = '';
+        if (is_array($params)) {
+            foreach ($params AS $key => $value) {
+                $paramString .= '&' . $key . '=' . $value; 
+            }
+        }
+        header('index.php?controller=' . strtolower($controller) . '&action=' . $action . $paramString);
+        return;
     }
     
 }

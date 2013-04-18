@@ -15,7 +15,7 @@ class UserRepository extends AbstractRepository {
 		parent::__construct();
 		
 		// Set the table
-		$this->table = "customer";
+		$this->table = "user";
 	}
 	
 }

@@ -16,10 +16,15 @@ class View {
     protected $layoutFile;
     protected $layoutsPath;
     
+    protected $errors;
+    protected $errorMessages;
+
+
     /**
      * Constructor
      */
     public function __construct($ajax = FALSE) {
+        if (!isset($this->errorMessages)) $this->errorMessages = array();
         $this->initPaths();
         // Set layout to default value
         if ($ajax) {
@@ -75,9 +80,31 @@ class View {
      * @return void;
      */
     public function render() {
+        $this->renderErrorMessages();
         include $this->templateFile;
         include $this->layoutFile;
         echo $this->layout;
+    }
+    
+    /**
+     * add a new error to template
+     * 
+     * @param type $message
+     */
+    public function addErrorMessage($message) {
+        $this->errorMessages[] = $message;
+    }
+    
+    /**
+     * render all error messages
+     * 
+     * @return void
+     */
+    public function renderErrorMessages() {
+        $this->errors = '';
+        foreach ($this->errorMessages AS $errorMessage) {
+            $this->errors .= '<div class="error">' . $errorMessage . '</div>';
+        }
     }
     
 }
