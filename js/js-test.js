@@ -1,8 +1,7 @@
 // exec functions when page is loaded
 window.onload = function() {
 
-	$(".tr-test").each(function(e){
-		e.addClass('foo');
+	$("#wrapper").find('a').each(function(e){
 	});
 
 
