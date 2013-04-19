@@ -14,6 +14,6 @@ require_once __AppRoot__ . '/lib/loader.php';
 
 // Instantiate request and call action
 $request = new \EJC\Request();
-$request->callAction();
+$request->execute();
 
 ?>			

@@ -30,10 +30,12 @@ class CustomerController extends AbstractController {
     /**
      * Display form for editing customer data
      * 
-     * @param string $customerID
+     * @param \EJC\Model\Customer $customer
      */
-    public function editAction($customerID) {
-        
+    public function editAction(\EJC\Model\Customer $customer) {
+        var_dump($customer);
+        $this->view->assign('customer', $customer);
+        $this->view->render();
     }
     
     /**
@@ -41,8 +43,8 @@ class CustomerController extends AbstractController {
      * 
      * @param array $customer
      */
-    public function updateAction($customer) {
-        
+    public function updateAction(\EJC\Model\Customer $customer) {
+        $this->customerRepository->update($customer);        
     }
     
     /**

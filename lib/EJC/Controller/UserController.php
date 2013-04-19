@@ -49,8 +49,9 @@ class UserController extends AbstractController {
      * 
      * @return void
      */
-    public function loginAction($params) {
-        $user = $this->userRepository->findOneByName($params['name']);
+    public function loginAction(array $login) {
+        // Get matching user from repository
+        $user = $this->userRepository->findOneByName($login['name']);
                
         // if user not exist show message
         if ($user === NULL) {
@@ -58,8 +59,15 @@ class UserController extends AbstractController {
             $this->forward('User', 'showLogin');
             return;
         } else {
-            // TODO passwort match check and start login-session
-            $this->forward('User', 'start');
+            // forward to overview if password matches
+            if ($user->getPasswort() === md5($login['password'])) {
+                $this->forward('User', 'overview');
+            } else {
+                // wrong password -> show login + error message
+                $this->view->addErrorMessage('Falsches Passwort');
+                $this->forward('User', 'showLogin');
+                return;                
+            }
         }
     }
     

@@ -13,7 +13,8 @@ class AbstractController {
     protected $actionName;
     protected $view;
     protected $ajax;
-    
+    protected $request;
+
     protected $userRepository;
     protected $customerRepository;
     
@@ -21,12 +22,9 @@ class AbstractController {
     /**
      * Constructor
      */
-    public function __construct($controllerName, $actionName, $ajax = FALSE, $params = array(), $view = NULL) {
-        $this->controllerName = $controllerName;
-        $this->actionName = $actionName;
-        $this->ajax = $ajax;
-        $this->params = $params;
+    public function __construct(\EJC\Request $request, \EJC\View $view = NULL) {
         $this->view = $view;
+        $this->request = $request;
         $this->initView();
         $this->initRepositories();
     }
@@ -48,7 +46,7 @@ class AbstractController {
      */
     public function initView() {
          // Get path to template File for action
-        $template = $this->controllerName . '/' . ucwords($this->actionName) . '.php';
+        $template = $this->request->getController() . '/' . ucwords($this->request->getAction()) . '.php';
         
         // Initialize the view
         if ($this->view === NULL) {
@@ -64,9 +62,9 @@ class AbstractController {
      * @param string $action
      * @param array $params
      */
-    public function forward($controller, $action, $params = NULL) {
+    public function forward($controller, $action, array $params = NULL) {
         $request = new \EJC\Request($action, $controller, $params, $this->view);
-        $request->callAction();
+        $request->execute();
     }
     
     /**
@@ -76,7 +74,7 @@ class AbstractController {
      * @param string $action
      * @param string $params
      */
-    public function redirect($controller, $action, $params = NULL) {
+    public function redirect($controller, $action, array $params = NULL) {
         $paramString = '';
         if (is_array($params)) {
             foreach ($params AS $key => $value) {
@@ -85,6 +83,17 @@ class AbstractController {
         }
         header('index.php?controller=' . strtolower($controller) . '&action=' . $action . $paramString);
         return;
+    }
+    
+    /**
+     * Set the request
+     * 
+     * @param \EJC\Request $request The Request
+     * @return void
+     */
+    public function setRequest(\EJC\Request $request) {
+        var_dump($request);
+        $this->request = $request;
     }
     
 }
