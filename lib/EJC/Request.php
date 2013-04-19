@@ -41,7 +41,7 @@ class Request {
         // Set defaults, if controller and action not set
         if (empty($this->controller) && empty($this->action)) {
             $this->controller = 'User';
-            $this->action = 'start';
+            $this->action = 'showLogin';
         }
     }
     

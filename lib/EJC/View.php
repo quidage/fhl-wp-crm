@@ -28,9 +28,9 @@ class View {
         $this->initPaths();
         // Set layout to default value
         if ($ajax) {
-            $this->layoutFile = $this->layoutsPath . 'Ajax.inc';
+            $this->layoutFile = $this->layoutsPath . 'Ajax.php';
         } else {
-            $this->layoutFile = $this->layoutsPath . 'Default.inc';
+            $this->layoutFile = $this->layoutsPath . 'Default.php';
         }
     }
     
@@ -52,7 +52,7 @@ class View {
      * @return void
      */
     public function setLayout($layout) {
-        $this->layoutFile = $this->layoutsPath . ucwords($layout) . '.inc';
+        $this->layoutFile = $this->layoutsPath . ucwords($layout) . '.php';
     }      
 
     /**
@@ -81,9 +81,12 @@ class View {
      */
     public function render() {
         $this->renderErrorMessages();
+        ob_start();
         include $this->templateFile;
+        $this->template = ob_get_clean();
+        
         include $this->layoutFile;
-        echo $this->layout;
+        //echo $this->layout;
     }
     
     /**

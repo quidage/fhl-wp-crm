@@ -21,7 +21,7 @@ class AbstractController {
     /**
      * Constructor
      */
-    public function __construct($controllerName, $actionName, $ajax = FALSE, $params = array(), $view) {
+    public function __construct($controllerName, $actionName, $ajax = FALSE, $params = array(), $view = NULL) {
         $this->controllerName = $controllerName;
         $this->actionName = $actionName;
         $this->ajax = $ajax;
@@ -48,7 +48,7 @@ class AbstractController {
      */
     public function initView() {
          // Get path to template File for action
-        $template = $this->controllerName . '/' . ucwords($this->actionName) . '.inc';
+        $template = $this->controllerName . '/' . ucwords($this->actionName) . '.php';
         
         // Initialize the view
         if ($this->view === NULL) {

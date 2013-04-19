@@ -37,6 +37,7 @@ class SqlRepository {
     public function __destruct() {
         if (!empty($this->mysqli->error)) {
             throw new \EJC\Exception\RepositoryException('mysql error occured: "' . $this->mysqli->error . '"', 1366213519);
+            
         }
     }
 
