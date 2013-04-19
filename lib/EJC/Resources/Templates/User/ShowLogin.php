@@ -4,8 +4,8 @@
 
 <div id="loginform">
     <form name="login" method="post" action="index.php?controller=user&action=login">
-            <input type="text" name="user[name]" />
-            <input type="password" name="user[password]" />
+            <input type="text" name="login[name]" />
+            <input type="password" name="login[password]" />
             <button type="submit">Einloggen</button>
     </form>
 </div>

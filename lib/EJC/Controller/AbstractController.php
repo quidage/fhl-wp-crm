@@ -62,7 +62,7 @@ class AbstractController {
      * @param string $action
      * @param array $params
      */
-    public function forward($controller, $action, array $params = NULL) {
+    public function forward($controller, $action, array $params = array()) {
         $request = new \EJC\Request($action, $controller, $params, $this->view);
         $request->execute();
     }

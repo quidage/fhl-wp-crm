@@ -17,7 +17,7 @@ class Request {
     /**
      * Konstruktor
      */
-    public function __construct($action = NULL, $controller = NULL, array $params = NULL, View $view = NULL) {
+    public function __construct($action = NULL, $controller = NULL, array $params = array(), View $view = NULL) {
        if ($controller !== NULL && $action !== NULL) {
             
             // forwarded request
@@ -72,19 +72,21 @@ class Request {
                             
                             if ($object === NULL) {
                                 throw new Exception\RepositoryException('object has no counterpart in repository', 1366378567);
+                            } else {
+                                if (is_array($paramValues)) {
+                                    foreach ($paramValues AS $paramValueKey => $paramValueValue) {
+                                        call_user_func_array(array($object, 'set' . ucwords($paramValueKey)), array($paramValueValue));
+                                    }
+                                }
                             }
                             
-                            foreach ($paramValues AS $paramValueKey => $paramValueValue) {
-                                 call_user_func_array(array($object, 'set' . ucwords($paramValueKey)), array($paramValueValue));
-                                
-                            }
                         }
                         $this->params[] = $object;
                         unset($this->params[$paramName]);
                         
                     } catch (\EJC\Exception\ClassLoaderException $e) {
                         // parameter is not of type model
-                        throw $e;
+                        //throw $e;
                     }
                 }
             }

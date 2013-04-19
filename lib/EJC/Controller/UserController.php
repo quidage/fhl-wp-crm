@@ -60,7 +60,7 @@ class UserController extends AbstractController {
             return;
         } else {
             // forward to overview if password matches
-            if ($user->getPasswort() === md5($login['password'])) {
+            if ($user->getPassword() === md5($login['password'])) {
                 $this->forward('User', 'overview');
             } else {
                 // wrong password -> show login + error message
