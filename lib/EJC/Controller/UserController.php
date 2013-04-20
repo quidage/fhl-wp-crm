@@ -26,6 +26,17 @@ class UserController extends AbstractController {
     }
     
     /**
+     * list all users
+     * 
+     * @return void
+     */
+    public function listAction() {
+        $users = $this->userRepository->findAll();
+        $this->view->assign('users', $users);
+        $this->view->render();
+    }
+    
+    /**
      * create a new user
      * 
      * @param \EJC\Model\User $user
@@ -61,7 +72,11 @@ class UserController extends AbstractController {
      */
     public function loginAction(array $login) {
         // Get matching user from repository
-        $user = $this->userRepository->findOneByName($login['name']);
+        try {
+            $user = $this->userRepository->findOneByName($login['name']);
+        } catch (EJC\Exception\RepositoryException $e) {
+            $user = NULL;
+        }
                
         // if user not exist show message
         if ($user === NULL) {
