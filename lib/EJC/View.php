@@ -15,6 +15,8 @@ class View {
     protected $layout;
     protected $layoutFile;
     protected $layoutsPath;
+    protected $partialsPath;
+    protected $resourcesPath;
     
     protected $errors;
     protected $errorMessages;
@@ -40,9 +42,10 @@ class View {
      * @return void
      */
     public function initPaths() {
-        $resourcesPath = __AppRoot__ . '/lib/EJC/Resources';
-        $this->templatesPath = $resourcesPath .  '/Templates/';
-        $this->layoutsPath = $resourcesPath .  '/Layouts/';        
+        $this->resourcesPath = __AppRoot__ . '/lib/EJC/Resources';
+        $this->templatesPath = $this->resourcesPath .  '/Templates/';
+        $this->layoutsPath = $this->resourcesPath .  '/Layouts/';        
+        $this->partialsPath = $this->resourcesPath .  '/Partials/';        
     }
 
     /**
@@ -87,6 +90,19 @@ class View {
         
         include $this->layoutFile;
         //echo $this->layout;
+    }
+    
+    /**
+     * render partial and return rendered html
+     * 
+     * @param string $controller
+     * @param string $partial
+     * @return string rendered partial
+     */
+    public function renderPartial($controller, $partial) {
+        ob_start();
+        include $this->partialsPath . ucwords($controller) . '/' . ucwords($partial);
+        return ob_get_clean();
     }
     
     /**
