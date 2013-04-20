@@ -5,7 +5,8 @@ namespace EJC\Controller;
 /**
  * Description of CustomerController
  *
- * @author christian
+ * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
  */
 class CustomerController extends AbstractController {
 
@@ -44,7 +45,8 @@ class CustomerController extends AbstractController {
      * @param array $customer
      */
     public function updateAction(\EJC\Model\Customer $customer) {
-        $this->customerRepository->update($customer);        
+        $this->customerRepository->update($customer);
+        var_dump($customer);
     }
     
     /**

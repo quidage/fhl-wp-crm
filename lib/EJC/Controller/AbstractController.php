@@ -6,18 +6,17 @@ namespace EJC\Controller;
  * Description of CustomerController
  *
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
  */
 class AbstractController {
 
     protected $controllerName;
     protected $actionName;
     protected $view;
-    protected $ajax;
     protected $request;
-
+    protected $customerRepository;    
+    protected $projectRepository;    
     protected $userRepository;
-    protected $customerRepository;
-    
 
     /**
      * Constructor
@@ -35,8 +34,9 @@ class AbstractController {
      * @return void
      */
     public function initRepositories() {
-        $this->userRepository = new \EJC\Repository\UserRepository();
         $this->customerRepository = new \EJC\Repository\CustomerRepository();
+        $this->projectRepository = new \EJC\Repository\ProjectRepository();
+        $this->userRepository = new \EJC\Repository\UserRepository();
     }
     
     /**
@@ -83,17 +83,6 @@ class AbstractController {
         }
         header('index.php?controller=' . strtolower($controller) . '&action=' . $action . $paramString);
         return;
-    }
-    
-    /**
-     * Set the request
-     * 
-     * @param \EJC\Request $request The Request
-     * @return void
-     */
-    public function setRequest(\EJC\Request $request) {
-        var_dump($request);
-        $this->request = $request;
     }
     
 }

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Cofiguration file
+ * 
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ */
+
 $config = array(
     
     // database configuration

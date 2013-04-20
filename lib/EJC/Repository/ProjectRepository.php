@@ -4,6 +4,7 @@ namespace EJC\Repository;
 
 /**
  * 
+ * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */
 class ProjectRepository extends AbstractRepository {

@@ -26,6 +26,16 @@ class UserController extends AbstractController {
     }
     
     /**
+     * create a new user
+     * 
+     * @param \EJC\Model\User $user
+     */
+    public function createAction(\EJC\Model\User $user) {
+        $this->userRepository->add($user);
+        var_dump($user);
+    }
+    
+    /**
      * display form to edit user-data
      * 
      * @param array $user
@@ -61,7 +71,7 @@ class UserController extends AbstractController {
         } else {
             // forward to overview if password matches
             if ($user->getPassword() === md5($login['password'])) {
-                $this->forward('User', 'overview');
+                $this->forward('User', 'start');
             } else {
                 // wrong password -> show login + error message
                 $this->view->addErrorMessage('Falsches Passwort');

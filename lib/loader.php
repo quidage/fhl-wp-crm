@@ -4,6 +4,8 @@
  * Autoloader for classes
  * path defined by namespace
  * 
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * 
  * @param type $className
  */
 function __autoload($className) {

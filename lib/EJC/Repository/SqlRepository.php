@@ -3,10 +3,10 @@
 namespace EJC\Repository;
 
 /**
- * Repositoryfunctions for all repositories 
+ * Repositoryfunctions for all SQL-Repositories 
+ * building queries, executing queries
  * 
  * @author Christian Hansen <chrstian.hansen@stud.fh-luebeck.de>
- * 
  * @package wp-crm
  */
 class SqlRepository {
