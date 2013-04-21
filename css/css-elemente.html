@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+
+<head>
+  	<title>CSS Prototype</title>
+  
+  	<meta name="description" content="This is the css prototype for the applikatioin fhl-wp-crm." />
+	<meta name="author" content="Enrico Lauterschlag" />
+	<meta name="keywords" content="css, prototype" />
+	<meta name="robots" content="noindex, nofollow" />
+	<meta name="DC.Rights" content="Alle Rechte liegen beim Autor der Seite" />
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  	<meta http-equiv="expires" content="0" />
+  	<meta http-equiv="cache-control" content="no-cache" /> 
+  	
+	<link rel="stylesheet" type="text/css" href="screen.css" media="all" />
+</head>
+<body>
+
+<div id="wrap"> 
+	
+  	<div id="header">
+		
+		<div id="menu">
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="css-elemente.html">CSS Elements</a>
+					<ul>
+						<li><a href="css-elemente.html#button">Button</a></li>
+						<li><a href="css-elemente.html#paragraph">Forms</a></li>
+						<li><a href="css-elemente.html#tables">Tables</a></li>
+					</ul></li>
+				<li><a href="single-page.html">Page</a></li>
+			</ul>
+		</div>
+		
+	</div>
+    	  
+	<div id="main-content">
+		
+		<h1>Heading 1</h1>
+		<h2>Heading 2</h2>
+		<h3>Heading 3</h3>
+		<h4>Heading 4</h4>
+		<h5>Heading 5</h5>
+		<h6>Heading 6</h6>
+		
+		<h1>Paragraph</h1>
+		
+			<p>Lorem ipsum dolor sit amet, <a href="#">test link</a> consectetur adipiscing elit. Vivamus varius feugiat tortor a 
+			scelerisque. Nulla quis nisl sapien. Aenean at dui tempus velit laoreet mollis. Sed sed eros 
+			diam. Donec pretium posuere malesuada. Fusce porttitor, dui sed tristique rhoncus, lacus ipsum 
+			fringilla magna, at volutpat erat nisi sed libero. Praesent lacinia aliquam metus, ac mollis leo 
+			commodo vel. Curabitur luctus odio vitae velit consequat vel scelerisque ipsum pulvinar. 
+			Nam cursus pellentesque turpis, vel suscipit metus pharetra non. Nam sagittis neque ipsum.</p>
+			<p>Curabitur nec justo urna. Phasellus lacus enim, placerat sed auctor quis, porta in metus. 
+			Donec tempor gravida enim accumsan aliquet. Sed at semper tortor. Lorem ipsum dolor sit amet, 
+			consectetur adipiscing elit. Phasellus ac velit a ante condimentum luctus. Ut viverra ullamcorper 
+			dolor at.</p>
+		
+		<h1>Button</h1>
+			<a href="#" class="button-link">Call to Action</a>
+		
+		<h1>Bilder</h1>
+		<h2>Bild</h2>
+			<img src="../images/picture.jpg" />
+		<h2>Bild als Link</h2>
+			<a href="#"><img src="../images/picture_link.jpg" /></a>
+		
+		<h1>List Types</h1>
+		<h2>Ordered List</h2>
+			<ol>
+				<li>List Item 1</li>
+				<li>List Item 2</li>
+				<li>List Item 3</li>
+				<li>List Item 4</li>
+			</ol>
+		<h2>Unordered List</h2>
+			<ul>
+				<li>List Item 1
+				<ul>
+					<li>List Item 2</li>
+					<li>List Item 3</li>
+				</ul></li>
+				<li>List Item 4</li>
+			</ul>
+			
+		<h1>Forms</h1>
+		<form action="#">
+			<fieldset>
+				<legend>Grouped Form</legend>
+				<label for="vorname">Vorname:</label>
+				<input type="text" name="vorname"></input>
+				<br />
+				<label for="comments">Kommentar:</label>
+				<textarea name="comments"></textarea>
+			</fieldset>			
+		</form>
+		<h2>Form with table</h2>
+		<form action="#">
+			<table>
+				<tr>
+					<td>
+						Textfield:
+					</td>
+					<td>
+						<input type="text" name="textfield" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Passwort:
+					</td>
+					<td>
+						<input type="password" name="password" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Textarea:
+					</td>
+					<td>
+						<textarea name="textarea"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Select Box:
+					</td>
+					<td>
+						<select>
+							<option>1. Option</option>
+							<option>2. Option</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Radio Buttons:
+					</td>
+					<td>
+						<input type="radio" name="radio" value="value 1" class="radio" /> Value 1<br />
+						<input type="radio" name="radio" value="value 2" class="radio" /> Value 2<br />
+						<input type="radio" name="radio" value="value 3" class="radio" /> Value 3
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Checkboxen:
+					</td>
+					<td>
+						<input type="checkbox" name="check" value="value 1" class="checkbox" /> Salami<br />
+					    <input type="checkbox" name="check" value="value 2" class="checkbox" /> Pilze<br />
+					    <input type="checkbox" name="check" value="value 3" class="checkbox" /> Sardellen
+				    </td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align:right">
+						<input type="submit" value="Submit" class="submit button-link" />
+						<input type="reset" value="Reset" class="button-link" />
+					</td>
+				</tr>				
+			</table>
+		</form>
+		
+		<h1>Tables</h1>
+		<table>
+			<caption>
+				Kundendaten
+			</caption>
+			<thead>
+				<tr>
+					<th>Kundennummer</th>
+					<th>Name</th>
+					<th>Offene Projekte</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>Christian Hansen</td>
+					<td>PHP-Backend programmieren</td>
+					<td>
+						<a href="#" title="Bearbeiten"><img src="../images/iconset/writeNew.png" /></a>
+						<a href="#" title="Details"><img src="../images/iconset/information.png" /></a>
+						<a href="#" title="Eintrag löschen"><img src="../images/iconset/check-not-ok.png" /></a>
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Julian Hilbers</td>
+					<td>JS-Backend programmieren</td>
+					<td>
+						<a href="#" title="Bearbeiten"><img src="../images/iconset/writeNew.png" /></a>
+						<a href="#" title="Details"><img src="../images/iconset/information.png" /></a>
+						<a href="#" title="Eintrag löschen"><img src="../images/iconset/check-not-ok.png" /></a>
+					</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>Enrico Lauterschlag</td>
+					<td>Layout gestalten</td>
+					<td>
+						<a href="#" title="Bearbeiten"><img src="../images/iconset/writeNew.png" /></a>
+						<a href="#" title="Details"><img src="../images/iconset/information.png" /></a>
+						<a href="#" title="Eintrag löschen"><img src="../images/iconset/check-not-ok.png" /></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>	
+	</div>
+	
+	<div id="footer">
+	
+		<div id="footer-content">
+			<p>Footer</p>
+		</div>
+		
+		<div id="copyright">
+			<p>fhl-wp-crm Designed &amp; Coded by Christian Hansen, Julian Hilbers &amp; Enrico Lauterschlag</p>
+		</div>
+	
+	</div>
+	
+</div>
+
+</body>
+</html>
