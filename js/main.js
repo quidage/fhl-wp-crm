@@ -21,7 +21,8 @@ function $(selector) {
  * @type object
  */
 var dh = {
-	elem: null,		// contains the selected element
+	elem: null,		// Contains the selected element
+	len: 0,			// Number of found results
 	workArr: [],	// Array for selected classes
 	
     /**
@@ -36,9 +37,11 @@ var dh = {
     	
     	if( sType === "#" ) {
     		this.elem = document.getElementById(selector);
+    		this.len = ( this.elem != null ? 1 : 0 );
     	} else if( sType === "." ) {
     		this.workArr = document.getElementsByClassName(selector);
     		this.elem = this.workArr[0];
+    		this.len = this.workArr.length;
     	}
     	
     	return this;
@@ -87,15 +90,71 @@ var dh = {
     },
               
     /**
-     * Trim a string
+     * Trims a string
      * 
-     * @param {type} untrimmedString
-     * @returns {@exp;untrimmedString@call;replace}
+     * @param {string} uStr		Untrimmed string
+     * 
+     * @return {string}
      */
-    trim: function(untrimmedString) {
-        return untrimmedString.replace(/^\s+|\s+$/g, '');
+    trim: function( uStr ) {
+        return uStr.replace(/^\s+|\s+$/g, '');
     },
-            
+    
+    /**
+     * Read and write html
+     * 
+     * @param {string} html		new html content
+     * 
+     * @return {string} if no argument is given
+     */
+    html: function( html ) {
+    	if( html === undefined ) return this.elem.innerHTML();
+    	this.elem.innerHTML = html;
+    },
+    
+    /**
+     * Appends an simple Element like (<p>xyz</p>) to the DOM
+     * 
+     * @param {string} input		Data to append
+     * @param {string} idStr		Optional id
+     * @param {string} clsStr		Optional class 
+     */
+    append: function( input, idStr, clsStr ) {
+    	
+    	var wArr = this.seperateHtmlTag(input);
+    	
+    	var elem = document.createElement(wArr[0]);
+    	if( typeof(idStr) === 'string' && idStr != '') elem.setAttribute('id', idStr);
+    	if( typeof(clsStr) === 'string' && clsStr != '') elem.setAttribute('class', clsStr);
+    	
+    	elem.innerHTML = wArr[1];
+    	
+    	this.elem.appendChild(elem);
+    },
+    
+    /**
+     * Finds and seperates an HTML Tag from its content
+     * 
+     * @param {string} input		String with entrys to seperate
+     * 
+     * @return {array} With an element and its content
+     */
+    seperateHtmlTag: function( input ) {
+    	var rtArr = [];
+    	
+    	// Get tag
+    	var regExp = /<[^>]*>/;
+    	var ea = regExp.exec(input);
+    	rtArr[0] = ea[0].substr(1, ea[0].search(/\s{1}|>/)-1);
+    	
+    	// Get content
+    	regExp = new RegExp('<\\/['+rtArr[0]+']{1}\\s*>', 'gi');
+    	rtArr[1] = input.substr(ea[0].length);
+    	rtArr[1] = rtArr[1].replace(regExp, '');
+    	
+    	return rtArr; 
+    },
+    
     /**
      * Adds a class to an element
      * 
@@ -151,7 +210,7 @@ var dh = {
     },
     
     /**
-     * Fügt dem Element ein Klick Event hinzu
+     * Adds an click event to the element
      * 
      * @param {function} callback
      */
@@ -162,7 +221,7 @@ var dh = {
     },
     
     /**
-     * Fügt dem Element ein Mouseover Event hinzu
+     * Adds an mouseover event to the element
      * 
      * @param {function} callback
      */
@@ -171,6 +230,18 @@ var dh = {
     		this.elem.addEventListener('mouseover', callback, false);	
     	}
     },
+    
+    /**
+     * Adds an on focus event to the element
+     * 
+     * @param {function} callback
+     */
+    focus: function( callback ) {
+    	if( typeof(callback) === 'function' ) {
+    		alert('hho');
+    		this.elem.addEventListener('onfocus', callback, false);	
+    	}
+    },    
     
     /**
      * Show an element
@@ -255,7 +326,7 @@ function valid(selector, options){
  */
 var Validate = {
 	// Default values
-	defaults : { name: '', required: false, type: 'text', maxLen: 0, minLen: 0, error: 'Fehlerhafte Eingabe' },
+	defaults : { name: '', required: false, type: 'text', maxLen: 0, minLen: 0, errMsg: 'Ihre Eingabe ist nicht korrekt!' },
 	fields: {},		// All field to check
 	vForm: null,	// Formular to check
 	
@@ -283,34 +354,36 @@ var Validate = {
 	 * @param {*} value			Value for testing
 	 * @param {object} opt		Conditions for this value
 	 * 
-	 * @return {boolean}
+	 * @return {string} Error Message
 	 */
-	investigateEntry: function( value, opt ) {
+	investigate: function( value, opt ) {
 		var strLen = value.length;
+		var regExp;
 		var maL = ( opt.maxLen == 0 ? strLen : opt.maxLen );
 		var miL = ( opt.minLen == 0 ? strLen : opt.minLen );
 		
 		// End if it's required but empty
 		if( opt.required && strLen < 1 ) {
-			console.log('Keine Eingabe im Pflichtfeld!');
-			return false;
+			return 'Fehlende Eingabe im Feld: '+opt.name+'.';
 		}
 		
 		// End if value have wrong length
-		if( strLen > maL || strLen < miL ) {
-			if( strLen > maL ) console.log('Ihr Eintrag im Feld '+opt.name+' ist '+( strLen-maL )+' Zeichen zu lang!');
-			if( strLen < miL ) console.log('Ihr Eintrag im Feld '+opt.name+' ist '+( miL-strLen )+' Zeichen zu kurz!');
-			
-			return false;
-		}
+		if( strLen > maL ) return 'Ihr Eintrag im Feld '+opt.name+' ist '+( strLen-maL )+' Zeichen zu lang.';
+		if( strLen < miL ) return 'Ihr Eintrag im Feld '+opt.name+' ist '+( miL-strLen )+' Zeichen zu kurz.';
+		
 		
 		// Compare to regular expression
+		var msg = '';
 		switch( opt.type ) {
-			case '':;
-			default: return this.checkRegExp( value, \^[^#]$\ );
+			case 'email': regExp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			break;
+			case 'plz': regExp = /^([0-9]{5})$/;
+			break;
+			default: regExp = /^([A-Za-z0-9]*)$/;
 		}
 		
-		return true;
+		if(!this.checkRegExp( value, regExp )) msg = opt.errMsg;
+		return msg;
 	},
 	/**
 	 * Checks a value depending to a regular expression
@@ -321,18 +394,42 @@ var Validate = {
 	 * @return {boolean}
 	 */
 	checkRegExp: function( value, regExp ) {
-		// TO DO!!
+		return regExp.test(value);
 	},
+	/**
+	 * Appends an informative message to an element 
+	 * 
+	 * @param {string} pName	Name of this field to identify the error message
+	 * @param {object} elem		Element within the error will be displayed
+	 * @param {string} msg		Error message
+	 */
+	addErrorMessage: function( pName, elem, msg ) {
+		var tmpID = 'err_'+pName;
+		if( $('#'+tmpID).len == 0 ) $(elem).append('<p>'+msg+'</p>', tmpID);
+	},
+	
 	/**
 	 * Investigates all within "this.list" stored fields
 	 * 
 	 * @return {boolean} 
 	 */
 	check: function() {
-		valid = true;
+		var valid = true;
+		var err = '';
 		
+		// Test every Element
+		var del = false;
 		for( var x in this.list ) {
-			valid = this.investigateEntry( this.vForm[x].value, this.list[x] );
+			if( !del ) {
+				$(this.list[x].errTo).html('');		// Remove existing Messages
+				del = true;
+			} 
+			
+			err = this.investigate( this.vForm[x].value, this.list[x] );
+			if(err != '') {
+				this.addErrorMessage( x, this.list[x].errTo, err );
+			}
+			
 		}
 		
 		return valid;
