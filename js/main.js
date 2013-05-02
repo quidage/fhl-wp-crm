@@ -16,7 +16,7 @@ function $(selector) {
 };
 
 /**
- * namespace for DOMHelper-Functions
+ * Namespace for DOMHelper-Functions
  * 
  * @type object
  */
@@ -130,6 +130,25 @@ var dh = {
         }
         return this;
     },
+    /**
+     * Reads or sets the attribute of an element
+     * 
+     * @param {string} attr		Attribute to find
+     * @param {string} val		New Value
+     * 
+     * @returns {string}
+     */
+    attr: function( attr, val ) {
+    	val = val || null;
+    	
+    	if( val == null ) {
+    		return this.elem.getAttribute(attr);	
+    	} else {
+    		this.elem.setAttribute(attr, val);
+    	}
+    	
+    	return '';
+    },
     
     /**
      * Fügt dem Element ein Klick Event hinzu
@@ -214,6 +233,123 @@ var dh = {
 
         request.send(null);
     }
-
-
 }; // var selection
+
+
+/**
+ * Initiates the validation of an form
+ * 
+ * @param {string} selector		Formulars name
+ * @param {object} options		json Object with options
+ * @returns {boolean} 
+ */
+function valid(selector, options){
+	var vForm = document[selector];
+	Validate.init(vForm, options);
+	
+	return Validate;
+}
+
+/**
+ * Namespace to validate Formular inputs 
+ */
+var Validate = {
+	// Default values
+	defaults : { name: '', required: false, type: 'text', maxLen: 0, minLen: 0, error: 'Fehlerhafte Eingabe' },
+	fields: {},		// All field to check
+	vForm: null,	// Formular to check
+	
+	init: function( vf, entrys ) {
+		this.combineWithDefaults( entrys );
+		this.vForm = vf;
+	},
+	/**
+	 * 
+ 	 * @param {Object} list		List with entrys
+	 */
+	combineWithDefaults: function( list ) {
+		this.list = [];
+		
+		for( var x in list ) {
+			var obj = {};
+			Object.extend( obj, this.defaults );
+			Object.extend( obj, list[x] );
+			this.list[x] = obj;
+		}
+	},
+	/**
+	 * Tests an value of its predefined parameters
+	 * 
+	 * @param {*} value			Value for testing
+	 * @param {object} opt		Conditions for this value
+	 * 
+	 * @return {boolean}
+	 */
+	investigateEntry: function( value, opt ) {
+		var strLen = value.length;
+		var maL = ( opt.maxLen == 0 ? strLen : opt.maxLen );
+		var miL = ( opt.minLen == 0 ? strLen : opt.minLen );
+		
+		// End if it's required but empty
+		if( opt.required && strLen < 1 ) {
+			console.log('Keine Eingabe im Pflichtfeld!');
+			return false;
+		}
+		
+		// End if value have wrong length
+		if( strLen > maL || strLen < miL ) {
+			if( strLen > maL ) console.log('Ihr Eintrag im Feld '+opt.name+' ist '+( strLen-maL )+' Zeichen zu lang!');
+			if( strLen < miL ) console.log('Ihr Eintrag im Feld '+opt.name+' ist '+( miL-strLen )+' Zeichen zu kurz!');
+			
+			return false;
+		}
+		
+		// Compare to regular expression
+		switch( opt.type ) {
+			case '':;
+			default: return this.checkRegExp( value, \^[^#]$\ );
+		}
+		
+		return true;
+	},
+	/**
+	 * Checks a value depending to a regular expression
+	 * 
+	 * @param {*} value				Value for testing
+	 * @param {string} regExp		Regular expression
+	 * 
+	 * @return {boolean}
+	 */
+	checkRegExp: function( value, regExp ) {
+		// TO DO!!
+	},
+	/**
+	 * Investigates all within "this.list" stored fields
+	 * 
+	 * @return {boolean} 
+	 */
+	check: function() {
+		valid = true;
+		
+		for( var x in this.list ) {
+			valid = this.investigateEntry( this.vForm[x].value, this.list[x] );
+		}
+		
+		return valid;
+	}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
