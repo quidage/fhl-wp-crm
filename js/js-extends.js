@@ -9,8 +9,8 @@
  * Slightly modified version of an script from a guy called KorRedDevil (member of forum.devshed) to
  * extend the functionality of this default JavaScript function 
  * 
- * @param {Object} className	Name of your class
- * @returns {Array} Containing all elements with this class name
+ * @param {string} className	Name of your class
+ * @return {array} Containing all elements with this class name
  */
 document.getElementsByClassName = function( className ) {
 	var hasClass  = new RegExp("(?:^|\\s)"+className+"(?:$|\\s)");
@@ -26,4 +26,18 @@ document.getElementsByClassName = function( className ) {
 	}
 	
 	return results;
+}
+
+/**
+ * Copyes the content of one object into an other
+ * 
+ * @param {object} target	 		File to update
+ * @param {object} source			New Data
+ */
+Object.extend = function( target, source ) {
+	for( var x in source ) {
+		target[x] = source[x];
+	}
+	
+	return target;
 }
