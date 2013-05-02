@@ -1,10 +1,19 @@
 // exec functions when page is loaded
 window.onload = function() {
 
-	$("#wrapper").find('a').each(function(e){
-	});
 
+var v = valid('logform', {
+	'username': { name: 'Benutzername', required: true },
+	'userpass': { name: 'Passwort', required: true, minLen: 6, error: 'Bitte geben Sie ein Passwort ein!' }
+});
+	
 
+$("#loginform").find('button').click(function(e){
+	e.preventDefault();
+	console.log(v.check());
+});	
+
+	
 //    $('ergebnis').removeClass('test');
 
 //	ejc.ajax({
