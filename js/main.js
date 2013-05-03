@@ -1,310 +1,275 @@
 /**
- * create own namespace for this project
- * the $ is inspired by jQuery
+ * Selector for DOM elements inspired by jQuery
  * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>, Julian Hilbers <hilbers.juian@gmail.com>
- */
-
-/**
- * Get an element by selector-string
+ * @version 1.0 
  * 
- * @param {string} selector
- * @returns {object}
- */
-function $(selector) {
-    return dh.init(selector);
-};
-
-/**
- * Namespace for DOMHelper-Functions
  * 
- * @type object
+ * -------------------------------------------------------------------------------------------|
+ * DOM helper to interact with DOM elements
+ * 
+ * @param {object} window		Central window object
+ * @param {*} undefined			For security reason, to get a clean undefined
  */
-var dh = {
-	elem: null,		// Contains the selected element
-	len: 0,			// Number of found results
-	workArr: [],	// Array for selected classes
+(function(window, undefined){
+	"strict mode"
 	
-    /**
-     * Selects an element by class or id
-     * 
-     * @param {string} 	selector, start for classes with . and id's with #
-     * @returns {dh}
-     */
-    init: function(selector) {
-    	var sType = selector.charAt(0);
-    	selector = selector.substr(1,selector.length);
-    	
-    	if( sType === "#" ) {
-    		this.elem = document.getElementById(selector);
-    		this.len = ( this.elem != null ? 1 : 0 );
-    	} else if( sType === "." ) {
-    		this.workArr = document.getElementsByClassName(selector);
-    		this.elem = this.workArr[0];
-    		this.len = this.workArr.length;
-    	}
-    	
-    	return this;
-    },
-    
-    /**
-     * Finds an html tag within an selected element
-     * 
-     * @param {string} selector		
-     */
-    find: function( selector ) {
-    	this.workArr = this.elem.getElementsByTagName(selector)
-    	this.elem = this.workArr[0];
-    	return this; 
-    },
-    
-    /**
-     * Works only with selected classes and find, delivers the element at the passed position
-     * 
-     * @param {int} 	Position of the element
-     * @returns {dh}
-     */
-    eq: function( no ) {
-    	no *= 1;	// Makes an int of it
-    	var c = this.workArr.length;
-    	no = ( no < c ? no : c-1 );
-    	
-		this.elem = this.workArr[no];
-		return this;
-    },
-    
-    /**
-     * Works only with selected classes and find, runs through every element and
-     * performs the passed event
-     * 
-     * @param {function} callback		Something that should happen with this element
-     */
-    each: function( callback ) {
-    	var c = this.workArr.length;
-    	if( c > 0 && typeof(callback) === 'function' ) {
-    		for( var i = 0; i < c; i++ ) {
-    			this.elem = this.workArr[i];
-    			callback(this);
-    		}
-    	}
-    },
-              
-    /**
-     * Trims a string
-     * 
-     * @param {string} uStr		Untrimmed string
-     * 
-     * @return {string}
-     */
-    trim: function( uStr ) {
-        return uStr.replace(/^\s+|\s+$/g, '');
-    },
-    
-    /**
-     * Read and write html
-     * 
-     * @param {string} html		new html content
-     * 
-     * @return {string} if no argument is given
-     */
-    html: function( html ) {
-    	if( html === undefined ) return this.elem.innerHTML();
-    	this.elem.innerHTML = html;
-    },
-    
-    /**
-     * Appends an simple Element like (<p>xyz</p>) to the DOM
-     * 
-     * @param {string} input		Data to append
-     * @param {string} idStr		Optional id
-     * @param {string} clsStr		Optional class 
-     */
-    append: function( input, idStr, clsStr ) {
-    	
-    	var wArr = this.seperateHtmlTag(input);
-    	
-    	var elem = document.createElement(wArr[0]);
-    	if( typeof(idStr) === 'string' && idStr != '') elem.setAttribute('id', idStr);
-    	if( typeof(clsStr) === 'string' && clsStr != '') elem.setAttribute('class', clsStr);
-    	
-    	elem.innerHTML = wArr[1];
-    	
-    	this.elem.appendChild(elem);
-    },
-    
-    /**
-     * Finds and seperates an HTML Tag from its content
-     * 
-     * @param {string} input		String with entrys to seperate
-     * 
-     * @return {array} With an element and its content
-     */
-    seperateHtmlTag: function( input ) {
-    	var rtArr = [];
-    	
-    	// Get tag
-    	var regExp = /<[^>]*>/;
-    	var ea = regExp.exec(input);
-    	rtArr[0] = ea[0].substr(1, ea[0].search(/\s{1}|>/)-1);
-    	
-    	// Get content
-    	regExp = new RegExp('<\\/['+rtArr[0]+']{1}\\s*>', 'gi');
-    	rtArr[1] = input.substr(ea[0].length);
-    	rtArr[1] = rtArr[1].replace(regExp, '');
-    	
-    	return rtArr; 
-    },
-    
-    /**
-     * Adds a class to an element
-     * 
-     * @param {string} className
-     * @returns {dh}
-     */
-    addClass: function(className) {
-        if (this.elem.hasAttribute('class')) {	
-            this.elem.setAttribute('class', this.elem.getAttribute('class') + ' ' + className);
-        } else {
-            this.elem.setAttribute('class', className);
-        }
-        return this;
-    },
-
-    /**
-     * Remove class from an element
-     * 
-     * @param {string} className
-     * @returns {dh}
-     */
-    removeClass: function(className) {
-        if (this.elem.hasAttribute('class')) {
-            var classes = this.elem.getAttribute('class').split(' ');
-            var classesString = '';
-            for(i = 0; i < classes.length; i++) {
-                if(this.trim(classes[i]) !== className) {
-                    classesString += this.trim(classes[i]) + ' ';
-                }
-            }
-            this.elem.setAttribute('class', this.trim(classesString));
-        }
-        return this;
-    },
-    /**
-     * Reads or sets the attribute of an element
-     * 
-     * @param {string} attr		Attribute to find
-     * @param {string} val		New Value
-     * 
-     * @returns {string}
-     */
-    attr: function( attr, val ) {
-    	val = val || null;
-    	
-    	if( val == null ) {
-    		return this.elem.getAttribute(attr);	
-    	} else {
-    		this.elem.setAttribute(attr, val);
-    	}
-    	
-    	return '';
-    },
-    
-    /**
-     * Adds an click event to the element
-     * 
-     * @param {function} callback
-     */
-    click: function( callback ) {
-    	if( typeof(callback) === 'function' ) {
-    		this.elem.addEventListener('click', callback, false);	
-    	}
-    },
-    
-    /**
-     * Adds an mouseover event to the element
-     * 
-     * @param {function} callback
-     */
-    mouseover: function( callback ) {
-    	if( typeof(callback) === 'function' ) {
-    		this.elem.addEventListener('mouseover', callback, false);	
-    	}
-    },
-    
-    /**
-     * Adds an on focus event to the element
-     * 
-     * @param {function} callback
-     */
-    focus: function( callback ) {
-    	if( typeof(callback) === 'function' ) {
-    		alert('hho');
-    		this.elem.addEventListener('onfocus', callback, false);	
-    	}
-    },    
-    
-    /**
-     * Show an element
-     * 
-     * @returns {dh}
-     */        
-    show: function() {
-        this.elem.style.display = "block";
-        return this;
-    },
-            
-    /**
-     * Hide an element
-     * 
-     * @returns {dh}
-     */        
-    hide: function() {
-        this.elem.style.display = "none";
-        return this;
-    },
-            
-    /**
-     * Make an AJAX-Call
-     * 
-     * @param {object} parameter
-     * @returns {string}
-     */
-    ajax: function(parameter) {
-
-        var request = null;
-
-        // Internet Explorer
-        if (window.ActiveXObject) {
-            request = new ActiveXObject("Microsoft.XMLHTTP");
-        } else { // other browsers
-            request = new XMLHttpRequest();
-        }
-
-        var requestUri = parameter.url;
-        
-        for (i = 0; i < parameter.params.length; i++) {
-
-        }
-        request.open("GET", requestUri, true);
-        request.onreadystatechange = function() {
-
-            if (request.readyState !== 4 && parameter.loading() !== undefined) {
-                parameter.loading();
-            }
-
-            if (request.readyState === 4 && request.status === 200 && parameter.success(request.response) !== undefined) {
-                if (parameter.type === 'json') {
-                    parameter.success();
-                } else {
-                    parameter.success(request.responseText);
-                }
-            }
-
-        };
-
-        request.send(null);
-    }
-}; // var selection
+	var matches,
+		reSingleTag = /^<(\w+)\s*\/?>$/;
+	
+	// Call the contructor
+	var dHelper = function(selector) {
+		return new dHelper.dh.init( selector );
+	};
+	
+	// Append all the nice functionalities to dHelper.fn
+	dHelper.dh = dHelper.prototype = {
+		len: 0,		// Found results
+		
+		/**
+		 * Contructor
+		 * 
+		 * @param {string} selector		Element selectable by id or class 
+		 */
+		init: function(selector) {
+			var elem, sType;
+	    	
+	    	sType = selector.charAt(0);
+	    	selector = selector.substr(1,selector.length);
+	    	
+	    	switch( sType ) {
+	    		case '#': elem = document.getElementById(selector);
+	    				  this[0] = elem;
+	    				  this.len = 1;
+	    		break;
+	    		case '.': elem = document.getElementsByClassName(selector); 
+	    				  this.pushToMatches(elem);
+	    				  this[0] = elem[0];
+	    		break;
+	    		case '<': this.pushToMatches(document.getElementsByTagName(reSingleTag.exec(selector)));
+	    		break;
+	    		default: return this;
+	    	}
+	    	
+	    	return this;
+	 	},
+	 	/**
+	     * Finds an html tag within an selected element
+	     * 
+	     * @param {string} selector		Tag to find
+	     * @returns {dh}
+	     */
+	    find: function( selector ) {
+	    	// TO DO due refactoring
+	    	this.pushToMatches(this[0].getElementsByTagName(selector));
+	    	return this;
+	    },
+	    /**
+	     * Works only with selected classes, delivers the element at the passed position
+	     * 
+	     * @param {int} 	Position of the element
+	     * @returns {dh}
+	     */
+	    eq: function( no ) {
+	    	return this.matches[no];
+	    },
+	    /**
+	     * Works only with selected classes and find, runs through every element and
+	     * performs the passed event
+	     * 
+	     * @param {function} callback		Something that should happen with this element
+	     */
+	    each: function( callback ) {
+	    	// TO DO due refactoring
+	    	/*
+	    	var c = this.workArr.length;
+	    	if( c > 0 && typeof(callback) === 'function' ) {
+	    		for( var i = 0; i < c; i++ ) {
+	    			this.elem = this.workArr[i];
+	    			callback(this);
+	    		}
+	    	}
+	    	*/
+	    },
+	    /**
+	     * Appends the an array of results to dHelper
+	     * 
+	     * @param {array} results		Array with found elements
+	     */
+	    pushToMatches: function( results ) {
+	    	var c = results.length;
+	    	this.len = c;
+	    	this.matches = [];
+	    	
+	    	for( var i = 0; i < c; i++ ) {
+	    		var nEl = {};
+	    		Object.extend( nEl, this );
+	    		nEl[0] = results[i];
+	    		this.matches.push(nEl);
+	    	}
+	    },
+	    /**
+	     * Trims a string
+	     * 
+	     * @param {string} uStr		Untrimmed string
+	     * @return {string}
+	     */
+	    trim: function( uStr ) {
+	        return uStr.replace(/^\s+|\s+$/g, '');
+	    },
+	    /**
+	     * Appends some content to the element
+	     * 
+	     * @param {string} input		New content
+	     */
+	    append: function( input ) {
+	    	// TO DO
+	    },
+	 	/**
+	     * Adds a class to an element
+	     * 
+	     * @param {string} className
+	     * @return {dh}
+	     */
+	    addClass: function( className ) {
+	        if (this[0].hasAttribute('class')) {	
+	            this[0].setAttribute('class', this[0].getAttribute('class') + ' ' + className);
+	        } else {
+	            this[0].setAttribute('class', className);
+	        }
+	        return this;
+	    },
+	    /**
+	     * Remove class from an element
+	     * 
+	     * @param {string} className
+	     * @return {dh}
+	     */
+	    removeClass: function( className ) {
+	        if (this[0].hasAttribute('class')) {
+	            var classes = this.elem.getAttribute('class').split(' ');
+	            var classesString = '';
+	            for(i = 0; i < classes.length; i++) {
+	                if(this.trim(classes[i]) !== className) {
+	                    classesString += this.trim(classes[i]) + ' ';
+	                }
+	            }
+	            this[0].setAttribute('class', this.trim(classesString));
+	        }
+	        return this;
+	    },
+	    /**
+		 * Reads or sets the attribute of an element
+		 * 
+		 * @param {string} attr		Attribute to find
+		 * @param {string} val		New Value
+		 * 
+		 * @returns {string}
+		 */
+		attr: function( attr, val ) {
+			val = val || null;
+			
+			if( val == null ) {
+				return this[0].getAttribute(attr);	
+			} else {
+				this[0].setAttribute(attr, val);
+			}
+			
+			return '';
+		},
+		/**
+	     * Read and write html
+	     * 
+	     * @param {string} html		new html content
+	     * 
+	     * @return {string} if no argument is given
+	     */
+	    html: function( html ) {
+	    	if( html === undefined ) return this[0].innerHTML();
+	    	this[0].innerHTML = html;
+	    },
+	    /**
+	     * Adds an click event to the element
+	     * 
+	     * @param {function} callback
+	     */
+	    click: function( callback ) {
+	    	if( typeof(callback) === 'function' ) {
+	    		this[0].addEventListener('click', callback, false);	
+	    	}
+	    },
+	    
+	    /**
+	     * Adds an mouseover event to the element
+	     * 
+	     * @param {function} callback
+	     */
+	    mouseover: function( callback ) {
+	    	if( typeof(callback) === 'function' ) {
+	    		this[0].addEventListener('mouseover', callback, false);	
+	    	}
+	    },
+	    
+	    /**
+	     * Adds an on focus event to the element
+	     * 
+	     * @param {function} callback
+	     */
+	    focus: function( callback ) {
+	    	if( typeof(callback) === 'function' ) {
+	    		this[0].addEventListener('onfocus', callback, false);	
+	    	}
+	    },
+	     /**
+	     * Make an AJAX-Call
+	     * 
+	     * @param {object} parameter
+	     * @returns {string}
+	     */
+	    ajax: function(parameter) {
+	
+	        var request = null;
+	
+	        // Internet Explorer
+	        if (window.ActiveXObject) {
+	            request = new ActiveXObject("Microsoft.XMLHTTP");
+	        } else { // other browsers
+	            request = new XMLHttpRequest();
+	        }
+	
+	        var requestUri = parameter.url;
+	        
+	        for (i = 0; i < parameter.params.length; i++) {
+	
+	        }
+	        request.open("GET", requestUri, true);
+	        request.onreadystatechange = function() {
+	
+	            if (request.readyState !== 4 && parameter.loading() !== undefined) {
+	                parameter.loading();
+	            }
+	
+	            if (request.readyState === 4 && request.status === 200 && parameter.success(request.response) !== undefined) {
+	                if (parameter.type === 'json') {
+	                    parameter.success();
+	                } else {
+	                    parameter.success(request.responseText);
+	                }
+	            }
+	
+	        };
+	
+	        request.send(null);
+	    }
+	};
+	
+	
+	// Init obtains through dHelper prototype all it's functions for instantiation  
+	dHelper.dh.init.prototype = dHelper.dh;
+	
+	// Expose for gloabel use 
+	window.$ = dHelper;
+})(window);
 
 
 /**
