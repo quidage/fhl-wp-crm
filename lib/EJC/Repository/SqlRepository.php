@@ -52,7 +52,7 @@ class SqlRepository {
     }    
     
     /**
-     * @todo write list of properties and for writing in database
+     * write list of properties and for writing in database
      * 
      * @param array $keysValues
      * @return return array
