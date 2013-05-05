@@ -1,0 +1,106 @@
+#menu {
+	position:relative;
+	float:left;
+	width: 66%;
+	height:50px;
+	top:100px;
+}
+
+#menu ul {
+	position: absolute;
+	margin: 9px auto;
+	padding:0 20px;
+}
+
+#menu ul li {
+	float: left;
+	font-size: 16px;
+	line-height: 40px;
+	list-style:none;
+	border-bottom:3px solid #000;
+	border-top:1px solid #000;
+	border-right:1px solid #000;
+	border-right:1px solid #000;
+	background-color:#0c5a84;
+	border-radius: 10px 10px 0 0;
+		-webkit-border-radius: 10px 10px 0 0;
+		-moz-border-radius: 10px 10px 0 0;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+		-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#menu ul li a {
+	color:#fff;
+	padding:12px 15px;
+	font-weight:bold;
+	text-decoration: none;
+}
+
+#menu ul li:hover {
+	background-color:#2688bc;
+	line-heigth:40px;
+	border-bottom:3px solid orange;
+	border-radius: 10px 10px 0 0;
+		-webkit-border-radius: 10px 10px 0 0;
+		-moz-border-radius: 10px 10px 0 0;
+}
+
+#menu ul ul {
+	position: absolute;
+	visibility:hidden;
+	background: #fff;
+	padding: 0;
+	opacity: 0.9;
+}
+
+#menu ul li:hover ul {
+	top: 35px;
+	visibility:visible;
+}
+
+#menu ul ul li {
+	float: none;
+	font-size: 14px;
+	padding: 5px 10px;
+	text-align: left;
+	margin-bottom: 1px;
+	border:0;
+	line-height: 20px;
+	background-color:#2688bc;
+	border-radius:0;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+		-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#menu ul ul a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#menu ul ul li.all {
+	font-size: 12px;
+	border-bottom: none;
+	text-transform: none;
+}
+
+#menu ul ul li:hover {
+	background:#0c5a84;
+	color: #fff;
+	border:0;
+	border-radius:0;
+}
+
+#menu_config {
+	position:relative;
+	float:right;
+	margin-right: 20px;
+	padding:0;
+	top:100px;
+}
+
+#menu_config img {
+	border:0;
+	padding:0;
+}
