@@ -49,9 +49,9 @@ class UserController extends AbstractController {
     /**
      * display form to edit user-data
      * 
-     * @param array $user
+     * @param \EJC\Model\User $user
      */
-    public function editAction() {
+    public function editAction(\EJC\Model\User $user) {
         echo 'editAction';
     }
     

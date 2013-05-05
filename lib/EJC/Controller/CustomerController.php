@@ -15,7 +15,7 @@ class CustomerController extends AbstractController {
      * 
      */
     public function listAction() {
-        $this->view->assign('title', 'test');
+        $this->view->assign('title', 'Kundenliste');
         $this->view->render();
     }
     
@@ -24,7 +24,7 @@ class CustomerController extends AbstractController {
      * 
      * @param string $customerID
      */
-    public function showAction($customerID) {
+    public function showAction(\EJC\Model\Customer $customer) {
         
     }
 
@@ -61,7 +61,7 @@ class CustomerController extends AbstractController {
      * 
      * @param array $customer
      */
-    public function createAction($customer) {
+    public function createAction(\EJC\Model\Customer $customer) {
         
     }
     
