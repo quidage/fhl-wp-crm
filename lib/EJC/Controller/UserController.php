@@ -37,6 +37,15 @@ class UserController extends AbstractController {
     }
     
     /**
+     * show user settings
+     * 
+     * @return void
+     */
+    public function showSettingsAction() {
+        $this->view->render();
+    }
+    
+    /**
      * create a new user
      * 
      * @param \EJC\Model\User $user
@@ -71,29 +80,32 @@ class UserController extends AbstractController {
      * @return void
      */
     public function loginAction(array $login) {
-        // Get matching user from repository
-        try {
-            $user = $this->userRepository->findOneByName($login['name']);
-        } catch (EJC\Exception\RepositoryException $e) {
-            $user = NULL;
-        }
-               
-        // if user not exist show message
-        if ($user === NULL) {
-            $this->view->addErrorMessage('User nicht gefunden');
-            $this->forward('User', 'showLogin');
-            return;
-        } else {
-            // forward to overview if password matches
-            if ($user->getPassword() === md5($login['password'])) {
-                $this->forward('User', 'start');
-            } else {
-                // wrong password -> show login + error message
-                $this->view->addErrorMessage('Falsches Passwort');
-                $this->forward('User', 'showLogin');
-                return;                
-            }
-        }
+        
+        $this->forward('User', 'start');
+        
+//        // Get matching user from repository
+//        try {
+//            $user = $this->userRepository->findOneByName($login['name']);
+//        } catch (EJC\Exception\RepositoryException $e) {
+//            $user = NULL;
+//        }
+//               
+//        // if user not exist show message
+//        if ($user === NULL) {
+//            $this->view->addErrorMessage('User nicht gefunden');
+//            $this->forward('User', 'showLogin');
+//            return;
+//        } else {
+//            // forward to overview if password matches
+//            if ($user->getPassword() === md5($login['password'])) {
+//                $this->forward('User', 'start');
+//            } else {
+//                // wrong password -> show login + error message
+//                $this->view->addErrorMessage('Falsches Passwort');
+//                $this->forward('User', 'showLogin');
+//                return;                
+//            }
+//        }
     }
     
 }

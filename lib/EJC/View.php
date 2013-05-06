@@ -89,7 +89,17 @@ class View {
         $this->template = ob_get_clean();
         
         include $this->layoutFile;
-        //echo $this->layout;
+    }
+    
+    /**
+     * render url to action
+     * 
+     * @param string $controller
+     * @param string $action
+     * @return void
+     */
+    public function getUrl($controller, $action) {
+        echo 'index.php?controller=' . $controller . '&action=' . $action;
     }
     
     /**

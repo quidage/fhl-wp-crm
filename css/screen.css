@@ -120,6 +120,10 @@ th, td {
         border-bottom:1px solid #fff;
 }
 
+.errors {
+    color: red;
+}
+
 /*
 *Button
 *Tutorial: http://www.usabilitypost.com/2012/01/10/pressed-button-state-with-css3/
@@ -143,6 +147,7 @@ th, td {
     transition-duration: 0.2s;
             -webkit-transition-duration: 0.2s;
             -moz-transition-duration: 0.2s;
+            cursor: pointer;
 }
 
 .button-link:hover {

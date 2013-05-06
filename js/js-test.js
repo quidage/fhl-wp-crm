@@ -1,13 +1,13 @@
 // exec functions when page is loaded
-window.onload = function() {
-
-var x = $('#wrapper');
-var y = $('.errors');
-
-console.log(x.attr('id'));
-console.log(y.attr('class'));
-
-x.find('div').eq(1).addClass('it_works');
+//window.onload = function() {
+//
+//var x = $('#wrapper');
+//var y = $('.errors');
+//
+//console.log(x.attr('id'));
+//console.log(y.attr('class'));
+//
+//x.find('div').eq(1).addClass('it_works');
 
 
 /*
@@ -43,4 +43,4 @@ $("#loginform").find('button').click(function(e){
 //		}
 //	});
 
-};
+//};
