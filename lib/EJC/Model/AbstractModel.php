@@ -3,9 +3,9 @@
 namespace EJC\Model;
 
 /**
- * Description of AbstractModel
+ * Eigenschaften fuer alle Models
  *
- * @author christian
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  */
 class AbstractModel {
 
