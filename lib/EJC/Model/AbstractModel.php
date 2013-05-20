@@ -9,15 +9,52 @@ namespace EJC\Model;
  */
 class AbstractModel {
 
+    /**
+     * Die ID des Datensatzes
+     *
+     * @var int
+     */
     protected $id;
+    
+    /**
+     * Die ID des Elterndatensatzes
+     *
+     * @var int
+     */
     protected $parent_id;
+    
+    /**
+     * Zeitpunkt der Erstellung 
+     * 
+     * @var \DateTime
+     */
     protected $cr_date;
+    
+    /**
+     * Letzte Aenderung
+     *
+     * @var \DateTime
+     */
     protected $tstamp;
+    
+    /**
+     * Loeschen-Status
+     * 
+     * @var boolean
+     */
     protected $deleted;
+    
+    /**
+     * Name
+     * 
+     * @var string
+     */
     protected $name;
 
     /**
-     * constructor
+     * Konstruktor
+     * 
+     * @return void
      */
     public function __construct() {
         $this->id = intval($this->id);
@@ -28,7 +65,7 @@ class AbstractModel {
     }
     
     /**
-     * convert object to an array
+     * Konvertiere ein Ojekt in ein Array
      * 
      * @return array
      */
@@ -40,40 +77,85 @@ class AbstractModel {
         return $objectArray;
     }
 
+    /**
+     * Hole die ID
+     * 
+     * @return int
+     */
     public function getId() {
-        return intval($this->id);
+        return $this->id;
     }
 
+    /**
+     * Hole die ID des Eltern-Datensatzes
+     * 
+     * @return int
+     */
     public function getParent_id() {
         return $this->parent_id;
     }
     
+    /**
+     * Hole den Zeitpunkt der Erstellung
+     * 
+     * @return \DateTime
+     */
     public function getCr_date() {
         return $this->cr_date;
     }    
 
+    /**
+     * Hole den Zeitpunkt der letzten Aenderung
+     * 
+     * @return \DateTime
+     */
     public function getTstamp() {
         return $this->tstamp;
     }
 
+    /**
+     * Setze den Zeitpunkt der letzten Aenderung
+     * 
+     * @param type $tstamp
+     */
     public function setTstamp($tstamp) {
         $this->tstamp = $tstamp;
     }
 
+    /**
+     * Hole den Loeschen-Status
+     * 
+     * @return boolean
+     */
     public function getDeleted() {
         return $this->deleted;
     }
 
+    /**
+     * Setze den Loeschen-Status
+     * 
+     * @param boolean $deleted
+     */
     public function setDeleted($deleted) {
-        $this->deleted = $deleted;
+        $this->deleted = filter_var($deleted, FILTER_VALIDATE_BOOLEAN);
     }
 
+    /**
+     * Hole den Namen
+     * 
+     * @return string
+     */
     public function getName() {
         return $this->name;
     }
 
+    /**
+     * Setze den Namen
+     * 
+     * @param string $name
+     */
     public function setName($name) {
-        $this->name = $name;
+        $this->name = trim($name);
     }
     
 }
