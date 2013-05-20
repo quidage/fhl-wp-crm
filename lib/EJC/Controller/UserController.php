@@ -70,37 +70,38 @@ class UserController extends AbstractController {
     }
     
     /**
-     * perform login of user
+     * Logge den User ein
      * 
      * @return void
      */
     public function loginAction(array $login) {
         
-        $this->forward('User', 'start');
-        
-//        // Get matching user from repository
-//        try {
-//            $user = $this->userRepository->findOneByName($login['name']);
-//        } catch (EJC\Exception\RepositoryException $e) {
-//            $user = NULL;
-//        }
-//               
-//        // if user not exist show message
-//        if ($user === NULL) {
-//            $this->view->addErrorMessage('User nicht gefunden');
-//            $this->forward('User', 'showLogin');
-//            return;
-//        } else {
-//            // forward to overview if password matches
-//            if ($user->getPassword() === md5($login['password'])) {
-//                $this->forward('User', 'start');
-//            } else {
-//                // wrong password -> show login + error message
-//                $this->view->addErrorMessage('Falsches Passwort');
-//                $this->forward('User', 'showLogin');
-//                return;                
-//            }
-//        }
+        // Hole passenden User aus dem Repository
+        try {
+            $user = $this->userRepository->findOneByName($login['name']);
+        } catch (EJC\Exception\RepositoryException $e) {
+            $user = NULL;
+        }
+               
+        // Wenn User nicht gefunden, gib Fehlermeldung aus
+        if ($user === NULL) {
+            $this->view->addErrorMessage('User nicht gefunden');
+            $this->forward('User', 'showLogin');
+            return;
+        } else {
+            // Wenn Username + Passwort passen, leite auf User-Startseite weiter
+            // Setze Login-Status in der User-Session            
+            if ($user->getPassword() === md5($login['password'])) {
+                $_SESSION['user'] = $user;
+                $_SESSION['login'] = time();
+                $this->forward('User', 'start');
+            } else {
+                // Falsches Passwort - Fehlermeldung anzeigen
+                $this->view->addErrorMessage('Falsches Passwort');
+                $this->forward('User', 'showLogin');
+                return;                
+            }
+        }
     }
     
 }
