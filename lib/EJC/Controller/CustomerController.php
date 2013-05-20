@@ -3,7 +3,7 @@
 namespace EJC\Controller;
 
 /**
- * Description of CustomerController
+ * Methoden fuer den Customer
  *
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
@@ -11,8 +11,9 @@ namespace EJC\Controller;
 class CustomerController extends AbstractController {
 
     /**
-     * Display list of customers
+     * Zeige eine Liste aller Customer
      * 
+     * @return void
      */
     public function listAction() {
         $this->view->assign('title', 'Kundenliste');
@@ -20,49 +21,53 @@ class CustomerController extends AbstractController {
     }
     
     /**
-     * Display customer data
+     * Zeige alle Daten zu einem Customer
      * 
      * @param string $customerID
+     * @return void
      */
     public function showAction(\EJC\Model\Customer $customer) {
-        
+        $this->view->assign('customer', $customer);
+        $this->view->render();
     }
 
     /**
-     * Display form for editing customer data
+     * Formular zum aendern der Customer-Daten
      * 
      * @param \EJC\Model\Customer $customer
+     * @return void
      */
     public function editAction(\EJC\Model\Customer $customer) {
-        var_dump($customer);
         $this->view->assign('customer', $customer);
         $this->view->render();
     }
     
     /**
-     * Update the customer data
+     * Aktualisiere die Daten des Customer
      * 
      * @param array $customer
      */
     public function updateAction(\EJC\Model\Customer $customer) {
         $this->customerRepository->update($customer);
-        var_dump($customer);
     }
     
     /**
-     * Display form for creating a new custormer
+     * Formular um einen Customer anzulegen
+     * 
+     * @return void
      */
     public function newAction() {
         
     }
     
     /**
-     * Create a new customer
+     * Erstelle einen neuen Customer
      * 
-     * @param array $customer
+     * @param \EJC\Model\Customer $customer
+     * @return void
      */
     public function createAction(\EJC\Model\Customer $customer) {
-        
+        $this->customerRepository->add($customer);
     }
     
 }

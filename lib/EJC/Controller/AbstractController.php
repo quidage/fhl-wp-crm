@@ -3,7 +3,7 @@
 namespace EJC\Controller;
 
 /**
- * Description of CustomerController
+ * Allgemeine Controller-Methoden
  *
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
@@ -19,7 +19,9 @@ class AbstractController {
     protected $userRepository;
 
     /**
-     * Constructor
+     * Konstruktor
+     * 
+     * @return void
      */
     public function __construct(\EJC\Request $request, \EJC\View $view = NULL) {
         $this->view = $view;
@@ -29,7 +31,7 @@ class AbstractController {
     }
     
     /**
-     * Instantiate the Repositories
+     * Instanziiere die Repositories
      * 
      * @return void
      */
@@ -40,7 +42,7 @@ class AbstractController {
     }
     
     /**
-     * Initialize the view
+     * Initialisiere den View
      * 
      * @return void 
      */
@@ -56,7 +58,7 @@ class AbstractController {
     }  
 
     /**
-     * Forward to another action
+     * zu einer anderen Action weiterleiten
      * 
      * @param string $controller
      * @param string $action
@@ -68,7 +70,8 @@ class AbstractController {
     }
     
     /**
-     * http-redirect on action
+     * zu einer anderen Action als HTTP-Request weiterleiten
+     * @todo funktoniert noch nicht richtig
      * 
      * @param string $controller
      * @param string $action
