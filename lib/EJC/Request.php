@@ -20,7 +20,7 @@ class Request {
     public function __construct($action = NULL, $controller = NULL, array $params = array(), View $view = NULL) {
        if ($controller !== NULL && $action !== NULL) {
             
-            // forwarded request
+            // Request wird über forward-Funktion ausgelöst
             $this->controller = $controller;
             $this->action = $action;
             $this->params = $params;
@@ -38,17 +38,19 @@ class Request {
             unset ($getParams['controller']);
             unset ($getParams['action']);
             $this->params = array_merge($getParams, $postParams);
-
-            // Get Type of oject
+            
+            // Hole den Typen des uebergebenen Objekts
             foreach ($this->params AS $paramName => $paramValues) {
                 
-                // create new object of given Type
+                // Erstelle ein neues Objekt des Typs, wenn der Anfang des 
+                // Parameternamens "new" ist
                 if (substr($paramName, 0, 3) === 'new') {
                     
                     $newObjectClassName = '\\EJC\\Model\\' . ucWords(substr($paramName, 3));
                     $object = new $newObjectClassName();
 
-                    // set Properties
+                    // Setze die Eigenschaften fuer das neue Objekt, welche in 
+                    // den Paramtern uebergeben werden
                     if (is_array($paramValues)) {
                         foreach ($paramValues AS $paramValueKey => $paramValueValue) {
                             call_user_func_array(array($object, 'set' . ucwords($paramValueKey)), array($paramValueValue));
@@ -58,15 +60,15 @@ class Request {
                     unset($this->params[$paramName]);
                     
                 } else {
-                    
-                    // check if user exists in db and
+                    // Pruefe ob ein Gegenpart zu dem Request im Repository existiert
+                    // und lade diesen
                     $repositoryClassName = '\\EJC\\Repository\\' . ucWords($paramName) . 'Repository';
                     try {
                         
                         $repository = new $repositoryClassName();
                         if (is_array($paramValues)) {
 
-                            // find object in db
+                            // Finde das entsprechende Ojekt in der DB
                             $object = $repository->findById(intval($paramValues['id']));
                             unset($paramValues['id']);
                             
@@ -74,6 +76,9 @@ class Request {
                                 throw new Exception\RepositoryException('object has no counterpart in repository', 1366378567);
                             } else {
                                 if (is_array($paramValues)) {
+                                    
+                                    // Wenn mehrere Paramter uebergeben werden, setze bei 
+                                    // dem geladenen Objekt die uebergebenen Eigenschaften
                                     foreach ($paramValues AS $paramValueKey => $paramValueValue) {
                                         call_user_func_array(array($object, 'set' . ucwords($paramValueKey)), array($paramValueValue));
                                     }
@@ -85,14 +90,14 @@ class Request {
                         unset($this->params[$paramName]);
                         
                     } catch (\EJC\Exception\ClassLoaderException $e) {
-                        // parameter is not of type model
-                        //throw $e;
+                        // Es existiert kein Model zu dem Paramter
+                        // throw $e;
                     }
                 }
             }
         }
         
-        // Set defaults, if controller and action not set
+        // Rufe default action auf, wenn controller und actionnicht gesetzt
         if (empty($this->controller) && empty($this->action)) {
             $this->controller = 'User';
             $this->action = 'showLogin';
@@ -100,22 +105,22 @@ class Request {
     }
     
     /**
-     * Call the action
+     * Rufe die action auf
      * 
-     * @return
+     * @return void
      */
     public function execute() {
-        // Define class and action
+        // Defieniere die aufzurufende Klasse und Action-Methode
         $controllerClassName = '\\EJC\\Controller\\' . $this->controller . 'Controller';
         $controller = new $controllerClassName($this, $this->view);
         $actionName = $this->action . 'Action';      
         
-        // Call action
+        // Rufe die Action mit den Parametern auf
         call_user_func_array(array($controller, $actionName), $this->params);
     }
     
    /**
-     * Wether is AJAX-Call or not
+     * Ob es sich um einen Ajax-Aufruf handelt
      * 
      * @return boolean
      */
@@ -128,7 +133,7 @@ class Request {
     } 
     
     /**
-     * get data of the http-post
+     * Hole die Post-Parameter
      * 
      * @return array
      */
@@ -136,18 +141,38 @@ class Request {
         return $_POST;
     }    
     
+    /**
+     * Hole die Get-Parameter
+     * 
+     * @return array
+     */
     public function getGetParams() {
         return $_GET;
     }
     
+    /**
+     * Gib den Controller_Namen zum Request zurueck
+     * 
+     * @return string
+     */
     public function getController() {
         return $this->controller;
     }
 
+    /**
+     * Gib den Acton-Namen zum Request zurueck
+     * 
+     * @return string
+     */
     public function getAction() {
         return $this->action;
     }
     
+    /**
+     * Gib alle Paramter in einem Array zurueck
+     * 
+     * @return array
+     */
     public function getParams() {
         return $this->params;
     }

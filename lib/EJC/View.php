@@ -3,7 +3,7 @@
 namespace EJC;
 
 /**
- * The view renders Templates with content
+ * Rendere das Template zu der Action
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  */
@@ -23,7 +23,9 @@ class View {
 
 
     /**
-     * Constructor
+     * Konstruktor
+     * 
+     * @return void
      */
     public function __construct($ajax = FALSE) {
         if (!isset($this->errorMessages)) $this->errorMessages = array();
@@ -37,7 +39,7 @@ class View {
     }
     
     /**
-     * Set Path for Templates, etc
+     * Setze die Pfade 
      * 
      * @return void
      */
@@ -49,7 +51,7 @@ class View {
     }
 
     /**
-     * Read the content from the template file
+     * Lese den Inhalt auf dem Layout-File 
      * 
      * @param string $layout
      * @return void
@@ -59,7 +61,7 @@ class View {
     }      
 
     /**
-     * Sets the template path
+     * Setze Template-Pfad
      * 
      * @param string $template
      */
@@ -68,7 +70,7 @@ class View {
     }
 
     /**
-     * Assign variable to template
+     * Setze eien Variable zur Uebergabe an das Templdate
      * 
      * @param string $key
      * @param mixed $value
@@ -78,7 +80,7 @@ class View {
     }
     
     /**
-     * Render the template
+     * Render das Template
      * 
      * @return void;
      */
@@ -92,7 +94,7 @@ class View {
     }
     
     /**
-     * render url to action
+     * Rendere die Url zum Aufruf einer Action
      * 
      * @param string $controller
      * @param string $action
@@ -103,7 +105,7 @@ class View {
     }
     
     /**
-     * render partial and return rendered html
+     * Rendere ein Partial
      * 
      * @param string $controller
      * @param string $partial
@@ -116,7 +118,7 @@ class View {
     }
     
     /**
-     * add a new error to template
+     * Füge der Ausgabe einen neuen Fehler hinzu
      * 
      * @param type $message
      */
@@ -125,7 +127,7 @@ class View {
     }
     
     /**
-     * render all error messages
+     * Rendere die Fehlermeldungen
      * 
      * @return void
      */
