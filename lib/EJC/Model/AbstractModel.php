@@ -116,7 +116,7 @@ class AbstractModel {
     /**
      * Setze den Zeitpunkt der letzten Aenderung
      * 
-     * @param type $tstamp
+     * @param \DateTime $tstamp
      */
     public function setTstamp($tstamp) {
         $this->tstamp = $tstamp;
