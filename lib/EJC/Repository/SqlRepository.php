@@ -3,8 +3,7 @@
 namespace EJC\Repository;
 
 /**
- * Repositoryfunctions for all SQL-Repositories 
- * building queries, executing queries
+ * Methoden fuer die SQL-Verarbeitung
  * 
  * @author Christian Hansen <chrstian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
@@ -15,9 +14,7 @@ class SqlRepository {
 	protected $mysqli;
 
     /**
-	 * constructor
-	 * 
-     * connect to database, set character set
+	 * Kontuktor / Verbindung zur DB aufbauen und Character Set setzen
      * 
 	 * @return void
 	 */
@@ -28,21 +25,19 @@ class SqlRepository {
 	}
     
     /**
-     * destructor
-     * 
-     * throw exception if database errors occur
+     * Desktruktor / Werfe einen Ausnahmefehler, wenn ein Datenfehler auftritt
      * 
      * @throws \Exception
+     * @return void
      */
     public function __destruct() {
         if (!empty($this->mysqli->error)) {
             throw new \EJC\Exception\RepositoryException('mysql error occured: "' . $this->mysqli->error . '"', 1366213519);
-            
         }
     }
 
     /**
-     * Prepare string for database
+     * Bereite String vor, um in die Datenbank zu schreiben
      * 
      * @param string $dirtyString
      * @return string
@@ -52,7 +47,7 @@ class SqlRepository {
     }    
     
     /**
-     * write list of properties and for writing in database
+     * Praepariere eine Array um die Daten in die Datenbank zu schreiben
      * 
      * @param array $keysValues
      * @return return array
@@ -64,7 +59,7 @@ class SqlRepository {
     }        
 
     /**
-	 * build select query
+	 * Baue eine SELECT Query
 	 * 
 	 * @param string $select
 	 * @param string $table
@@ -81,7 +76,7 @@ class SqlRepository {
 	}
     
     /**
-	 * build update query
+	 * Baue ein UPDATE query
 	 * 
 	 * @param string $table
 	 * @param string $where
@@ -99,7 +94,7 @@ class SqlRepository {
 	}
     
     /**
-	 * build insert query
+	 * Baue eine INSERT query
 	 * 
 	 * @param string $table
 	 * @param string $where
@@ -113,7 +108,7 @@ class SqlRepository {
 	}
        
     /**
-     * Return first result object of a query result
+     * Gib das erste Object der Ergebnisse einer Query zurueck
      * 
      * @param string $query
      * @return object $result
@@ -128,7 +123,7 @@ class SqlRepository {
     }
     
     /**
-     * get array of result-objects
+     * Gib alle Ergebnis-Objekte in einem Array zurueck
      * 
      * @param type $result
      * @return type
@@ -145,10 +140,10 @@ class SqlRepository {
     }
     
 	/**
-	 * find one object by property
+	 * Finde ein Objekt ueber die ID
      * 
-	 * @param string $property
-	 * @param string $value
+	 * @param int $id
+     * @return object
 	 */
 	public function findById($id) {
 		$query = $this->buildSelectQuery("*", $this->table," id = '" . intval($id) . "'");
@@ -156,10 +151,10 @@ class SqlRepository {
 	}  
     
 	/**
-	 * find one object by property
+	 * Finde alle Objekte zu einer Parent_id
      * 
-	 * @param string $property
-	 * @param string $value
+	 * @param int $parent_id
+     * @return array
 	 */
 	public function findByParent_id($parent_id) {
 		$query = $this->buildSelectQuery("*", $this->table, " parent_id= '" . intval($parent_id) . "'");
@@ -167,10 +162,11 @@ class SqlRepository {
 	}       
     
 	/**
-	 * find one object by property
+	 * Finde ein Objekt zu einer Eigenschaft
      * 
 	 * @param string $property
 	 * @param string $value
+     * @return object
 	 */
 	public function findOneByProperty($property, $value) {
 		$query = $this->buildSelectQuery("*", $this->table, $property . " = '" . $this->prepareString($value) . "'", NULL, NULL, "0,1");
@@ -178,10 +174,11 @@ class SqlRepository {
 	}   
     
 	/**
-	 * find objects by property
+	 * Finde alle Objekte zu einer Eigenschaft
      * 
 	 * @param string $property
 	 * @param string $value
+     * @return array
 	 */
 	public function findByProperty($property, $value) {
 		$query = $this->buildSelectQuery("*", $this->table, $property . " = '" . $this->prepareString($value) . "'");
@@ -189,7 +186,7 @@ class SqlRepository {
 	}    
 
 	/**
-	 * Returns array of all results
+	 * Finde alle Objekte in einem Repository
 	 * 
 	 * @return array results
 	 */
@@ -199,7 +196,8 @@ class SqlRepository {
     }
     
     /**
-     * set deleted = 1
+     * Loesche ein Objekt aus dem Repository
+     * setze deleted = 1
      * 
      * @param int $id
      * @return void
@@ -210,9 +208,10 @@ class SqlRepository {
     }
     
     /**
-     * Insert in database
+     * Fuege ein neues Objekt in die Datenbank
      * 
      * @param array $propertiesValues
+     * @return int SQL insert id
      */
     public function insert($propertiesValues) {
         $query = $this->buildInsertQuery($this->table, $propertiesValues);
@@ -221,7 +220,7 @@ class SqlRepository {
     }
     
     /**
-     * update one element in database by id
+     * Aktualisiere eine Objekt ueber die id des Objekts
      * 
      * @param int $id
      * @param array $propertiesValues
