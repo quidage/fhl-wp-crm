@@ -3,14 +3,19 @@
 namespace EJC\Repository;
 
 /**
- * Repositoryfunctions for all repositories 
+ * Allgemeine Methoden und fuer alle Repositories
  * 
  * @author Christian Hansen <chrstian.hansen@stud.fh-luebeck.de>
- * 
  * @package wp-crm
  */
 class AbstractRepository extends SqlRepository {
 
+    /**
+     * Alle keys welche nicht durch den User ueberschrieben werden sollen, 
+     * wie id, tstamp, crdate
+     *
+     * @var array
+     */
     protected $notUpdateableKeys;
 
     /**
@@ -37,7 +42,7 @@ class AbstractRepository extends SqlRepository {
 
         if (substr($name, 0, 6) === 'findBy') {
             /*
-             * Magic findByProperty-Method
+             * Magic findByProperty-Methode
              *
              * examples:    findById(1)
              *              findByName('Testname')
@@ -46,7 +51,7 @@ class AbstractRepository extends SqlRepository {
             return $this->findByProperty($property, $arguments[0]);
         } elseif (substr($name, 0, 9) === 'findOneBy') {
             /*
-             * Magic findOneByProperty-Method
+             * Magic findOneByProperty-Methode
              *
              * examples:    findOneById(1)
              *              findOneByName('Testname')
@@ -59,7 +64,7 @@ class AbstractRepository extends SqlRepository {
     } // public function __call($name, $arguments)
 
     /**
-     * Get the class name of the Model
+     * Hole den Klassennamen des Models
      * 
      * @return string
      */

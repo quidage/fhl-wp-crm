@@ -5,7 +5,8 @@ namespace EJC;
 /**
  * Rendere das Template zu der Action
  *
- * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
  */
 class View {
     
@@ -29,8 +30,26 @@ class View {
 	 * @var string
 	 */
     protected $templatesPath;
+    
+    /**
+     * Inhalt des Layouts
+     * 
+     * @var string
+     */
     protected $layout;
+    
+    /**
+     * Pfad der Layout-Datei
+     *
+     * @var string
+     */
     protected $layoutFile;
+    
+    /**
+     * Pfad des Ordners der Layout-Dateien
+     *
+     * @var string
+     */
     protected $layoutsPath;
 	
 	/**

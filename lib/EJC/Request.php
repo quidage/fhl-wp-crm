@@ -3,9 +3,10 @@
 namespace EJC;
 
 /**
- * Handle Request
+ * Behandle den Aufruf und fuehre die Action aus
  *
- * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
  */
 class Request {
 

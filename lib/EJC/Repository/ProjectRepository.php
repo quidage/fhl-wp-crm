@@ -3,6 +3,7 @@
 namespace EJC\Repository;
 
 /**
+ * Repository fuer das Project
  * 
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
@@ -10,22 +11,22 @@ namespace EJC\Repository;
 class ProjectRepository extends AbstractRepository {
 	
 	/**
-	 * Constructor
+	 * Konstruktor
 	 * 
 	 * @return void
 	 */
 	public function __construct() {
 		parent::__construct();
 		
-		// Set the table
-		$this->table = "project";
+		// Setze die Tabelle
+		$this->table = 'project';
 	}	
 	
 	/**
-	 * Find all projects of customer
+	 * Finde alle Projects zu einem Customer
 	 * 
 	 * @param int $id Customer id
-	 * @return array list of projects
+	 * @return array 
 	 */
 	public function findByCustomer($id) {
 		return $this->findByParentId($id);

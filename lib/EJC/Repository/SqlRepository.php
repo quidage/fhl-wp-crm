@@ -10,11 +10,22 @@ namespace EJC\Repository;
  */
 class SqlRepository {
 
+    /**
+     * Die SQL-Tabelle fuer das Repository
+     *
+     * @var string
+     */
     protected $table;
+    
+    /**
+     * Die Mysqli-Datenbankverbindung
+     *
+     * @var Mysqli
+     */
 	protected $mysqli;
 
     /**
-	 * Kontuktor / Verbindung zur DB aufbauen und Character Set setzen
+	 * Konstruktor / Verbindung zur DB aufbauen und Character Set setzen
      * 
 	 * @return void
 	 */
