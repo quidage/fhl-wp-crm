@@ -9,16 +9,56 @@ namespace EJC;
  */
 class View {
     
+	/**
+	 * 
+	 * 
+	 * @var string
+	 */
     protected $template;
+	
+	/**
+	 * Name der Template-Datei
+	 *
+	 * @var sting
+	 */
     protected $templateFile;
+	
+	/**
+	 * Pfad des Template-Ordners
+	 * 
+	 * @var string
+	 */
     protected $templatesPath;
     protected $layout;
     protected $layoutFile;
     protected $layoutsPath;
+	
+	/**
+	 * Pfad des Partial Ordners
+	 *
+	 * @var string
+	 */
     protected $partialsPath;
+	
+	/**
+	 * Pfad zum Ressources Ordner
+	 *
+	 * @var string
+	 */
     protected $resourcesPath;
     
+	/**
+	 * Alle Fehlermeldungen in HTML gerendert
+	 *
+	 * @var string
+	 */
     protected $errors;
+	
+	/**
+	 * Array der Fehlermeldungen
+	 * 
+	 * @var array
+	 */
     protected $errorMessages;
 
 
