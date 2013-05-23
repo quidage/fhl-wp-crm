@@ -13,6 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
 
 <link rel="stylesheet" type="text/css" href="screen.css" media="all" />
 <link rel="stylesheet" type="text/css" href="menue.css" media="all" />
@@ -26,7 +27,7 @@
 			<div id="menu">
 				<ul>
 					<li><a href="css-elemente.html">Home</a></li>
-					<li><a href="css-elemente.html">CSS Elements &raquo;</a>
+					<li id="current"><a href="css-elemente.html">CSS Elements &raquo;</a>
 						<ul>
 							<li><a href="css-elemente.html#button">Button</a></li>
 							<li><a href="css-elemente.html#paragraph">Forms</a></li>
@@ -39,19 +40,25 @@
 				</ul>
 			</div>
 			<div id="menu_config">
-				<a href="#"><img src="../images/iconset/einstellungen.png" /></a>
+				<a href="#"><img src="../images/iconset/einstellungen.png" onmouseover="this.src='../images/iconset/einstellungen_hover.png';" onmouseout="this.src='../images/iconset/einstellungen.png';" /></a>
 			</div>
 
 		</div>
 
 		<div id="main-content">
-
+			
+			<h1>Überschriften</h1>
+			
 			<h1>Heading 1</h1>
 			<h2>Heading 2</h2>
 			<h3>Heading 3</h3>
 			<h4>Heading 4</h4>
 			<h5>Heading 5</h5>
 			<h6>Heading 6</h6>
+			
+			<h1>Java-Script Layer</h1>
+			
+			<a href="#" onclick="Popup.show(null,null,null,{'className':'popupClass'});return false;">Click Here</a>
 
 			<h1>Paragraph</h1>
 
