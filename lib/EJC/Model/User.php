@@ -6,6 +6,7 @@ namespace EJC\Model;
  * Das User-Model
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
  */
 class User extends AbstractModel {
     

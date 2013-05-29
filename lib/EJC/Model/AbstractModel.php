@@ -6,6 +6,7 @@ namespace EJC\Model;
  * Eigenschaften fuer alle Models
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
  */
 class AbstractModel {
 
@@ -118,7 +119,7 @@ class AbstractModel {
      * 
      * @param \DateTime $tstamp
      */
-    public function setTstamp($tstamp) {
+    public function setTstamp(\DateTime $tstamp) {
         $this->tstamp = $tstamp;
     }
 

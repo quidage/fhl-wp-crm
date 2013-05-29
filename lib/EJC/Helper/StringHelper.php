@@ -6,6 +6,7 @@ namespace EJC\Helper;
  * Hilfsfunktionen fuer das Handling von Strings
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
  */
 class StringHelper {
     

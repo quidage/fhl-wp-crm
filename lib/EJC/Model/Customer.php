@@ -5,7 +5,8 @@ namespace EJC\Model;
 /**
  * Model fuer den Customer
  *
- * @author christian
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
  */
 class Customer extends AbstractModel { 
 
