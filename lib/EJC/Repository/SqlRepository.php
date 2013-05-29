@@ -20,7 +20,7 @@ class SqlRepository {
     /**
      * Die Mysqli-Datenbankverbindung
      *
-     * @var Mysqli
+     * @var \mysqli
      */
 	protected $mysqli;
 
@@ -84,7 +84,7 @@ class SqlRepository {
 		if ($orderBy !== NULL) $query .= " ORDER BY " . $orderBy;
 		if ($limit !== NULL) $query .= " LIMIT " . $limit;
 		return $query;
-	}
+	} // public function buildSelectQuery($select, $table, $where = NULL, $groupBy = NULL, $orderBy = NULL, $limit = NULL)
     
     /**
 	 * Baue ein UPDATE query
@@ -102,7 +102,7 @@ class SqlRepository {
         $query = substr($query, 0, -1);
         $query .= " WHERE " . $where;
 		return $query;
-	}
+	} // public function buildUpdateQuery($table, $propertiesValues, $where)
     
     /**
 	 * Baue eine INSERT query
@@ -131,7 +131,7 @@ class SqlRepository {
         } else {
             return $queryResult->fetch_object($this->getModelClassName());
         }
-    }
+    } // public function getFirstResult($query)
     
     /**
      * Gib alle Ergebnis-Objekte in einem Array zurueck
@@ -148,7 +148,7 @@ class SqlRepository {
             }
         }
 		return $results;        
-    }
+    } // public function getResultArray($query)
     
 	/**
 	 * Finde ein Objekt ueber die ID

@@ -55,7 +55,7 @@ class AbstractController {
             $this->view = new \EJC\View($this->ajax);
         }
         $this->view->setTemplate($template);
-    }  
+    } // public function initView()
 
     /**
      * zu einer anderen Action weiterleiten
@@ -86,7 +86,7 @@ class AbstractController {
         }
         header('index.php?controller=' . strtolower($controller) . '&action=' . $action . $paramString);
         return;
-    }
+    } // public function redirect($controller, $action, array $params = NULL)
     
 }
 

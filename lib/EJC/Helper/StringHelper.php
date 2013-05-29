@@ -3,14 +3,15 @@
 namespace EJC\Helper;
 
 /**
- * Description of StringFactory
+ * Hilfsfunktionen fuer das Handling von Strings
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  */
 class StringHelper {
     
     /**
-     * Clean up 
+     * String von zeichen befreien, welche nicht in einem GET-Parameter
+     * vorkommen duerfen
      * 
      * @param string $dirtyString
      * @return string

@@ -102,7 +102,7 @@ class UserController extends AbstractController {
                 return;                
             }
         }
-    }
+    } // public function loginAction(array $login)
     
 }
 ?>
