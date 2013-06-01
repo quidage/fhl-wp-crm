@@ -42,6 +42,18 @@ class UserController extends AbstractController {
     }
     
     /**
+     * list user details
+     * 
+     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+     * @return void
+     */
+    
+    public function listSettingsAction() {
+        $this->view->assign('users', $_SESSION['user']);
+        $this->view->render();
+    }
+    
+    /**
      * create a new user
      * 
      * @param \EJC\Model\User $user
@@ -104,6 +116,5 @@ class UserController extends AbstractController {
             }
         }
     } // public function loginAction(array $login)
-    
 }
 ?>
