@@ -14,7 +14,7 @@ body {
 }
 
 /*
-* Formatierung der Überschriften
+* Formatierung der ï¿½berschriften
 */
 h1, h2, h3, h4, h5, h6 {
     color:#2688bc;
@@ -169,7 +169,7 @@ th, td {
 }
 
 /*
-* Formatierungen für Formulare
+* Formatierungen fï¿½r Formulare
 */
 
 fieldset {
@@ -218,14 +218,17 @@ input[type="submit"], input[type="reset"] {
         margin:10px 0px 10px 10px;
 }
 
-.popupClass{
-	width:100px;
-	height:300px;
-	background-color:red;
+.std-window{
+    position:fixed;
+    z-index: 10;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
 }
 
 /*
-*Grundgerüst fürs Layout
+*Grundgerï¿½st fï¿½rs Layout
 */
 
 #wrap {
@@ -240,7 +243,7 @@ input[type="submit"], input[type="reset"] {
 }
 
 #header {
-		position:relative;
+	position:relative;
         height: 150px;
         background-color: #FFF;
         border-bottom:3px solid #000;
