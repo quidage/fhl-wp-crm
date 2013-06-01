@@ -167,7 +167,7 @@ class View {
     	ob_start();
 		$this->getUrl($controller, $action, $params);
 		$url = ob_get_clean();
-		echo '<a href="'.$url.'">'.$title.'</a>';
+		echo '<a class="std-btn" href="'.$url.'">'.$title.'</a>';
     }
     
     /**
