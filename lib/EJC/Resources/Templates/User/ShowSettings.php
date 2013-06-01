@@ -11,24 +11,22 @@
 
 
 <table>
-    <thead>
-        <caption>Ihre Daten</caption>
-    </thead>
+    <caption>Ihre Daten</caption>
     <tbody>
         <tr>
             <td>Vorname:</td>
             <td><?php echo $this->user->getFirst_name(); ?></td>
-            <td></td>
         </tr>
         <tr>
             <td>Nachname:</td>
             <td><?php echo $this->user->getLast_name(); ?></td>
-            <td><a href="<?php $this->getUrl('User', 'edit'); ?>" ><img src="images/iconset/writeNew.png" /></a></td>
         </tr>
         <tr>
             <td>E-Mail Adresse:</td>
             <td><?php echo $this->user->getEmail(); ?></td>
-            <td><a href="<?php $this->getUrl('User', 'edit'); ?>" ><img src="images/iconset/writeNew.png" /></a></td>
+        </tr>
+        <tr>
+        <td colspan="2"><?php $this->getLink('Daten bearbeiten', 'User', 'edit', array('user[id]' => $this->user->getID())); ?></td>
         </tr>
     </tbody>
 </table>
