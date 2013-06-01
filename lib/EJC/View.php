@@ -184,7 +184,11 @@ class View {
      * @return void
      */
     public function getUrl($controller, $action, $params = array()) {
-        echo 'index.php?controller=' . $controller . '&action=' . $action;
+        $url = 'index.php?controller=' . $controller . '&action=' . $action;
+        foreach($params AS $key => $value) {
+           $url .= '&' . $key . '=' . $value;
+        }
+        echo $url;
     }
     
     /**
