@@ -33,23 +33,13 @@ class UserController extends AbstractController {
     }
     
     /**
-     * show user settings
-     * 
-     * @return void
-     */
-    public function showSettingsAction() {
-        $this->view->render();
-    }
-    
-    /**
-     * list user details
+     * Anzeigen der Benutzereinstellungen
      * 
      * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
      * @return void
      */
-    
-    public function listSettingsAction() {
-        $this->view->assign('users', $_SESSION['user']);
+    public function showSettingsAction() {
+        $this->view->assign('user', $this->getCurrentUser());
         $this->view->render();
     }
     
@@ -116,5 +106,15 @@ class UserController extends AbstractController {
             }
         }
     } // public function loginAction(array $login)
+    
+    /*
+     * Hole den aktuell eingeloggten User
+     * 
+     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+     * @return Object
+     */
+    public function getCurrentUser(){
+        return unserialize($_SESSION['user']); 
+    }
 }
 ?>
