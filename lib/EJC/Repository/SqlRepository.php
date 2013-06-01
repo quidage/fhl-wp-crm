@@ -147,7 +147,6 @@ class SqlRepository {
                 $results[] = $row;
             }
         }
-        var_dump($query);
 		return $results;        
     } // public function getResultArray($query)
     
