@@ -151,15 +151,34 @@ class View {
         
         include $this->layoutFile;
     }
+
+
+    /**
+     * @author Julian Hilbers
+     * Generiert über die Methode getUrl einen kompletten a Tag
+	 * 
+	 * @param string $title
+     * @param string $controller
+     * @param string $action
+	 * @param array $params
+     * @return void
+     */
+    public function getLink($title, $controller, $action, $params = array()) {
+    	ob_start();
+		$this->getUrl($controller, $action, $params);
+		$url = ob_get_clean();
+		echo '<a href="'.$url.'">'.$title.'</a>';
+    }
     
     /**
      * Rendere die Url zum Aufruf einer Action
      * 
      * @param string $controller
      * @param string $action
+	 * @param array $params
      * @return void
      */
-    public function getUrl($controller, $action) {
+    public function getUrl($controller, $action, $params = array()) {
         echo 'index.php?controller=' . $controller . '&action=' . $action;
     }
     
