@@ -9,6 +9,15 @@
     </head>
     
     <body>
+        
+        <?php var_dump($this->customers); ?>
+        
+        <?php foreach ($this->customers AS $customer) : ?>
+
+        
+        
+        
+        <?php endforeach; ?> 
         <div>TODO write content</div>
     </body>
     

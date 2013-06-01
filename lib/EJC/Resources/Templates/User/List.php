@@ -16,4 +16,6 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<a href="<?php $this->getUrl('User', 'list'); ?>" ><?php $this->getUrl('User', 'list'); ?></a>
  
