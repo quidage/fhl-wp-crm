@@ -18,7 +18,6 @@
 
                 <div id="menu">
                     <ul>
-                        <?php $this->getAdmin(); ?>
                         
                         <li><a href="<?php $this->getUrl('user', 'start'); ?>">Home</a></li>
                         <li><a href="css/css-elemente.html">CSS Elements &raquo;</a>
