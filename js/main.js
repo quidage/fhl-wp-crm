@@ -299,8 +299,8 @@
 		activ: false,		// Flag für die den Zastand
 		wndObj: null,		// Objekt des Fensters selbst
 		ovlObj: null,		// Objekt der Shader Fläche im Hintergrund
-		fadeStep: 0.5,		// Schritte mit denen das Fenster eingeblenden wird
-		fadeSpeed: 1000,	// Geschwindigkeit der wiederholungen in milli sekunden
+		fadeStep: 0.05,		// Schritte mit denen das Fenster eingeblenden wird
+		fadeSpeed: 10,		// Geschwindigkeit der wiederholungen in milli sekunden
 		properties: {},		// Objekt mit den aktuellen Eigenschaften des Fensters
 		defaults: {			
 			w: 0,			// Breite des Fensters
@@ -330,9 +330,20 @@
 		draw: function() {
 			var bdy = document.body;
 			if( this.ovlObj != null ) bdy.appendChild(this.ovlObj);
-			if( this.wndObj != null ) bdy.appendChild(this.wndObj);
+			if( this.wndObj != null ) {
+				bdy.appendChild(this.wndObj);
+				this.fadeIn();
+			} 
 		},
-		
+		/**
+		 * Schließt ein Fenster und entfernt dessen HTML Code
+		 */
+		close: function() {
+			var _this = this;
+			this.fadeOut(1, function() {
+				// TO DO
+			});
+		},
 		/**
 		 * Ändert den Inhalt des Fensters
 		 * 
@@ -375,12 +386,12 @@
 		 * Fürt alle nötigen Methoden zum erstellen des Fensters aus
 		 */
 		newWindow: function() {
+			var _this = this;
 			this.newWindowId();
 			
 			this.wndObj = document.createElement('div');
 			this.wndObj.setAttribute('id', 'wnd-'+this.wId);
 			this.wndObj.setAttribute('class', 'std-window');
-			document.body.appendChild(this.wndObj);
 			
 			wndArray.push(this);
 		},
@@ -411,14 +422,17 @@
 		 * 
 		 * @param {number} val		// Nächster Schritt für den rekursiven Aufruf
 		 */
-		fadeIn: function( val ) {
+		fadeIn: function( val, callback ) {
+			var _this = this;
 			val = val || 0;
 			this.wndObj.style.opacity = val;
 			
-			if( val <= val-this.fadeStep ) { 
+			if( val < 1 ) { 
 				setTimeout( function(){
-					this.fadeIn( val+= this.fadeStep );
+					_this.fadeIn( val+= _this.fadeStep );
 				}, this.fadeSpeed );
+			} else {
+				if( typeof(callback) === 'function' ) callback();
 			}
 		},
 		/**
@@ -426,14 +440,17 @@
 		 * 
 		 * @param {number} val		// Nächster Schritt für den rekursiven Aufruf
 		 */
-		fadeOut: function( val ) {
-			val = val || 0;
+		fadeOut: function( val, callback ) {
+			var _this = this;
+			val = val || 1;
 			this.wndObj.style.opacity = val;
 			
-			if( val >= val+this.fadeStep ) { 
+			if( val > 0 ) { 
 				setTimeout( function(){
-					this.fadeIn( val-= this.fadeStep );
+					_this.fadeOut( val-= _this.fadeStep );
 				}, this.fadeSpeed );
+			} else {
+				if( typeof(callback) === 'function' ) callback();
 			}
 		}
 	};
