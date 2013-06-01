@@ -17,6 +17,13 @@ class AbstractRepository extends SqlRepository {
      * @var array
      */
     protected $notUpdateableKeys;
+    
+    /**
+     * Instanz des Eltern-Repository 
+     * 
+     * @var object
+     */
+    protected $parentRepository;    
 
     /**
      * Konstruktor
@@ -70,6 +77,24 @@ class AbstractRepository extends SqlRepository {
      */
     public function getModelClassName() {
         return 'EJC\\Model\\' . ucwords($this->table);
+    }
+    
+    /**
+     * Hole den Tabellenamen
+     * 
+     * @return string
+     */
+    public function getTable() {
+        return $this->table;
+    }
+    
+    /**
+     * Hole das Eltern-Repository
+     * 
+     * @return object
+     */
+    public function getParentRepository() {
+        return $this->parentRepository;
     }
 
     /**

@@ -24,7 +24,8 @@ class ProjectRepository extends AbstractRepository {
 	 */
 	public function __construct() {
 		parent::__construct();
-        $this->customerRepository = new \EJC\Repository\CustomerRepository();
+        $this->customerRepository = new CustomerRepository();
+        $this->parentRepository = new CustomerRepository();
 		
 		// Setze die Tabelle
 		$this->table = 'project';
@@ -47,15 +48,17 @@ class ProjectRepository extends AbstractRepository {
      * @return array
      */
     public function findByUser(\EJC\Model\User $user) {
-        $projects = array();
-        $customers = $this->customerRepository->findByParent_id($user->getId());
-        if (!empty($customers)) {   
-            foreach ($customers AS $customer) {
-                $customerProjects = $this->findByParent_id($customer->getId());
-                $projects = array_merge($customerProjects, $projects);
-            }
-        }
-        return $projects;
+        return $this->findByGrandParent_id($user->getId());
+    }
+    
+    /**
+     * Finde alle offenen Projects zu einem User
+     * 
+     * @param \EJC\Model\User $user
+     * @return array
+     */
+    public function findOpenByUser(\EJC\Model\User $user) {
+        return $this->findByGrandParent_idAndStatus($user->getId(), 'offen');
     }
 	
 }

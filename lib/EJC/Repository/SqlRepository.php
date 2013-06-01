@@ -22,7 +22,7 @@ class SqlRepository {
      *
      * @var \mysqli
      */
-	protected $mysqli;
+	protected $mysqli;    
 
     /**
 	 * Konstruktor / Verbindung zur DB aufbauen und Character Set setzen
@@ -147,6 +147,7 @@ class SqlRepository {
                 $results[] = $row;
             }
         }
+        var_dump($query);
 		return $results;        
     } // public function getResultArray($query)
     
@@ -168,9 +169,72 @@ class SqlRepository {
      * @return array
 	 */
 	public function findByParent_id($parent_id) {
-		$query = $this->buildSelectQuery("*", $this->table, " parent_id= '" . intval($parent_id) . "'");
+		$query = $this->buildSelectQuery("*", $this->table, " parent_id = '" . intval($parent_id) . "'");
 		return $this->getResultArray($query);
-	}       
+	} 
+    
+    /**
+     * Finde alle Objekte zu der ID eines Grosselternobject 
+     * 
+     * @param int $grandParent_id
+     * @return array 
+     */
+    public function findByGrandParent_id($grandParent_id) {
+        $query = $this->buildSelectQuery("*", $this->table, " parent_id  IN (" 
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id) . ")");
+        $this->getResultArray($query);
+    }
+    
+    /**
+     * Finde alle Objekte zu der ID eines UrGrosselternobject 
+     * 
+     * @param int $greatGrandParent_id
+     * @return array 
+     */
+    public function findByGreatGrandParent_id($greatGrandParent_id) {
+        $query = $this->buildSelectQuery("*", $this->table, " parent_id  IN (" 
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id  IN (" 
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getParentRepository()->getTable(), " parent_id = " . $greatGrandParent_id) . ")"));
+        $this->getResultArray($query);
+    }
+    
+	/**
+	 * Finde alle Objekte zu einer Parent_id und dem Status
+     * 
+	 * @param int $parent_id
+	 * @param string $status
+     * @return array
+	 */
+	public function findByParent_idAndStatus($parent_id, $status) {
+		$query = $this->buildSelectQuery("*", $this->table, " parent_id = '" . intval($parent_id) . "' AND status = '" . $status . "'");
+		return $this->getResultArray($query);
+	}   
+    
+    /**
+     * Finde alle Objekte zu der ID eines Grosselternobject 
+     * 
+     * @param int $grandParent_id
+     * @return array 
+     */
+    public function findByGrandParent_idAndStatus($grandParent_id, $status) {
+        $query = $this->buildSelectQuery("*", $this->table, " parent_id  IN (" 
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id) . ") AND status = '" . $status . "'");
+        return $this->getResultArray($query);
+    }    
+    
+    /**
+     * Finde alle Objekte zu der ID eines UrGrosselternobject und dem Status
+     * 
+     * @param int $greatGrandParent_id
+     * @param string $status
+     * @return array 
+     */
+    public function findByGreatGrandParent_idAndStatus($greatGrandParent_id, $status) {
+        $query = $this->buildSelectQuery("*", $this->table, " parent_id  IN (" 
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id  IN (" 
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getParentRepository()->getTable(), " parent_id = " . $greatGrandParent_id) . ")) AND status = '" . $status . "'"));
+        return $this->getResultArray($query);
+    }    
     
 	/**
 	 * Finde ein Objekt zu einer Eigenschaft
