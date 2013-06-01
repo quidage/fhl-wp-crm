@@ -16,7 +16,9 @@ class UserController extends AbstractController {
      * @return void
      */
     public function startAction() {
+        $projects = findByUser($this->getCurrentUser);
         $this->view->assign('title', 'Startseite');
+        $this->view->assign('projects', $projects);
         $this->view->render();
     }
     
@@ -32,11 +34,13 @@ class UserController extends AbstractController {
     }
     
     /**
-     * show user settings
+     * Anzeigen der Benutzereinstellungen
      * 
+     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
      * @return void
      */
     public function showSettingsAction() {
+        $this->view->assign('user', $this->getCurrentUser());
         $this->view->render();
     }
     
@@ -92,7 +96,7 @@ class UserController extends AbstractController {
             // Wenn Username + Passwort passen, leite auf User-Startseite weiter
             // Setze Login-Status in der User-Session            
             if ($user->getPassword() === md5($login['password'])) {
-                $_SESSION['user'] = $user;
+                $_SESSION['user'] = serialize($user);
                 $_SESSION['login'] = time();
                 $this->forward('User', 'start');
             } else {
@@ -104,5 +108,14 @@ class UserController extends AbstractController {
         }
     } // public function loginAction(array $login)
     
+    /*
+     * Hole den aktuell eingeloggten User
+     * 
+     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+     * @return Object
+     */
+    public function getCurrentUser(){
+        return unserialize($_SESSION['user']); 
+    }
 }
 ?>

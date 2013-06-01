@@ -216,6 +216,21 @@ class View {
         }
     }
     
+    /**
+     * Hole den Admin-Status des eingeloggten Users
+     * 
+     * @return boolean
+     */
+    public function getAdmin() {
+        if(isset($_SESSION['user'])){
+            $user = unserialize($_SESSION['user']);
+            return $user->getAdmin();
+        }else{
+            return false;
+        }
+        
+    }
+    
 }
 
 ?>

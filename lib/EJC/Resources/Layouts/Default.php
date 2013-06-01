@@ -13,11 +13,12 @@
 
     <body>
         <div id="wrap">
-
+            
             <div id="header">
 
                 <div id="menu">
                     <ul>
+                        
                         <li><a href="<?php $this->getUrl('user', 'start'); ?>">Home</a></li>
                         <li><a href="css/css-elemente.html">CSS Elements &raquo;</a>
                             <ul>
