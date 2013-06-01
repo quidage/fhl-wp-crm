@@ -17,5 +17,5 @@
     </tbody>
 </table>
 
-<a href="<?php $this->getUrl('User', 'list'); ?>" ><?php $this->getUrl('User', 'list'); ?></a>
+<?php $this->getLink('Test Link','User','list'); ?>
  
