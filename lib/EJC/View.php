@@ -203,8 +203,13 @@ class View {
      * @return boolean
      */
     public function getAdmin() {
-        $user = unserialize($_SESSION['user']);
-        return $user->getAdmin();
+        if(isset($_SESSION['user'])){
+            $user = unserialize($_SESSION['user']);
+            return $user->getAdmin();
+        }else{
+            return false;
+        }
+        
     }
     
 }
