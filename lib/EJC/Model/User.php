@@ -39,6 +39,14 @@ class User extends AbstractModel {
     protected $last_name;
     
     /**
+     * E-Mail Adresse des Users
+     * 
+     * @author Enrico Lauterschlag
+     * @var string
+     */
+    protected $email;
+    
+    /**
      * Admin-Status
      * 
      * @var boolean
@@ -126,6 +134,27 @@ class User extends AbstractModel {
     public function setLast_name($last_name) {
         $this->last_name = trim($last_name);
     }
+    
+    /**
+     * Hole die Email des Users
+     * 
+     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de> 
+     * @return string
+     */
+    public function getEmail() {
+        return $this->email;
+    }
+    
+    /**
+     * Setze die Email des Users
+     * 
+     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de> 
+     * @param string $user_email
+     * @return void
+     */
+    public function setEmail() {
+        $this->email = filter_var(trim($email), FILTER_VALIDATE_EMAIL);
+    }
 
     /**
      * Hole den Admin-Status
@@ -154,7 +183,6 @@ class User extends AbstractModel {
     public function setAdmin($admin) {
         $this->admin = filter_var($admin, FILTER_VALIDATE_BOOLEAN);
     }
-    
 }
 
 ?>
