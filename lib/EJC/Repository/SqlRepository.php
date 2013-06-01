@@ -169,7 +169,7 @@ class SqlRepository {
 	 */
 	public function findByParent_id($parent_id) {
 		$query = $this->buildSelectQuery("*", $this->table, " parent_id= '" . intval($parent_id) . "'");
-		return $this->getFirstResult($query);
+		return $this->getResultArray($query);
 	}       
     
 	/**

@@ -152,7 +152,7 @@ class User extends AbstractModel {
      * @param string $user_email
      * @return void
      */
-    public function setEmail() {
+    public function setEmail($email) {
         $this->email = filter_var(trim($email), FILTER_VALIDATE_EMAIL);
     }
 

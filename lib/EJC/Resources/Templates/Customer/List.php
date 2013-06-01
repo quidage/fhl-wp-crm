@@ -8,17 +8,13 @@
 		<script src="js/main.js"></script>        
     </head>
     
-    <body>
-        
-        <?php var_dump($this->customers); ?>
-        
+    <body>        
         <?php foreach ($this->customers AS $customer) : ?>
 
         
         
         
         <?php endforeach; ?> 
-        <div>TODO write content</div>
     </body>
     
 </html>

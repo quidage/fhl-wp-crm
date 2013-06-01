@@ -49,9 +49,11 @@ class ProjectRepository extends AbstractRepository {
     public function findByUser(\EJC\Model\User $user) {
         $projects = array();
         $customers = $this->customerRepository->findByParent_id($user->getId());
-        foreach ($customers AS $customer) {
-            $customerProjects = $this->findByParent_id($customer->getId());
-            array_merge($projects, $customerProjects);
+        if (!empty($customers)) {   
+            foreach ($customers AS $customer) {
+                $customerProjects = $this->findByParent_id($customer->getId());
+                $projects = array_merge($customerProjects, $projects);
+            }
         }
         return $projects;
     }

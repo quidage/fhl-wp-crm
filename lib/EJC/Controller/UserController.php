@@ -16,7 +16,7 @@ class UserController extends AbstractController {
      * @return void
      */
     public function startAction() {
-        $projects = findByUser($this->getCurrentUser);
+        $projects = $this->projectRepository->findByUser($this->getCurrentUser());
         $this->view->assign('title', 'Startseite');
         $this->view->assign('projects', $projects);
         $this->view->render();
@@ -51,7 +51,6 @@ class UserController extends AbstractController {
      */
     public function createAction(\EJC\Model\User $user) {
         $this->userRepository->add($user);
-        var_dump($user);
     }
     
     /**
