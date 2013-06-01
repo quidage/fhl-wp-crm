@@ -9,10 +9,10 @@
 
 <h1>Benutzereinstellungen</h2>
 
-<?php foreach ($this->users AS $user):
+<?php 
 
-    echo $user->getName();
-    echo $user->getFirst_name();
-    echo $user->getLast_name();
+    echo $this->user->getName();
+    echo $this->user->getFirst_name();
+    echo $this->user->getLast_name();
 
-endforeach; ?>
+?>
