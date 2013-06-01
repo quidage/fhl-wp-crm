@@ -26,6 +26,10 @@
             <td><?php echo $this->user->getEmail(); ?></td>
         </tr>
         <tr>
+            <td>Password:</td>
+            <td>******</td>
+        </tr>
+        <tr>
         <td colspan="2"><?php $this->getLink('Daten bearbeiten', 'User', 'edit', array('user[id]' => $this->user->getID())); ?></td>
         </tr>
     </tbody>
