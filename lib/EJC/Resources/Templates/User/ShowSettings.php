@@ -34,3 +34,5 @@
         </tr>
     </tbody>
 </table>
+
+<a class="std-btn" href="#">Klick mich</a>
