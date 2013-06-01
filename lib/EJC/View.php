@@ -164,15 +164,15 @@ class View {
 	 * @param array $params
      * @return void
      */
-    public function getLink($title, $ident, $controller, $action, $params = array()) {
+    public function getLink($title, $controller, $action, $params = array(), $ident = '') {
     	$fchar = substr($ident, 0, 1);
-		$iVal = substr($ident, 1, str_len($ident));
+		$iVal = substr($ident, 1, strlen($ident));
 		
     	ob_start();
 		$this->getUrl($controller, $action, $params);
 		$url = ob_get_clean();
 		
-		echo '<a '.( $fchar == '#' ? 'id' : 'class' ).'="'.$iVal.'" href="'.$url.'">'.$title.'</a>';
+		echo '<a '.($ident !== '' ? ( $fchar == '#' ? 'id' : 'class' ).'="'.$iVal.'".' : '').' href="'.$url.'">'.$title.'</a>';
     }
     
     /**
