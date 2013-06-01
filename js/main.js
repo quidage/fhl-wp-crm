@@ -36,26 +36,21 @@
 		 * @param {string} selector		Element selectable by id or class 
 		 */
 		init: function(selector) {
-			var elem, sType;
+			var elem, sType, sWork;
 	    	
 	    	sType = selector.charAt(0);
-	    	selector = selector.substr(1,selector.length);
-	    	
-	    	sType = ( selector === 'body' ? '<' : sType ); 
+	    	sWork = selector.substr(1,selector.length);
 	    	
 	    	switch( sType ) {
-	    		case '#': elem = document.getElementById(selector);
+	    		case '#': elem = document.getElementById(sWork);
 	    				  this[0] = elem;
 	    				  this.len = 1;
 	    		break;
-	    		case '.': elem = document.getElementsByClassName(selector); 
+	    		case '.': elem = document.getElementsByClassName(sWork); 
 	    				  this.pushToMatches(elem);
 	    				  this[0] = elem[0];
 	    		break;
-	    		case '<': selector.replace(/^<|\s+|>$/g, '');
-	    					
-	    					console.log(selector);
-	    					//this.pushToMatches(document.getElementsByTagName(reSingleTag.exec(selector)));
+	    		case '<': this.pushToMatches(document.getElementsByTagName(reSingleTag.exec(sWork)));
 	    		break;
 	    		default: return this;
 	    	}
@@ -123,12 +118,15 @@
 	        return uStr.replace(/^\s+|\s+$/g, '');
 	    },
 	    /**
-	     * Appends some content to the element
+	     * Fügt ein Element zum DOM hinzu
 	     * 
 	     * @param {string} input		New content
 	     */
 	    append: function( input ) {
-	    	// TO DO
+	    	// TO DO - Klasse bzw. ID erkennen und übergeben
+
+	    	var tmp = document.createElement(input);
+	    	this[0].appendChild(tmp);
 	    },
 	 	/**
 	     * Adds a class to an element
@@ -280,41 +278,102 @@
 	// *** CRM Window **********************
 	// *************************************
 	
+	var wndArray = [];			// Array zur Verwaltung aller offenen Fensters
+	
 	/**
 	 * Objekt zum generieren von Fenstern
-	 * 
-	 * @param {int} w		// Breite des Fensters
-	 * @param {int} h		// Höhe des Fensters
-	 * @param {int} x		// X-Position des Fensters
-	 * @param {int} y		// Y-Position des Fensters
+	 * 		
+	 * @param {object} settings		
 	 * 
 	 * @retuns {Wnd}
 	 */
-	var wndHelper = function( w, h, x, y ) {
-		return new wndHelper.wnd.init();
+	var wndHelper = function( settings ) {
+		return new wndHelper.wnd.init( settings );
 	}
 	
 	/**
 	 * Grundobjekt des Fenster mit allen Funktionen und Eingenschaften
 	 */
 	wndHelper.wnd = wndHelper.prototype = {
-		properties: {
-			w: 0,
-			h: 0,
-			x: 0,
-			y: 0
+		wId: 0,				// Einmalige ID des Fenster
+		wndLayout: '',		// String mit dem HTML für das Fenster
+		properties: {},
+		defaults: {
+			w: 0,			// Breite des Fensters
+			h: 0,			// Höhe des Fensters
+			x: 0,			// X-Position des Fensters
+			y: 0			// Y-Position des Fensters
 		},
 		/**
 		 * Initiiert das neue Fenster
+		 * 
+		 * @param {object} settings		// Objekt mit Einstellungen für das Fentser
+		 * 
+		 * @returns {wndHelper}
 		 */	
-		init: function() {
+		init: function( settings ) {
+			Object.extend( this.properties, this.defaults );	// Properties mit den Werten von Default befüllen
+			Object.extend( this.properties, settings );			// Properties mit den Settings des Nutezrs überschreiben
+			
+			this.newWindow();
 			return this;
 		},
 		/**
 		 * Fügt ein Fenster zum DOM hinzu
 		 */
 		draw: function() {
-			$('<body>').html('check');
+			var lVal = wndArray.length;
+			
+			//document.body.innerHTML = '';
+		},
+		/**
+		 * Generiert eine Einmalige ID für das Fenster.
+		 */
+		newWindowId: function() {
+			var rID = (1 + Math.random()).toString(32).substr(2);
+			var c = wndArray.length;
+			
+			for( var i = 0; i < c; i++ ) {
+				if( wndArray[i].wId === rID ) this.wndId;
+				return;
+			}
+			
+			this.wId = rID;
+		},
+		/**
+		 * Fürt alle nötigen Methoden zum erstellen des Fensters aus
+		 */
+		newWindow: function() {
+			var elem;
+			this.newWindowId();
+			
+			elem = document.createElement('div');
+			elem.setAttribute('id', 'wnd-'+this.wId);
+			elem.setAttribute('class', 'std-window');
+			document.body.appendChild(elem);
+			
+			wndArray.push(this);
+		},
+		/**
+		 * Legt ein Overlay über die Seite
+		 */
+		addOverlay: function() {
+			var ovl = this.getWindowElement('crm-overlay');
+			var bdy = document.body;
+			if( !ovl ) {
+				ovl = document.createElement('div');
+				ovl.setAttribute('class', 'crm-overlay');
+				document.body.appendChild(ovl);		
+			}
+		},
+		/**
+		 * Liefert das Element anhand Seiner ID
+		 * 
+		 * @param {string} elemId
+		 * @returns {object}
+		 */
+		getWindowElement: function( elemId ) {
+			return document.getElementById(elemId);
 		}
 	};
 	
@@ -322,6 +381,8 @@
 	wndHelper.wnd.init.prototype = wndHelper.wnd;
 	
 	window.crmWindow = wndHelper;
+	
+	
 })(window);
 
 
