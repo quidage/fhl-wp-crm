@@ -62,7 +62,7 @@
 */
 #menu ul li:hover {
 	background-color:#2688bc;
-	line-heigth:40px;
+	line-height:40px;
 	border-bottom:3px solid orange;
 }
 
@@ -71,7 +71,7 @@
 */
 #menu ul li#current {
 	background-color:#2688bc;
-	line-heigth:40px;
+	line-height:40px;
 	border-bottom:3px solid orange;
 }
 
