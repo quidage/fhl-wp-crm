@@ -12,6 +12,7 @@ class AbstractController {
 
     protected $controllerName;
     protected $actionName;
+    protected $ajax;
     protected $view;
     protected $request;
     protected $customerRepository;    
