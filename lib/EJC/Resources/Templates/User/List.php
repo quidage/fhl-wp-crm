@@ -17,5 +17,5 @@
     </tbody>
 </table>
 
-<?php $this->getLink('Test Link','User','list'); ?>
+<?php $this->getLink('Test Link','User','list', array(), '.std-btn'); ?>
  
