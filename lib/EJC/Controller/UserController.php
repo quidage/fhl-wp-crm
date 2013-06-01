@@ -92,7 +92,7 @@ class UserController extends AbstractController {
             // Wenn Username + Passwort passen, leite auf User-Startseite weiter
             // Setze Login-Status in der User-Session            
             if ($user->getPassword() === md5($login['password'])) {
-                $_SESSION['user'] = $user;
+                $_SESSION['user'] = serialize($user);
                 $_SESSION['login'] = time();
                 $this->forward('User', 'start');
             } else {
