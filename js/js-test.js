@@ -10,6 +10,27 @@
 //x.find('div').eq(1).addClass('it_works');
 
 
+
+window.onload = function() {
+	
+	var wnd1;
+	
+	$('.std-btn').each(
+		function(btn){
+			btn.click(function(e){
+				e.preventDefault();
+				wnd1 = crmWindow();
+				wnd1.draw();
+			});
+		}
+	);
+	
+	
+	
+}
+
+
+
 /*
 
 var v = valid('logform', {

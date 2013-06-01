@@ -14,8 +14,12 @@
 (function(window, undefined){
 	"strict mode"
 	
+	// *************************************
+	// *** Selector ************************
+	// *************************************
+	
 	var matches,
-		reSingleTag = /^<(\w+)\s*\/?>$/;
+		reSingleTag = /^<(\w*)\s*\/?>$/;
 	
 	// Call the contructor
 	var dHelper = function(selector) {
@@ -37,6 +41,8 @@
 	    	sType = selector.charAt(0);
 	    	selector = selector.substr(1,selector.length);
 	    	
+	    	sType = ( selector === 'body' ? '<' : sType ); 
+	    	
 	    	switch( sType ) {
 	    		case '#': elem = document.getElementById(selector);
 	    				  this[0] = elem;
@@ -46,7 +52,10 @@
 	    				  this.pushToMatches(elem);
 	    				  this[0] = elem[0];
 	    		break;
-	    		case '<': this.pushToMatches(document.getElementsByTagName(reSingleTag.exec(selector)));
+	    		case '<': selector.replace(/^<|\s+|>$/g, '');
+	    					
+	    					console.log(selector);
+	    					//this.pushToMatches(document.getElementsByTagName(reSingleTag.exec(selector)));
 	    		break;
 	    		default: return this;
 	    	}
@@ -80,16 +89,12 @@
 	     * @param {function} callback		Something that should happen with this element
 	     */
 	    each: function( callback ) {
-	    	// TO DO due refactoring
-	    	/*
-	    	var c = this.workArr.length;
+	    	var c = this.len;
 	    	if( c > 0 && typeof(callback) === 'function' ) {
 	    		for( var i = 0; i < c; i++ ) {
-	    			this.elem = this.workArr[i];
-	    			callback(this);
+	    			callback(this.matches[i]);
 	    		}
 	    	}
-	    	*/
 	    },
 	    /**
 	     * Appends the an array of results to dHelper
@@ -269,7 +274,62 @@
 	
 	// Expose for gloabel use 
 	window.$ = dHelper;
+	
+	
+	// *************************************
+	// *** CRM Window **********************
+	// *************************************
+	
+	/**
+	 * Objekt zum generieren von Fenstern
+	 * 
+	 * @param {int} w		// Breite des Fensters
+	 * @param {int} h		// Höhe des Fensters
+	 * @param {int} x		// X-Position des Fensters
+	 * @param {int} y		// Y-Position des Fensters
+	 * 
+	 * @retuns {Wnd}
+	 */
+	var wndHelper = function( w, h, x, y ) {
+		return new wndHelper.wnd.init();
+	}
+	
+	/**
+	 * Grundobjekt des Fenster mit allen Funktionen und Eingenschaften
+	 */
+	wndHelper.wnd = wndHelper.prototype = {
+		properties: {
+			w: 0,
+			h: 0,
+			x: 0,
+			y: 0
+		},
+		/**
+		 * Initiiert das neue Fenster
+		 */	
+		init: function() {
+			return this;
+		},
+		/**
+		 * Fügt ein Fenster zum DOM hinzu
+		 */
+		draw: function() {
+			$('<body>').html('check');
+		}
+	};
+	
+	// Alle Funktionen und Parameter an das Window prototyp Objekt übergeben
+	wndHelper.wnd.init.prototype = wndHelper.wnd;
+	
+	window.crmWindow = wndHelper;
 })(window);
+
+
+
+
+
+
+
 
 
 /**
