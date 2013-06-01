@@ -296,14 +296,19 @@
 	 */
 	wndHelper.wnd = wndHelper.prototype = {
 		wId: 0,				// Einmalige ID des Fenster
-		wndLayout: '',		// String mit dem HTML für das Fenster
-		properties: {},
-		defaults: {
+		activ: false,		// Flag für die den Zastand
+		wndObj: null,		// Objekt des Fensters selbst
+		ovlObj: null,		// Objekt der Shader Fläche im Hintergrund
+		fadeStep: 0.5,		// Schritte mit denen das Fenster eingeblenden wird
+		fadeSpeed: 1000,	// Geschwindigkeit der wiederholungen in milli sekunden
+		properties: {},		// Objekt mit den aktuellen Eigenschaften des Fensters
+		defaults: {			
 			w: 0,			// Breite des Fensters
 			h: 0,			// Höhe des Fensters
 			x: 0,			// X-Position des Fensters
 			y: 0			// Y-Position des Fensters
 		},
+		
 		/**
 		 * Initiiert das neue Fenster
 		 * 
@@ -318,14 +323,39 @@
 			this.newWindow();
 			return this;
 		},
+		
 		/**
 		 * Fügt ein Fenster zum DOM hinzu
 		 */
 		draw: function() {
-			var lVal = wndArray.length;
-			
-			//document.body.innerHTML = '';
+			var bdy = document.body;
+			if( this.ovlObj != null ) bdy.appendChild(this.ovlObj);
+			if( this.wndObj != null ) bdy.appendChild(this.wndObj);
 		},
+		
+		/**
+		 * Ändert den Inhalt des Fensters
+		 * 
+		 * @param {String} input		Neuer Inhalt des Fensters
+		 */
+		update: function( input ) {
+			this.wndObj.innerHTML = input;
+		},
+		
+		/**
+		 * Versteckt das Fenster
+		 */
+		hide: function() {
+			this.wndObj.style.display = "none";
+		},
+		
+		/**
+		 * Zeigt das Fenster wieder an
+		 */
+		show: function() {
+			this.wndObj.style.display = "block";
+		},
+		
 		/**
 		 * Generiert eine Einmalige ID für das Fenster.
 		 */
@@ -340,32 +370,33 @@
 			
 			this.wId = rID;
 		},
+		
 		/**
 		 * Fürt alle nötigen Methoden zum erstellen des Fensters aus
 		 */
 		newWindow: function() {
-			var elem;
 			this.newWindowId();
 			
-			elem = document.createElement('div');
-			elem.setAttribute('id', 'wnd-'+this.wId);
-			elem.setAttribute('class', 'std-window');
-			document.body.appendChild(elem);
+			this.wndObj = document.createElement('div');
+			this.wndObj.setAttribute('id', 'wnd-'+this.wId);
+			this.wndObj.setAttribute('class', 'std-window');
+			document.body.appendChild(this.wndObj);
 			
 			wndArray.push(this);
 		},
+		
 		/**
 		 * Legt ein Overlay über die Seite
 		 */
 		addOverlay: function() {
-			var ovl = this.getWindowElement('crm-overlay');
-			var bdy = document.body;
+			var ovl = this.getWindowElement('std-overlay');
+			
 			if( !ovl ) {
-				ovl = document.createElement('div');
-				ovl.setAttribute('class', 'crm-overlay');
-				document.body.appendChild(ovl);		
+				this.ovlObj = document.createElement('div');
+				this.ovlObj.setAttribute('id', 'std-overlay');
 			}
 		},
+		
 		/**
 		 * Liefert das Element anhand Seiner ID
 		 * 
@@ -374,22 +405,47 @@
 		 */
 		getWindowElement: function( elemId ) {
 			return document.getElementById(elemId);
+		},
+		/**
+		 * Blendet ein Fenster mit den per Variabel festgelegten Schritten ein
+		 * 
+		 * @param {number} val		// Nächster Schritt für den rekursiven Aufruf
+		 */
+		fadeIn: function( val ) {
+			val = val || 0;
+			this.wndObj.style.opacity = val;
+			
+			if( val <= val-this.fadeStep ) { 
+				setTimeout( function(){
+					this.fadeIn( val+= this.fadeStep );
+				}, this.fadeSpeed );
+			}
+		},
+		/**
+		 * Blendet ein Fenster mit den per Variabel festgelegten Schritten aus
+		 * 
+		 * @param {number} val		// Nächster Schritt für den rekursiven Aufruf
+		 */
+		fadeOut: function( val ) {
+			val = val || 0;
+			this.wndObj.style.opacity = val;
+			
+			if( val >= val+this.fadeStep ) { 
+				setTimeout( function(){
+					this.fadeIn( val-= this.fadeStep );
+				}, this.fadeSpeed );
+			}
 		}
 	};
 	
 	// Alle Funktionen und Parameter an das Window prototyp Objekt übergeben
 	wndHelper.wnd.init.prototype = wndHelper.wnd;
 	
+	// Dem System den Namen des Objektes bekannt machen
 	window.crmWindow = wndHelper;
 	
 	
 })(window);
-
-
-
-
-
-
 
 
 
@@ -521,18 +577,3 @@ var Validate = {
 		return valid;
 	}
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
