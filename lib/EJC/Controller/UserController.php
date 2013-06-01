@@ -54,12 +54,24 @@ class UserController extends AbstractController {
     }
     
     /**
-     * display form to edit user-data
+     * Anzeigen des Formulars zum Bearbeiten der Benutzereinstellungen
      * 
+     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
      * @param \EJC\Model\User $user
      */
     public function editAction(\EJC\Model\User $user) {
-        echo 'editAction';
+        $this->view->assign('user', $user);
+        $this->view->render();
+    }
+    
+    /**
+     * Aktualisiere die Daten des Users
+     * 
+     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+     * @param \EJC\Model\User $user
+     */
+    public function updateAction(\EJC\Model\User $user) {
+        $this->userRepository->update($user);
     }
     
     /**
