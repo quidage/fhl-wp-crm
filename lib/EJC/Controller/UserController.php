@@ -16,6 +16,7 @@ class UserController extends AbstractController {
      * @return void
      */
     public function startAction() {
+        $projects = findByUser($this->getCurrentUser);
         $this->view->assign('title', 'Startseite');
         $this->view->assign('projects', $projects);
         $this->view->render();

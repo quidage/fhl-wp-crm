@@ -9,14 +9,22 @@ namespace EJC\Repository;
  * @package wp-crm
  */
 class ProjectRepository extends AbstractRepository {
-	
-	/**
+    
+    /**
+     * Das CustomerRepository
+     * 
+     * @var \EJC\Repository\CustomerRepository
+     */
+	protected $customerRepository;
+
+    /**
 	 * Konstruktor
 	 * 
 	 * @return void
 	 */
 	public function __construct() {
 		parent::__construct();
+        $this->customerRepository = new \EJC\Repository\CustomerRepository();
 		
 		// Setze die Tabelle
 		$this->table = 'project';
@@ -31,6 +39,22 @@ class ProjectRepository extends AbstractRepository {
 	public function findByCustomer($id) {
 		return $this->findByParentId($id);
 	}
+    
+    /**
+     * Finde alle Projects zu einem User
+     * 
+     * @param \EJC\Model\User $user
+     * @return array
+     */
+    public function findByUser(\EJC\Model\User $user) {
+        $projects = array();
+        $customers = $this->customerRepository->findByParent_id($user->getId());
+        foreach ($customers AS $customer) {
+            $customerProjects = $this->findByParent_id($customer->getId());
+            array_merge($projects, $customerProjects);
+        }
+        return $projects;
+    }
 	
 }
 
