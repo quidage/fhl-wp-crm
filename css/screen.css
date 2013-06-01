@@ -231,9 +231,9 @@ input[type="submit"], input[type="reset"] {
 }
 
 .std-window {
-	position: absolute;
-	left: 50%;
-	top: 20%;
+    position: absolute;
+    left: 50%;
+    top: 20%;
     width: 50%;
     height: 50%;
     margin-left: -25%;
