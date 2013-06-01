@@ -11,14 +11,16 @@ namespace EJC\Controller;
 class UserController extends AbstractController {
     
     /**
-     * show the index page
+     * Zeige die Uebersichtsseite des Users
      * 
      * @return void
      */
     public function startAction() {
-        $projects = $this->projectRepository->findByUser($this->getCurrentUser());
+        $openProjects = $this->projectRepository->findOpenByUser($this->getCurrentUser());
+        $openTasks = $this->taskRepository->findOpenByuser($this->getCurrentUser());
         $this->view->assign('title', 'Startseite');
-        $this->view->assign('openProjects', $projects);
+        $this->view->assign('openProjects', $openProjects);
+        $this->view->assign('openTasks', $openTasks);
         $this->view->render();
     }
     

@@ -23,6 +23,22 @@ class CustomerController extends AbstractController {
     }
     
     /**
+     * Liste alle Customer zu einem User
+     * 
+     * @param \EJC\Model\User $user
+     * @return void
+     */
+    public function listByUserAction(\EJC\Model\User $user = NULL) {
+        if ($user === NULL) {
+            $user = $this->getCurrentUser();
+        }
+        $customers = $this->customerRepository->findByParent_id($user->getId());
+        $this->view->assign('customers', $customers);
+        $this->view->assign('title', 'Kundenliste');
+        $this->view->render();        
+    }
+    
+    /**
      * Zeige alle Daten zu einem Customer
      * 
      * @param string $customerID

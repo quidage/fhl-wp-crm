@@ -76,10 +76,10 @@ class AbstractController {
      * @return void
      */
     public function initRepositories() {
+        $this->userRepository = new \EJC\Repository\UserRepository();
         $this->customerRepository = new \EJC\Repository\CustomerRepository();
         $this->projectRepository = new \EJC\Repository\ProjectRepository();
-        $this->userRepository = new \EJC\Repository\UserRepository();
-    }
+        $this->taskRepository = new \EJC\Repository\TaskRepository();    }
     
     /**
      * Initialisiere den View

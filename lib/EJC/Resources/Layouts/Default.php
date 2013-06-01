@@ -1,3 +1,11 @@
+<?php
+/**
+ * Default Layout fuer http-Aufrufe
+ * 
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Enrioc Lauterschlag <enrico.lauterschlag@web.de>
+ */
+?>
 <!DOCTYPE html>
 <html>
 
@@ -19,19 +27,13 @@
                 <div id="menu">
                     <ul>
                         
-                        <li><a href="<?php $this->getUrl('user', 'start'); ?>">Home</a></li>
-                        <li><a href="css/css-elemente.html">CSS Elements &raquo;</a>
-                            <ul>
-                                <li><a href="css-elemente.html#button">Button</a></li>
-                                <li><a href="css-elemente.html#paragraph">Forms</a></li>
-                                <li><a href="css-elemente.html#tables">Tables</a></li>
-                            </ul></li>
-                        <li><a href="single-page.html">Page &raquo;</a>
-                            <ul>
-                                <li><a href="#">Subpage</a></li>
-                            </ul></li>
+                        <li><?php $this->getLink('&uuml;bersicht', 'User', 'start'); ?></li>
+                        <li><?php $this->getLink('Kunden', 'Customer', 'listByUser'); ?></li>
+                        <li><?php $this->getLink('Projekte', 'Projects', 'listByUser'); ?></li>
+                 
                     </ul>
                 </div>
+                
                 <div id="menu_config">
                     <a href="<?php $this->getUrl('user', 'showSettings'); ?>"><img src="images/iconset/einstellungen.png" /></a>
                 </div>

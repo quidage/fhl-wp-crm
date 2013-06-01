@@ -17,6 +17,7 @@ class CustomerRepository extends AbstractRepository {
 	 */
 	public function __construct() {
 		parent::__construct();
+        $this->parentRepository = new UserRepository();
 		// setze die Tabelle
 		$this->table = "customer";
 	}
