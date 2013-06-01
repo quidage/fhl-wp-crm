@@ -1,6 +1,15 @@
-<?php if (!empty($this->projects)): ?>
+<?php
+/**
+ * Template fuer die Start-Action des Users
+ *
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
+ */
+?>
 
-<h2>Offene Projekte</h2>
+<?php if (!empty($this->openProjects)): ?>
+
+    <h2>Offene Projekte</h2>
 
     <table>
         <thead>
@@ -11,12 +20,37 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($this->projects AS $project): ?>
+            <?php foreach ($this->openProjects AS $project): ?>
+                <tr>
+                    <td><?php echo $project->getName(); ?></td>
+                    <td><?php echo $project->getDescription(); ?></td>
+                    <td><?php $this->getLink('Details', 'Project', 'show', array('project[id]' => $project->getId())); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?> 
+
+
+<?php if (!empty($this->openTasks)): ?>
+
+    <h2>Offene Aufgaben</h2>
+
+    <table>
+        <thead>
             <tr>
-                <td><?php echo $project->getName(); ?></td>
-                <td><?php echo $project->getDescription(); ?></td>
-                <td><?php $this->getLink('Project', 'edit', array('project[id]' => $project->getId())); ?></td>
+                <td>Name</td>
+                <td>Beschreibung</td>
+                <td></td>
             </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->openTasks AS $task): ?>
+                <tr>
+                    <td><?php echo $task->getName(); ?></td>
+                    <td><?php echo $task->getDescription(); ?></td>
+                    <td><?php $this->getLink('Details', 'Project', 'show', array('task[id]' => $task->getId())); ?></td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

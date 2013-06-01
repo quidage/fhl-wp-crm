@@ -10,13 +10,52 @@ namespace EJC\Controller;
  */
 class AbstractController {
 
+    /**
+     *
+     * @var string
+     */
     protected $controllerName;
+    
+    /**
+     *
+     * @var string
+     */
     protected $actionName;
+    
+    /**
+     *
+     * @var boolean
+     */
     protected $ajax;
+    
+    /**
+     *
+     * @var \EJC\View
+     */
     protected $view;
+    
+    /**
+     *
+     * @var \EJC\Request 
+     */
     protected $request;
+    
+    /**
+     *
+     * @var \EJC\Repository\CustomerRepository
+     */
     protected $customerRepository;    
+    
+    /**
+     *
+     * @var \EJC\Repository\ProjectrRepository
+     */    
     protected $projectRepository;    
+    
+    /**
+     *
+     * @var \EJC\Repository\UserrRepository
+     */    
     protected $userRepository;
 
     /**
@@ -89,7 +128,7 @@ class AbstractController {
         return;
     } // public function redirect($controller, $action, array $params = NULL)
     
-    /*
+    /**
      * Hole den aktuell eingeloggten User
      * 
      * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>

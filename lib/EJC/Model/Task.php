@@ -3,12 +3,12 @@
 namespace EJC\Model;
 
 /**
- * Das Project-Model
+ * Das Task-Model
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */
-class Project extends AbstractModel {
+class Task extends AbstractModel {
     
     /**
      * Beschreibung
@@ -17,13 +17,6 @@ class Project extends AbstractModel {
      */
     protected $description;
     
-    /**
-     * Status
-     * 
-     * @var string
-     */
-    protected $status;
-
     /**
      * Sorge dafuer, dass die Eigenschaften die richtigen Datentypen bekommen
      * @return void
@@ -48,25 +41,6 @@ class Project extends AbstractModel {
      */
     public function setDescription($description) {
         $this->description = trim($description);
-    }
-
-    /**
-     * Hole den Status
-     * 
-     * @return string
-     */
-    public function getStatus() {
-        return $this->status;
-    }
-
-    /**
-     * Setze den Status
-     * 
-     * @param string $status
-     * @return void
-     */
-    public function setStatus($status) {
-        $this->status = trim($status);
     }
 
 }

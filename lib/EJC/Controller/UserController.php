@@ -3,7 +3,7 @@
 namespace EJC\Controller;
 
 /**
- * Controller for user actions, like login, creation of new users
+ * Controller für den User
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
@@ -18,7 +18,7 @@ class UserController extends AbstractController {
     public function startAction() {
         $projects = $this->projectRepository->findByUser($this->getCurrentUser());
         $this->view->assign('title', 'Startseite');
-        $this->view->assign('projects', $projects);
+        $this->view->assign('openProjects', $projects);
         $this->view->render();
     }
     
