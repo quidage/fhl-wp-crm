@@ -89,6 +89,16 @@ class AbstractController {
         return;
     } // public function redirect($controller, $action, array $params = NULL)
     
+    /*
+     * Hole den aktuell eingeloggten User
+     * 
+     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+     * @return string
+     */
+    public function getCurrentUser(){
+        return unserialize($_SESSION['user']); 
+    }
+    
 }
 
 ?>
