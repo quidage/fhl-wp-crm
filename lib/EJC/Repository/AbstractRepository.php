@@ -45,7 +45,7 @@ class AbstractRepository extends SqlRepository {
      * @param array $arguments
      * @return void
      */
-    public function __call($name, $arguments) {
+    public function __call($name, array $arguments) {
 
         if (substr($name, 0, 6) === 'findBy') {
             /*
@@ -103,7 +103,7 @@ class AbstractRepository extends SqlRepository {
      * @param type $object
      * @return int Insert ID
      */
-    public function add($object) {
+    public function add(object $object) {
         $objectArray = $object->toArray();
         $arrayToInsert = $this->prepareArray($objectArray);
         return $this->insert($arrayToInsert);
@@ -115,7 +115,7 @@ class AbstractRepository extends SqlRepository {
      * @param type $object
      * @return void
      */
-    public function remove($object) {
+    public function remove(object $object) {
         $this->delete($object->getId());
     }
 
@@ -124,7 +124,7 @@ class AbstractRepository extends SqlRepository {
      * 
      * @param object $object
      */
-    public function update($object) {
+    public function update(object $object) {
         $objectArray = $object->toArray();
         $arrayToInsert = $this->prepareArray($objectArray);
         $this->updateOneById($object->getId(), $arrayToInsert);
@@ -137,7 +137,7 @@ class AbstractRepository extends SqlRepository {
      * @param array $arrayToPrepare
      * @return array
      */
-    protected function prepareArray($arrayToPrepare) {
+    protected function prepareArray(array $arrayToPrepare) {
         $arrayToInsert = array();
         foreach ($arrayToPrepare AS $key => $value) {
             if (!in_array($key, $this->notUpdateableKeys)) {

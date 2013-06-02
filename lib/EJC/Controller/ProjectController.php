@@ -38,10 +38,9 @@ class ProjectController extends AbstractController {
      */
     public function listByUserAction(\EJC\Model\User $user = NULL) {
         if ($user === NULL) {
-            $projects = $this->projectRepository->findByUser($this->getCurrentUser());
-        } else {
-            $projects = $this->projectRepository->findByUser($user);
+            $user = $this->getCurrentUser();
         }
+        $projects = $this->projectRepository->findByUser($user);
         $this->view->assign('projects', $projects);
         $this->view->render();
     }

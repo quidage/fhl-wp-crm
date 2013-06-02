@@ -157,7 +157,7 @@ class SqlRepository {
      * @return object
 	 */
 	public function findById($id) {
-		$query = $this->buildSelectQuery("*", $this->table," id = '" . intval($id) . "'");
+		$query = $this->buildSelectQuery("*", $this->getTable()," id = '" . intval($id) . "'");
 		return $this->getFirstResult($query);
 	}  
     
@@ -168,7 +168,7 @@ class SqlRepository {
      * @return array
 	 */
 	public function findByParent_id($parent_id) {
-		$query = $this->buildSelectQuery("*", $this->table, " parent_id = '" . intval($parent_id) . "'");
+		$query = $this->buildSelectQuery("*", $this->getTable(), " parent_id = '" . intval($parent_id) . "'");
 		return $this->getResultArray($query);
 	} 
     
@@ -179,9 +179,9 @@ class SqlRepository {
      * @return array 
      */
     public function findByGrandParent_id($grandParent_id) {
-        $query = $this->buildSelectQuery("*", $this->table, " parent_id  IN (" 
+        $query = $this->buildSelectQuery("*", $this->getTable(), " parent_id  IN (" 
                 . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id) . ")");
-        $this->getResultArray($query);
+        return $this->getResultArray($query);
     }
     
     /**
@@ -191,7 +191,7 @@ class SqlRepository {
      * @return array 
      */
     public function findByGreatGrandParent_id($greatGrandParent_id) {
-        $query = $this->buildSelectQuery("*", $this->table, " parent_id  IN (" 
+        $query = $this->buildSelectQuery("*", $this->getTable(), " parent_id  IN (" 
                 . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id  IN (" 
                 . $this->buildSelectQuery("id", $this->getParentRepository()->getParentRepository()->getTable(), " parent_id = " . $greatGrandParent_id) . ")"));
         $this->getResultArray($query);
@@ -205,7 +205,7 @@ class SqlRepository {
      * @return array
 	 */
 	public function findByParent_idAndStatus($parent_id, $status) {
-		$query = $this->buildSelectQuery("*", $this->table, " parent_id = '" . intval($parent_id) . "' AND status = '" . $status . "'");
+		$query = $this->buildSelectQuery("*", $this->getTable(), " parent_id = '" . intval($parent_id) . "' AND status = '" . $status . "'");
 		return $this->getResultArray($query);
 	}   
     
@@ -216,7 +216,7 @@ class SqlRepository {
      * @return array 
      */
     public function findByGrandParent_idAndStatus($grandParent_id, $status) {
-        $query = $this->buildSelectQuery("*", $this->table, " parent_id  IN (" 
+        $query = $this->buildSelectQuery("*", $this->getTable(), " parent_id  IN (" 
                 . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id) . ") AND status = '" . $status . "'");
         return $this->getResultArray($query);
     }    

@@ -24,7 +24,6 @@ class ProjectRepository extends AbstractRepository {
 	 */
 	public function __construct() {
 		parent::__construct();
-        $this->customerRepository = new CustomerRepository();
         $this->parentRepository = new CustomerRepository();
 		
 		// Setze die Tabelle

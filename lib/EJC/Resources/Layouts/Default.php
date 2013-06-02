@@ -29,7 +29,7 @@
                         
                         <li><?php $this->getLink('&uuml;bersicht', 'User', 'start'); ?></li>
                         <li><?php $this->getLink('Kunden', 'Customer', 'listByUser'); ?></li>
-                        <li><?php $this->getLink('Projekte', 'Projects', 'listByUser'); ?></li>
+                        <li><?php $this->getLink('Projekte', 'Project', 'listByUser'); ?></li>
                  
                     </ul>
                 </div>
