@@ -3,7 +3,7 @@
 namespace EJC\Controller;
 
 /**
- * Controller für den User
+ * Controller fuer den User
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
