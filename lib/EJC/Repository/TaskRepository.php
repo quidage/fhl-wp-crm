@@ -54,7 +54,7 @@ class TaskRepository extends AbstractRepository {
             }
         }
         return $projects;
-    }
+    } // public function findByUser(\EJC\Model\User $user)
     
     /**
      * Finde alle offenen Tasks zu einem User

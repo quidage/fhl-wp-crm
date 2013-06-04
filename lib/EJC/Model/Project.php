@@ -68,6 +68,16 @@ class Project extends AbstractModel {
     public function setStatus($status) {
         $this->status = trim($status);
     }
+    
+    /**
+     * Hole alle Tasks zu dem Project
+     * 
+     * @return array
+     */
+    public function getTasks() {
+        $taskRepository = new \EJC\Repository\TaskRepository();
+        return $taskRepository->findByParent_id($this->getId());
+    }
 
 }
 

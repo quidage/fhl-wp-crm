@@ -166,6 +166,15 @@ class Customer extends AbstractModel {
         $this->email = filter_var(trim($email), FILTER_VALIDATE_EMAIL);
     }
 
+    /**
+     * Hole alle Projects zu dem User
+     * 
+     * @return array
+     */
+    public function getProjects() {
+        $projectRepository = new \EJC\Repository\ProjectRepository();
+        return $projectRepository->findByParent_id($this->getId());
+    }
 
 }
 
