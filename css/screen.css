@@ -264,11 +264,21 @@ input[type="submit"], input[type="reset"] {
 
 #header {
 	position:relative;
-        height: 150px;
-        background-color: #FFF;
-        border-bottom:3px solid #000;
-        background:url(../images/header.jpg);
-        background-repeat:no-repeat;
+    height: 150px;
+    background-color: #FFF;
+    border-bottom:3px solid #000;
+}
+
+#logo {
+	height:100px;
+	font-family: 'Fugaz One', sans-serif;
+	font-weight:bold;
+	font-size:50px;
+	color:orange;
+}
+
+#logo p {
+	text-align:center;
 }
 
 #main-content {
