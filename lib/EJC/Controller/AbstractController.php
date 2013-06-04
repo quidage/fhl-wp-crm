@@ -132,7 +132,7 @@ class AbstractController {
      * Hole den aktuell eingeloggten User
      * 
      * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
-     * @return string
+     * @return \EJC\Model\User
      */
     public function getCurrentUser(){
         return unserialize($_SESSION['user']); 

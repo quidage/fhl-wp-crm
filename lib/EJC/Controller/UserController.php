@@ -121,14 +121,5 @@ class UserController extends AbstractController {
         }
     } // public function loginAction(array $login)
     
-    /*
-     * Hole den aktuell eingeloggten User
-     * 
-     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
-     * @return Object
-     */
-    public function getCurrentUser(){
-        return unserialize($_SESSION['user']); 
-    }
 }
 ?>
