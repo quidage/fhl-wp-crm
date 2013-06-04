@@ -19,11 +19,15 @@ class ApiController extends AbstractController {
         // Setze MIME-Type fuer Output auf XML
         header('Content-type: application/xml');
         
-//        $customers = $this->customerRepository->findByUser($this->getCurrentUser());
+        $user = $this->getCurrentUser();
+        $customers = $this->customerRepository->findByParent_id($user->getId());
+        $this->view->assign('customers', $customers);
+//        $this->view->assign('cumstomers', $customers);
+        
+//        
 //        $projects = $this->projectRepository->findByUser($this->getCurrentUser());
 //        $tasks = $this->taskRepository->findByuser($this->getCurrentUser());
-//        $this->view->assign('title', 'Startseite');
-//        $this->view->assign('cumstomers', $customers);
+//        
 //        $this->view->assign('projects', $projects);
 //        $this->view->assign('tasks', $tasks);
         $this->view->setLayout('ajax');
