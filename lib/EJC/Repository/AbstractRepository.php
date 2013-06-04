@@ -103,7 +103,10 @@ class AbstractRepository extends SqlRepository {
      * @param type $object
      * @return int Insert ID
      */
-    public function add(object $object) {
+    public function add($object) {
+        if (!is_object($object)) {
+            throw new \EJC\Exception\RepositoryException('no object given to repository');
+        }
         $objectArray = $object->toArray();
         $arrayToInsert = $this->prepareArray($objectArray);
         return $this->insert($arrayToInsert);
@@ -115,7 +118,10 @@ class AbstractRepository extends SqlRepository {
      * @param type $object
      * @return void
      */
-    public function remove(object $object) {
+    public function remove($object) {
+        if (!is_object($object)) {
+            throw new \EJC\Exception\RepositoryException('no object given to repository');
+        }        
         $this->delete($object->getId());
     }
 
@@ -124,7 +130,10 @@ class AbstractRepository extends SqlRepository {
      * 
      * @param object $object
      */
-    public function update(object $object) {
+    public function update($object) {
+        if (!is_object($object)) {
+            throw new \EJC\Exception\RepositoryException('no object given to repository');
+        }        
         $objectArray = $object->toArray();
         $arrayToInsert = $this->prepareArray($objectArray);
         $this->updateOneById($object->getId(), $arrayToInsert);

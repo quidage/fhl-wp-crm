@@ -67,13 +67,15 @@ class UserController extends AbstractController {
     }
     
     /**
-     * Aktualisiere die Daten des Users
+     * Aktualisiere die Daten des Users in DB und Session
      * 
      * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
      * @param \EJC\Model\User $user
      */
     public function updateAction(\EJC\Model\User $user) {
         $this->userRepository->update($user);
+        $_SESSION['user'] = serialize($user);
+        $this->forward('User', 'showSettings');
     }
     
     /**

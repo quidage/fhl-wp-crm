@@ -84,7 +84,7 @@ class Request {
                         $repository = new $repositoryClassName();
                         if (is_array($paramValues)) {
 
-                            // Finde das entsprechende Ojekt in der DB
+                            // Finde das entsprechende Objekt in der DB
                             $object = $repository->findById(intval($paramValues['id']));
                             unset($paramValues['id']);
 
@@ -101,7 +101,7 @@ class Request {
                                 }
                             }
                         }
-                        $this->params[] = $object;
+                        $this->params = array_merge(array($object), $this->params);
                         unset($this->params[$paramName]);
                     } catch (\EJC\Exception\ClassLoaderException $e) {
                         // Es existiert kein Model zu dem Paramter

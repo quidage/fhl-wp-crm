@@ -9,8 +9,8 @@
 
 <h1>Benutzerdaten ändern</h1>
 
-<form name="edit" method="post" action="<?php $this->getUrl('user', 'edit'); ?>">
-    <input type="hidden" name="user[id]" value="<?php $this->user->getId() ?>">
+<form name="edit" method="post" action="<?php $this->getUrl('user', 'update'); ?>">
+    <input type="hidden" name="user[id]" value="<?php echo $this->user->getId() ?>">
     <table>
         <tr>
                 <td>Vorname:</td>
