@@ -114,7 +114,11 @@ class Request {
         // Rufe default action auf, wenn controller und action nicht gesetzt
         if (empty($this->controller) && empty($this->action)) {
             $this->controller = 'User';
-            $this->action = 'showLogin';
+            if (isset($_SESSION)) {
+                $this->action = 'start';
+            } else {
+                $this->action = 'showLogin';
+            }
         }
     }
 
