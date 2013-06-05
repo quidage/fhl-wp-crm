@@ -1,47 +1,57 @@
-<?php
-/**
- * Default Layout fuer http-Aufrufe
- * 
- * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
- * @author Enrioc Lauterschlag <enrico.lauterschlag@web.de>
- */
-?>
 <!DOCTYPE html>
 <html>
-
+    <?php
+    /**
+     * Default Layout fuer http-Aufrufe
+     * 
+     * @todo Logout-Button
+     * 
+     * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+     * @author Enrioc Lauterschlag <enrico.lauterschlag@web.de>
+     */
+    ?>
     <head>
         <title><?php echo $this->title; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/screen.css" media="all" />
         <link rel="stylesheet" type="text/css" href="css/menue.css" media="all" />
-        <link href='http://fonts.googleapis.com/css?family=Voces' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Voces|Fugaz+One|Skranji|Carter+One|Orbitron' rel='stylesheet' type='text/css'>
         <script src="js/js-extends.js"></script>
         <script src="js/main.js"></script>
         <script src="js/js-test.js"></script>  
     </head>
-
     <body>
         <div id="wrap">
-            
+
             <div id="header">
+
+                <div id="logo">
+                    <p>FHL-WP-CRM</p>
+                </div>
 
                 <div id="menu">
                     <ul>
-                        
+
                         <li><?php $this->getLink('&uuml;bersicht', 'User', 'start'); ?></li>
                         <li><?php $this->getLink('Kunden', 'Customer', 'listByUser'); ?></li>
                         <li><?php $this->getLink('Projekte', 'Project', 'listByUser'); ?></li>
-                 
+
                     </ul>
                 </div>
-                
+
                 <div id="menu_config">
-                    <a href="<?php $this->getUrl('user', 'showSettings'); ?>"><img src="images/iconset/einstellungen.png" /></a>
+                    <a href="<?php $this->getUrl('user', 'showSettings'); ?>"><img src="images/iconset/gear.png" /> Einstellungen</a>
                 </div>
 
             </div>
 
             <div id="main-content">
+
+                <?php if (!empty($this->errors)): ?>
+                    <div class="errors">
+                        <?php echo $this->errors; ?>
+                    </div>   
+                <?php endif; ?>
 
                 <?php echo $this->template; ?>
 
@@ -54,8 +64,7 @@
                 </div>
 
                 <div id="copyright">
-                    <p>fhl-wp-crm Designed &amp; Coded by Christian Hansen, Julian
-                        Hilbers &amp; Enrico Lauterschlag</p>
+                    <p>fhl-wp-crm Designed &amp; Coded by Christian Hansen, Julian Hilbers &amp; Enrico Lauterschlag</p>
                 </div>
 
             </div>            
