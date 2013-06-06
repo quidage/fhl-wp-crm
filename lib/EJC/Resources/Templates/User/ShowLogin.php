@@ -1,22 +1,6 @@
-    
-
-<div id="loginform">
-    <form name="login" method="post" action="index.php?controller=user&action=login">
-
-
-        
-    </form>
-
+ <div id="loginform">
     <form name="login" method="post" action="<?php $this->getUrl('user', 'login'); ?>">
         <table>
-            <tr>
-                <td></td>
-                <td>
-                    <div class="errors">
-                        <?php echo $this->errors; ?>
-                    </div>    
-                </td>
-            </tr>
             <tr>
                 <td>Username:</td>
                 <td><input type="text" name="login[name]" /></td>
@@ -32,9 +16,3 @@
         </table>
     </form>
 </div>
-
-
-
-<br><br>
-
-<a href="css/css-elemente.html">Eine Übersicht aller CSS-Elemente</a>

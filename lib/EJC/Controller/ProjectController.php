@@ -41,6 +41,7 @@ class ProjectController extends AbstractController {
             $user = $this->getCurrentUser();
         }
         $projects = $this->projectRepository->findByUser($user);
+        $this->view->assign('title', 'Projekte');
         $this->view->assign('projects', $projects);
         $this->view->render();
     }

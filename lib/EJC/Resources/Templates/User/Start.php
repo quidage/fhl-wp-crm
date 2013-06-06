@@ -49,13 +49,10 @@
                 <tr>
                     <td><?php echo $task->getName(); ?></td>
                     <td><?php echo $task->getDescription(); ?></td>
-                    <td><?php $this->getLink('Details', 'Project', 'show', array('task[id]' => $task->getId())); ?></td>
+                    <td><?php $this->getLink('Details', 'Task', 'show', array('task[id]' => $task->getId())); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+    
 <?php endif; ?> 
-
-<br><br>
-
-<a href="css/css-elemente.html">Eine Übersicht aller CSS-Elemente</a>
