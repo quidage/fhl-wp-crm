@@ -91,6 +91,15 @@ class UserController extends AbstractController {
     }
 
     /**
+     * Das Passwort des Benutzers ändern
+     * 
+     * @return void
+     */
+    public function updatePasswordAction() {
+        $user = $this->getCurrentUser();
+    }
+    
+    /**
      * display page for login form
      * 
      * @return void

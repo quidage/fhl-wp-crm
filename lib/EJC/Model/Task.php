@@ -67,6 +67,15 @@ class Task extends AbstractModel {
     public function setStatus($status) {
         $this->status = $status;
     }
+    
+    /**
+     * Hole alle moeglichen Status fuer das Model 
+     * 
+     * @return array
+     */
+    public function getPossibleStatus() {
+        return array('Offen', 'Geschlossen');
+    }    
 
 }
 ?>

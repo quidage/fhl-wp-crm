@@ -78,6 +78,15 @@ class Project extends AbstractModel {
         $taskRepository = new \EJC\Repository\TaskRepository();
         return $taskRepository->findByParent_id($this->getId());
     }
+    
+    /**
+     * Hole alle moeglichen Status fuer das Model 
+     * 
+     * @return array
+     */
+    public function getPossibleStatus() {
+        return array('Offen', 'Geschlossen');
+    }
 
 }
 

@@ -75,6 +75,18 @@ class ProjectController extends AbstractController {
      */
     public function editAction(\EJC\Model\Project $project) {
         $this->view->assign('project', $project);
+        $this->view->render();
+    }
+    
+    /**
+     * Aktualisiere das Projekt
+     * 
+     * @param \EJC\Model\Project $project
+     * @return void
+     */
+    public function updateAction(\EJC\Model\Project $project) {
+        $this->projectRepository->update($project);
+        $this->forward('Project', 'listByUser');
     }
     
 }
