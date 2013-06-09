@@ -7,6 +7,9 @@
             <td>Name</td>
             <td>Stra&szlig;e</td>
             <td>Ort</td>
+            <td>Telefon/Fax</td>
+            <td>Email</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -16,6 +19,9 @@
                 <td><?php echo $customer->getName(); ?></td>
                 <td><?php echo $customer->getStreet(); ?></td>
                 <td><?php echo $customer->getZip() . " " . $customer->getCity(); ?></td> 
+                <td><?php echo $customer->getPhone() . "<br>" . $customer->getFax(); ?></td> 
+                <td><a href="mailto:<?php echo $customer->getEmail(); ?>"><?php echo $customer->getEmail(); ?></a></td> 
+                <td><?php $this->getLink('Bearbeiten', 'Customer', 'edit', array('customer[id]' => $customer->getId())); ?></td> 
             </tr>
         <?php endforeach; ?> 
     </tbody>

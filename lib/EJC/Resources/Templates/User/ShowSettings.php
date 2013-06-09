@@ -7,7 +7,7 @@
  */
 ?>
 
-<h1>Benutzereinstellungen von <?php echo $this->user->getName(); ?></h2>
+<h1>Benutzereinstellungen von <?php echo $this->user->getName(); ?></h1>
 
 <table>
     <caption>Ihre Daten</caption>
