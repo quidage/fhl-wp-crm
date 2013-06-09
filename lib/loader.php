@@ -1,12 +1,15 @@
 <?php
 
 /**
- * Autoloader for classes
- * path defined by namespace
+ * Autoloader
+ * 
+ * der Klassenpfad definiert sich ueber den Namespace
  * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
  * 
- * @param type $className
+ * @param string $className
+ * @return void
  */
 function __autoload($className) {
     $classFile = __AppRoot__ . '/lib/' . str_replace('\\', '/', $className) . '.php';

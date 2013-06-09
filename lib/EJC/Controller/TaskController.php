@@ -11,6 +11,7 @@ namespace EJC\Controller;
 class TaskController extends AbstractController {
     
     /**
+     * Zeige die Detailansicht zu einem Tasks
      * 
      * @param \EJC\Model\Task $task
      */

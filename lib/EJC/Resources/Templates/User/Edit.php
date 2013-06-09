@@ -30,7 +30,7 @@
         </tr>
         <tr>
                 <td>Neues Passwort:</td>
-                <td><input type="password" name="user[password]" /></td>
+                <td><input type="password" name="new_password" /></td>
         </tr>
         <tr>
                 <td colspan="2" style="text-align: right"><input

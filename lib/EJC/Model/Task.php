@@ -16,7 +16,14 @@ class Task extends AbstractModel {
      * @var string
      */
     protected $description;
-    
+
+    /**
+     * Status des Tasks
+     * 
+     * @var string
+     */
+    protected $status;
+
     /**
      * Sorge dafuer, dass die Eigenschaften die richtigen Datentypen bekommen
      * @return void
@@ -43,6 +50,23 @@ class Task extends AbstractModel {
         $this->description = trim($description);
     }
 
-}
+    /**
+     * Hole den Status
+     * 
+     * @return string
+     */
+    public function getStatus() {
+        return $this->status;
+    }
 
+    /**
+     * Setze den Status
+     * 
+     * @param string $status
+     */
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
+}
 ?>

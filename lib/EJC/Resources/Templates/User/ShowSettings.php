@@ -9,7 +9,6 @@
 
 <h1>Benutzereinstellungen von <?php echo $this->user->getName(); ?></h2>
 
-
 <table>
     <caption>Ihre Daten</caption>
     <tbody>
@@ -27,7 +26,7 @@
         </tr>
         <tr>
             <td>Password:</td>
-            <td>******</td>
+            <td>********</td>
         </tr>
         <tr>
         <td colspan="2"><?php $this->getLink('Daten bearbeiten', 'User', 'edit', array('user[id]' => $this->user->getID())); ?></td>
