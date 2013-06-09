@@ -97,6 +97,16 @@ class AbstractModel {
     }
     
     /**
+     * Setze die ID des Eltern-Datensatzes
+     * 
+     * @param int
+     * @return void
+     */
+    public function setParent_id($parent_id) {
+        $this->parent_id = intval($parent_id);
+    }
+    
+    /**
      * Hole den Zeitpunkt der Erstellung
      * 
      * @return \DateTime

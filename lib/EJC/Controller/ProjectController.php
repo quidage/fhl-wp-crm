@@ -65,6 +65,7 @@ class ProjectController extends AbstractController {
      */
     public function createAction(\EJC\Model\Project $project) {
         $this->projectRepository->add($project);
+        $this->forward('Project', 'listByUser');
     }
     
     /**
@@ -75,6 +76,17 @@ class ProjectController extends AbstractController {
      */
     public function editAction(\EJC\Model\Project $project) {
         $this->view->assign('project', $project);
+        $this->view->render();
+    }
+    
+    /**
+     * Formalar fuer ein neues Project
+     * 
+     * @return void
+     */
+    public function newAction() {
+        $this->view->assign('customers', $this->getCurrentUser()->getCustomers());
+        $this->view->assign('newProject', new \EJC\Model\Project());
         $this->view->render();
     }
     

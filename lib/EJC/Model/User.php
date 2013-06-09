@@ -183,6 +183,17 @@ class User extends AbstractModel {
     public function setAdmin($admin) {
         $this->admin = filter_var($admin, FILTER_VALIDATE_BOOLEAN);
     }
+    
+    /**
+     * Hole die Customer zum User
+     * 
+     * @return array
+     */
+    public function getCustomers() {
+        $customerRepository = new \EJC\Repository\CustomerRepository();
+        return $customerRepository->findByParent_id($this->getId());
+    }
+    
 }
 
 ?>

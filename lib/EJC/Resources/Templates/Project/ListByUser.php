@@ -1,5 +1,7 @@
 <h1>Projekte</h1>
 
+<?php $this->getLink('Ein neues Projekt erstellen', 'Project', 'new'); ?>
+
 <table width="100%">
     <thead>
         <tr>
