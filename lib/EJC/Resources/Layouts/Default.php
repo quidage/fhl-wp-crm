@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+
     <?php
     /**
      * Default Layout fuer http-Aufrufe
@@ -12,7 +13,7 @@
     ?>
     <head>
         <title><?php echo $this->title; ?></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/screen.css" media="all" />
         <link rel="stylesheet" type="text/css" href="css/menue.css" media="all" />
         <link href='http://fonts.googleapis.com/css?family=Voces|Fugaz+One|Skranji|Carter+One|Orbitron' rel='stylesheet' type='text/css'>
