@@ -12,7 +12,7 @@
     ?>
     <head>
         <title><?php echo $this->title; ?></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <link rel="stylesheet" type="text/css" href="css/screen.css" media="all" />
         <link rel="stylesheet" type="text/css" href="css/menue.css" media="all" />
         <link href='http://fonts.googleapis.com/css?family=Voces|Fugaz+One|Skranji|Carter+One|Orbitron' rel='stylesheet' type='text/css'>
@@ -30,17 +30,23 @@
                 </div>
 
                 <div id="menu">
-                    <ul>
-
-                        <li><?php $this->getLink('&uuml;bersicht', 'User', 'start'); ?></li>
-                        <li><?php $this->getLink('Kunden', 'Customer', 'listByUser'); ?></li>
-                        <li><?php $this->getLink('Projekte', 'Project', 'listByUser'); ?></li>
-
-                    </ul>
+                    <?php
+                    if(isset($_SESSION['login'])){ ?>
+	                    <ul>
+	
+	                        <li><?php $this->getLink('&uuml;bersicht', 'User', 'start'); ?></li>
+	                        <li><?php $this->getLink('Kunden', 'Customer', 'listByUser'); ?></li>
+	                        <li><?php $this->getLink('Projekte', 'Project', 'listByUser'); ?></li>
+	
+	                    </ul>
+                    <?php } ?>
                 </div>
-
+				
                 <div id="menu_config">
-                    <a href="<?php $this->getUrl('user', 'showSettings'); ?>"><img src="images/iconset/gear.png" /> Einstellungen</a>
+                    <?php
+                    if(isset($_SESSION['login'])){ ?>
+                    	<a href="<?php $this->getUrl('user', 'showSettings'); ?>"><img src="images/iconset/gear.png" /> Einstellungen</a>
+                    <?php } ?>
                 </div>
 
             </div>
@@ -58,10 +64,6 @@
             </div>
 
             <div id="footer">
-
-                <div id="footer-content">
-                    <p>Footer</p>
-                </div>
 
                 <div id="copyright">
                     <p>fhl-wp-crm Designed &amp; Coded by Christian Hansen, Julian Hilbers &amp; Enrico Lauterschlag</p>
