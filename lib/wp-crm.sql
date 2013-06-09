@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 04. Jun 2013 um 20:45
+-- Erstellungszeit: 09. Jun 2013 um 14:28
 -- Server Version: 5.5.31-0ubuntu0.13.04.1
 -- PHP-Version: 5.4.9-4ubuntu2
 
@@ -130,4 +130,4 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `parent_id`, `cr_date`, `tstamp`, `deleted`, `name`, `password`, `last_login`, `first_name`, `last_name`, `admin`, `email`) VALUES
 (1, 0, '2013-04-16 00:00:00', '2013-06-01 12:11:53', 0, 'hans', 'wurst', '0000-00-00 00:00:00', 'Hans', 'Wurst', 0, 'hans.wurst@bockwurstwasser.de'),
-(2, 0, '2013-04-19 16:59:43', '2013-06-01 12:13:45', 0, 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', '0000-00-00 00:00:00', 'Max', 'Mustermann', 1, 'max.mustermann@online.de');
+(2, 0, '2013-04-19 16:59:43', '2013-06-04 20:00:53', 0, 'admin', 'd41d8cd98f00b204e9800998ecf8427e', '2013-06-04 22:00:53', 'Maximus', 'Mustermann', 1, 'max.mustermann@online.de');
