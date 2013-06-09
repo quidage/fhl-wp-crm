@@ -34,4 +34,11 @@
     </tbody>
 </table>
 
-<a class="std-btn" href="#">Klick mich</a>
+<?php
+// TODO Formular zum Erstellen eines authKey + Authenfizierung im Request, wenn wenn authKey gesetzt ist
+// Api Aufrufe
+?>
+
+
+<h2>Export</h2>
+<?php $this->getLink('Kundendaten f&uuml;r Backup als XML', 'Api', 'get', array(), '', '_blank'); ?>

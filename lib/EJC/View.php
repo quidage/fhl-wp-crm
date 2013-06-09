@@ -158,13 +158,14 @@ class View {
      * Generiert über die Methode getUrl einen kompletten a Tag
 	 * 
 	 * @param string $title
-	 * @param string $ident			// Klasse als .Klassenname und Id als #id
      * @param string $controller
      * @param string $action
 	 * @param array $params
+     * @param string $ident			// Klasse als .Klassenname und Id als #id
+	 * @param target $target
      * @return void
      */
-    public function getLink($title, $controller, $action, $params = array(), $ident = '') {
+    public function getLink($title, $controller, $action, $params = array(), $ident = '', $target = '') {
     	$fchar = substr($ident, 0, 1);
 		$iVal = substr($ident, 1, strlen($ident));
 		
@@ -172,7 +173,7 @@ class View {
 		$this->getUrl($controller, $action, $params);
 		$url = ob_get_clean();
 		
-		echo '<a '.($ident !== '' ? ( $fchar == '#' ? 'id' : 'class' ).'="'.$iVal.'".' : '').' href="'.$url.'">'.$title.'</a>';
+		echo '<a '.($ident !== '' ? ( $fchar == '#' ? 'id' : 'class' ).'="'.$iVal.'".' : '').' href="'.$url.'"'.($target !== '' ? ' target="'.$target.'"':'').'>'.$title.'</a>';
     }
     
     /**

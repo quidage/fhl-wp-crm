@@ -9,7 +9,7 @@ namespace EJC\Controller;
  * @package wp-crm
  */
 class UserController extends AbstractController {
-    
+
     /**
      * Zeige die Uebersichtsseite des Users
      * 
@@ -23,7 +23,7 @@ class UserController extends AbstractController {
         $this->view->assign('openTasks', $openTasks);
         $this->view->render();
     }
-    
+
     /**
      * list all users
      * 
@@ -34,7 +34,7 @@ class UserController extends AbstractController {
         $this->view->assign('users', $users);
         $this->view->render();
     }
-    
+
     /**
      * Anzeigen der Benutzereinstellungen
      * 
@@ -45,7 +45,7 @@ class UserController extends AbstractController {
         $this->view->assign('user', $this->getCurrentUser());
         $this->view->render();
     }
-    
+
     /**
      * create a new user
      * 
@@ -54,7 +54,7 @@ class UserController extends AbstractController {
     public function createAction(\EJC\Model\User $user) {
         $this->userRepository->add($user);
     }
-    
+
     /**
      * Anzeigen des Formulars zum Bearbeiten der Benutzereinstellungen
      * 
@@ -65,7 +65,7 @@ class UserController extends AbstractController {
         $this->view->assign('user', $user);
         $this->view->render();
     }
-    
+
     /**
      * Aktualisiere die Daten des Users in DB und Session
      * 
@@ -77,31 +77,31 @@ class UserController extends AbstractController {
         $_SESSION['user'] = serialize($user);
         $this->forward('User', 'showSettings');
     }
-    
+
     /**
      * display page for login form
      * 
      * @return void
      */
     public function showLoginAction() {
-        $this->view->assign('title','Login');
+        $this->view->assign('title', 'Login');
         $this->view->render();
     }
-    
+
     /**
      * Logge den User ein
      * 
      * @return void
      */
     public function loginAction(array $login) {
-        
+
         // Hole passenden User aus dem Repository
         try {
             $user = $this->userRepository->findOneByName($login['name']);
         } catch (EJC\Exception\RepositoryException $e) {
             $user = NULL;
         }
-               
+
         // Wenn User nicht gefunden, gib Fehlermeldung aus
         if ($user === NULL) {
             $this->view->addErrorMessage('User nicht gefunden');
@@ -118,10 +118,11 @@ class UserController extends AbstractController {
                 // Falsches Passwort - Fehlermeldung anzeigen
                 $this->view->addErrorMessage('Falsches Passwort');
                 $this->forward('User', 'showLogin');
-                return;                
+                return;
             }
         }
-    } // public function loginAction(array $login)
-    
+    }
+
 }
+
 ?>
