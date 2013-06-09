@@ -75,7 +75,7 @@ class Request {
                                 call_user_func_array(array($object, 'set' . ucwords($paramValueKey)), array($paramValueValue));
                             }
                         }
-                        $this->params[] = $object;
+                        $this->params = array_merge(array($object), $this->params);
                         unset($this->params[$paramName]);                        
                     } 
                 } else {

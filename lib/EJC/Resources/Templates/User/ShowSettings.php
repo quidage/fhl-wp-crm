@@ -39,6 +39,10 @@
 // Api Aufrufe
 ?>
 
+<?php if ($this->user->getAdmin()): ?>
+<h2>Admin</h2>
+<?php $this->getLink('Neuen Benutzer erstellen', 'User', 'new'); ?>
+<?php endif; ?>
 
 <h2>Export</h2>
 <?php $this->getLink('Kundendaten f&uuml;r Backup als XML', 'Api', 'get', array(), '', '_blank'); ?>

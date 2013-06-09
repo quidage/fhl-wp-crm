@@ -46,14 +46,34 @@ class UserController extends AbstractController {
         $this->view->assign('user', $this->getCurrentUser());
         $this->view->render();
     }
+    
+    /**
+     * Zeige das Formular fuer das Erstellen eines neuen Users
+     * 
+     * @return void
+     */
+    public function newAction() {
+        $newUser = new \EJC\Model\User();
+        $this->view->assign('user', $newUser);
+        $this->view->render();
+    }
 
     /**
-     * create a new user
+     * Erstelle einen neuen User
      * 
      * @param \EJC\Model\User $user
      */
-    public function createAction(\EJC\Model\User $user) {
-        $this->userRepository->add($user);
+    public function createAction(\EJC\Model\User $newUser) {
+        $params = $this->request->getParams();
+        if (md5($params['passwordConfirm']) === $newUser->getPassword()) {
+            $this->userRepository->add($newUser);
+            $this->forward('User', 'showSettings');
+        } elseif(empty($params['passwordConfirm'])) {
+            $this->view->addErrorMessage('Geben Sie ein Passwort an');
+        } else {
+            $this->view->addErrorMessage('Die Passw&ouml;rter stimmen nicht &uuml;berein');
+        } 
+        $this->forward('User', 'new', array('newUser' => $newUser));
     }
 
     /**
@@ -85,7 +105,7 @@ class UserController extends AbstractController {
             $this->forward('User', 'edit', array('user' => $user));
             return;
         }
-        $user->setPassword(md5($params['newPassword']));
+        $user->setPassword($params['newPassword']);
         $this->userRepository->update($user);
         $_SESSION['user'] = serialize($user);
         $this->forward('User', 'showSettings');
