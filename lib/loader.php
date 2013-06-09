@@ -18,7 +18,7 @@ function __autoload($className) {
     if (file_exists($classFile)) {
         require_once $classFile;
     } else {
-        throw new \EJC\Exception\ClassLoaderException('Class "' . $classFile . '" no found', 1366377452);
+        throw new \EJC\Exception\ClassLoaderException('Class "' . $classFile . '" not found', 1366377452);
     }
 }
 

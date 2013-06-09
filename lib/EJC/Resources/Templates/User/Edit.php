@@ -26,11 +26,11 @@
         </tr>
         <tr>
                 <td>Altes Passwort:</td>
-                <td><input type="password" name="old_password" /></td>
+                <td><input type="password" name="oldPassword" /></td>
         </tr>
         <tr>
                 <td>Neues Passwort:</td>
-                <td><input type="password" name="new_password" /></td>
+                <td><input type="password" name="newPassword" /></td>
         </tr>
         <tr>
                 <td colspan="2" style="text-align: right"><input

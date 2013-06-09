@@ -73,6 +73,18 @@ class UserController extends AbstractController {
      * @param \EJC\Model\User $user
      */
     public function updateAction(\EJC\Model\User $user) {
+        $params = $this->request->getParams();
+        if (md5($params['oldPassword']) !== $user->getPassword()) {
+            $this->view->addErrorMessage('Sie haben ihr aktuelles Passwort falsch angegeben');
+            $this->forward('User', 'edit', array('user' => $user)); 
+            return;
+        }
+        if (empty($params['newPassword'])) {
+            $this->view->addErrorMessage('Geben Sie ein neues Passwort an');
+            $this->forward('User', 'edit', array('user' => $user));
+            return;
+        }
+        $user->setPassword(md5($params['newPassword']));
         $this->userRepository->update($user);
         $_SESSION['user'] = serialize($user);
         $this->forward('User', 'showSettings');

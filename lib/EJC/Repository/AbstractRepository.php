@@ -66,7 +66,7 @@ class AbstractRepository extends SqlRepository {
             $property = strtolower(substr($name, 9));
             return $this->findOneByProperty($property, $arguments[0]);
         } else {
-            throw new \Exception('method "' . $name . '" not available in this repository', 1366208633);
+        throw new \EJC\Exception\RepositoryException('method "' . $name . '" not available in this repository', 1366208633);
         }
     } // public function __call($name, $arguments)
 
@@ -158,7 +158,7 @@ class AbstractRepository extends SqlRepository {
             }
         }
         return $arrayToInsert;
-    } // protected function prepareArray($arrayToPrepare)
+    }
 
 }
 

@@ -21,14 +21,13 @@ class Request {
      * @return void
      */
     public function __construct($action = NULL, $controller = NULL, array $params = array(), View $view = NULL) {
-        
+
         if ($controller !== NULL && $action !== NULL) {
             // Request wird ueber forward-Funktion ausgeloest
             $this->controller = $controller;
             $this->action = $action;
             $this->params = $params;
             $this->view = $view;
-            
         } else {
 
             // HTTP-Request
@@ -40,11 +39,11 @@ class Request {
             $this->action = \EJC\Helper\StringHelper::cleanUp($getParams['action']);
             unset($getParams['controller']);
             unset($getParams['action']);
-            
+
             // Pruefe ob der User eingeloggt ist, wenn es sich nicht um die login-Action handelt
             if (strtolower($this->action) !== 'login') {
                 // Wenn User nicht eingeloggt, schicke ihn auf die Login-Seite
-                if (!isset($_SESSION[login]) || $_SESSION['login'] < time() -1800) {
+                if (!isset($_SESSION[login]) || $_SESSION['login'] < time() - 1800) {
                     $this->controller = 'User';
                     $this->action = 'showLogin';
                     $this->params = array();
@@ -53,7 +52,8 @@ class Request {
                     $_SESSION['login'] = time();
                 }
             }
-            
+
+            // Fuege GET- und POST-Paramenter zusammen
             $this->params = array_merge($getParams, $postParams);
 
             // Hole den Typen des uebergebenen Objekts
@@ -63,24 +63,27 @@ class Request {
                 // Parameternamens "new" ist
                 if (substr($paramName, 0, 3) === 'new') {
 
+                    // Schaue ob ein Model exisitert, wenn ja, dann erstelle neues Objekt
                     $newObjectClassName = '\\EJC\\Model\\' . ucWords(substr($paramName, 3));
-                    $object = new $newObjectClassName();
-
-                    // Setze die Eigenschaften fuer das neue Objekt, welche in 
-                    // den Paramtern uebergeben werden
-                    if (is_array($paramValues)) {
-                        foreach ($paramValues AS $paramValueKey => $paramValueValue) {
-                            call_user_func_array(array($object, 'set' . ucwords($paramValueKey)), array($paramValueValue));
+                    $classFile = __AppRoot__ . '/lib/' . str_replace('\\', '/', $newObjectClassName) . '.php';
+                    if (file_exists($classFile)) {
+                        $object = new $newObjectClassName();
+                        // Setze die Eigenschaften fuer das neue Objekt, welche in 
+                        // den Paramtern uebergeben werden
+                        if (is_array($paramValues)) {
+                            foreach ($paramValues AS $paramValueKey => $paramValueValue) {
+                                call_user_func_array(array($object, 'set' . ucwords($paramValueKey)), array($paramValueValue));
+                            }
                         }
-                    }
-                    $this->params[] = $object;
-                    unset($this->params[$paramName]);
+                        $this->params[] = $object;
+                        unset($this->params[$paramName]);                        
+                    } 
                 } else {
                     // Pruefe ob ein Gegenpart zu dem Request im Repository existiert
                     // und lade diesen
                     $repositoryClassName = '\\EJC\\Repository\\' . ucWords($paramName) . 'Repository';
                     try {
-
+                        // Erstelle ein Objekt der Repository-Klasse
                         $repository = new $repositoryClassName();
                         if (is_array($paramValues)) {
 
@@ -89,7 +92,7 @@ class Request {
                             unset($paramValues['id']);
 
                             if ($object === NULL) {
-                                throw new Exception\RepositoryException('object has no counterpart in repository', 1366378567);
+                                throw new \EJC\Exception\RepositoryException('object has no counterpart in repository', 1366378567);
                             } else {
                                 if (is_array($paramValues)) {
 
@@ -104,8 +107,10 @@ class Request {
                         $this->params = array_merge(array($object), $this->params);
                         unset($this->params[$paramName]);
                     } catch (\EJC\Exception\ClassLoaderException $e) {
-                        // Es existiert kein Model zu dem Paramter
-                        // throw $e;
+                        // Es existiert kein Model zu dem Parameter
+                        // tue weiter nichts und uebergebe den Paramter
+                        //throw $e;
+                        
                     }
                 }
             }
