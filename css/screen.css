@@ -283,6 +283,7 @@ input[type="submit"], input[type="reset"] {
 
 #main-content {
         display: block;
+        width: 860px;
         min-height: 350px;
         float: left;
         margin-top: 10px;

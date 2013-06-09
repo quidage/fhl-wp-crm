@@ -1,6 +1,6 @@
 <h1>Kunden</h1>
 
-<table>
+<table width="100%">
     <thead>
         <tr>
             <td>Kunden-Nr.</td>

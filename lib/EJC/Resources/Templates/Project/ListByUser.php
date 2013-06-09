@@ -1,6 +1,6 @@
 <h1>Projekte</h1>
 
-<table>
+<table width="100%">
     <thead>
         <tr>
             <td>Name</td>
