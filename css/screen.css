@@ -48,14 +48,16 @@ p{
         text-align:justify;
 }
 
-p, dl, hr, ol, ul, pre, table, address, fieldset, figure, iframe {
+p, dl, hr, ol, ul, pre, address, fieldset, figure, iframe {
     margin-bottom:20px;
     font-weight:normal;
 }
 
 img {
 	padding:10px;
+	margin-right:20px;
 	border:1px solid #ccc;
+	float:left;
 }
 
 a img {
@@ -130,8 +132,7 @@ th, td {
 */
 
 .button-link {
-    padding: 10px 15px;
-    margin:20px;
+    padding: 5px 8px;
     color:#fff;
     font-weight:bold;
     text-decoration:none;
@@ -191,7 +192,7 @@ form table {
 
 form table td {
         vertical-align:middle;
-        padding:10px;
+        padding:5px 10px 5px 10px;
         background:#fff;
         border-radius:0 0 0 0;
 }
@@ -215,7 +216,6 @@ input[type="text"], input[type="password"], textarea {
 
 input[type="submit"], input[type="reset"] {
         cursor:pointer;
-        margin:10px 0px 10px 10px;
 }
 
 #std-overlay {
@@ -290,6 +290,12 @@ input[type="submit"], input[type="reset"] {
         padding: 0 20px 20px;
 }
 
+#loginform{
+	postition:absolute;
+	margin-top:40px;
+	padding:20px 20px 20px 0;
+}
+
 /*
 *Footer
 */
@@ -299,10 +305,6 @@ input[type="submit"], input[type="reset"] {
         position: relative;
         color:#fff;
         background-color:#2688bc;
-}
-
-#footer-content{
-        padding:5px 0px 0px 20px;
 }
 
 #copyright{

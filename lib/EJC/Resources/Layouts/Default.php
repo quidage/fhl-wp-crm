@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+
     <?php
     /**
      * Default Layout fuer http-Aufrufe
@@ -30,17 +31,23 @@
                 </div>
 
                 <div id="menu">
-                    <ul>
-
-                        <li><?php $this->getLink('&uuml;bersicht', 'User', 'start'); ?></li>
-                        <li><?php $this->getLink('Kunden', 'Customer', 'listByUser'); ?></li>
-                        <li><?php $this->getLink('Projekte', 'Project', 'listByUser'); ?></li>
-
-                    </ul>
+                    <?php
+                    if(isset($_SESSION['login'])){ ?>
+	                    <ul>
+	
+	                        <li><?php $this->getLink('&uuml;bersicht', 'User', 'start'); ?></li>
+	                        <li><?php $this->getLink('Kunden', 'Customer', 'listByUser'); ?></li>
+	                        <li><?php $this->getLink('Projekte', 'Project', 'listByUser'); ?></li>
+	
+	                    </ul>
+                    <?php } ?>
                 </div>
-
+				
                 <div id="menu_config">
-                    <a href="<?php $this->getUrl('user', 'showSettings'); ?>"><img src="images/iconset/gear.png" /> Einstellungen</a>
+                    <?php
+                    if(isset($_SESSION['login'])){ ?>
+                    	<a href="<?php $this->getUrl('user', 'showSettings'); ?>"><img src="images/iconset/gear.png" /> Einstellungen</a>
+                    <?php } ?>
                 </div>
 
             </div>
@@ -58,10 +65,6 @@
             </div>
 
             <div id="footer">
-
-                <div id="footer-content">
-                    <p>Footer</p>
-                </div>
 
                 <div id="copyright">
                     <p>fhl-wp-crm Designed &amp; Coded by Christian Hansen, Julian Hilbers &amp; Enrico Lauterschlag</p>

@@ -2,6 +2,7 @@
 
 <table width="100%">
     <thead>
+    	<caption>Kundendaten</caption>
         <tr>
             <td>Kunden-Nr.</td>
             <td>Name</td>

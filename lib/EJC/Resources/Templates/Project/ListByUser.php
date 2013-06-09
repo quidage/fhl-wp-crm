@@ -4,6 +4,7 @@
 
 <table width="100%">
     <thead>
+        <caption>Projektdaten</caption>
         <tr>
             <td>Name</td>
             <td>Beschreibung</td>
