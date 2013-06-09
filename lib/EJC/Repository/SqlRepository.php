@@ -30,7 +30,7 @@ class SqlRepository {
 	 * @return void
 	 */
 	public function __construct() {
-        include __AppRoot__ . '/lib/config.php';
+        include APPROOT . '/lib/config.php';
 		$this->mysqli = new \mysqli($config['db_host'], $config['db_user'], $config['db_password'], $config['db_name']);
 		$this->mysqli->query("SET NAMES 'utf8';");
 	}

@@ -1,13 +1,13 @@
  <?php
 /*
- * Template für die Startseite + Login-Formular
+ * Template fï¿½r die Startseite + Login-Formular
  *  
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
 ?>
  
- <h1>Für Freelancer und Selbstständige</h1>
+ <h1>F&uuml;r Freelancer und Selbstst&auml;ndige</h1>
  <p>Zeitsparen bei der Kunden- und Projektverwaltung</p>
  <a href="#" class="button-link">Kostenlos registrieren</a>
  

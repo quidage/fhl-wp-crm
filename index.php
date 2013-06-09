@@ -11,10 +11,10 @@
 session_start();
 
 // Definiere Konstanten
-define(__AppRoot__, dirname(__FILE__));
+define(APPROOT, dirname(__FILE__));
 
 // Lade den Autoloader
-require_once __AppRoot__ . '/lib/loader.php';
+require_once APPROOT . '/lib/loader.php';
 
 // Instanziere den Request
 $request = new \EJC\Request();

@@ -103,7 +103,7 @@ class View {
      * @return void
      */
     public function initPaths() {
-        $this->resourcesPath = __AppRoot__ . '/lib/EJC/Resources';
+        $this->resourcesPath = APPROOT . '/lib/EJC/Resources';
         $this->templatesPath = $this->resourcesPath .  '/Templates/';
         $this->layoutsPath = $this->resourcesPath .  '/Layouts/';        
         $this->partialsPath = $this->resourcesPath .  '/Partials/';        

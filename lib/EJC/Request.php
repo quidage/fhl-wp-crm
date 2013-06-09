@@ -65,7 +65,7 @@ class Request {
 
                     // Schaue ob ein Model exisitert, wenn ja, dann erstelle neues Objekt
                     $newObjectClassName = '\\EJC\\Model\\' . ucWords(substr($paramName, 3));
-                    $classFile = __AppRoot__ . '/lib/' . str_replace('\\', '/', $newObjectClassName) . '.php';
+                    $classFile = APPROOT . '/lib/' . str_replace('\\', '/', $newObjectClassName) . '.php';
                     if (file_exists($classFile)) {
                         $object = new $newObjectClassName();
                         // Setze die Eigenschaften fuer das neue Objekt, welche in 

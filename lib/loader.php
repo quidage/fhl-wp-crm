@@ -12,7 +12,7 @@
  * @return void
  */
 function __autoload($className) {
-    $classFile = __AppRoot__ . '/lib/' . str_replace('\\', '/', $className) . '.php';
+    $classFile = APPROOT . '/lib/' . str_replace('\\', '/', $className) . '.php';
     // TODO catch file not found
     
     if (file_exists($classFile)) {
