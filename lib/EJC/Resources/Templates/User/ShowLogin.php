@@ -1,6 +1,6 @@
  <?php
 /*
- * Template f�r die Startseite + Login-Formular
+ * Template f&uuml;r die Startseite + Login-Formular
  *  
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm

@@ -1,6 +1,6 @@
 <?php
 /*
- * View für die Benutzereistellungen
+ * View f&uuml;r die Benutzereistellungen
  * 
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm

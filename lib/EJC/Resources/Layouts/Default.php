@@ -13,10 +13,10 @@
     ?>
     <head>
         <title><?php echo $this->title; ?></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="css/screen.css" media="all" />
         <link rel="stylesheet" type="text/css" href="css/menue.css" media="all" />
-        <link href='http://fonts.googleapis.com/css?family=Voces|Fugaz+One|Skranji|Carter+One|Orbitron' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Voces' rel='stylesheet' type='text/css' />
         <script src="js/js-extends.js"></script>
         <script src="js/main.js"></script>
         <script src="js/js-test.js"></script>  
@@ -35,7 +35,7 @@
                     if(isset($_SESSION['login'])){ ?>
 	                    <ul>
 	
-	                        <li><?php $this->getLink('&uuml;bersicht', 'User', 'start'); ?></li>
+	                        <li><?php $this->getLink('&Uuml;bersicht', 'User', 'start'); ?></li>
 	                        <li><?php $this->getLink('Kunden', 'Customer', 'listByUser'); ?></li>
 	                        <li><?php $this->getLink('Projekte', 'Project', 'listByUser'); ?></li>
 	

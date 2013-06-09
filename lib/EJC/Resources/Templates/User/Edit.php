@@ -1,13 +1,13 @@
 <?php
 /*
- * Formular für die Änderung der Benutzerdaten 
+ * Formular f&uuml;r die &Auml;nderung der Benutzerdaten 
  * 
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
 ?>
 
-<h1>Benutzerdaten ändern</h1>
+<h1>Benutzerdaten &Auml;ndern</h1>
 
 <form name="edit" method="post" action="<?php $this->getUrl('user', 'update'); ?>">
     <input type="hidden" name="user[id]" value="<?php echo $this->user->getId() ?>">

@@ -155,7 +155,7 @@ class View {
 
     /**
      * @author Julian Hilbers
-     * Generiert über die Methode getUrl einen kompletten a Tag
+     * Generiert &uuml;ber die Methode getUrl einen kompletten a Tag
 	 * 
 	 * @param string $title
      * @param string $controller
@@ -206,7 +206,7 @@ class View {
     }
     
     /**
-     * Füge der Ausgabe einen neuen Fehler hinzu
+     * F&uuml;ge der Ausgabe einen neuen Fehler hinzu
      * 
      * @param type $message
      */
