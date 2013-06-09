@@ -53,6 +53,9 @@ class UserController extends AbstractController {
      * @return void
      */
     public function newAction() {
+        // Wenn es sich nicht um einen Admin handelt abbrechen
+        if (!$this->getCurrentUser()->getAdmin()) exit;
+        
         $newUser = new \EJC\Model\User();
         $this->view->assign('user', $newUser);
         $this->view->render();
@@ -64,6 +67,9 @@ class UserController extends AbstractController {
      * @param \EJC\Model\User $user
      */
     public function createAction(\EJC\Model\User $newUser) {
+        // Wenn es sich nicht um einen Admin handelt abbrechen
+        if (!$this->getCurrentUser()->getAdmin()) exit;
+        
         $params = $this->request->getParams();
         if (md5($params['passwordConfirm']) === $newUser->getPassword()) {
             $this->userRepository->add($newUser);
