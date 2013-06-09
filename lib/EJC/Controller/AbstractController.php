@@ -6,6 +6,7 @@ namespace EJC\Controller;
  * Allgemeine Controller-Methoden
  *
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
 class AbstractController {
