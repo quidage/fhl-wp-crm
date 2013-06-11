@@ -46,7 +46,13 @@
                 <div id="menu_config">
                     <?php
                     if(isset($_SESSION['login'])){ ?>
-                    	<a href="<?php $this->getUrl('user', 'showSettings'); ?>"><img src="images/iconset/gear.png" /> Einstellungen</a>
+                    	<ul>
+                    		<li><img src="images/config.png" height="32" />
+                    			<ul>
+                    				<li><a href="<?php $this->getUrl('user', 'showSettings'); ?>">Einstellungen</a></li>
+                    				<li><a href="#">Log out</a></li>
+                    			</ul></li>
+                    	</ul>
                     <?php } ?>
                 </div>
 
