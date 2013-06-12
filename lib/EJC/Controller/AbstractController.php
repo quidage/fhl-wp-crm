@@ -4,6 +4,9 @@ namespace EJC\Controller;
 
 /**
  * Allgemeine Controller-Methoden
+ * 
+ * Initialisieren der Repositories und des Views
+ * Weiterleiten an andere Actions
  *
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>

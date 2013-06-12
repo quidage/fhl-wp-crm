@@ -9,18 +9,6 @@ namespace EJC\Controller;
  * @package wp-crm
  */
 class CustomerController extends AbstractController {
-
-    /**
-     * Zeige eine Liste aller Customer
-     * 
-     * @return void
-     */
-    public function listAction() {
-        $customers = $this->customerRepository->findAll();
-        $this->view->assign('customers', $customers);
-        $this->view->assign('title', 'Kundenliste');
-        $this->view->render();
-    }
     
     /**
      * Liste alle Customer zu einem User

@@ -7,33 +7,33 @@
  */
 echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' ?>
 
-<CUSTOMERS>
+<customers>
 <?php foreach ($this->customers AS $customer): ?>
-    <CUSTOMER>
-        <ID><?php echo $customer->getId(); ?></ID>
-        <NAME><?php echo $customer->getName(); ?></NAME>
-        <STREET><?php echo $customer->getStreet(); ?></STREET>
-        <ZIP><?php echo $customer->getZip(); ?></ZIP>
-        <CITY><?php echo $customer->getCity(); ?></CITY>
-        <PHONE><?php echo $customer->getPhone(); ?></PHONE>
-        <FAX><?php echo $customer->getFax(); ?></FAX>
-        <EMAIL><?php echo $customer->getEmail(); ?></EMAIL>
+    <customer>
+        <id><?php echo $customer->getId(); ?></id>
+        <name><?php echo $customer->getName(); ?></name>
+        <street><?php echo $customer->getStreet(); ?></street>
+        <zip><?php echo $customer->getZip(); ?></zip>
+        <city><?php echo $customer->getCity(); ?></city>
+        <phone><?php echo $customer->getPhone(); ?></phone>
+        <fax><?php echo $customer->getFax(); ?></fax>
+        <email><?php echo $customer->getEmail(); ?></email>
 <?php foreach($customer->getProjects() AS $project): ?>
-        <PROJECT>
-            <ID><?php echo $project->getId(); ?></ID>
-            <NAME><?php echo $project->getName(); ?></NAME>
-            <DESCRIPTION><?php echo $project->getDescription(); ?></DESCRIPTION>
-            <STATUS><?php echo $project->getStatus(); ?></STATUS>
+        <project>
+            <id><?php echo $project->getId(); ?></id>
+            <name><?php echo $project->getName(); ?></name>
+            <description><?php echo $project->getDescription(); ?></description>
+            <status><?php echo $project->getStatus(); ?></status>
 <?php foreach($project->getTasks() AS $task): ?>
-            <TASK>
-                <ID><?php echo $task->getId(); ?></ID>
-                <NAME><?php echo $task->getName(); ?></NAME>
-                <DESCRIPTION><?php echo $task->getDescription(); ?></DESCRIPTION>
-                <STATUS><?php echo $task->getStatus(); ?></STATUS>
-            </TASK>
+            <task>
+                <id><?php echo $task->getId(); ?></id>
+                <name><?php echo $task->getName(); ?></name>
+                <description><?php echo $task->getDescription(); ?></description>
+                <status><?php echo $task->getStatus(); ?></status>
+            </task>
 <?php endforeach; ?>
-        </PROJECT>
+        </project>
 <?php endforeach; ?>
-    </CUSTOMER>
+    </customer>
 <?php endforeach; ?>
-</CUSTOMERS>
+</customers>
