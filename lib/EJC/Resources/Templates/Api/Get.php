@@ -2,6 +2,8 @@
 /**
  * Template fuer XML-Ausgabe aller Kundendaten eines Users
  * 
+ * Kann fuer Backup oder export in andere Applikationen genutzt werden
+ * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */

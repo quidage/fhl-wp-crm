@@ -4,6 +4,10 @@ namespace EJC\Controller;
 
 /**
  * Controller fuer Api-Funktionen
+ * 
+ * Mit der Get-Methode kann koennen alle Daten des eingeloggten Users
+ * ausgegeben werden fuer ein Backup oder auch den Export in andere
+ * Applikationen
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
@@ -11,7 +15,7 @@ namespace EJC\Controller;
 class ApiController extends AbstractController {
 
     /**
-     * Gib XML-Baum aller Daten des Users zurueck
+     * Gib XML-Baum aller Daten des Users aus
      * 
      * @return void
      */

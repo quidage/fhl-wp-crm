@@ -4,6 +4,8 @@ namespace EJC\Controller;
 
 /**
  * Methoden fuer den Customer
+ * 
+ * Listen, Darstellen und Bearbeiten der Customer Daten
  *
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
@@ -67,8 +69,13 @@ class CustomerController extends AbstractController {
      * 
      * @return void
      */
-    public function newAction() {
-        
+    public function newAction(\EJC\Model\User $user = NULL) {
+        if ($user === NULL) {
+            $user = $this->getCurrentUser();
+        }
+        $this->view->assign('user', $user);
+        $this->view->assign('newCustomer', new \EJC\Model\Customer());
+        $this->view->render();
     }
     
     /**
@@ -77,8 +84,13 @@ class CustomerController extends AbstractController {
      * @param \EJC\Model\Customer $customer
      * @return void
      */
-    public function createAction(\EJC\Model\Customer $customer) {
-        $this->customerRepository->add($customer);
+    public function createAction(\EJC\Model\Customer $newCustomer) {
+        $this->customerRepository->add($newCustomer);
+        if ($this->ajax) {
+            echo json_encode(array('status' => 'ok'));
+        } else {
+            $this->forward('Customer', 'listByUser');
+        }        
     }
     
 }
