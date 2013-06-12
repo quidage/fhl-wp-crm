@@ -2,6 +2,8 @@
 /**
  * Template fuer das Formular zum Erstellen eines neuen Customer
  * 
+ * @todo nur von project kopiert, muss noch angepasst werden
+ * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */
@@ -9,7 +11,7 @@
 
 <h1>Neues Projekt</h1>
 
-<form name="newProject" method="post" action="<?php $this->getUrl('Project', 'create'); ?>">
+<form name="newTask" method="post" action="<?php $this->getUrl('Task', 'create'); ?>">
     <table>
         <tr>
                 <td>Kunde:</td>

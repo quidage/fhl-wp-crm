@@ -1,16 +1,14 @@
-<h1>Projekte</h1>
-
-<?php $this->getLink('Ein neues Projekt erstellen', 'Project', 'new'); ?>
-
-<table width="100%">
+<table>
     <thead>
-        <caption>Projektdaten</caption>
+        <caption>Projekte
+        <span class="new-object"><?php $this->getLink('neues Projekt erstellen', 'Project', 'new'); ?></span>
+        </caption>
         <tr>
-            <td>Name</td>
-            <td>Beschreibung</td>
-            <td>Status</td>
-            <td></td>
-            <td></td>
+            <th>Name</th>
+            <th>Beschreibung</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>

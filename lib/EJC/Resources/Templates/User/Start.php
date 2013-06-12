@@ -2,17 +2,23 @@
 /**
  * Template fuer die Start-Action des Users
  *
+ * Zeige offene Projekts und Taks
+ *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */
 ?>
 
+<?php 
+// Zeige offen Projekte
+?>
 <?php if (!empty($this->openProjects)): ?>
-
-    <h2>Offene Projekte</h2>
-
     <table>
         <thead>
+            <caption>
+                Offene Projekte
+                <span class="new-object"><?php $this->getLink('neues Projekt erstellen', 'Project', 'new'); ?></span>
+            </caption>
             <tr>
                 <td>Name</td>
                 <td>Beschreibung</td>
@@ -31,13 +37,15 @@
     </table>
 <?php endif; ?> 
 
-
+<?php 
+// Zeige offen Aufgaben
+?>
 <?php if (!empty($this->openTasks)): ?>
-
-    <h2>Offene Aufgaben</h2>
-
     <table>
         <thead>
+            <caption>
+                Offene Aufgaben
+            </caption>            
             <tr>
                 <td>Name</td>
                 <td>Beschreibung</td>
@@ -54,5 +62,4 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    
 <?php endif; ?> 

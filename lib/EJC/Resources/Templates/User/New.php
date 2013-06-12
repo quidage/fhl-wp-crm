@@ -13,23 +13,23 @@
     <table>
         <tr>
                 <td>Vorname:</td>
-                <td><input type="text" name="newUser[first_name]" value="" /></td>
+                <td><input type="text" name="newUser[first_name]" value="" placeholder="Max" /></td>
         </tr>
         <tr>
                 <td>Nachname:</td>
-                <td><input type="text" name="newUser[last_name]" value="" /></td>
+                <td><input type="text" name="newUser[last_name]" value="" placeholder="Mustermann" /></td>
         </tr>
         <tr>
                 <td>E-Mail Adresse:</td>
-                <td><input type="text" name="newUser[email]" value="" /></td>
+                <td><input type="text" name="newUser[email]" value="" placeholder="max@mustermann.de" /></td>
         </tr>
         <tr>
                 <td>Passwort:</td>
-                <td><input type="password" name="newUser[password]" /></td>
+                <td><input type="password" name="newUser[password]" placeholder="********" /></td>
         </tr>
         <tr>
                 <td>Passwort best&auml;tigen:</td>
-                <td><input type="password" name="passwordConfirm" /></td>
+                <td><input type="password" name="passwordConfirm" placeholder="********" /></td>
         </tr>
         <tr>
                 <td colspan="2" style="text-align: right"><input

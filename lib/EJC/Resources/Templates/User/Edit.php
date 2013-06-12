@@ -25,16 +25,8 @@
                 <td><input type="text" name="user[email]" value="<?php echo $this->user->getEmail(); ?>" /></td>
         </tr>
         <tr>
-                <td>Altes Passwort:</td>
-                <td><input type="password" name="oldPassword" /></td>
-        </tr>
-        <tr>
-                <td>Neues Passwort:</td>
-                <td><input type="password" name="newPassword" /></td>
-        </tr>
-        <tr>
-                <td colspan="2" style="text-align: right"><input
-                        type="submit" value="Speichern" class="submit button-link" /></td>
+            <td></td>
+                <td><input type="submit" value="Speichern" class="submit button-link" /></td>
         </tr>
     </table>
 </form>

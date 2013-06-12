@@ -98,6 +98,11 @@ table{
         border-collapse:collapse;
         border-spacing:0;
         text-align:left;
+        width: 100%;
+}
+
+table.half {
+    width: 50%;
 }
 
 caption {
@@ -118,9 +123,22 @@ caption {
         margin-top: 20px;
 }
 
+caption span.new-object {
+    float: right; 
+    padding-right: 10px;
+}
+
+caption span.new-object a {
+    color: #fff;
+}
+
 th, td {
         padding:5px 10px 5px 10px;
         border-bottom:1px solid #fff;
+}
+
+th td {
+    font-weight: bold;
 }
 
 .errors {

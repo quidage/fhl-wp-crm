@@ -26,7 +26,7 @@ class UserController extends AbstractController {
     }
 
     /**
-     * list all users
+     * Zeige eine Liste aller User
      * 
      * @return void
      */
@@ -83,12 +83,41 @@ class UserController extends AbstractController {
     }
 
     /**
-     * Anzeigen des Formulars zum Bearbeiten der Benutzereinstellungen
+     * Anzeigen des Formulars zum Bearbeiten der Benutzerdaten
      * 
      * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
      * @param \EJC\Model\User $user
      */
-    public function editAction(\EJC\Model\User $user) {
+    public function editAction(\EJC\Model\User $user = NULL) {
+        if ($user === NULL) {
+            $user = $this->getCurrentUser();
+        } else {
+            if (!$this->getCurrentUser()->getAdmin()) {
+                // wenn kein Admin duerfen keine fremden Userdaten editiert werden
+                header('HTTP/1.1 403 Forbidden');
+                exit;
+            }
+        }
+        $this->view->assign('user', $user);
+        $this->view->render();
+    }
+    
+    /**
+     * Anzeigen des Formulars zum Aendern des Passworts
+     * 
+     * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+     * @param \EJC\Model\User $user
+     */
+    public function editPasswordAction(\EJC\Model\User $user = NULL) {
+        if ($user === NULL) {
+            $user = $this->getCurrentUser();
+        } else {
+            if (!$this->getCurrentUser()->getAdmin()) {
+                // wenn kein Admin duerfen keine fremden Userdaten editiert werden
+                header('HTTP/1.1 403 Forbidden');
+                exit;
+            }
+        }
         $this->view->assign('user', $user);
         $this->view->render();
     }
@@ -100,15 +129,37 @@ class UserController extends AbstractController {
      * @param \EJC\Model\User $user
      */
     public function updateAction(\EJC\Model\User $user) {
+        if ($user->getId() !== $this->getCurrentUser->getId() || !$this->getCurrentUser()->getAdmin()) {
+            // wenn kein Admin duerfen keine fremden Userdaten editiert werden
+            header('HTTP/1.1 403 Forbidden');
+            exit;
+        }
+        $this->userRepository->update($user);
+        $_SESSION['user'] = serialize($user);
+        $this->forward('User', 'showSettings');
+    }
+    
+    /**
+     * Aktualisiere das Passwort des Users in DB und Session
+     * 
+     * @param \EJC\Model\User $user
+     */
+    public function updateActionPassword(\EJC\Model\User $user) {
+        if ($user->getId() !== $this->getCurrentUser->getId()) {
+            // nur der Benutzer selbst kann sein Passwort aendern
+            header('HTTP/1.1 403 Forbidden');
+            exit;
+        }
+        
         $params = $this->request->getParams();
         if (md5($params['oldPassword']) !== $user->getPassword()) {
             $this->view->addErrorMessage('Sie haben ihr aktuelles Passwort falsch angegeben');
-            $this->forward('User', 'edit', array('user' => $user)); 
+            $this->forward('User', 'editPassword', array('user' => $user)); 
             return;
         }
         if (empty($params['newPassword'])) {
             $this->view->addErrorMessage('Geben Sie ein neues Passwort an');
-            $this->forward('User', 'edit', array('user' => $user));
+            $this->forward('User', 'editPassword', array('user' => $user));
             return;
         }
         $user->setPassword($params['newPassword']);

@@ -1,15 +1,16 @@
 <table width="100%">
     <thead>
     	<caption>Kunden
-    	<span style="float: right; padding-right: 10px;"><?php $this->getLink('neuen Kunden anlegen', 'Customer', 'new'); ?></span></caption>
+    	<span class="new-object"><?php $this->getLink('neuen Kunden anlegen', 'Customer', 'new'); ?></span></caption>
         <tr>
-            <td>Kunden-Nr.</td>
-            <td>Name</td>
-            <td>Stra&szlig;e</td>
-            <td>Ort</td>
-            <td>Telefon/Fax</td>
-            <td>Email</td>
-            <td></td>
+            <th>Kunden-Nr.</th>
+            <th>Name</th>
+            <th>Stra&szlig;e</th>
+            <th>Ort</th>
+            <th>Telefon/Fax</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,7 @@
                 <td><?php echo $customer->getPhone() . "<br>" . $customer->getFax(); ?></td> 
                 <td><a href="mailto:<?php echo $customer->getEmail(); ?>"><?php echo $customer->getEmail(); ?></a></td> 
                 <td><?php $this->getLink('Bearbeiten', 'Customer', 'edit', array('customer[id]' => $customer->getId())); ?></td> 
+                <td><?php $this->getLink('neues Projekt', 'Project', 'new', array('customer[id]' => $customer->getId())); ?></td> 
             </tr>
         <?php endforeach; ?> 
     </tbody>

@@ -84,8 +84,12 @@ class ProjectController extends AbstractController {
      * 
      * @return void
      */
-    public function newAction() {
-        $this->view->assign('customers', $this->getCurrentUser()->getCustomers());
+    public function newAction(\EJC\Model\Customer $customer = NULL) {
+        if ($customer === NULL) {
+            $this->view->assign('customers', $this->getCurrentUser()->getCustomers());
+        } else {
+            $this->view->assign('customers', array($customer));
+        }
         $this->view->assign('newProject', new \EJC\Model\Project());
         $this->view->render();
     }

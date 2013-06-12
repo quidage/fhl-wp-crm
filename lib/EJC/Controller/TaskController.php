@@ -48,6 +48,18 @@ class TaskController extends AbstractController {
     }
     
     /**
+     * Formular fuer einen neuen Taks
+     * 
+     * @param \EJC\Model\Project $project
+     * @return void
+     */
+     public function newAction(\EJC\Model\Project $project) {
+         $this->view->assign('project', $project);
+         $this->view->assign('newTask', new \EJC\Model\Task());
+         $this->view->render();
+     }
+    
+    /**
      * Erstelle einen neuen Taks
      * 
      * @param \EJC\Model\Task $task
