@@ -1,8 +1,7 @@
-<h1>Kunden</h1>
-
 <table width="100%">
     <thead>
-    	<caption>Kundendaten</caption>
+    	<caption>Kunden
+    	<span style="float: right; padding-right: 10px;"><?php $this->getLink('neuen Kunden anlegen', 'Customer', 'new'); ?></span></caption>
         <tr>
             <td>Kunden-Nr.</td>
             <td>Name</td>

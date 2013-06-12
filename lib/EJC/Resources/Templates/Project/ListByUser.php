@@ -10,6 +10,7 @@
             <td>Beschreibung</td>
             <td>Status</td>
             <td></td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
                 <td><?php echo $project->getName(); ?></td> 
                 <td><?php echo $project->getDescription(); ?></td> 
                 <td><?php echo $project->getStatus(); ?></td> 
+                <td><?php $this->getLink('Details', 'Project', 'show', array('project[id]' => $project->getId())); ?></td>
                 <td><?php $this->getLink('Bearbeiten', 'Project', 'edit', array('project[id]' => $project->getId())); ?></td> 
             </tr>
         <?php endforeach; ?> 

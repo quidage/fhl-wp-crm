@@ -1,6 +1,6 @@
 <?php
 /**
- * Template fuer das Formular zum Editieren des Customer
+ * Template fuer das Formular zum Erstellen eines neuen Customer
  * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
@@ -23,17 +23,21 @@
         </tr>
         <tr>
                 <td>Name:</td>
-                <td><input type="text" name="newProject[name]" value="" /></td>
+                <td><input type="text" name="newProject[name]" value="" placeholder="Musterprojekt" /></td>
         </tr>
         <tr>
                 <td>Beschreibung:</td>
                 <td>
-                    <textarea rows="4" columns="60" name="newProject[description]"></textarea>
+                    <textarea rows="4" columns="60" name="newProject[description]" placeholder="Musterbeschreibungstext" ></textarea>
                 </td>
         </tr>
         <tr>
                 <td>Status:</td>
                 <td>
+                    <?php
+                        // Die Statusse zum Project stehen als Array im Model des Projects 
+                        // in der Methode getPossibleStatus()
+                    ?>
                     <select name="newProject[status]">
                         <?php foreach ($this->newProject->getPossibleStatus() AS $status): ?>
                         <option value="<?php echo $status; ?>"><?php echo $status; ?></option>

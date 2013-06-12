@@ -8,3 +8,7 @@
 ?>
 
 <h1><?php echo $this->project->getName(); ?></h1>
+
+<?php foreach ($this->project->getTasks() as $task): ?>
+    <?php echo $task->getName(); ?>	
+<?php endforeach ?>
