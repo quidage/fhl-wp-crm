@@ -1,6 +1,8 @@
 <?php
 /**
- * Template fuer das Formular zum Erstellen eines neuen Customer
+ * Template fuer \EJC\Controller\TaskController->newAction()
+ * 
+ * Formular zum Erstellen eines neuen Task
  * 
  * @todo nur von project kopiert, muss noch angepasst werden
  * 

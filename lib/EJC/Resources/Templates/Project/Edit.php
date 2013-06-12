@@ -1,6 +1,8 @@
 <?php
 /**
- * Template fuer das Formular zum Editieren des Customer
+ * Template fuer \EJC\Controller\ProjectController->editAction()
+ * 
+ * Formular zum Editieren des Project
  * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm

@@ -1,3 +1,14 @@
+<?php
+/**
+ * Template fuer \EJC\Controller\ProjectController->ListByUserAction()
+ * 
+ * Liste alle Projects eines Users
+ * 
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
+ */
+?>
+
 <table>
     <thead>
         <caption>Projekte

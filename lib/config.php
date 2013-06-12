@@ -3,6 +3,8 @@
 /**
  * Konfiguration fuer die Datenbank
  * 
+ * Weitere Konfigurationen sind zur Zeit nicht notwendig
+ * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */

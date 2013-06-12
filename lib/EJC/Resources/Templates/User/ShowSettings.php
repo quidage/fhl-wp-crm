@@ -1,6 +1,8 @@
 <?php
-/*
- * View f&uuml;r die Benutzereistellungen
+/**
+ * Template fuer \EJC\Controller\UserController->showSettingsAction() 
+ * 
+ * zeige Benutzerdaten und Links zu Admin-Funktionen fuer eingeloggte Admins
  * 
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm

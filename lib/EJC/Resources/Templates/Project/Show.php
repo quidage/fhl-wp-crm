@@ -1,6 +1,9 @@
 <?php
 /**
- * Controller fuer die Projects
+ * Template fuer \EJC\Controller\ProjectController->showAction()
+ * 
+ * Zeige die Details zu einem Project und
+ * eine Liste aller Tasks
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm

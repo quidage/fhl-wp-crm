@@ -1,3 +1,14 @@
+<?php
+/**
+ * Template fuer \EJC\Controller\CustomerController->listByUserAction()
+ * 
+ * Liste alle Customer zu einem User
+ * 
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
+ */
+?>
+
 <table width="100%">
     <thead>
     	<caption>Kunden

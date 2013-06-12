@@ -1,6 +1,8 @@
 <?php
 /**
- * Template fuer das Formular zum Editieren des Customer
+ * Template fuer \EJC\Controller\CustomerController->editAction()
+ * 
+ * Formular zum Aendern der Daten des Customer
  * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm

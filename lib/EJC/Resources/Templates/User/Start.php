@@ -1,7 +1,8 @@
 <?php
 /**
- * Template fuer die Start-Action des Users
- *
+ * Template fuer \EJC\Controller\UserController->startAction()
+ * 
+ * die Start-Action des Users
  * Zeige offene Projekts und Taks
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>

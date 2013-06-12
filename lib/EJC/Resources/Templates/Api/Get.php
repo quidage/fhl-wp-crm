@@ -1,8 +1,9 @@
 <?php
 /**
- * Template fuer XML-Ausgabe aller Kundendaten eines Users
+ * Template fuer \EJC\Controller\ApiController->getAction()
  * 
- * Kann fuer Backup oder export in andere Applikationen genutzt werden
+ * XML-Export aller Daten eines User,
+ * kann fuer Backup oder export in andere Applikationen genutzt werden
  * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm

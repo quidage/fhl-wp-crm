@@ -1,6 +1,8 @@
 <?php
 /**
- * Template fuer das Formular um einen neuen Customer zu erstellen
+ * Template fuer \EJC\Controller\CustomerController->newAction()
+ * 
+ * Formular um einen neuen Customer zu erstellen
  * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
