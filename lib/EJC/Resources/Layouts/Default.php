@@ -17,6 +17,8 @@
         <link rel="stylesheet" type="text/css" href="css/screen.css" media="all" />
         <link rel="stylesheet" type="text/css" href="css/menue.css" media="all" />
         <link href='http://fonts.googleapis.com/css?family=Voces' rel='stylesheet' type='text/css' />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <script src="js/js-extends.js"></script>
         <script src="js/main.js"></script>
         <script src="js/js-test.js"></script>  
