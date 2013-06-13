@@ -1,3 +1,13 @@
+<?php
+/**
+ * Template fuer \EJC\Controller\UserController->listAction()  
+ *
+ * Liste alle User im System - nur fuer den Admin vorgesehen
+ * 
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @package wp-crm
+ */
+?>
 
 <table>
     <thead>

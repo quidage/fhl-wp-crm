@@ -1,6 +1,8 @@
  <?php
 /*
- * Template f&uuml;r die Startseite + Login-Formular
+ * Template fuer \EJC\Controller\UserController->showLoginAction() 
+ * 
+ * Startseite mit Login-Formular
  *  
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm

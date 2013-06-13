@@ -1,6 +1,8 @@
 <?php
-/*
- * Formular f&uuml;r die &Auml;nderung der Benutzerdaten 
+/**
+ * Template fuer \EJC\Controller\UserController->editPasswordAction()   
+ *
+ * Formular fuer die Aenderung der des User-Passworts
  * 
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm

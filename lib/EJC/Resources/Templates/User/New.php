@@ -1,5 +1,7 @@
 <?php
-/*
+/**
+ * Template fuer \EJC\Controller\UserController->newAction()  
+ *
  * Formular für die Erstellung eines neuen Users
  * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>

@@ -8,4 +8,5 @@
  * @package wp-crm
  */
 ?>
+
 <h1><?php echo $this->task->getName(); ?></h1>
