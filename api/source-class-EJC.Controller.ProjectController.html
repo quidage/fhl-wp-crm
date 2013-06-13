@@ -182,25 +182,29 @@
 </span></span><span id="84" class="l"><a class="l" href="#84"> 84: </a><span class="php-comment">     * 
 </span></span><span id="85" class="l"><a class="l" href="#85"> 85: </a><span class="php-comment">     * @return void
 </span></span><span id="86" class="l"><a class="l" href="#86"> 86: </a><span class="php-comment">     */</span>
-</span><span id="87" class="l"><a class="l" href="#87"> 87: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_newAction" href="#_newAction">newAction</a>() {
-</span><span id="88" class="l"><a class="l" href="#88"> 88: </a>        <span class="php-var">$this</span>-&gt;view-&gt;assign(<span class="php-quote">'customers'</span>, <span class="php-var">$this</span>-&gt;getCurrentUser()-&gt;getCustomers());
-</span><span id="89" class="l"><a class="l" href="#89"> 89: </a>        <span class="php-var">$this</span>-&gt;view-&gt;assign(<span class="php-quote">'newProject'</span>, <span class="php-keyword1">new</span> \EJC\Model\Project());
-</span><span id="90" class="l"><a class="l" href="#90"> 90: </a>        <span class="php-var">$this</span>-&gt;view-&gt;render();
-</span><span id="91" class="l"><a class="l" href="#91"> 91: </a>    }
-</span><span id="92" class="l"><a class="l" href="#92"> 92: </a>    
-</span><span id="93" class="l"><a class="l" href="#93"> 93: </a>    <span class="php-comment">/**
-</span></span><span id="94" class="l"><a class="l" href="#94"> 94: </a><span class="php-comment">     * Aktualisiere das Projekt
-</span></span><span id="95" class="l"><a class="l" href="#95"> 95: </a><span class="php-comment">     * 
-</span></span><span id="96" class="l"><a class="l" href="#96"> 96: </a><span class="php-comment">     * @param \EJC\Model\Project $project
-</span></span><span id="97" class="l"><a class="l" href="#97"> 97: </a><span class="php-comment">     * @return void
-</span></span><span id="98" class="l"><a class="l" href="#98"> 98: </a><span class="php-comment">     */</span>
-</span><span id="99" class="l"><a class="l" href="#99"> 99: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_updateAction" href="#_updateAction">updateAction</a>(\EJC\Model\Project <span class="php-var">$project</span>) {
-</span><span id="100" class="l"><a class="l" href="#100">100: </a>        <span class="php-var">$this</span>-&gt;projectRepository-&gt;update(<span class="php-var">$project</span>);
-</span><span id="101" class="l"><a class="l" href="#101">101: </a>        <span class="php-var">$this</span>-&gt;forward(<span class="php-quote">'Project'</span>, <span class="php-quote">'listByUser'</span>);
-</span><span id="102" class="l"><a class="l" href="#102">102: </a>    }
-</span><span id="103" class="l"><a class="l" href="#103">103: </a>    
-</span><span id="104" class="l"><a class="l" href="#104">104: </a>}
-</span><span id="105" class="l"><a class="l" href="#105">105: </a></span><span class="xlang">?&gt;</span></code></pre>
+</span><span id="87" class="l"><a class="l" href="#87"> 87: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_newAction" href="#_newAction">newAction</a>(\EJC\Model\Customer <span class="php-var">$customer</span> = <span class="php-keyword1">NULL</span>) {
+</span><span id="88" class="l"><a class="l" href="#88"> 88: </a>        <span class="php-keyword1">if</span> (<span class="php-var">$customer</span> === <span class="php-keyword1">NULL</span>) {
+</span><span id="89" class="l"><a class="l" href="#89"> 89: </a>            <span class="php-var">$this</span>-&gt;view-&gt;assign(<span class="php-quote">'customers'</span>, <span class="php-var">$this</span>-&gt;getCurrentUser()-&gt;getCustomers());
+</span><span id="90" class="l"><a class="l" href="#90"> 90: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="91" class="l"><a class="l" href="#91"> 91: </a>            <span class="php-var">$this</span>-&gt;view-&gt;assign(<span class="php-quote">'customers'</span>, <span class="php-keyword1">array</span>(<span class="php-var">$customer</span>));
+</span><span id="92" class="l"><a class="l" href="#92"> 92: </a>        }
+</span><span id="93" class="l"><a class="l" href="#93"> 93: </a>        <span class="php-var">$this</span>-&gt;view-&gt;assign(<span class="php-quote">'newProject'</span>, <span class="php-keyword1">new</span> \EJC\Model\Project());
+</span><span id="94" class="l"><a class="l" href="#94"> 94: </a>        <span class="php-var">$this</span>-&gt;view-&gt;render();
+</span><span id="95" class="l"><a class="l" href="#95"> 95: </a>    }
+</span><span id="96" class="l"><a class="l" href="#96"> 96: </a>    
+</span><span id="97" class="l"><a class="l" href="#97"> 97: </a>    <span class="php-comment">/**
+</span></span><span id="98" class="l"><a class="l" href="#98"> 98: </a><span class="php-comment">     * Aktualisiere das Projekt
+</span></span><span id="99" class="l"><a class="l" href="#99"> 99: </a><span class="php-comment">     * 
+</span></span><span id="100" class="l"><a class="l" href="#100">100: </a><span class="php-comment">     * @param \EJC\Model\Project $project
+</span></span><span id="101" class="l"><a class="l" href="#101">101: </a><span class="php-comment">     * @return void
+</span></span><span id="102" class="l"><a class="l" href="#102">102: </a><span class="php-comment">     */</span>
+</span><span id="103" class="l"><a class="l" href="#103">103: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_updateAction" href="#_updateAction">updateAction</a>(\EJC\Model\Project <span class="php-var">$project</span>) {
+</span><span id="104" class="l"><a class="l" href="#104">104: </a>        <span class="php-var">$this</span>-&gt;projectRepository-&gt;update(<span class="php-var">$project</span>);
+</span><span id="105" class="l"><a class="l" href="#105">105: </a>        <span class="php-var">$this</span>-&gt;forward(<span class="php-quote">'Project'</span>, <span class="php-quote">'listByUser'</span>);
+</span><span id="106" class="l"><a class="l" href="#106">106: </a>    }
+</span><span id="107" class="l"><a class="l" href="#107">107: </a>    
+</span><span id="108" class="l"><a class="l" href="#108">108: </a>}
+</span><span id="109" class="l"><a class="l" href="#109">109: </a></span><span class="xlang">?&gt;</span></code></pre>
 
 	<div id="footer">
 		fhl-wp-crm API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

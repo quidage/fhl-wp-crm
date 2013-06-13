@@ -138,7 +138,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 				<b>Author:</b>
 				Enrico Lauterschlag &lt;<a
 href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.de</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-EJC.Controller.UserController.html#5-174" title="Go to source code">lib/EJC/Controller/UserController.php</a><br />
+		<b>Located at</b> <a href="source-class-EJC.Controller.UserController.html#5-225" title="Go to source code">lib/EJC/Controller/UserController.php</a><br />
 	</div>
 
 
@@ -193,13 +193,13 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 
 		<div class="description short">
 			
-<p>list all users</p>
+<p>Zeige eine Liste aller User</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>list all users</p>
+<p>Zeige eine Liste aller User</p>
 
 
 
@@ -331,17 +331,60 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 
 		<td class="name"><div>
 		<a class="anchor" href="#_editAction">#</a>
-		<code><a href="source-class-EJC.Controller.UserController.html#85-94" title="Go to source code">editAction</a>( <span><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code> <var>$user</var></span> )</code>
+		<code><a href="source-class-EJC.Controller.UserController.html#85-103" title="Go to source code">editAction</a>( <span><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code> <var>$user</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
-<p>Anzeigen des Formulars zum Bearbeiten der Benutzereinstellungen</p>
+<p>Anzeigen des Formulars zum Bearbeiten der Benutzerdaten</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Anzeigen des Formulars zum Bearbeiten der Benutzereinstellungen</p>
+<p>Anzeigen des Formulars zum Bearbeiten der Benutzerdaten</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd><code><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code></code><br>$user</dd>
+				</dl></div>
+
+
+
+				<h4>Author</h4>
+				<div class="list">
+						Enrico Lauterschlag &lt;<a
+href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.de</a>&gt;<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="editPasswordAction" id="_editPasswordAction">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_editPasswordAction">#</a>
+		<code><a href="source-class-EJC.Controller.UserController.html#105-123" title="Go to source code">editPasswordAction</a>( <span><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code> <var>$user</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Anzeigen des Formulars zum Aendern des Passworts</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Anzeigen des Formulars zum Aendern des Passworts</p>
 
 
 
@@ -374,7 +417,7 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 
 		<td class="name"><div>
 		<a class="anchor" href="#_updateAction">#</a>
-		<code><a href="source-class-EJC.Controller.UserController.html#96-118" title="Go to source code">updateAction</a>( <span><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code> <var>$user</var></span> )</code>
+		<code><a href="source-class-EJC.Controller.UserController.html#125-140" title="Go to source code">updateAction</a>( <span><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code> <var>$user</var></span> )</code>
 
 		<div class="description short">
 			
@@ -406,6 +449,44 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="updateActionPassword" id="_updateActionPassword">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_updateActionPassword">#</a>
+		<code><a href="source-class-EJC.Controller.UserController.html#142-169" title="Go to source code">updateActionPassword</a>( <span><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code> <var>$user</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Aktualisiere das Passwort des Users in DB und Session</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Aktualisiere das Passwort des Users in DB und Session</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd><code><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code></code><br>$user</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="updatePasswordAction" id="_updatePasswordAction">
 
 		<td class="attributes"><code>
@@ -417,7 +498,7 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 
 		<td class="name"><div>
 		<a class="anchor" href="#_updatePasswordAction">#</a>
-		<code><a href="source-class-EJC.Controller.UserController.html#120-127" title="Go to source code">updatePasswordAction</a>( )</code>
+		<code><a href="source-class-EJC.Controller.UserController.html#171-178" title="Go to source code">updatePasswordAction</a>( )</code>
 
 		<div class="description short">
 			
@@ -450,7 +531,7 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 
 		<td class="name"><div>
 		<a class="anchor" href="#_showLoginAction">#</a>
-		<code><a href="source-class-EJC.Controller.UserController.html#129-137" title="Go to source code">showLoginAction</a>( )</code>
+		<code><a href="source-class-EJC.Controller.UserController.html#180-188" title="Go to source code">showLoginAction</a>( )</code>
 
 		<div class="description short">
 			
@@ -483,7 +564,7 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loginAction">#</a>
-		<code><a href="source-class-EJC.Controller.UserController.html#139-172" title="Go to source code">loginAction</a>( <span>array <var>$login</var></span> )</code>
+		<code><a href="source-class-EJC.Controller.UserController.html#190-223" title="Go to source code">loginAction</a>( <span>array <var>$login</var></span> )</code>
 
 		<div class="description short">
 			
