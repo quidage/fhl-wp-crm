@@ -6,6 +6,7 @@
  * eine Liste aller Tasks
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
  
@@ -20,7 +21,8 @@
         <thead>
             <caption>
                 Offene Aufgaben
-                <span class="new-object"><?php $this->getLink('neue Aufgabe erstellen', 'Task', 'new', array('project[id]' => $this->project->getId())); ?></span>
+                <span class="new-object"><a href="<?php $this->getUrl('Task', 'new', array('project[id]' => $this->project->getId())); ?>" title="Neue Aufgabe">
+                	<img src="images/iconset/plus_white.png">Neue Aufgabe</a></span>
             </caption> 
             <?php if (!empty($tasks)): ?>           
                 <tr>
@@ -40,7 +42,10 @@
                     <tr>
                         <td><?php echo $task->getName(); ?></td>
                         <td><?php echo $task->getDescription(); ?></td>
-                        <td><?php $this->getLink('Details', 'Task', 'show', array('task[id]' => $task->getId())); ?></td>
+                        <td>
+                        	<a href="<?php $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
+                        		<img src="images/iconset/information.png" /></a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
              <?php endif; ?>

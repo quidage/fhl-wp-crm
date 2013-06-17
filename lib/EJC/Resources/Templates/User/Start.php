@@ -11,7 +11,7 @@
 ?>
 
 <?php 
-// Zeige offen Projekte
+// Zeige offene Projekte
 ?>
 <?php if (!empty($this->openProjects)): ?>
     <table>
@@ -31,7 +31,10 @@
                 <tr>
                     <td><?php echo $project->getName(); ?></td>
                     <td><?php echo $project->getDescription(); ?></td>
-                    <td><?php $this->getLink('Details', 'Project', 'show', array('project[id]' => $project->getId())); ?></td>
+                    <td>
+                    	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
+                    		<img src="images/iconset/information.png"></a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -58,7 +61,10 @@
                 <tr>
                     <td><?php echo $task->getName(); ?></td>
                     <td><?php echo $task->getDescription(); ?></td>
-                    <td><?php $this->getLink('Details', 'Task', 'show', array('task[id]' => $task->getId())); ?></td>
+                    <td>
+                    	<a href="<?php $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
+                    		<img src="images/iconset/information.png"></a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

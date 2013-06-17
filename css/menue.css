@@ -121,7 +121,7 @@
 #menu_config {
 	position:relative;
 	float:right;
-	height:40px;
+	height:50px;
 	margin-right:20px;
 }
 
@@ -130,7 +130,6 @@
 }
 
 #menu_config ul li {
-	height:100%;
 	overflow:hidden;
 	float:none;
 	display:block;
@@ -149,7 +148,7 @@
 
 #menu_config ul li img {
 	border:0;
-	margin:7px 10px;
+	margin: 4px 10px 4px 10px;
 	padding: 0;
 }
 
@@ -168,7 +167,6 @@
 	position: absolute;
 	visibility:hidden;
 	background: #000;
-	width:100px;
 	padding: 0;
 	opacity: 0.9;
 }
@@ -179,7 +177,6 @@
 #menu_config ul li:hover ul {
 	top: 44px;
 	left:-3px;
-	width:100px;
 	visibility:visible;
 }
 
@@ -203,7 +200,6 @@
 	color: #fff;
 	text-decoration: none;
 	padding:0px;
-	width:100px;
 }
 
 /*
@@ -212,6 +208,5 @@
 #menu_config ul ul li:hover {
 	background:#2688bc;
 	line-height:20px;
-	width:100px;
 	border:0px;
 }
