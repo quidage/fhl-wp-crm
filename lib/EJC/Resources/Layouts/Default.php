@@ -74,9 +74,7 @@
 
             <div id="footer">
 
-                <div id="copyright">
-                    <p>fhl-wp-crm Designed &amp; Coded by Christian Hansen, Julian Hilbers &amp; Enrico Lauterschlag</p>
-                </div>
+                <p>fhl-wp-crm Designed &amp; Coded by Christian Hansen, Julian Hilbers &amp; Enrico Lauterschlag</p>
 
             </div>            
 
