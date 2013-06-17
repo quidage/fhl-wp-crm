@@ -9,7 +9,7 @@
  */
 ?>
 
-<h1>Neues Projekt</h1>
+<h1>Neues Projekt anlegen</h1>
 
 <form name="newProject" method="post" action="<?php $this->getUrl('Project', 'create'); ?>">
     <table>

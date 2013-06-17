@@ -16,6 +16,8 @@
 ?>
 
 <h1><?php echo $this->project->getName(); ?></h1>
+<p><strong>Status:</strong> <?php echo $this->project->getStatus(); ?><br />
+<strong>Beschreibung:</strong> <?php echo $this->project->getDescription(); ?></p>
 
     <table>
         <thead>

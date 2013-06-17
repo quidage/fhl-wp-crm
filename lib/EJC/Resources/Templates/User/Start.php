@@ -6,6 +6,7 @@
  * Zeige offene Projekts und Taks
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
 ?>
@@ -18,12 +19,13 @@
         <thead>
             <caption>
                 Offene Projekte
-                <span class="new-object"><?php $this->getLink('neues Projekt erstellen', 'Project', 'new'); ?></span>
+                <span class="new-object"><a href="<?php $this->getUrl('Project', 'new'); ?>" title="Neues Projekt">
+                	<img src="images/iconset/plus_white.png">Neues Projekt</a></span>
             </caption>
             <tr>
-                <td>Name</td>
-                <td>Beschreibung</td>
-                <td></td>
+                <th>Name</th>
+                <th>Beschreibung</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -51,9 +53,9 @@
                 Offene Aufgaben
             </caption>            
             <tr>
-                <td>Name</td>
-                <td>Beschreibung</td>
-                <td></td>
+                <th>Name</th>
+                <th>Beschreibung</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

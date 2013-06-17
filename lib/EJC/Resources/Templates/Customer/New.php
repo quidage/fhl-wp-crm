@@ -9,7 +9,7 @@
  */
 ?>
 
-<h1>Neuer Kunde</h1>
+<h1>Neuen Kunde anlegen</h1>
 
 <form name="newCustomer" method="post" action="<?php $this->getUrl('Customer', 'create'); ?>">
     <table>
