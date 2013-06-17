@@ -17,8 +17,8 @@
         <link rel="stylesheet" type="text/css" href="css/screen.css" media="all" />
         <link rel="stylesheet" type="text/css" href="css/menue.css" media="all" />
         <link href='http://fonts.googleapis.com/css?family=Voces' rel='stylesheet' type='text/css' />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="icon" href="favicon.ico" type="image/x-icon" />
         <script src="js/js-extends.js"></script>
         <script src="js/main.js"></script>
         <script src="js/js-test.js"></script>  
@@ -51,8 +51,8 @@
                     	<ul>
                     		<li><img src="images/config.png" height="32" />
                     			<ul>
-                    				<li><a href="<?php $this->getUrl('user', 'showSettings'); ?>">Einstellungen</a></li>
-                    				<li><a href="#">Log out</a></li>
+                    				<li><?php $this->getLink('Einstellungen', 'user', 'showSettings'); ?></li>
+                    				<li><?php $this->getLink('Logout', 'User', 'logout'); ?></li>
                     			</ul></li>
                     	</ul>
                     <?php } ?>
