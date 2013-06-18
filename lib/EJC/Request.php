@@ -44,7 +44,7 @@ class Request {
             $this->params = array_merge($getParams, $postParams);
 
             // Pruefe der User eingeloggt ist
-            $this->loginCheck();
+            $this->checkLogin();
 
             // Hole den Typen des uebergebenen Objekts
             foreach ($this->params AS $paramName => $paramValues) {
