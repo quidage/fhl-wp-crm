@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class EJC\Request | fhl-wp-crm</title>
+	<title>Class EJC\Request | Auto generierte API fuer fhl-wp-crm</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?1952951856"></script>
+	<script type="text/javascript" src="elementlist.js?3699365254"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -35,8 +35,6 @@
 						</li>
 							</ul></li>
 				<li><a href="namespace-None.html">None</a>
-						</li>
-				<li><a href="namespace-PHP.html">PHP</a>
 						</li>
 			</ul>
 		</div>
@@ -96,7 +94,8 @@
 
 	<div class="description">
 	
-<p>Behandle den Aufruf und fuehre die Action aus</p>
+<p>Anhand der uebergebenen Parameter wird entschieden, welche Action aufgerufen
+wird und was als Parameter an diese Action uebergeben wird</p>
 
 	</div>
 
@@ -117,7 +116,7 @@
 				<b>Author:</b>
 				Chrstian Hansen &lt;<a
 href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---->stud.fh-luebeck.de</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-EJC.Request.html#5-203" title="Go to source code">lib/EJC/Request.php</a><br />
+		<b>Located at</b> <a href="source-class-EJC.Request.html#5-214" title="Go to source code">lib/EJC/Request.php</a><br />
 	</div>
 
 
@@ -135,7 +134,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-EJC.Request.html#18-128" title="Go to source code">__construct</a>( <span>mixed <var>$action</var> = <span class="php-keyword1">NULL</span></span>, <span>mixed <var>$controller</var> = <span class="php-keyword1">NULL</span></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span><code><a href="class-EJC.View.html">EJC\View</a></code> <var>$view</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-EJC.Request.html#19-118" title="Go to source code">__construct</a>( <span>mixed <var>$action</var> = <span class="php-keyword1">NULL</span></span>, <span>mixed <var>$controller</var> = <span class="php-keyword1">NULL</span></span>, <span>array <var>$params</var> = <span class="php-keyword1">array</span>()</span>, <span><code><a href="class-EJC.View.html">EJC\View</a></code> <var>$view</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -168,7 +167,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 
 		<td class="name"><div>
 		<a class="anchor" href="#_execute">#</a>
-		<code><a href="source-class-EJC.Request.html#130-143" title="Go to source code">execute</a>( )</code>
+		<code><a href="source-class-EJC.Request.html#120-133" title="Go to source code">execute</a>( )</code>
 
 		<div class="description short">
 			
@@ -201,7 +200,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isAjax">#</a>
-		<code><a href="source-class-EJC.Request.html#145-156" title="Go to source code">isAjax</a>( )</code>
+		<code><a href="source-class-EJC.Request.html#135-146" title="Go to source code">isAjax</a>( )</code>
 
 		<div class="description short">
 			
@@ -227,6 +226,43 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="checkLogin" id="_checkLogin">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_checkLogin">#</a>
+		<code><a href="source-class-EJC.Request.html#148-167" title="Go to source code">checkLogin</a>( )</code>
+
+		<div class="description short">
+			
+<p>Pruefe ob der User eingeloggt ist, wenn es sich nicht um die login-Action
+handelt nicht mehr eingeloggte User werden auf die Login-Action
+weitergeleitet</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Pruefe ob der User eingeloggt ist, wenn es sich nicht um die login-Action
+handelt nicht mehr eingeloggte User werden auf die Login-Action
+weitergeleitet</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="getPostParams" id="_getPostParams">
 
 		<td class="attributes"><code>
@@ -238,7 +274,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getPostParams">#</a>
-		<code><a href="source-class-EJC.Request.html#158-165" title="Go to source code">getPostParams</a>( )</code>
+		<code><a href="source-class-EJC.Request.html#169-176" title="Go to source code">getPostParams</a>( )</code>
 
 		<div class="description short">
 			
@@ -275,7 +311,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getGetParams">#</a>
-		<code><a href="source-class-EJC.Request.html#167-174" title="Go to source code">getGetParams</a>( )</code>
+		<code><a href="source-class-EJC.Request.html#178-185" title="Go to source code">getGetParams</a>( )</code>
 
 		<div class="description short">
 			
@@ -312,7 +348,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getController">#</a>
-		<code><a href="source-class-EJC.Request.html#176-183" title="Go to source code">getController</a>( )</code>
+		<code><a href="source-class-EJC.Request.html#187-194" title="Go to source code">getController</a>( )</code>
 
 		<div class="description short">
 			
@@ -349,7 +385,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getAction">#</a>
-		<code><a href="source-class-EJC.Request.html#185-192" title="Go to source code">getAction</a>( )</code>
+		<code><a href="source-class-EJC.Request.html#196-203" title="Go to source code">getAction</a>( )</code>
 
 		<div class="description short">
 			
@@ -386,7 +422,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getParams">#</a>
-		<code><a href="source-class-EJC.Request.html#194-201" title="Go to source code">getParams</a>( )</code>
+		<code><a href="source-class-EJC.Request.html#205-212" title="Go to source code">getParams</a>( )</code>
 
 		<div class="description short">
 			
@@ -434,7 +470,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-EJC.Request.html#13" title="Go to source code"><var>$controller</var></a>
+				<a href="source-class-EJC.Request.html#14" title="Go to source code"><var>$controller</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -457,7 +493,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-EJC.Request.html#14" title="Go to source code"><var>$action</var></a>
+				<a href="source-class-EJC.Request.html#15" title="Go to source code"><var>$action</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -480,7 +516,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-EJC.Request.html#15" title="Go to source code"><var>$params</var></a>
+				<a href="source-class-EJC.Request.html#16" title="Go to source code"><var>$params</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -503,7 +539,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-EJC.Request.html#16" title="Go to source code"><var>$view</var></a>
+				<a href="source-class-EJC.Request.html#17" title="Go to source code"><var>$view</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -529,7 +565,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 </div>
 
 	<div id="footer">
-		fhl-wp-crm API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Auto generierte API fuer fhl-wp-crm API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>
