@@ -30,8 +30,8 @@ class Request {
             $this->params = $params;
             $this->view = $view;
         } else {
-
             // HTTP-Request, der Request wird von der index.php instanziiert
+            $this->view = new \EJC\View();
             $getParams = $this->getGetParams();
             $postParams = $this->getPostParams();
 
@@ -42,9 +42,6 @@ class Request {
 
             // Fuege GET- und POST-Paramenter zusammen
             $this->params = array_merge($getParams, $postParams);
-
-            // Pruefe der User eingeloggt ist
-            $this->checkLogin();
 
             // Hole den Typen des uebergebenen Objekts
             foreach ($this->params AS $paramName => $paramValues) {
@@ -109,12 +106,15 @@ class Request {
         // Rufe default action auf, wenn controller und action nicht gesetzt
         if (empty($this->controller) && empty($this->action)) {
             $this->controller = 'User';
-            if (isset($_SESSION)) {
+            if (isset($_SESSION['user'])) {
                 $this->action = 'start';
             } else {
                 $this->action = 'showLogin';
             }
         }
+
+        // Pruefe der User eingeloggt ist
+        $this->checkLogin();
     }
 
     /**
@@ -154,11 +154,10 @@ class Request {
     public function checkLogin() {
         if (strtolower($this->action) !== 'login') {
             // Wenn User nicht eingeloggt, schicke ihn auf die Login-Seite
-            if (!isset($_SESSION[login]) || $_SESSION['login'] < time() - 1800) {
-                $this->controller = 'User';
-                $this->action = 'showLogin';
-                $this->params = array();
-                return;
+            if (!isset($_SESSION['login']) || $_SESSION['login'] < time() - 1800) {
+                if ($this->action !== 'showLogin') {
+                    header('Location: .');
+                }
             } else {
                 // Setze den login-Zeitpunkt neu, dass der User wieder 30min hat, bis er
                 // ausgeloggt wird

@@ -1,11 +1,11 @@
 <?php
 /**
  * Template fuer \EJC\Controller\TaskController->newAction()
- * 
+ *
  * Formular zum Erstellen eines neuen Task
- * 
+ *
  * @todo nur von project kopiert, muss noch angepasst werden
- * 
+ *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */
@@ -18,8 +18,8 @@
         <tr>
                 <td>Kunde:</td>
                 <td>
-                    <?php if (count($this->customers) > 1): ?> 
-                        <select name="newProject[parent_id]">
+                    <?php if (count($this->customers) > 1): ?>
+                        <select name="newTask[parent_id]">
                             <?php foreach ($this->customers AS $customer): ?>
                             <option value="<?php echo $customer->getId(); ?>"><?php echo $customer->getId() . ' ' . $customer->getName(); ?></option>
                             <?php endforeach; ?>
@@ -44,7 +44,7 @@
                 <td>Status:</td>
                 <td>
                     <?php
-                        // Die Statusse zum Project stehen als Array im Model des Projects 
+                        // Die Statusse zum Project stehen als Array im Model des Projects
                         // in der Methode getPossibleStatus()
                     ?>
                     <select name="newProject[status]">

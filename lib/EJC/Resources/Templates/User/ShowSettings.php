@@ -1,18 +1,18 @@
 <?php
 /**
- * Template fuer \EJC\Controller\UserController->showSettingsAction() 
- * 
+ * Template fuer \EJC\Controller\UserController->showSettingsAction()
+ *
  * zeige Benutzerdaten und Links zu Admin-Funktionen fuer eingeloggte Admins
- * 
+ *
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
-?>  
+?>
 <table class="half">
     <caption>
         Ihre Daten
         <span class="new-object"><a href="<?php $this->getUrl('User', 'edit'); ?>" title="Bearbeiten">
-        	<img src="images/iconset/writeNew_white.png" />Bearbeiten</a></span>    
+        	<img src="images/iconset/writeNew_white.png" />Bearbeiten</a></span>
     </caption>
     <tbody>
         <tr>
@@ -23,7 +23,7 @@
             <td>Vorname:</td>
             <td><?php echo $this->user->getFirst_name(); ?></td>
         </tr>
-        <tr> 
+        <tr>
             <td>Nachname:</td>
             <td><?php echo $this->user->getLast_name(); ?></td>
         </tr>
@@ -35,7 +35,7 @@
             <td colspan="2">
                 <?php $this->getLink('Passwort &auml;ndern', 'User', 'editPassword'); ?>
             </td>
-        </tr>        
+        </tr>
     </tbody>
 </table>
 
@@ -46,7 +46,7 @@
 
 <?php if ($this->user->getAdmin()): ?>
 <h2>Admin</h2>
-<?php $this->getLink('Neuen Benutzer erstellen', 'User', 'new'); ?><br>
+<?php $this->getLink('Neuen Benutzer anlegen', 'User', 'new'); ?><br>
 <?php $this->getLink('Zeige alle Benutzer', 'User', 'list'); ?>
 
 <?php endif; ?>
