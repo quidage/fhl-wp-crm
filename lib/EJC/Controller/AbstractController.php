@@ -4,7 +4,7 @@ namespace EJC\Controller;
 
 /**
  * Allgemeine Controller-Methoden
- * 
+ *
  * Initialisieren der Repositories und des Views
  * Weiterleiten an andere Actions
  *
@@ -40,7 +40,7 @@ class AbstractController {
 
     /**
      *
-     * @var \EJC\Request 
+     * @var \EJC\Request
      */
     protected $request;
 
@@ -64,7 +64,7 @@ class AbstractController {
 
     /**
      * Konstruktor
-     * 
+     *
      * @return void
      */
     public function __construct(\EJC\Request $request, \EJC\View $view = NULL) {
@@ -76,7 +76,7 @@ class AbstractController {
 
     /**
      * Instanziiere die Repositories
-     * 
+     *
      * @return void
      */
     public function initRepositories() {
@@ -88,8 +88,8 @@ class AbstractController {
 
     /**
      * Initialisiere den View
-     * 
-     * @return void 
+     *
+     * @return void
      */
     public function initView() {
         // Get path to template File for action
@@ -104,7 +104,7 @@ class AbstractController {
 
     /**
      * zu einer anderen Action weiterleiten
-     * 
+     *
      * @param string $controller
      * @param string $action
      * @param array $params
@@ -115,9 +115,8 @@ class AbstractController {
     }
 
     /**
-     * zu einer anderen Action als HTTP-Request weiterleiten
-     * @todo funktoniert noch nicht richtig
-     * 
+     * zu einer anderen Action als HTTP-Redirect weiterleiten
+     *
      * @param string $controller
      * @param string $action
      * @param string $params
@@ -129,13 +128,12 @@ class AbstractController {
                 $paramString .= '&' . $key . '=' . $value;
             }
         }
-        header('index.php?controller=' . strtolower($controller) . '&action=' . $action . $paramString);
-        return;
+        header('Location: ' . $this->view->getUrl($controller, $action) . $paramString);
     }
 
     /**
      * Hole den aktuell eingeloggten User
-     * 
+     *
      * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
      * @return \EJC\Model\User
      */
