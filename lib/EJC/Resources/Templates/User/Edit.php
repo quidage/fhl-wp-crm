@@ -9,7 +9,7 @@
  */
 ?>
 
-<h1>Benutzerdaten &Auml;ndern</h1>
+<h1>Benutzerdaten &auml;ndern</h1>
 
 <form name="edit" method="post" action="<?php $this->getUrl('user', 'update'); ?>">
     <input type="hidden" name="user[id]" value="<?php echo $this->user->getId() ?>">

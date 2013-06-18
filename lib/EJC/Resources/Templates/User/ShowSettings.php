@@ -11,7 +11,8 @@
 <table class="half">
     <caption>
         Ihre Daten
-        <span class="new-object"><?php $this->getLink('Bearbeiten', 'User', 'edit'); ?></span>    
+        <span class="new-object"><a href="<?php $this->getUrl('User', 'edit'); ?>" title="Bearbeiten">
+        	<img src="images/iconset/writeNew_white.png" />Bearbeiten</a></span>    
     </caption>
     <tbody>
         <tr>

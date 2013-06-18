@@ -1,58 +1,76 @@
-/* 
-    Document   : screen.css
-    Created on : 19.03.2013, 20:47:49
-    Author     : Enrico Lauterschlag 
-    
-    Farbcodes: dunkelblau -> #0c5a84    hellblau -> #2688bc    
+/** 
+* Dateiname   : screen.css
+* Erstellt am : 19.03.2013, 20:47:49
+* Beschreibung: In dieser CSS-Datei, werden die Formatierungen fuer die verwendeten HTML-Elemente und fuer das Grundgeruest des Layouts definiert.
+* 
+* @author Enrico Lauterschlag <enrico.lauterschlag@web.de> 
+* Farbcodes: dunkelblau -> #0c5a84    hellblau -> #2688bc    
 */
 
+
+/**
+* Definitionen, die fuer den gesamten sichtbaren Koerper der Webseite gueltig sind.
+* Die Schriftart fuer die Webseite wird festgelegt. Hier wird die Schriftart Voces von den Google-Fonts verwendet (http://www.google.com/fonts/).
+* Ausserdem wird die Schriftgroesse, Schriftfarbe und ein Hintergrundbild definiert.
+*/
 body {
-        font-family: 'Voces', cursive;
-        font-size: 14px;
-        color:#000;
-        background:url(../images/background.png);
+	font-family: 'Voces', cursive;
+	font-size: 14px;
+	color:#000;
+	background:url(../images/background.png);
 }
 
 /*
-* Formatierung der &Uuml;berschriften
+* Formatierung der Ueberschriften
+* Fuer alle Ueberschriften wird eine blaue Farbe gewaehlt und die verschiedenen Groessen festgelegt.
 */
 h1, h2, h3, h4, h5, h6 {
     color:#2688bc;
 }
 
 h1{
-        font-size:24px;
+	font-size:24px;
 }
 
 h2{
-        font-size:22px;
+	font-size:22px;
 }
 
 h3{
-        font-size:20px;
+	font-size:20px;
 }
 
 h4{
-        font-size:18px;
+	font-size:18px;
 }
 
 h5{
-        font-size:16px;
+	font-size:16px;
 }
 
 h6{
-        font-size:14px;
+	font-size:14px;
 }
 
+/**
+* Text der in Absaetzen strukturiert ist, wird als Blocksatz dargestellt.
+*/
 p{
         text-align:justify;
 }
 
+/**
+* Alle gaengigen HTML-Elemente werden mit einem unterem Abstand von 20px definiert und einer normalen Schriftgewichtung.
+*/
 p, dl, hr, ol, ul, pre, address, fieldset, figure, iframe {
     margin-bottom:20px;
     font-weight:normal;
 }
 
+/**
+* Formatierungen fuer Bilder
+* Bilder haben einen Abstand von 10px rundherum und einen schwarzen Rahmen von 1px. Der Text fliesst rechts um die Bilder.
+*/
 img {
 	padding:10px;
 	margin-right:20px;
@@ -60,72 +78,94 @@ img {
 	float:left;
 }
 
+/**
+* Bilder die als Link verwendet werden, haben keinen Rahmen.
+*/
 a img {
     border:0;
 }
+
+/**
+* Formatieren fuer Links
+* Links und besuchte Links werden nicht unterstrichen und in einer blauen Farbe dargestellt.
+* Wenn man mit der Maus ueber den Link fuehrt, wird dieser unterstrichen und in oranger Farbe dargestellt.
+*/
 a, a:visited {
-        text-decoration:none;
-        color:#2688bc;
+	text-decoration:none;
+	color:#2688bc;
 }
 a:hover {
-        color:#ffa401;
-        text-decoration:underline;
+	color:#ffa401;
+	text-decoration:underline;
 }
 
 /*
 * Listen-Formatierungen
+* Als Listensymbole werden in der 1. Ebene Rechtecke und in der 2. Ebene Kreise verwendet.
 */
 ul ul {
-        margin:0px;
+	margin:0px;
 }
 
 ul li {
-        list-style-type:square;
+	list-style-type:square;
 }
 
 ul ul li{
-        list-style-type:disc;
+	list-style-type:disc;
 }
 
 /*
-*Tabelle
+* Formatierungen fuer Tabellen
+* Tabellen werden mit abgerundeten Rahmen und einem grauen Hintergrund definiert.
+* Ebenfalls werden Formatierungen fuer eine Tabellenbeschriftung (caption) definiert. Hier wird der ober linke und rechte Rahmen abgerundet und
+* die gesamte Caption erhaelt einen inneren Schatten.
 */
 table{
-        background:#eee;
-        border-radius: 0 0 10px 10px;
-                -webkit-border-radius:0 0 10px 10px;
-                -moz-border-radius:0 0 10px 10px;
-        border-collapse:collapse;
-        border-spacing:0;
-        text-align:left;
-        width: 100%;
+	background:#eee;
+	border-radius: 0 0 10px 10px;
+		-webkit-border-radius:0 0 10px 10px;
+		-moz-border-radius:0 0 10px 10px;
+	border-collapse:collapse;
+	border-spacing:0;
+	text-align:left;
+	width: 100%;
 }
 
 table.half {
     width: 50%;
 }
 
-caption {
-        background:#2688bc;
-        border-radius:10px 10px 0 0;
-                -webkit-border-radius:10px 10px 0 0;
-                -moz-border-radius:10px 10px 0 0;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-        color:#fff;
-        font-size:15px;
-        font-weight:bold;
-        padding:10px 0 10px 10px;
-        text-align:left;
-        text-shadow:0 -1px 1px rgba(0,0,0,.5);
-        border:1px solid #0c5a84;
-        margin-top: 20px;
+table img {
+	padding:0px;
+	margin-right:5px;
 }
 
+caption {
+	background:#2688bc;
+	border-radius:10px 10px 0 0;
+	    -webkit-border-radius:10px 10px 0 0;
+	    -moz-border-radius:10px 10px 0 0;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	color:#fff;
+	font-size:15px;
+	font-weight:bold;
+	padding:10px 0 10px 10px;
+	text-align:left;
+	text-shadow:0 -1px 1px rgba(0,0,0,.5);
+	border:1px solid #0c5a84;
+	margin-top: 20px;
+}
+
+/**
+* Formatierungen fuer den Neu-Link in der rechten Ecke einer Caption bei der Kunden- und Projektansicht.
+* Dieser wird rechtsbuendig ausgerichtet.
+*/
 caption span.new-object {
     float: right; 
-    padding-right: 10px;
+    padding-right: 20px;
 }
 
 caption span.new-object a {
@@ -133,21 +173,26 @@ caption span.new-object a {
 }
 
 th, td {
-        padding:5px 10px 5px 10px;
-        border-bottom:1px solid #fff;
+	padding:5px 10px 5px 10px;
+	border-bottom:1px solid #fff;
+	font-size:12px;
 }
 
 th td {
     font-weight: bold;
 }
 
+/**
+* Bei einer Fehlermeldung, wird der Text in roter Farbe dargestellt.
+*/
 .errors {
     color: red;
 }
 
 /*
-*Button
-*Tutorial: http://www.usabilitypost.com/2012/01/10/pressed-button-state-with-css3/
+* Formatierungen fuer einen Action-Button
+* Hier werden die Formatierungen fuer einen ueber CSS gestalteten Button definiert. Die Ecken sind abgerundet, der Button hat einen inneren Schatten
+* und die Farbe transformiert langsam von der Standardfarbe, zu der in :hover definierten.
 */
 
 .button-link {
@@ -171,9 +216,9 @@ th td {
 }
 
 .button-link:hover {
-        color:#fff;
-        text-decoration:none;
-        background-color:#0c5a84;
+	color:#fff;
+	text-decoration:none;
+	background-color:#0c5a84;
 }
 
 .button-link:active {
@@ -185,59 +230,69 @@ th td {
 }
 
 .button-link:visited {
-        color:#fff;
+	color:#fff;
 }
 
 /*
-* Formatierungen f�r Formulare
+* Formatierungen fuer Formulare
+* Hier werden die Elemente von Formularen formatiert.
+* Besonderheiten: Textfelder, Checkboxen und Radiobuttons, erhalten einen blauen Schatten, wenn sie aktiv sind.
 */
 
 fieldset {
-        padding:20px;
+	padding:20px;
 }
 
 legend {
-        font-weight:bold;
+	font-weight:bold;
 }
 
 label {
-        display: block;
-        margin: 10px 0 10px 0;
+	display: block;
+	margin: 10px 0 10px 0;
 }
 
 form table {
-        border:0px;     
+	border:0px;     
 }
 
 form table td {
-        vertical-align:middle;
-        padding:5px 10px 5px 10px;
-        background:#fff;
-        border-radius:0 0 0 0;
+	vertical-align:middle;
+	padding:5px 10px 5px 10px;
+	background:#fff;
+	border-radius:0 0 0 0;
 }
 
 input[type="text"], input[type="password"], input[type="radio"], input[type="checkbox"], textarea, select {
-        border-radius:5px;
-        border:1px solid #ccc;
-        padding:3px;
+	border-radius:5px;
+	border:1px solid #ccc;
+	padding:3px;
 }
 
 input[type="text"]:focus, input[type="password"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus, textarea:focus, select:focus {
-        border:1px solid #2688bc;
-        box-shadow:0px 0px 10px 4px rgba(38,136,188,0.3);
-                -webkit-box-shadow: 0px 0px 10px 4px rgba(38, 136, 188, 0.3);
-                -moz-box-shadow: 0px 0px 10px 4px rgba(38, 136, 188, 0.3);
+	border:1px solid #2688bc;
+	box-shadow:0px 0px 10px 4px rgba(38,136,188,0.3);
+		-webkit-box-shadow: 0px 0px 10px 4px rgba(38, 136, 188, 0.3);
+		-moz-box-shadow: 0px 0px 10px 4px rgba(38, 136, 188, 0.3);
 }
 
 input[type="text"], input[type="password"], textarea {
-        width:250px;
+	width:250px;
 }
 
 input[type="submit"], input[type="reset"] {
-        cursor:pointer;
+	cursor:pointer;
 }
 
-#std-overlay {
+/**
+* Formatierungen fuer einen Layer (Lightbox)
+* Ueber JavaScript werden die folgenden Formatierungen fuer zwei div-container aufgerufen und mit Inhalt gefuellt. 
+* Std-overlay bewirkt, dass die komplette Webseite mit einem blauen und teilweise transparenten Layer belegt wird. Ueber diesen Layer wird ein
+* weitere div-container gelegt, der den Inhalt aufnimmt und zentriert im Browser-Fenster ist (Formatierungen in der Klasse std-window). Dieser
+* besitzt abgerundete Ecken und einen Schatten. Die Formatierungen fuer std-overlay verhindert, dass irgendetwas anderes auf der Webseite geklickt
+* werden kann und nur Aktionen, im div der mit std-window definiert wird, ausgefuehrt werden koennen.  
+*/
+.std-overlay {
     position:fixed;
     width:100%;
     height:100%;
@@ -255,9 +310,10 @@ input[type="submit"], input[type="reset"] {
     top: 20%;
     width: 50%;
     height: 50%;
-    margin-left: -25%;
-    background-color: #ffa401;
-    border:10px solid#000;
+    margin-left: -27%;
+    padding:1%;
+    background-color: #fff;
+    border:10px solid #000;
     border-radius: 10px;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
@@ -267,20 +323,27 @@ input[type="submit"], input[type="reset"] {
 }
 
 /*
-*Grundger&uuml;st f&uuml;rs Layout
+* Grundgeruest fuer das Layout
 */
 
+/*
+* Hauptbereich der Webseite, der zentriert dargestellt wird und einen Schatten besitzt.
+* Dieser nimmt alle weiteren Elemente, die auf der Webseite dargestellt werden, auf.
+*/
 #wrap {
-        background-color: #FFF;
-        width: 900px;
-        margin:0 auto;
-        text-align: left;
-        border: 1px solid #CCC;
-        box-shadow:5px 5px 0px rgba(0,0,0,0.2);
-        -moz-box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
-        -webkit-box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
+	background-color: #FFF;
+	width: 900px;
+	margin:0 auto;
+	text-align: left;
+	border: 1px solid #CCC;
+	box-shadow:5px 5px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
 }
 
+/*
+* Der Header
+*/
 #header {
 	position:relative;
     height: 150px;
@@ -288,6 +351,9 @@ input[type="submit"], input[type="reset"] {
     border-bottom:3px solid #000;
 }
 
+/*
+* Innerhalb des Headers wird das Logo dargestellt.
+*/
 #logo {
 	height:100px;
 	font-family: 'Fugaz One', sans-serif;
@@ -300,39 +366,41 @@ input[type="submit"], input[type="reset"] {
 	text-align:center;
 }
 
+/*
+* Dieses Individualformat nimmt den Content der Applikation auf.
+*/
 #main-content {
-        display: block;
-        width: 860px;
-        min-height: 350px;
-        float: left;
-        margin-top: 10px;
-        padding: 0 20px 20px;
+	display: block;
+	width: 860px;
+	min-height: 350px;
+	float: left;
+	margin-top: 10px;
+	padding: 0 20px 20px;
 }
 
-#loginform{
+/**
+* Formatierungen fuer das Login-Formular
+*/
+#loginform {
 	postition:absolute;
 	margin-top:40px;
 	padding:20px 20px 20px 0;
 }
 
 /*
-*Footer
+* Formatierungen fuer den Footer
+* Dieser hat als optisches Highlight einen Inneren Schatten.
 */
 
 #footer{
-        clear:both;
-        position: relative;
-        color:#fff;
-        background-color:#2688bc;
-}
-
-#copyright{
-        background-color:#0c5a84;
-        margin: 0 0 0;
-        padding: 1px 20px;
-        font-size: 12px;
-        border-top:1px solid #000;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	clear:both;
+	color:#fff;
+	background-color:#0c5a84;
+	margin: 0 0 0;
+	padding: 1px 20px;
+	font-size: 12px;
+	border-top:1px solid #000;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
 }

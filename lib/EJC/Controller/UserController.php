@@ -221,6 +221,20 @@ class UserController extends AbstractController {
             }
         }
     }
+    
+    /**
+    * Logge den User aus
+    *
+    * @author: Enrico Lauterschlag <enrico.lauterschlag@web.de>
+    * @return void
+    */
+    public function logoutAction() {
+    
+    	// L&ouml;sche die aktuelle Session des Users und leite Ihn auf die Startseite weiter.
+    	session_destroy();
+    	header('Location: index.php');
+    	return;
+    }
 
 }
 

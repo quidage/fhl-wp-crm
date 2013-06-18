@@ -6,24 +6,26 @@
  * Zeige offene Projekts und Taks
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
 ?>
 
 <?php 
-// Zeige offen Projekte
+// Zeige offene Projekte
 ?>
 <?php if (!empty($this->openProjects)): ?>
     <table>
         <thead>
             <caption>
                 Offene Projekte
-                <span class="new-object"><?php $this->getLink('neues Projekt erstellen', 'Project', 'new'); ?></span>
+                <span class="new-object"><a href="<?php $this->getUrl('Project', 'new'); ?>" title="Neues Projekt">
+                	<img src="images/iconset/plus_white.png">Neues Projekt</a></span>
             </caption>
             <tr>
-                <td>Name</td>
-                <td>Beschreibung</td>
-                <td></td>
+                <th>Name</th>
+                <th>Beschreibung</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +33,10 @@
                 <tr>
                     <td><?php echo $project->getName(); ?></td>
                     <td><?php echo $project->getDescription(); ?></td>
-                    <td><?php $this->getLink('Details', 'Project', 'show', array('project[id]' => $project->getId())); ?></td>
+                    <td>
+                    	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
+                    		<img src="images/iconset/information.png"></a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -48,9 +53,9 @@
                 Offene Aufgaben
             </caption>            
             <tr>
-                <td>Name</td>
-                <td>Beschreibung</td>
-                <td></td>
+                <th>Name</th>
+                <th>Beschreibung</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -58,7 +63,10 @@
                 <tr>
                     <td><?php echo $task->getName(); ?></td>
                     <td><?php echo $task->getDescription(); ?></td>
-                    <td><?php $this->getLink('Details', 'Task', 'show', array('task[id]' => $task->getId())); ?></td>
+                    <td>
+                    	<a href="<?php $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
+                    		<img src="images/iconset/information.png"></a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

@@ -1,13 +1,15 @@
-/* 
-    Document   : menue.css
-    Created on : 25.04.2013
-    Author     : Enrico Lauterschlag 
-    
-    Farbcodes: dunkelblau -> #0c5a84    hellblau -> #2688bc    
+/** 
+* Dateiname   : menue.css
+* Erstellt am : 25.04.2013
+* Beschreibung: In dieser CSS-Datei, werden die Formatierungen fuer die Hauptnavigation definiert. Die Hauptnavigation wird ueber eine
+* unsortierte Liste dargestellt. Ausserdem wird auch das Einstellungs-Menue formatiert.
+* 
+* @author Enrico Lauterschlag <enrico.lauterschlag@web.de> 
+* Farbcodes: dunkelblau -> #0c5a84    hellblau -> #2688bc    
 */
 
 /*
-*
+* Container, der das Menue aufnimmt. Dieser ist links ausgerichtet und 50 Pixel hoch.
 */
 #menu {
 	position:relative;
@@ -17,7 +19,7 @@
 }
 
 /*
-*
+* Einleitung der Liste
 */
 #menu ul {
 	position: absolute;
@@ -26,7 +28,7 @@
 }
 
 /*
-*
+* Listenpunkte werden mit abgerundeten Ecken und einem inneren Schatten dargestellt.
 */
 #menu ul li {
 	float: left;
@@ -47,7 +49,7 @@
 }
 
 /*
-*
+* Links innerhalb von Listenpunkten, werden fett und ohne Textdekoration dargestellt.
 */
 #menu ul li a {
 	color:#fff;
@@ -57,7 +59,7 @@
 }
 
 /*
-*
+* Wenn mit der Maus ueber die Listenpunkte gefahren wird, aendert sich die Hintergrundfarbe und Rahmenfarbe.
 */
 #menu ul li:hover {
 	background-color:#2688bc;
@@ -66,7 +68,8 @@
 }
 
 /*
-*
+* Einleitung der zweiten Listenebene
+* Diese Ebene wird zuerst nicht angezeigt.
 */
 #menu ul ul {
 	position: absolute;
@@ -77,7 +80,7 @@
 }
 
 /*
-*
+* Wenn mit der Maus ueber einen Listenpunkt der 1. Ebene gefahren wird, werden die Listenpunkte der 2. Ebene sichtbar.
 */
 #menu ul li:hover ul {
 	top: 35px;
@@ -85,7 +88,7 @@
 }
 
 /*
-*
+* Formatierungen fuer die Listenpunkte der 2. Ebene
 */
 #menu ul ul li {
 	float: none;
@@ -99,7 +102,7 @@
 }
 
 /*
-*
+* Formatieren fuer die Links der 2. Listenebene
 */
 #menu ul ul a {
 	color: #fff;
@@ -107,7 +110,7 @@
 }
 
 /*
-*
+* Wenn mit der Maus ueber ein Listenpunkt der 2. Ebene gefahren wird, aendert sich die Hintergrundfarbe.
 */
 #menu ul ul li:hover {
 	background:#0c5a84;
@@ -116,21 +119,26 @@
 }
 
 /*
-*
+* Formatierungen, fuer das Einstellungsmenue.
 */
 #menu_config {
 	position:relative;
 	float:right;
-	height:40px;
+	height:50px;
 	margin-right:20px;
 }
 
+/*
+* Einleitung der Liste
+*/
 #menu_config ul {
 	margin: 9px auto;
 }
 
+/*
+* Listenpunkte werden mit einem inneren Schatten dargestellt.
+*/
 #menu_config ul li {
-	height:100%;
 	overflow:hidden;
 	float:none;
 	display:block;
@@ -147,14 +155,17 @@
 		-moz-box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
+/*
+* Das Bild im Menue hat keinen Rahmen, wie normale Bilder auf der Webseite.
+*/
 #menu_config ul li img {
 	border:0;
-	margin:7px 10px;
+	margin: 4px 10px 4px 10px;
 	padding: 0;
 }
 
 /*
-*
+* Wenn mit der Maus ueber den Listenpunkt gefahren wird, aendert sich die Hintergrundfarbe und Rahmenfarbe.
 */
 #menu_config ul li:hover {
 	background-color:#0c5a84;
@@ -162,29 +173,27 @@
 }
 
 /*
-*
+* Einleitung der 2. Listenebene. Diese wird standardmaessig nicht angezeigt.
 */
 #menu_config ul ul {
 	position: absolute;
 	visibility:hidden;
 	background: #000;
-	width:100px;
 	padding: 0;
 	opacity: 0.9;
 }
 
 /*
-*
+* Wenn mit der Maus ueber ein Listenpunkt der 1. Ebene gefahren wird, dann werden die Listenpunkte der 2. Ebene sichtbar.
 */
 #menu_config ul li:hover ul {
 	top: 44px;
 	left:-3px;
-	width:100px;
 	visibility:visible;
 }
 
 /*
-*
+* Formatierungen fuer die Listenpunkte der 2. Listenebene
 */
 #menu_config ul ul li {
 	float: none;
@@ -197,21 +206,19 @@
 }
 
 /*
-*
+* Formatierungen fuer Links in der 2. Listenebene
 */
 #menu_config ul ul a {
 	color: #fff;
 	text-decoration: none;
 	padding:0px;
-	width:100px;
 }
 
 /*
-*
+* Wenn mit der Maus ueber einen Listenpunkt der 2. Ebene gefahren wird, aendert sich die Hintergrundfarbe.
 */
 #menu_config ul ul li:hover {
 	background:#2688bc;
 	line-height:20px;
-	width:100px;
 	border:0px;
 }
