@@ -3,7 +3,8 @@
 namespace EJC;
 
 /**
- * Behandle den Aufruf und fuehre die Action aus
+ * Anhand der uebergebenen Parameter wird entschieden, welche Action aufgerufen
+ * wird und was als Parameter an diese Action uebergeben wird
  *
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
@@ -17,21 +18,20 @@ class Request {
 
     /**
      * Konstruktor
-     * 
+     *
      * @return void
      */
     public function __construct($action = NULL, $controller = NULL, array $params = array(), View $view = NULL) {
 
         if ($controller !== NULL && $action !== NULL) {
-            // Request wird ueber forward-Funktion ausgeloest
+            // Request wird ueber forward-Methode aus dem AbstractController aufgerufen
             $this->controller = $controller;
             $this->action = $action;
             $this->params = $params;
             $this->view = $view;
         } else {
 
-            // HTTP-Request
-            // TODO clean up request Params
+            // HTTP-Request, der Request wird von der index.php instanziiert
             $getParams = $this->getGetParams();
             $postParams = $this->getPostParams();
 
@@ -40,26 +40,16 @@ class Request {
             unset($getParams['controller']);
             unset($getParams['action']);
 
-            // Pruefe ob der User eingeloggt ist, wenn es sich nicht um die login-Action handelt
-            if (strtolower($this->action) !== 'login') {
-                // Wenn User nicht eingeloggt, schicke ihn auf die Login-Seite
-                if (!isset($_SESSION[login]) || $_SESSION['login'] < time() - 1800) {
-                    $this->controller = 'User';
-                    $this->action = 'showLogin';
-                    $this->params = array();
-                    return;
-                } else {
-                    $_SESSION['login'] = time();
-                }
-            }
-
             // Fuege GET- und POST-Paramenter zusammen
             $this->params = array_merge($getParams, $postParams);
+
+            // Pruefe der User eingeloggt ist
+            $this->loginCheck();
 
             // Hole den Typen des uebergebenen Objekts
             foreach ($this->params AS $paramName => $paramValues) {
 
-                // Erstelle ein neues Objekt des Typs, wenn der Anfang des 
+                // Erstelle ein neues Objekt des Typs, wenn der Anfang des
                 // Parameternamens "new" ist
                 if (substr($paramName, 0, 3) === 'new') {
 
@@ -68,7 +58,7 @@ class Request {
                     $classFile = APPROOT . '/lib/' . str_replace('\\', '/', $newObjectClassName) . '.php';
                     if (file_exists($classFile)) {
                         $object = new $newObjectClassName();
-                        // Setze die Eigenschaften fuer das neue Objekt, welche in 
+                        // Setze die Eigenschaften fuer das neue Objekt, welche in
                         // den Paramtern uebergeben werden
                         if (is_array($paramValues)) {
                             foreach ($paramValues AS $paramValueKey => $paramValueValue) {
@@ -76,8 +66,8 @@ class Request {
                             }
                         }
                         $this->params = array_merge(array($object), $this->params);
-                        unset($this->params[$paramName]);                        
-                    } 
+                        unset($this->params[$paramName]);
+                    }
                 } else {
                     // Pruefe ob ein Gegenpart zu dem Request im Repository existiert
                     // und lade diesen
@@ -96,7 +86,7 @@ class Request {
                             } else {
                                 if (is_array($paramValues)) {
 
-                                    // Wenn mehrere Paramter uebergeben werden, setze bei 
+                                    // Wenn mehrere Paramter uebergeben werden, setze bei
                                     // dem geladenen Objekt die uebergebenen Eigenschaften
                                     foreach ($paramValues AS $paramValueKey => $paramValueValue) {
                                         call_user_func_array(array($object, 'set' . ucwords($paramValueKey)), array($paramValueValue));
@@ -108,9 +98,9 @@ class Request {
                         unset($this->params[$paramName]);
                     } catch (\EJC\Exception\ClassLoaderException $e) {
                         // Es existiert kein Model zu dem Parameter
-                        // tue weiter nichts und uebergebe den Paramter
+                        // tue weiter nichts und uebergebe den Parameter
                         //throw $e;
-                        
+
                     }
                 }
             }
@@ -129,7 +119,7 @@ class Request {
 
     /**
      * Rufe die action auf
-     * 
+     *
      * @return void
      */
     public function execute() {
@@ -144,11 +134,11 @@ class Request {
 
     /**
      * Ob es sich um einen Ajax-Aufruf handelt
-     * 
+     *
      * @return boolean
      */
     public function isAjax() {
-        if (isset($_SERVER['XMLHttpRequest'])) {
+        if (isset($_SERVER['XMLHttpRequest']) || isset($_GET['ajax'])) {
             return TRUE;
         } else {
             return FALSE;
@@ -156,8 +146,30 @@ class Request {
     }
 
     /**
+     * Pruefe ob der User eingeloggt ist, wenn es sich nicht um die login-Action handelt
+     * nicht mehr eingeloggte User werden auf die Login-Action weitergeleitet
+     *
+     * @return void
+     */
+    public function checkLogin() {
+        if (strtolower($this->action) !== 'login') {
+            // Wenn User nicht eingeloggt, schicke ihn auf die Login-Seite
+            if (!isset($_SESSION[login]) || $_SESSION['login'] < time() - 1800) {
+                $this->controller = 'User';
+                $this->action = 'showLogin';
+                $this->params = array();
+                return;
+            } else {
+                // Setze den login-Zeitpunkt neu, dass der User wieder 30min hat, bis er
+                // ausgeloggt wird
+                $_SESSION['login'] = time();
+            }
+        }
+    }
+
+    /**
      * Hole die Post-Parameter
-     * 
+     *
      * @return array
      */
     public function getPostParams() {
@@ -166,7 +178,7 @@ class Request {
 
     /**
      * Hole die Get-Parameter
-     * 
+     *
      * @return array
      */
     public function getGetParams() {
@@ -175,7 +187,7 @@ class Request {
 
     /**
      * Gib den Controller_Namen zum Request zurueck
-     * 
+     *
      * @return string
      */
     public function getController() {
@@ -184,7 +196,7 @@ class Request {
 
     /**
      * Gib den Acton-Namen zum Request zurueck
-     * 
+     *
      * @return string
      */
     public function getAction() {
@@ -193,7 +205,7 @@ class Request {
 
     /**
      * Gib alle Paramter in einem Array zurueck
-     * 
+     *
      * @return array
      */
     public function getParams() {

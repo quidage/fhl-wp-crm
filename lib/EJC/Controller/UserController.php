@@ -13,7 +13,7 @@ class UserController extends AbstractController {
 
     /**
      * Zeige die Uebersichtsseite des Users
-     * 
+     *
      * @return void
      */
     public function startAction() {
@@ -27,7 +27,7 @@ class UserController extends AbstractController {
 
     /**
      * Zeige eine Liste aller User
-     * 
+     *
      * @return void
      */
     public function listAction() {
@@ -38,7 +38,7 @@ class UserController extends AbstractController {
 
     /**
      * Anzeigen der Benutzereinstellungen
-     * 
+     *
      * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
      * @return void
      */
@@ -46,16 +46,16 @@ class UserController extends AbstractController {
         $this->view->assign('user', $this->getCurrentUser());
         $this->view->render();
     }
-    
+
     /**
      * Zeige das Formular fuer das Erstellen eines neuen Users
-     * 
+     *
      * @return void
      */
     public function newAction() {
         // Wenn es sich nicht um einen Admin handelt abbrechen
         if (!$this->getCurrentUser()->getAdmin()) exit;
-        
+
         $newUser = new \EJC\Model\User();
         $this->view->assign('user', $newUser);
         $this->view->render();
@@ -63,30 +63,33 @@ class UserController extends AbstractController {
 
     /**
      * Erstelle einen neuen User
-     * 
+     *
      * @param \EJC\Model\User $user
+     * @return void
      */
     public function createAction(\EJC\Model\User $newUser) {
         // Wenn es sich nicht um einen Admin handelt abbrechen
         if (!$this->getCurrentUser()->getAdmin()) exit;
-        
+
         $params = $this->request->getParams();
         if (md5($params['passwordConfirm']) === $newUser->getPassword()) {
             $this->userRepository->add($newUser);
             $this->forward('User', 'showSettings');
+            return;
         } elseif(empty($params['passwordConfirm'])) {
             $this->view->addErrorMessage('Geben Sie ein Passwort an');
         } else {
             $this->view->addErrorMessage('Die Passw&ouml;rter stimmen nicht &uuml;berein');
-        } 
+        }
         $this->forward('User', 'new', array('newUser' => $newUser));
     }
 
     /**
      * Anzeigen des Formulars zum Bearbeiten der Benutzerdaten
-     * 
+     *
      * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
      * @param \EJC\Model\User $user
+     * @return void
      */
     public function editAction(\EJC\Model\User $user = NULL) {
         if ($user === NULL) {
@@ -101,10 +104,10 @@ class UserController extends AbstractController {
         $this->view->assign('user', $user);
         $this->view->render();
     }
-    
+
     /**
      * Anzeigen des Formulars zum Aendern des Passworts
-     * 
+     *
      * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
      * @param \EJC\Model\User $user
      */
@@ -124,7 +127,7 @@ class UserController extends AbstractController {
 
     /**
      * Aktualisiere die Daten des Users in DB und Session
-     * 
+     *
      * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
      * @param \EJC\Model\User $user
      */
@@ -138,10 +141,10 @@ class UserController extends AbstractController {
         $_SESSION['user'] = serialize($user);
         $this->forward('User', 'showSettings');
     }
-    
+
     /**
      * Aktualisiere das Passwort des Users in DB und Session
-     * 
+     *
      * @param \EJC\Model\User $user
      */
     public function updateActionPassword(\EJC\Model\User $user) {
@@ -150,11 +153,11 @@ class UserController extends AbstractController {
             header('HTTP/1.1 403 Forbidden');
             exit;
         }
-        
+
         $params = $this->request->getParams();
         if (md5($params['oldPassword']) !== $user->getPassword()) {
             $this->view->addErrorMessage('Sie haben ihr aktuelles Passwort falsch angegeben');
-            $this->forward('User', 'editPassword', array('user' => $user)); 
+            $this->forward('User', 'editPassword', array('user' => $user));
             return;
         }
         if (empty($params['newPassword'])) {
@@ -170,16 +173,16 @@ class UserController extends AbstractController {
 
     /**
      * Das Passwort des Benutzers ändern
-     * 
+     *
      * @return void
      */
     public function updatePasswordAction() {
         $user = $this->getCurrentUser();
     }
-    
+
     /**
      * display page for login form
-     * 
+     *
      * @return void
      */
     public function showLoginAction() {
@@ -189,7 +192,7 @@ class UserController extends AbstractController {
 
     /**
      * Logge den User ein
-     * 
+     *
      * @return void
      */
     public function loginAction(array $login) {
@@ -208,7 +211,7 @@ class UserController extends AbstractController {
             return;
         } else {
             // Wenn Username + Passwort passen, leite auf User-Startseite weiter
-            // Setze Login-Status in der User-Session            
+            // Setze Login-Status in der User-Session
             if ($user->getPassword() === md5($login['password'])) {
                 $_SESSION['user'] = serialize($user);
                 $_SESSION['login'] = time();
@@ -221,7 +224,7 @@ class UserController extends AbstractController {
             }
         }
     }
-    
+
     /**
     * Logge den User aus
     *
@@ -229,7 +232,7 @@ class UserController extends AbstractController {
     * @return void
     */
     public function logoutAction() {
-    
+
     	// L&ouml;sche die aktuelle Session des Users und leite Ihn auf die Startseite weiter.
     	session_destroy();
     	header('Location: index.php');

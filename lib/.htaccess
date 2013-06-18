@@ -1,2 +1,10 @@
+#
+# Verweigere den Zugriff auf das lib-Verzeichnis
+# ein Zugreifen von aussen ist nicht notwendig, wird daher
+# aus Sicherheitsgesichtspukten verboten
+#
+# @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+#
+
 Order deny,allow
 Deny from all
