@@ -6,6 +6,7 @@ namespace EJC\Controller;
  * Controller fuer die Tasks
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
 class TaskController extends AbstractController {
@@ -60,7 +61,7 @@ class TaskController extends AbstractController {
      }
     
     /**
-     * Erstelle einen neuen Taks
+     * Erstelle einen neuen Task
      * 
      * @param \EJC\Model\Task $task
      * @return void
@@ -77,6 +78,19 @@ class TaskController extends AbstractController {
      */
     public function editAction(\EJC\Model\Task $task) {
         $this->view->assign('task', $task);
+        $this->view->render();
+    }
+    
+    /**
+    * Aktualisiere die Aufgabe
+    *
+    * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+    * @param \EJC\Model\Task $task
+    * @return void
+    */
+    public function updateAction(\EJC\Model\Task $task) {
+    	$this->taskRepository->update($task);
+    	$this->forward('Project', 'listByUser');
     }
     
 }
