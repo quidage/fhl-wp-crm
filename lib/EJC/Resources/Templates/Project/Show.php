@@ -17,7 +17,7 @@
 
 <h1><?php echo $this->project->getName(); ?></h1>
 <p><strong>Status:</strong> <?php echo $this->project->getStatus(); ?><br />
-<strong>Beschreibung:</strong> <?php echo $this->project->getDescription(); ?></p>
+<strong>Beschreibung:</strong><br /><?php echo $this->project->getDescription(); ?></p>
 
     <table>
         <thead>
@@ -45,6 +45,8 @@
                         <td><?php echo $task->getName(); ?></td>
                         <td><?php echo $task->getDescription(); ?></td>
                         <td>
+                        	<a href="<?php $this->getUrl('Task', 'edit', array('task[id]' => $task->getId(), 'project[id]' => $project->getId())); ?>" title="Bearbeiten">
+                				<img src="images/iconset/writeNew_black.png" /></a> 
                         	<a href="<?php $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
                         		<img src="images/iconset/information.png" /></a>
                         </td>
