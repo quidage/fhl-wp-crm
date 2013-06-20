@@ -148,7 +148,7 @@ class UserController extends AbstractController {
      * @param \EJC\Model\User $user
      */
     public function updatePasswordAction(\EJC\Model\User $user) {
-        if ($user->getId() !== $this->getCurrentUser->getId()) {
+        if ($user->getId() !== $this->getCurrentUser()->getId()) {
             // nur der Benutzer selbst kann sein Passwort aendern
             header('HTTP/1.1 403 Forbidden');
             exit;
@@ -188,13 +188,28 @@ class UserController extends AbstractController {
      * @return void
      */
     public function sendNewPasswordAction() {
-        $user = $this->userRepository->findByEmail();
-        if ($user === NULL) {
-            $this->view->addErrorMessage('Es wurde kein User zu der E-Mail-Adresse gefunden.');
-            $this->forward('User', 'requestNewPassword');
+        $params = $this->request->getParams();
+        if ($params['email'] === '') {
+                $this->view->addErrorMessage('Geben sie eine E-Mail-Adresse an.');
+                $this->forward('User', 'requestNewPassword');
         } else {
-            $this->view->assign('title', 'Passwort wurde verschickt');
-            $this->view->render();
+            $user = $this->userRepository->findOneByEmail($params['email']);
+            if ($user === NULL) {
+                $this->view->addErrorMessage('Es wurde kein User zu der E-Mail-Adresse gefunden.');
+                $this->forward('User', 'requestNewPassword');
+            } else {
+                // Verschicke die Mail mit dem neuen Passwort
+                $newPassword = \EJC\Helper\StringHelper::createPassword();
+                var_dump($newPassword);
+                $content = "Ihre neuen Nutzerdaten: \r\n\r\nUsername: " . $user->getName() . " \r\nPasswort: $newPassword";
+                $this->sendMail($content, 'Ihr neues Passwort', $user->getEmail());
+
+                $user->setPassword($newPassword);
+                $this->userRepository->update($user);
+
+                $this->view->assign('title', 'Passwort wurde verschickt');
+                $this->view->render();
+            }
         }
     }
 

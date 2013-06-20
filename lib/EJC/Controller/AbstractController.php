@@ -150,8 +150,8 @@ class AbstractController {
      * @param string $bcc
      * @return void
      */
-    public function sendMail($content, $receiver, $cc = '', $bcc = '') {
-
+    public function sendMail($content, $subject, $receiver, $sender = 'no-reply@herrhansen.com') {
+        mail($receiver, $subject, $content, "From: " . $sender . "\r\n");
     }
 
 }
