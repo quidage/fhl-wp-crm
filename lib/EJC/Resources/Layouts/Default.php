@@ -1,12 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+<!DOCTYPE html>
+<html>
 
     <?php
     /**
      * Default Layout fuer http-Aufrufe
-     * 
+     *
      * @todo Logout-Button
-     * 
+     *
      * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
      * @author Enrioc Lauterschlag <enrico.lauterschlag@web.de>
      */
@@ -21,7 +21,7 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
         <script src="js/js-extends.js"></script>
         <script src="js/main.js"></script>
-        <script src="js/js-test.js"></script>  
+        <script src="js/js-test.js"></script>
     </head>
     <body>
         <div id="wrap">
@@ -36,15 +36,15 @@
                     <?php
                     if(isset($_SESSION['login'])){ ?>
 	                    <ul>
-	
+
 	                        <li><?php $this->getLink('&Uuml;bersicht', 'User', 'start'); ?></li>
 	                        <li><?php $this->getLink('Kunden', 'Customer', 'listByUser'); ?></li>
 	                        <li><?php $this->getLink('Projekte', 'Project', 'listByUser'); ?></li>
-	
+
 	                    </ul>
                     <?php } ?>
                 </div>
-				
+
                 <div id="menu_config">
                     <?php
                     if(isset($_SESSION['login'])){ ?>
@@ -65,7 +65,7 @@
                 <?php if (!empty($this->errors)): ?>
                     <div class="errors">
                         <?php echo $this->errors; ?>
-                    </div>   
+                    </div>
                 <?php endif; ?>
 
                 <?php echo $this->template; ?>
@@ -76,9 +76,9 @@
 
                 <p>fhl-wp-crm Designed &amp; Coded by Christian Hansen, Julian Hilbers &amp; Enrico Lauterschlag</p>
 
-            </div>            
+            </div>
 
         </div>
     </body>
 
-</html>             
+</html>
