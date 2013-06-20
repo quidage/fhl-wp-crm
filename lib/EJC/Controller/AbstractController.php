@@ -141,6 +141,19 @@ class AbstractController {
         return unserialize($_SESSION['user']);
     }
 
+    /**
+     * Versende eine E-Mail
+     *
+     * @param string $content
+     * @param string $receiver
+     * @param string $cc
+     * @param string $bcc
+     * @return void
+     */
+    public function sendMail($content, $receiver, $cc = '', $bcc = '') {
+
+    }
+
 }
 
 ?>

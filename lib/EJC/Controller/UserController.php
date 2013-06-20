@@ -147,7 +147,7 @@ class UserController extends AbstractController {
      *
      * @param \EJC\Model\User $user
      */
-    public function updateActionPassword(\EJC\Model\User $user) {
+    public function updatePasswordAction(\EJC\Model\User $user) {
         if ($user->getId() !== $this->getCurrentUser->getId()) {
             // nur der Benutzer selbst kann sein Passwort aendern
             header('HTTP/1.1 403 Forbidden');
@@ -172,16 +172,34 @@ class UserController extends AbstractController {
     }
 
     /**
-     * Das Passwort des Benutzers ändern
+     * Zeige Formular um ein neues Passwort anzufordern
      *
      * @return void
      */
-    public function updatePasswordAction() {
-        $user = $this->getCurrentUser();
+    public function requestNewPasswordAction() {
+        $this->view->assign('title', 'Neues Passwort anfordern');
+        $this->view->render();
     }
 
     /**
-     * display page for login form
+     * Versende ein neues Passwort an die in den Benutzerdaten angegebene
+     * E-Mail-Adresse
+     *
+     * @return void
+     */
+    public function sendNewPasswordAction() {
+        $user = $this->userRepository->findByEmail();
+        if ($user === NULL) {
+            $this->view->addErrorMessage('Es wurde kein User zu der E-Mail-Adresse gefunden.');
+            $this->forward('User', 'requestNewPassword');
+        } else {
+            $this->view->assign('title', 'Passwort wurde verschickt');
+            $this->view->render();
+        }
+    }
+
+    /**
+     * Zeige das Login-Formular
      *
      * @return void
      */
@@ -227,16 +245,15 @@ class UserController extends AbstractController {
 
     /**
     * Logge den User aus
+    * Loesche die aktuelle Session des Users und leite Ihn auf die Startseite weiter.
     *
     * @author: Enrico Lauterschlag <enrico.lauterschlag@web.de>
     * @return void
     */
     public function logoutAction() {
-
-    	// L&ouml;sche die aktuelle Session des Users und leite Ihn auf die Startseite weiter.
     	session_destroy();
-    	header('Location: index.php');
-    	return;
+    	header('Location: .');
+    	exit;
     }
 
 }

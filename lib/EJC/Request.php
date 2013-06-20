@@ -152,11 +152,16 @@ class Request {
      * @return void
      */
     public function checkLogin() {
-        if (strtolower($this->action) !== 'login') {
+        // Defiere die Actions, fuer welchen kein Login benoetigt wird
+        $actionsWithoutNeedForLogin = array(
+            'login', 'showLogin', 'requestNewPassword', 'sendNewPassword'
+        );
+
+        if (!in_array($this->action, $actionsWithoutNeedForLogin)) {
             // Wenn User nicht eingeloggt, schicke ihn auf die Login-Seite
             if (!isset($_SESSION['login']) || $_SESSION['login'] < time() - 1800) {
                 if ($this->action !== 'showLogin') {
-                    header('Location: .');
+                    header('Location: index.php');
                 }
             } else {
                 // Setze den login-Zeitpunkt neu, dass der User wieder 30min hat, bis er

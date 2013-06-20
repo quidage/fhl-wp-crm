@@ -1,18 +1,18 @@
  <?php
 /*
- * Template fuer \EJC\Controller\UserController->showLoginAction() 
- * 
+ * Template fuer \EJC\Controller\UserController->showLoginAction()
+ *
  * Startseite mit Login-Formular
- *  
+ *
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
 ?>
- 
+
  <h1>F&uuml;r Freelancer und Selbstst&auml;ndige</h1>
  <p>Zeitsparen bei der Kunden- und Projektverwaltung</p>
  <a href="#" class="button-link">Kostenlos registrieren</a>
- 
+
  <div id="loginform">
     <form name="login" method="post" action="<?php $this->getUrl('user', 'login'); ?>">
         <fieldset>
@@ -30,7 +30,7 @@
 	            </tr>
 	            <tr>
 	            	<td colspan="3" style="text-align:right; font-size:10px;">Noch nicht angemeldet? <a href="#">Jetzt registrieren!</a>
-	            	| <a href="#">Passwort vergessen?</a></td>
+	            	| <?php $this->getLink('Passwort vergessen?', 'User', 'requestNewPassword'); ?></td>
 	            </tr>
 	        </table>
         </fieldset>
