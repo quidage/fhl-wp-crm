@@ -1,8 +1,8 @@
 <?php
 /**
- * Template fuer \EJC\Controller\UserController->newAction()
+ * Template fuer \EJC\Controller\UserController->sendNewPasswordAction()
  *
- * Formular für die Erstellung eines neuen Users
+ * Bestaetigung fuer die Verschickung eines neuen Passworts an den User
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm

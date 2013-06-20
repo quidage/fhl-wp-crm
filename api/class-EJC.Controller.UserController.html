@@ -136,7 +136,7 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 				<b>Author:</b>
 				Enrico Lauterschlag &lt;<a
 href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.de</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-EJC.Controller.UserController.html#5-242" title="Go to source code">lib/EJC/Controller/UserController.php</a><br />
+		<b>Located at</b> <a href="source-class-EJC.Controller.UserController.html#5-274" title="Go to source code">lib/EJC/Controller/UserController.php</a><br />
 	</div>
 
 
@@ -447,7 +447,7 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="updateActionPassword" id="_updateActionPassword">
+	<tr data-order="updatePasswordAction" id="_updatePasswordAction">
 
 		<td class="attributes"><code>
 			 public 
@@ -457,8 +457,8 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_updateActionPassword">#</a>
-		<code><a href="source-class-EJC.Controller.UserController.html#145-172" title="Go to source code">updateActionPassword</a>( <span><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code> <var>$user</var></span> )</code>
+		<a class="anchor" href="#_updatePasswordAction">#</a>
+		<code><a href="source-class-EJC.Controller.UserController.html#145-172" title="Go to source code">updatePasswordAction</a>( <span><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code> <var>$user</var></span> )</code>
 
 		<div class="description short">
 			
@@ -485,7 +485,7 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="updatePasswordAction" id="_updatePasswordAction">
+	<tr data-order="requestNewPasswordAction" id="_requestNewPasswordAction">
 
 		<td class="attributes"><code>
 			 public 
@@ -495,18 +495,53 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 		</td>
 
 		<td class="name"><div>
-		<a class="anchor" href="#_updatePasswordAction">#</a>
-		<code><a href="source-class-EJC.Controller.UserController.html#174-181" title="Go to source code">updatePasswordAction</a>( )</code>
+		<a class="anchor" href="#_requestNewPasswordAction">#</a>
+		<code><a href="source-class-EJC.Controller.UserController.html#174-182" title="Go to source code">requestNewPasswordAction</a>( )</code>
 
 		<div class="description short">
 			
-<p>Das Passwort des Benutzers ändern</p>
+<p>Zeige Formular um ein neues Passwort anzufordern</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Das Passwort des Benutzers ändern</p>
+<p>Zeige Formular um ein neues Passwort anzufordern</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sendNewPasswordAction" id="_sendNewPasswordAction">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sendNewPasswordAction">#</a>
+		<code><a href="source-class-EJC.Controller.UserController.html#184-214" title="Go to source code">sendNewPasswordAction</a>( )</code>
+
+		<div class="description short">
+			
+<p>Versende ein neues Passwort an die in den Benutzerdaten angegebene
+E-Mail-Adresse</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Versende ein neues Passwort an die in den Benutzerdaten angegebene
+E-Mail-Adresse</p>
 
 
 
@@ -529,17 +564,17 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 
 		<td class="name"><div>
 		<a class="anchor" href="#_showLoginAction">#</a>
-		<code><a href="source-class-EJC.Controller.UserController.html#183-191" title="Go to source code">showLoginAction</a>( )</code>
+		<code><a href="source-class-EJC.Controller.UserController.html#216-224" title="Go to source code">showLoginAction</a>( )</code>
 
 		<div class="description short">
 			
-<p>display page for login form</p>
+<p>Zeige das Login-Formular</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>display page for login form</p>
+<p>Zeige das Login-Formular</p>
 
 
 
@@ -562,7 +597,7 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loginAction">#</a>
-		<code><a href="source-class-EJC.Controller.UserController.html#193-226" title="Go to source code">loginAction</a>( <span>array <var>$login</var></span> )</code>
+		<code><a href="source-class-EJC.Controller.UserController.html#226-259" title="Go to source code">loginAction</a>( <span>array <var>$login</var></span> )</code>
 
 		<div class="description short">
 			
@@ -595,17 +630,19 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 
 		<td class="name"><div>
 		<a class="anchor" href="#_logoutAction">#</a>
-		<code><a href="source-class-EJC.Controller.UserController.html#228-240" title="Go to source code">logoutAction</a>( )</code>
+		<code><a href="source-class-EJC.Controller.UserController.html#261-272" title="Go to source code">logoutAction</a>( )</code>
 
 		<div class="description short">
 			
-<p>Logge den User aus</p>
+<p>Logge den User aus Loesche die aktuelle Session des Users und leite Ihn auf
+die Startseite weiter.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Logge den User aus</p>
+<p>Logge den User aus Loesche die aktuelle Session des Users und leite Ihn auf
+die Startseite weiter.</p>
 
 
 
@@ -633,7 +670,8 @@ href="mailto:enrico.lauterschlag&#64;web.de">enrico.lauterschlag&#64;<!---->web.
 			<a href="class-EJC.Controller.AbstractController.html#_getCurrentUser">getCurrentUser()</a>, 
 			<a href="class-EJC.Controller.AbstractController.html#_initRepositories">initRepositories()</a>, 
 			<a href="class-EJC.Controller.AbstractController.html#_initView">initView()</a>, 
-			<a href="class-EJC.Controller.AbstractController.html#_redirect">redirect()</a>
+			<a href="class-EJC.Controller.AbstractController.html#_redirect">redirect()</a>, 
+			<a href="class-EJC.Controller.AbstractController.html#_sendMail">sendMail()</a>
 		</code></td>
 	</tr>
 	</table>
