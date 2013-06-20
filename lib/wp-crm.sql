@@ -2,7 +2,7 @@
 --
 -- Dump erstellt mit phpmydmin
 --
--- @created Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+-- created by Christian Hansen <christian.hansen@stud.fh-luebeck.de>
 
 -- phpMyAdmin SQL Dump
 -- version 3.5.8.1deb1
