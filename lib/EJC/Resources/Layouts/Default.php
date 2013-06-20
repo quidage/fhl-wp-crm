@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html>
-
     <?php
     /**
      * Default Layout fuer http-Aufrufe
-     *
-     * @todo Logout-Button
      *
      * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
      * @author Enrioc Lauterschlag <enrico.lauterschlag@web.de>
