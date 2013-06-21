@@ -9,81 +9,81 @@ namespace EJC;
  * @package wp-crm
  */
 class View {
-    
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @var string
 	 */
     protected $template;
-	
+
 	/**
 	 * Name der Template-Datei
 	 *
 	 * @var sting
 	 */
     protected $templateFile;
-	
+
 	/**
 	 * Pfad des Template-Ordners
-	 * 
+	 *
 	 * @var string
 	 */
     protected $templatesPath;
-    
+
     /**
      * Inhalt des Layouts
-     * 
+     *
      * @var string
      */
     protected $layout;
-    
+
     /**
      * Pfad der Layout-Datei
      *
      * @var string
      */
     protected $layoutFile;
-    
+
     /**
      * Pfad des Ordners der Layout-Dateien
      *
      * @var string
      */
     protected $layoutsPath;
-	
+
 	/**
 	 * Pfad des Partial Ordners
 	 *
 	 * @var string
 	 */
     protected $partialsPath;
-	
+
 	/**
 	 * Pfad zum Ressources Ordner
 	 *
 	 * @var string
 	 */
     protected $resourcesPath;
-    
+
 	/**
 	 * Alle Fehlermeldungen in HTML gerendert
 	 *
 	 * @var string
 	 */
     protected $errors;
-	
+
 	/**
 	 * Array der Fehlermeldungen
-	 * 
+	 *
 	 * @var array
 	 */
-    protected $errorMessages;
+    public $errorMessages;
 
 
     /**
      * Konstruktor
-     * 
+     *
      * @return void
      */
     public function __construct($ajax = FALSE) {
@@ -96,32 +96,32 @@ class View {
             $this->layoutFile = $this->layoutsPath . 'Default.php';
         }
     }
-    
+
     /**
-     * Setze die Pfade 
-     * 
+     * Setze die Pfade
+     *
      * @return void
      */
     public function initPaths() {
         $this->resourcesPath = APPROOT . '/lib/EJC/Resources';
         $this->templatesPath = $this->resourcesPath .  '/Templates/';
-        $this->layoutsPath = $this->resourcesPath .  '/Layouts/';        
-        $this->partialsPath = $this->resourcesPath .  '/Partials/';        
+        $this->layoutsPath = $this->resourcesPath .  '/Layouts/';
+        $this->partialsPath = $this->resourcesPath .  '/Partials/';
     }
 
     /**
-     * Lese den Inhalt auf dem Layout-File 
-     * 
+     * Lese den Inhalt auf dem Layout-File
+     *
      * @param string $layout
      * @return void
      */
     public function setLayout($layout) {
         $this->layoutFile = $this->layoutsPath . ucwords($layout) . '.php';
-    }      
+    }
 
     /**
      * Setze Template-Pfad
-     * 
+     *
      * @param string $template
      */
     public function setTemplate($template) {
@@ -130,17 +130,17 @@ class View {
 
     /**
      * Setze eien Variable zur Uebergabe an das Templdate
-     * 
+     *
      * @param string $key
      * @param mixed $value
      */
     public function assign($key, $value) {
         $this->$key = $value;
     }
-    
+
     /**
      * Render das Template
-     * 
+     *
      * @return void;
      */
     public function render() {
@@ -148,7 +148,7 @@ class View {
         ob_start();
         include $this->templateFile;
         $this->template = ob_get_clean();
-        
+
         include $this->layoutFile;
     }
 
@@ -156,7 +156,7 @@ class View {
     /**
      * @author Julian Hilbers
      * Generiert &uuml;ber die Methode getUrl einen kompletten a Tag
-	 * 
+	 *
 	 * @param string $title
      * @param string $controller
      * @param string $action
@@ -168,17 +168,17 @@ class View {
     public function getLink($title, $controller, $action, $params = array(), $ident = '', $target = '') {
     	$fchar = substr($ident, 0, 1);
 		$iVal = substr($ident, 1, strlen($ident));
-		
+
     	ob_start();
 		$this->getUrl($controller, $action, $params);
 		$url = ob_get_clean();
-		
+
 		echo '<a '.($ident !== '' ? ( $fchar == '#' ? 'id' : 'class' ).'="'.$iVal.'".' : '').' href="'.$url.'"'.($target !== '' ? ' target="'.$target.'"':'').'>'.$title.'</a>';
     }
-    
+
     /**
      * Rendere die Url zum Aufruf einer Action
-     * 
+     *
      * @param string $controller
      * @param string $action
 	 * @param array $params
@@ -191,10 +191,10 @@ class View {
         }
         echo $url;
     }
-    
+
     /**
      * Rendere ein Partial
-     * 
+     *
      * @param string $controller
      * @param string $partial
      * @return string rendered partial
@@ -204,19 +204,19 @@ class View {
         include $this->partialsPath . ucwords($controller) . '/' . ucwords($partial);
         return ob_get_clean();
     }
-    
+
     /**
      * F&uuml;ge der Ausgabe einen neuen Fehler hinzu
-     * 
+     *
      * @param type $message
      */
     public function addErrorMessage($message) {
         $this->errorMessages[] = $message;
     }
-    
+
     /**
      * Rendere die Fehlermeldungen
-     * 
+     *
      * @return void
      */
     public function renderErrorMessages() {
@@ -225,10 +225,10 @@ class View {
             $this->errors .= '<div class="error">' . $errorMessage . '</div>';
         }
     }
-    
+
     /**
      * Hole den Admin-Status des eingeloggten Users
-     * 
+     *
      * @return boolean
      */
     public function getAdmin() {
@@ -238,9 +238,9 @@ class View {
         }else{
             return false;
         }
-        
+
     }
-    
+
 }
 
 ?>

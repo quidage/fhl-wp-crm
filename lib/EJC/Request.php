@@ -154,7 +154,7 @@ class Request {
     public function checkLogin() {
         // Defiere die Actions, fuer welchen kein Login benoetigt wird
         $actionsWithoutNeedForLogin = array(
-            'login', 'showLogin', 'requestNewPassword', 'sendNewPassword'
+            'login', 'showLogin', 'register', 'createRegistered', 'requestNewPassword', 'sendNewPassword'
         );
 
         if (!in_array($this->action, $actionsWithoutNeedForLogin)) {

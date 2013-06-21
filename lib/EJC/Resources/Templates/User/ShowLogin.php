@@ -29,7 +29,7 @@
 	              	<td><button class="button-link" type="submit">Login</button></td>
 	            </tr>
 	            <tr>
-	            	<td colspan="3" style="text-align:right; font-size:10px;">Noch nicht angemeldet? <a href="#">Jetzt registrieren!</a>
+	            	<td colspan="3" style="text-align:right; font-size:10px;">Noch nicht angemeldet? <?php $this->getLink('Jetzt registrieren', 'User', 'register'); ?>
 	            	| <?php $this->getLink('Passwort vergessen?', 'User', 'requestNewPassword'); ?></td>
 	            </tr>
 	        </table>

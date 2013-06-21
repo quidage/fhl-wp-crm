@@ -259,6 +259,44 @@ class UserController extends AbstractController {
     }
 
     /**
+     * Zeige ein Formular fuer die Registrierung
+     *
+     * @return void
+     */
+    public function registerAction() {
+        $this->view->assign('title', 'Registrieren');
+        $this->view->assign('newUser', new \EJC\Model\User());
+        $this->view->render();
+    }
+
+    /**
+     * Registriere einen neuen User
+     *
+     * @param \EJC\Model\User $newUser
+     * @return void
+     */
+    public function createRegisteredAction(\EJC\Model\User $newUser) {
+        $params = $this->request->getParams();
+        // Fehlermeldungen ausgeben
+        if ($newUser->getName() === '') $this->view->addErrorMessage('Geben sie einen Usernamen an');
+        if ($newUser->getFirst_name() === '') $this->view->addErrorMessage('Geben sie einen Vornamen an');
+        if ($newUser->getLast_name() === '') $this->view->addErrorMessage('Geben sie einen Nachnamen an');
+        if ($newUser->getEmail() === FALSE) $this->view->addErrorMessage('Geben sie eine g&uuml;ltige E-Mail-Adresse an');
+        if ($newUser->getPassword() === NULL) {
+            $this->view->addErrorMessage('Geben sie ein Passwort an');
+        } elseif (md5($params['passwordConfirm']) !== $newUser->getPassword()) {
+            $this->view->addErrorMessage('Die Passw&ouml;rter stimmen nicht &uuml;berein');
+        }
+        if (!empty($this->view->errorMessages)) {
+            $this->forward('User', 'register', array('newUser', $newUser));
+        } else {
+            $this->userRepository->add($newUser);
+            $this->view->assign('title', 'Registrierung gestartet');
+            $this->view->render();
+        }
+    }
+
+    /**
     * Logge den User aus
     * Loesche die aktuelle Session des Users und leite Ihn auf die Startseite weiter.
     *
