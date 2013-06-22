@@ -26,7 +26,7 @@
             <div id="header">
 
                 <div id="logo">
-                    <p>FHL-WP-CRM</p>
+                    <p><?php $this->getLink('FHL-WP-CRM', 'User', 'start'); ?></p>
                 </div>
 
                 <div id="menu">
