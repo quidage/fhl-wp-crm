@@ -52,6 +52,11 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <div class="pagination-box">
+        <?php echo $this->getPagination($this->allOpenProjects, 'limitProjects'); ?>
+    </div>
+
     <?php else: ?>
     	<p>Es sind keine offenen Projekte vorhanden.</p>
 <?php endif; ?>
@@ -91,6 +96,11 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <div class="pagination-box">
+        <?php echo $this->getPagination($this->allOpenTasks, 'limitTasks'); ?>
+    </div>
+
     <?php else: ?>
     	<p>Es sind keine offenen Aufgaben vorhanden.</p>
 <?php endif; ?>
