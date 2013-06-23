@@ -40,6 +40,9 @@
                     	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
                     		<img src="images/iconset/information.png"></a>
                     </td>
+                    <td>
+                    	<?php $this->getLink('<img src="images/iconset/check-not-ok.png" title="Eintrag löschen" alt="eintrag löschen">','Project', 'deleteMessage', array('ajax' => true,'project[id]' => $project->getId()), '.std-btn');?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
