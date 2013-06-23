@@ -37,8 +37,12 @@
                     <td><?php echo $project->getCustomer()->getId() . ' | ' . $project->getCustomer()->getName(); ?></td>
                     <td><?php echo $project->getDescription(); ?></td>
                     <td>
-                    	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
-                    		<img src="images/iconset/information.png"></a>
+	                	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
+	                		<img src="images/iconset/information.png" /></a>
+	                </td>
+                    <td>
+                    	<a href="<?php $this->getUrl('Project', 'edit', array('project[id]' => $project->getId())); ?>" title="Bearbeiten">
+                			<img src="images/iconset/writeNew_black.png" /></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -74,6 +78,10 @@
                     	<a href="<?php $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
                     		<img src="images/iconset/information.png"></a>
                     </td>
+                    <td>
+                    	<a href="<?php $this->getUrl('Task', 'edit', array('task[id]' => $task->getID())); ?>" title="Bearbeiten">
+                    		<img src="images/iconset/writeNew_black.png"></a>
+                   	</td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
