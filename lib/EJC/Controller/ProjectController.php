@@ -9,9 +9,9 @@ namespace EJC\Controller;
  * @package wp-crm
  */
 class ProjectController extends AbstractController {
-    
+
     /**
-     * 
+     *
      * @param \EJC\Model\Project $project
      */
     public function showAction(\EJC\Model\Project $project) {
@@ -22,7 +22,7 @@ class ProjectController extends AbstractController {
 
     /**
      * Liste alle Projekte
-     * 
+     *
      * @return void
      */
     public function listAction() {
@@ -30,36 +30,46 @@ class ProjectController extends AbstractController {
         $this->view->assign('projects', $projects);
         $this->view->render();
     }
-    
+
     /**
      * Liste alle Projekte zu einem User
-     * 
+     *
      * @return void
      */
     public function listByUserAction(\EJC\Model\User $user = NULL) {
         if ($user === NULL) {
             $user = $this->getCurrentUser();
         }
-        $projects = $this->projectRepository->findByUser($user);
+        if (isset($this->params['filter']) && $this->params['filter'] !== '') {
+            $projects = $this->projectRepository->findByUserFiltered($user, $this->params['filter']);
+        } else {
+            $projects = $this->projectRepository->findByUser($user);
+        }
         $this->view->assign('title', 'Projekte');
+        $this->view->assign('filter', $this->params['filter']);
+        $this->view->assign('filterUrl', $this->request->getCurrentUrl());
         $this->view->assign('projects', $projects);
         $this->view->render();
     }
-    
+
     /**
-     * Liste alle Projekte zu einem User
-     * 
+     * Liste alle Projekte zu einem Customer
+     *
      * @return void
      */
-    public function listByCustomerAction() {
-        $projects = $this->projectRepository->findByParent_id();
+    public function listByCustomerAction(\EJC\Model\Customer $customer) {
+        if (isset($this->params['filter'])) {
+            $projects = $this->projectRepository->findByCustomerFiltered($customer, $this->params['filter']);
+        } else {
+            $projects = $this->projectRepository->findByParent_id($customer->getId());
+        }
         $this->view->assign('projects', $projects);
         $this->view->render();
     }
-    
+
     /**
      * Erstelle ein neues Project
-     * 
+     *
      * @param \EJC\Model\Project $project
      * @return void
      */
@@ -67,10 +77,10 @@ class ProjectController extends AbstractController {
         $this->projectRepository->add($project);
         $this->forward('Project', 'listByUser');
     }
-    
+
     /**
      * Formular zum Aendern des Projekts
-     * 
+     *
      * @param \EJC\Model\Project $project
      * @return void
      */
@@ -78,10 +88,10 @@ class ProjectController extends AbstractController {
         $this->view->assign('project', $project);
         $this->view->render();
     }
-    
+
     /**
      * Formalar fuer ein neues Project
-     * 
+     *
      * @return void
      */
     public function newAction(\EJC\Model\Customer $customer = NULL) {
@@ -93,10 +103,10 @@ class ProjectController extends AbstractController {
         $this->view->assign('newProject', new \EJC\Model\Project());
         $this->view->render();
     }
-    
+
     /**
      * Aktualisiere das Projekt
-     * 
+     *
      * @param \EJC\Model\Project $project
      * @return void
      */
@@ -104,6 +114,6 @@ class ProjectController extends AbstractController {
         $this->projectRepository->update($project);
         $this->forward('Project', 'listByUser');
     }
-    
+
 }
 ?>

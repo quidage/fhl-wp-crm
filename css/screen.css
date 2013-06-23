@@ -1,10 +1,10 @@
-/** 
+/**
 * Dateiname   : screen.css
 * Erstellt am : 19.03.2013, 20:47:49
 * Beschreibung: In dieser CSS-Datei, werden die Formatierungen fuer die verwendeten HTML-Elemente und fuer das Grundgeruest des Layouts definiert.
-* 
-* @author Enrico Lauterschlag <enrico.lauterschlag@web.de> 
-* Farbcodes: dunkelblau -> #0c5a84    hellblau -> #2688bc    
+*
+* @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+* Farbcodes: dunkelblau -> #0c5a84    hellblau -> #2688bc
 */
 
 
@@ -164,7 +164,7 @@ caption {
 * Dieser wird rechtsbuendig ausgerichtet.
 */
 caption span.new-object {
-    float: right; 
+    float: right;
     padding-right: 20px;
 }
 
@@ -253,7 +253,7 @@ label {
 }
 
 form table {
-	border:0px;     
+	border:0px;
 }
 
 form table td {
@@ -286,11 +286,11 @@ input[type="submit"], input[type="reset"] {
 
 /**
 * Formatierungen fuer einen Layer (Lightbox)
-* Ueber JavaScript werden die folgenden Formatierungen fuer zwei div-container aufgerufen und mit Inhalt gefuellt. 
+* Ueber JavaScript werden die folgenden Formatierungen fuer zwei div-container aufgerufen und mit Inhalt gefuellt.
 * Std-overlay bewirkt, dass die komplette Webseite mit einem blauen und teilweise transparenten Layer belegt wird. Ueber diesen Layer wird ein
 * weitere div-container gelegt, der den Inhalt aufnimmt und zentriert im Browser-Fenster ist (Formatierungen in der Klasse std-window). Dieser
 * besitzt abgerundete Ecken und einen Schatten. Die Formatierungen fuer std-overlay verhindert, dass irgendetwas anderes auf der Webseite geklickt
-* werden kann und nur Aktionen, im div der mit std-window definiert wird, ausgefuehrt werden koennen.  
+* werden kann und nur Aktionen, im div der mit std-window definiert wird, ausgefuehrt werden koennen.
 */
 div#std-overlay {
     position:fixed;
@@ -405,6 +405,13 @@ div#std-overlay img {
 	postition:absolute;
 	margin-top:40px;
 	padding:20px 20px 20px 0;
+}
+
+/**
+* eine Box fuer die Filterfunktion
+*/
+.filter-box {
+    text-align: right;
 }
 
 /*

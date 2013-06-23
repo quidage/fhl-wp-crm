@@ -45,6 +45,13 @@ class AbstractController {
     protected $request;
 
     /**
+     * Paramter welche vom Request uebergeben werden
+     *
+     * @var array
+     */
+    protected $params;
+
+    /**
      *
      * @var \EJC\Repository\CustomerRepository
      */
@@ -72,6 +79,7 @@ class AbstractController {
         $this->request = $request;
         $this->initView();
         $this->initRepositories();
+        $this->params = $this->request->getParams();
     }
 
     /**

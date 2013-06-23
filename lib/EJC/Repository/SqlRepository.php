@@ -84,7 +84,7 @@ class SqlRepository {
 		if ($orderBy !== NULL) $query .= " ORDER BY " . $orderBy;
 		if ($limit !== NULL) $query .= " LIMIT " . $limit;
 		return $query;
-	} // public function buildSelectQuery($select, $table, $where = NULL, $groupBy = NULL, $orderBy = NULL, $limit = NULL)
+	}
 
     /**
 	 * Baue ein UPDATE query
@@ -301,7 +301,7 @@ class SqlRepository {
      * @return void
      */
     public function updateOneById($id, $propertiesValues) {
-        $query = $this->buildUpdateQuery($this->table, $propertiesValues, "id = " . intval($id));
+        $query = $this->buildUpdateQuery($this->table, $propertiesValues, "deleted = 0 id = " . intval($id));
         $this->mysqli->query($query);
     }
 
@@ -312,16 +312,56 @@ class SqlRepository {
      * @param array $filter
      * @retur array
      */
-    public function findByParentIdWithOrFilter($parentId, $filter) {
+    public function findByParent_idWithOrFilter($parent_id, $filter) {
+        $query = $this->buildSelectQuery("*", $this->table, " parent_id = $parent_id AND deleted = 0 AND (" . $this->createFilterString($filter)) . ")";
+        return $this->getResultArray($query);
+    }        
+
+
+    /**
+     * Finde alle Objekte zu der ID eines Grosselternobject nach einen filter
+     * gefilter
+     *
+     * @param int $grandParent_id
+     * @param array $filter
+     * @return array
+     */
+    public function findByGrandParent_idWithOrFilter($grandParent_id, $filter) {
+        $query = $this->buildSelectQuery("*", $this->getTable(), " parent_id  IN ("
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id)
+                . ") AND deleted = 0 AND (" . $this->createFilterString($filter)) . ")";
+        return $this->getResultArray($query);
+    }
+
+    /**
+     * Finde alle Objekte zu der ID eines UrGrosselternobject nach einem
+     * Filterstring gefiltert
+     *
+     * @param int $greatGrandParent_id
+     * @param array $filter
+     * @return array
+     */
+    public function findByGreatGrandParent_idWithOrFilter($greatGrandParent_id, $filter) {
+        $query = $this->buildSelectQuery("*", $this->getTable(), " deleted = 0 AND (" . $this->createFilterString($filter) . ") AND parent_id  IN ("
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id  IN ("
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getParentRepository()->getTable(), " parent_id = " . $greatGrandParent_id) . ")"));
+        $this->getResultArray($query);
+    }
+
+    /**
+     * Erstelle einen OR-Filterstring aus einem Filter-Array
+     *
+     * @param array $filter
+     * @return string
+     */
+    public function createFilterString($filter) {
         $orfilter = '';
         foreach ($filter AS $key => $value) {
             if ($value !== '') {
-                $orfilter = " OR $key LIKE $value ";
+                $orfilter .= " OR $key LIKE '%$value%' ";
             }
         }
-        $orfilter = substr($orfilter, 3);
-        $query = $this->buildSelectQuery("*", $this->table, " parent_id = $parentId AND deleted = 0 AND (" . $orfilter . ")");
-        return $this->getResultArray($query);
+        return substr($orfilter, 3);
     }
 
 }

@@ -14,9 +14,10 @@ class Request {
 
     protected $controller;
     protected $action;
-    protected $params;
     protected $view;
 	protected $ajax;
+    protected $params = array();
+    protected $actionParams = array();
 
     /**
      * Konstruktor
@@ -68,7 +69,7 @@ class Request {
                                 call_user_func_array(array($object, 'set' . ucwords($paramValueKey)), array($paramValueValue));
                             }
                         }
-                        $this->params = array_merge(array($object), $this->params);
+                        $this->actionParams = array_merge(array($object), $this->actionParams);
                         unset($this->params[$paramName]);
                     }
                 } else {
@@ -97,7 +98,7 @@ class Request {
                                 }
                             }
                         }
-                        $this->params = array_merge(array($object), $this->params);
+                        $this->actionParams = array_merge(array($object), $this->actionParams);
                         unset($this->params[$paramName]);
                     } catch (\EJC\Exception\ClassLoaderException $e) {
                         // Es existiert kein Model zu dem Parameter
@@ -135,7 +136,7 @@ class Request {
         $actionName = $this->action . 'Action';
 
         // Rufe die Action mit den Parametern auf
-        call_user_func_array(array($controller, $actionName), $this->params);
+        call_user_func_array(array($controller, $actionName), $this->actionParams);
     }
 
     /**
@@ -220,6 +221,15 @@ class Request {
      */
     public function getParams() {
         return $this->params;
+    }
+
+    /**
+     * Hole die URL der aktuellen Seite
+     *
+     * @return string
+     */
+    public function getCurrentUrl() {
+        return $_SERVER['REQUEST_URI'];
     }
 
 }
