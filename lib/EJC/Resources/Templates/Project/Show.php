@@ -47,10 +47,10 @@
                         <td><?php echo $task->getName(); ?></td>
                         <td><?php echo $task->getDescription(); ?></td>
                         <td>
-                        	<a href="<?php $this->getUrl('Task', 'edit', array('task[id]' => $task->getId(), 'project[id]' => $this->project->getId())); ?>" title="Bearbeiten">
-                				<img src="images/iconset/writeNew_black.png" /></a>
                         	<a href="<?php $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
                         		<img src="images/iconset/information.png" /></a>
+                        	<a href="<?php $this->getUrl('Task', 'edit', array('task[id]' => $task->getId(), 'project[id]' => $this->project->getId())); ?>" title="Bearbeiten">
+                				<img src="images/iconset/writeNew_black.png" /></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
