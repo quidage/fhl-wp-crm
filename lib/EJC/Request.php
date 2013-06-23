@@ -42,7 +42,7 @@ class Request {
             unset($getParams['controller']);
             unset($getParams['action']);
 			unset($getParams['ajax']);
-			
+
 			// View initialisieren unter Beachtung des benötigten Layouts
 			$this->view = new \EJC\View($this->isAjax());
 
@@ -166,6 +166,7 @@ class Request {
         if (!in_array($this->action, $actionsWithoutNeedForLogin)) {
             // Wenn User nicht eingeloggt, schicke ihn auf die Login-Seite
             if (!isset($_SESSION['login']) ||  $_SESSION['login'] < time() - 1800) {
+
                 session_destroy();
                 header('Location: index.php');
             } else {

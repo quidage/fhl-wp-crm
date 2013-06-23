@@ -150,8 +150,14 @@ class AbstractController {
      * @param string $bcc
      * @return void
      */
-    public function sendMail($content, $subject, $receiver, $sender = 'no-reply@herrhansen.com') {
-        mail($receiver, $subject, $content, "From: " . $sender . "\r\n");
+    public function sendMail($receiver, $subject, $content) {
+        include_once APPROOT . '/lib/config.php';
+        //$mailSent = mail($receiver, $subject, $content, "From: " . $config['sender'] . "\r\n");
+        $mailSent = mail($receiver, $subject, $content);
+        if(!$mailSent) {
+            $this->view->addErrorMessage('Die E-Mail konnte nicht verschickt werden.');
+        }
+        return $mailSent;
     }
 
 }

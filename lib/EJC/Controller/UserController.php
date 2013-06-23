@@ -200,15 +200,18 @@ class UserController extends AbstractController {
             } else {
                 // Verschicke die Mail mit dem neuen Passwort
                 $newPassword = \EJC\Helper\StringHelper::createPassword();
-                var_dump($newPassword);
                 $content = "Ihre neuen Nutzerdaten: \r\n\r\nUsername: " . $user->getName() . " \r\nPasswort: $newPassword";
-                $this->sendMail($content, 'Ihr neues Passwort', $user->getEmail());
 
-                $user->setPassword($newPassword);
-                $this->userRepository->update($user);
+                $mailSent = $this->sendMail($user->getEmail(), 'Ihr neues Passwort', $content);
+                if (!$mailSent) {
+                    $this->forward('User', 'requestNewPassword');
+                } else {
+                    $user->setPassword($newPassword);
+                    $this->userRepository->update($user);
 
-                $this->view->assign('title', 'Passwort wurde verschickt');
-                $this->view->render();
+                    $this->view->assign('title', 'Passwort wurde verschickt');
+                    $this->view->render();
+                }
             }
         }
     }

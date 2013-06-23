@@ -1,9 +1,9 @@
 <?php
 /**
  * Template fuer \EJC\Controller\ProjectController->ListByUserAction()
- * 
+ *
  * Liste alle Projects eines Users
- * 
+ *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
@@ -27,16 +27,17 @@
     <tbody>
         <?php foreach ($this->projects AS $project) : ?>
             <tr>
-                <td><?php echo $project->getName(); ?></td> 
-                <td><?php echo $project->getDescription(); ?></td> 
-                <td><?php echo $project->getStatus(); ?></td> 
+                <td><?php echo $project->getName(); ?></td>
+                <td><?php echo $project->getDescription(); ?></td>
+                <td><?php echo $project->getStatus(); ?></td>
                 <td>
                 	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
                 		<img src="images/iconset/information.png" /></a>
+                </td><td>
                 	<a href="<?php $this->getUrl('Project', 'edit', array('project[id]' => $project->getId())); ?>" title="Bearbeiten">
                 		<img src="images/iconset/writeNew_black.png" /></a>
-                </td> 
+                </td>
             </tr>
-        <?php endforeach; ?> 
+        <?php endforeach; ?>
     </tbody>
 </table>
