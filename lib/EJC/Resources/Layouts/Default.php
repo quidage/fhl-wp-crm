@@ -46,11 +46,13 @@
                     <?php
                     if(isset($_SESSION['login'])){ ?>
                     	<ul>
-                    		<li><img src="images/config.png" height="32" />
+                    		<li>
+                                <img src="images/config.png" height="32" />
                     			<ul>
-                    				<li><?php $this->getLink('Einstellungen', 'user', 'showSettings'); ?></li>
-                    				<li><?php $this->getLink('Logout', 'User', 'logout'); ?></li>
-                    			</ul></li>
+                    				<?php $this->getLink('<li>Einstellungen</li>', 'user', 'showSettings'); ?>
+                    				<?php $this->getLink('<li>Logout</li>', 'User', 'logout'); ?>
+                    			</ul>
+                            </li>
                     	</ul>
                     <?php } ?>
                 </div>
