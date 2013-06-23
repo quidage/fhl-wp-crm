@@ -167,8 +167,8 @@ class SqlRepository {
 	 * @param int $parent_id
      * @return array
 	 */
-	public function findByParent_id($parent_id) {
-		$query = $this->buildSelectQuery("*", $this->getTable(), " parent_id = '" . intval($parent_id) . "'");
+	public function findByParent_id($parent_id, $limit = NULL) {
+		$query = $this->buildSelectQuery("*", $this->getTable(), " parent_id = '" . intval($parent_id) . "'", NULL, NULL, $limit);
 		return $this->getResultArray($query);
 	}
 
@@ -190,10 +190,10 @@ class SqlRepository {
      * @param int $greatGrandParent_id
      * @return array
      */
-    public function findByGreatGrandParent_id($greatGrandParent_id) {
+    public function findByGreatGrandParent_id($greatGrandParent_id, $limit = NULL) {
         $query = $this->buildSelectQuery("*", $this->getTable(), " parent_id  IN ("
                 . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id  IN ("
-                . $this->buildSelectQuery("id", $this->getParentRepository()->getParentRepository()->getTable(), " parent_id = " . $greatGrandParent_id) . ")"));
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getParentRepository()->getTable(), " parent_id = " . $greatGrandParent_id) . ")"), NULL, NULL, $limit);
         $this->getResultArray($query);
     }
 
@@ -204,8 +204,8 @@ class SqlRepository {
 	 * @param string $status
      * @return array
 	 */
-	public function findByParent_idAndStatus($parent_id, $status) {
-		$query = $this->buildSelectQuery("*", $this->getTable(), " parent_id = '" . intval($parent_id) . "' AND status = '" . $status . "'");
+	public function findByParent_idAndStatus($parent_id, $status, $limit = NULL) {
+		$query = $this->buildSelectQuery("*", $this->getTable(), " parent_id = '" . intval($parent_id) . "' AND status = '" . $status . "'", NULL, NULL, $limit);
 		return $this->getResultArray($query);
 	}
 
