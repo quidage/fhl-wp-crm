@@ -22,8 +22,9 @@
 <table>
     <thead>
         <caption>Projekte
-        <span class="new-object"><a href="<?php $this->getUrl('Project', 'new'); ?>" title="Neues Projekt">
-    		<img src="images/iconset/plus_white.png" />Neues Projekt</a></span>
+        <span class="new-object">
+    		<?php $this->getLink('<img src="images/iconset/plus_white.png" alt="neues projekt">Neues Projekt ','Project', 'new', array('ajax' => true), '.std-btn');?>
+    	</span>
         </caption>
         <tr>
             <th>Name</th>
@@ -45,8 +46,7 @@
                 	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
                 		<img src="images/iconset/information.png" /></a>
                 </td><td>
-                	<a href="<?php $this->getUrl('Project', 'edit', array('project[id]' => $project->getId())); ?>" title="Bearbeiten">
-                		<img src="images/iconset/writeNew_black.png" /></a>
+                	<?php $this->getLink('<img src="images/iconset/writeNew_black.png" title="Bearbeiten"></a>','Project', 'edit', array('ajax' => true, 'project[id]' => $project->getId()), '.std-btn');?>
                 </td>
             </tr>
         <?php endforeach; ?>
