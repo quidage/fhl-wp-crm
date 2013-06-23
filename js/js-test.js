@@ -10,37 +10,11 @@
 //x.find('div').eq(1).addClass('it_works');
 
 
-
+// Onload für Testzwecke
+/*
 window.onload = function() {
-	
-	var wnd1;
-	
-	$('.std-btn').each(
-		function(btn){
-			btn.click(function(e){
-				e.preventDefault();
-				wnd1 = null;
-				var obj = { 'url': btn.attr('href') };
-				$.ajax(obj, function( resp ){
-					wnd1 = crmWindow();
-					wnd1.addOverlay();
-					wnd1.update(resp);
-					wnd1.draw();
-					
-					document.body.addEventListener("keydown", function(e){
-						if( e.keyCode === 27 ) {
-							wnd1.close();
-						}
-					}, false);
-				});
-			});
-		}
-	);
-	
-	
-	
 }
-
+*/
 
 
 /*
