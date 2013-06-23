@@ -140,7 +140,7 @@
 				<b>Author:</b>
 				Chrstian Hansen &lt;<a
 href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---->stud.fh-luebeck.de</a>&gt;<br />
-		<b>Located at</b> <a href="source-class-EJC.Repository.CustomerRepository.html#5-25" title="Go to source code">lib/EJC/Repository/CustomerRepository.php</a><br />
+		<b>Located at</b> <a href="source-class-EJC.Repository.CustomerRepository.html#5-46" title="Go to source code">lib/EJC/Repository/CustomerRepository.php</a><br />
 	</div>
 
 
@@ -182,6 +182,50 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="findByUserWithOrFilter" id="_findByUserWithOrFilter">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_findByUserWithOrFilter">#</a>
+		<code><a href="source-class-EJC.Repository.CustomerRepository.html#25-44" title="Go to source code">findByUserWithOrFilter</a>( <span><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code> <var>$user</var></span>, <span>string <var>$filterString</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Finde alle Customer zu User nach einem String gefiltert</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Finde alle Customer zu User nach einem String gefiltert</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd><code><code><a href="class-EJC.Model.User.html">EJC\Model\User</a></code></code><br>$user</dd>
+					<dt><var>$filterString</var></dt>
+					<dd><code>string</code><br>$filterString</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	</table>
 
 	<table class="summary inherited">
@@ -207,15 +251,19 @@ href="mailto:christian.hansen&#64;stud.fh-luebeck.de">christian.hansen&#64;<!---
 			<a href="class-EJC.Repository.SqlRepository.html#_buildInsertQuery">buildInsertQuery()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_buildSelectQuery">buildSelectQuery()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_buildUpdateQuery">buildUpdateQuery()</a>, 
+			<a href="class-EJC.Repository.SqlRepository.html#_createFilterString">createFilterString()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_delete">delete()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_findAll">findAll()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_findByGrandParent_id">findByGrandParent_id()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_findByGrandParent_idAndStatus">findByGrandParent_idAndStatus()</a>, 
+			<a href="class-EJC.Repository.SqlRepository.html#_findByGrandParent_idWithOrFilter">findByGrandParent_idWithOrFilter()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_findByGreatGrandParent_id">findByGreatGrandParent_id()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_findByGreatGrandParent_idAndStatus">findByGreatGrandParent_idAndStatus()</a>, 
+			<a href="class-EJC.Repository.SqlRepository.html#_findByGreatGrandParent_idWithOrFilter">findByGreatGrandParent_idWithOrFilter()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_findById">findById()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_findByParent_id">findByParent_id()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_findByParent_idAndStatus">findByParent_idAndStatus()</a>, 
+			<a href="class-EJC.Repository.SqlRepository.html#_findByParent_idWithOrFilter">findByParent_idWithOrFilter()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_findByProperty">findByProperty()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_findOneByProperty">findOneByProperty()</a>, 
 			<a href="class-EJC.Repository.SqlRepository.html#_getFirstResult">getFirstResult()</a>, 
