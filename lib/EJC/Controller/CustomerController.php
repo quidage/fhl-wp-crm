@@ -96,7 +96,7 @@ class CustomerController extends AbstractController {
      */
     public function createAction(\EJC\Model\Customer $newCustomer) {
         $this->customerRepository->add($newCustomer);
-        $this->redirect('Customer', 'listByUser');
+        $this->redirect('Customer', 'listByUser', array('user' => $this->getCurrentUser()));
     }
 
 }

@@ -140,7 +140,11 @@ class AbstractController {
         $paramString = '';
         if (is_array($params)) {
             foreach ($params AS $key => $value) {
-                $paramString .= '&' . $key . '=' . $value;
+                if (is_object($value)) {
+                    $paramString .= '&' . strtolower($key) . '[id]=' . $value->getId();
+                } else {
+                    $paramString .= '&' . $key . '=' . $value;
+                }
             }
         }
         header('Location: ' . $this->view->getUrl($controller, $action) . $paramString);
