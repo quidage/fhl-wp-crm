@@ -1,7 +1,7 @@
 <?php
 /**
  * Template fuer \EJC\Controller\ProjectController->showAction()
- * 
+ *
  * Zeige die Details zu einem Project und
  * eine Liste aller Tasks
  *
@@ -9,10 +9,10 @@
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
- 
+
  // Schreibe das Tasks-Array in eine Variable zur spateren Verwendung
  $tasks = $this->project->getTasks();
- 
+
 ?>
 
 <h1><?php echo $this->project->getName(); ?></h1>
@@ -25,8 +25,8 @@
                 Offene Aufgaben
                 <span class="new-object"><a href="<?php $this->getUrl('Task', 'new', array('project[id]' => $this->project->getId())); ?>" title="Neue Aufgabe">
                 	<img src="images/iconset/plus_white.png">Neue Aufgabe</a></span>
-            </caption> 
-            <?php if (!empty($tasks)): ?>           
+            </caption>
+            <?php if (!empty($tasks)): ?>
                 <tr>
                     <th>Name</th>
                     <th>Beschreibung</th>
@@ -45,8 +45,8 @@
                         <td><?php echo $task->getName(); ?></td>
                         <td><?php echo $task->getDescription(); ?></td>
                         <td>
-                        	<a href="<?php $this->getUrl('Task', 'edit', array('task[id]' => $task->getId(), 'project[id]' => $project->getId())); ?>" title="Bearbeiten">
-                				<img src="images/iconset/writeNew_black.png" /></a> 
+                        	<a href="<?php $this->getUrl('Task', 'edit', array('task[id]' => $task->getId(), 'project[id]' => $this->project->getId())); ?>" title="Bearbeiten">
+                				<img src="images/iconset/writeNew_black.png" /></a>
                         	<a href="<?php $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
                         		<img src="images/iconset/information.png" /></a>
                         </td>

@@ -18,6 +18,7 @@
         </caption>
         <tr>
             <th>Name</th>
+            <th>Kunde</th>
             <th>Beschreibung</th>
             <th>Status</th>
             <th></th>
@@ -28,6 +29,7 @@
         <?php foreach ($this->projects AS $project) : ?>
             <tr>
                 <td><?php echo $project->getName(); ?></td>
+                <td><?php echo $project->getCustomer()->getId() . ' | ' . $project->getCustomer()->getName(); ?></td>
                 <td><?php echo $project->getDescription(); ?></td>
                 <td><?php echo $project->getStatus(); ?></td>
                 <td>

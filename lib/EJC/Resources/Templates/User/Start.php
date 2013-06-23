@@ -1,7 +1,7 @@
 <?php
 /**
  * Template fuer \EJC\Controller\UserController->startAction()
- * 
+ *
  * die Start-Action des Users
  * Zeige offene Projekts und Taks
  *
@@ -11,7 +11,7 @@
  */
 ?>
 
-<?php 
+<?php
 // Zeige offene Projekte
 ?>
 <?php if (!empty($this->openProjects)): ?>
@@ -24,6 +24,7 @@
             </caption>
             <tr>
                 <th>Name</th>
+                <th>Kunde</th>
                 <th>Beschreibung</th>
                 <th></th>
             </tr>
@@ -32,6 +33,7 @@
             <?php foreach ($this->openProjects AS $project): ?>
                 <tr>
                     <td><?php echo $project->getName(); ?></td>
+                    <td><?php echo $project->getCustomer()->getId() . ' | ' . $project->getCustomer()->getName(); ?></td>
                     <td><?php echo $project->getDescription(); ?></td>
                     <td>
                     	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
@@ -43,9 +45,9 @@
     </table>
     <?php else: ?>
     	<p>Es sind keine offenen Projekte vorhanden.</p>
-<?php endif; ?> 
+<?php endif; ?>
 
-<?php 
+<?php
 // Zeige offen Aufgaben
 ?>
 <?php if (!empty($this->openTasks)): ?>
@@ -53,9 +55,10 @@
         <thead>
             <caption>
                 Offene Aufgaben
-            </caption>            
+            </caption>
             <tr>
                 <th>Name</th>
+                <th>Projekt</th>
                 <th>Beschreibung</th>
                 <th></th>
             </tr>
@@ -64,6 +67,7 @@
             <?php foreach ($this->openTasks AS $task): ?>
                 <tr>
                     <td><?php echo $task->getName(); ?></td>
+                    <td><?php echo $task->getProject()->getId() . ' | ' . $task->getProject()->getName(); ?></td>
                     <td><?php echo $task->getDescription(); ?></td>
                     <td>
                     	<a href="<?php $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
@@ -75,4 +79,4 @@
     </table>
     <?php else: ?>
     	<p>Es sind keine offenen Aufgaben vorhanden.</p>
-<?php endif; ?> 
+<?php endif; ?>

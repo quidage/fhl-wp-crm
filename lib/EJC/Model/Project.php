@@ -96,6 +96,16 @@ class Project extends AbstractModel {
     }
 
     /**
+     * Hole den Customer zu dem Project
+     *
+     * @return \EJC\Model\Customer
+     */
+    public function getCustomer() {
+        $customerRepository = new \EJC\Repository\CustomerRepository();
+        return $customerRepository->findById($this->parent_id);
+    }
+
+    /**
      * Hole alle moeglichen Status fuer das Model
      *
      * @return array

@@ -9,17 +9,17 @@ namespace EJC\Model;
  * @package wp-crm
  */
 class Task extends AbstractModel {
-    
+
     /**
      * Beschreibung
-     * 
+     *
      * @var string
      */
     protected $description;
 
     /**
      * Status des Tasks
-     * 
+     *
      * @var string
      */
     protected $status;
@@ -34,7 +34,7 @@ class Task extends AbstractModel {
 
     /**
      * Hole die Beschreibung
-     * 
+     *
      * @return string
      */
     public function getDescription() {
@@ -43,7 +43,7 @@ class Task extends AbstractModel {
 
     /**
      * Setze die Beschreibung
-     * 
+     *
      * @param string $description
      */
     public function setDescription($description) {
@@ -52,7 +52,7 @@ class Task extends AbstractModel {
 
     /**
      * Hole den Status
-     * 
+     *
      * @return string
      */
     public function getStatus() {
@@ -61,21 +61,31 @@ class Task extends AbstractModel {
 
     /**
      * Setze den Status
-     * 
+     *
      * @param string $status
      */
     public function setStatus($status) {
         $this->status = $status;
     }
-    
+
     /**
-     * Hole alle moeglichen Status fuer das Model 
-     * 
+     * Hole alle moeglichen Status fuer das Model
+     *
      * @return array
      */
     public function getPossibleStatus() {
         return array('Offen', 'Geschlossen');
-    }    
+    }
+
+    /**
+     * Hole das Projekt zum Taks
+     *
+     * @return \EJC\Model\Project
+     */
+    public function getProject() {
+        $projectRepository = new \EJC\Repository\ProjectRepository();
+        return $projectRepository->findById($this->parent_id);
+    }
 
 }
 ?>
