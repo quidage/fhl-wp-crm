@@ -16,5 +16,5 @@
 <form name="edit" method="post" action="index.php?controller=project&action=delete">
 	<input type="hidden" name="project[id]" value="<?php echo $this->projectData->getId(); ?>" />
 	<input type="submit" value="Löschen" class="submit button-link" />
-	<input type="submit" value="Abbrechen" class="submit button-link" />
+	<input id="close-wnd" type="submit" value="Abbrechen" class="submit button-link" />
 </form>

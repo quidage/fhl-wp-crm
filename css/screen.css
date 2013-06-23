@@ -317,22 +317,32 @@ div#std-overlay img {
 	border: 0px;
 }
 
-.std-window {
+.std-window, .msg-window {
     position: absolute;
     left: 50%;
     top: 20%;
-    width: 50%;
-    height: 50%;
     margin-left: -27%;
     padding:1%;
     background-color: #fff;
-    border:10px solid #000;
+    border: 1px solid #000;
     border-radius: 10px;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
     box-shadow:5px 5px 0px rgba(0,0,0,0.2);
         -moz-box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
         -webkit-box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.std-window {
+    width: 50%;
+    height: 50%;
+    margin-left: -27%;
+    padding:1%;
+}
+
+.msg-window {
+    width: 20%;
+    margin-left: -10%;
 }
 
 /*

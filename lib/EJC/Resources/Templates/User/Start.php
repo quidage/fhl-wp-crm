@@ -39,25 +39,19 @@
                     <td><?php echo $project->getCustomer()->getId() . ' | ' . $project->getCustomer()->getName(); ?></td>
                     <td><?php echo $project->getDescription(); ?></td>
                     <td>
-	                	<a href="<?php echo $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
+	                	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
 	                		<img src="images/iconset/information.png" /></a>
 	                </td>
                     <td>
-                    	<a href="<?php echo $this->getUrl('Project', 'edit', array('project[id]' => $project->getId())); ?>" title="Bearbeiten">
-                			<img src="images/iconset/writeNew_black.png" /></a>
+                		<?php $this->getLink('<img src="images/iconset/writeNew_black.png" title="Eintrag bearbeiten" alt="bearbeiten">','Project', 'edit', array('ajax' => true,'project[id]' => $project->getId()), '.std-btn');?>
                     </td>
                     <td>
-                    	<?php $this->getLink('<img src="images/iconset/check-not-ok.png" title="Eintrag löschen" alt="eintrag löschen">','Project', 'deleteMessage', array('ajax' => true,'project[id]' => $project->getId()), '.std-btn');?>
+                    	<?php $this->getLink('<img src="images/iconset/check-not-ok.png" title="Eintrag löschen" alt="eintrag löschen">','Project', 'deleteMessage', array('ajax' => true,'project[id]' => $project->getId()), '.msg-btn');?>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-
-    <div class="pagination-box">
-        <?php echo $this->getPagination($this->allOpenProjects, 'limitProject'); ?>
-    </div>
-
     <?php else: ?>
     	<p>Es sind keine offenen Projekte vorhanden.</p>
 <?php endif; ?>
@@ -86,22 +80,17 @@
                     <td><?php echo $task->getProject()->getId() . ' | ' . $task->getProject()->getName(); ?></td>
                     <td><?php echo $task->getDescription(); ?></td>
                     <td>
-                    	<a href="<?php echo $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
+                    	<a href="<?php $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
                     		<img src="images/iconset/information.png"></a>
                     </td>
                     <td>
-                    	<a href="<?php echo $this->getUrl('Task', 'edit', array('task[id]' => $task->getID())); ?>" title="Bearbeiten">
+                    	<a href="<?php $this->getUrl('Task', 'edit', array('task[id]' => $task->getID())); ?>" title="Bearbeiten">
                     		<img src="images/iconset/writeNew_black.png"></a>
                    	</td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-
-    <div class="pagination-box">
-        <?php echo $this->getPagination($this->allOpenTasks, 'limitTask'); ?>
-    </div>
-
     <?php else: ?>
     	<p>Es sind keine offenen Aufgaben vorhanden.</p>
 <?php endif; ?>

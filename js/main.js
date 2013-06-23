@@ -312,19 +312,20 @@
 	 * Grundobjekt des Fenster mit allen Funktionen und Eingenschaften
 	 */
 	wndHelper.wnd = wndHelper.prototype = {
-		wId: 0,				// Einmalige ID des Fenster
-		activ: false,		// Flag für die den Zastand
-		wndObj: null,		// Objekt des Fensters selbst
-		ovlObj: null,		// Objekt der Shader Fläche im Hintergrund
-		windowId:'',		// Interne Id des Fensters
-		fadeStep: 0.05,		// Schritte mit denen das Fenster eingeblenden wird
-		fadeSpeed: 10,		// Geschwindigkeit der wiederholungen in milli sekunden
-		properties: {},		// Objekt mit den aktuellen Eigenschaften des Fensters
+		wId: 0,						// Einmalige ID des Fenster
+		activ: false,				// Flag für die den Zastand
+		wndObj: null,				// Objekt des Fensters selbst
+		ovlObj: null,				// Objekt der Shader Fläche im Hintergrund
+		windowId:'',				// Interne Id des Fensters
+		fadeStep: 0.05,				// Schritte mit denen das Fenster eingeblenden wird
+		fadeSpeed: 10,				// Geschwindigkeit der wiederholungen in milli sekunden
+		properties: {},				// Objekt mit den aktuellen Eigenschaften des Fensters
 		defaults: {			
-			w: 0,			// Breite des Fensters
-			h: 0,			// Höhe des Fensters
-			x: 0,			// X-Position des Fensters
-			y: 0			// Y-Position des Fensters
+			w: 0,						// Breite des Fensters
+			h: 0,						// Höhe des Fensters
+			x: 0,						// X-Position des Fensters
+			y: 0,						// Y-Position des Fensters
+			windowType: 'std-window',	// Art des Fensters
 		},
 		
 		/**
@@ -412,9 +413,23 @@
 			
 			this.wndObj = document.createElement('div');
 			this.wndObj.setAttribute('id', 'wnd-'+this.wId);
-			this.wndObj.setAttribute('class', 'std-window');
+			this.wndObj.setAttribute('class', this.properties.windowType);
 			
 			wndArray.push(this);
+		},
+		
+		/**
+		 * Ändert die Art des Fensters
+		 * 
+		 * @param {string} type		Art des neuen Fensters
+		 */
+		setWindowType: function( type ) {
+			switch(type) {
+				case 'information': this.properties.windowType = 'msg-window';
+				break;
+				default: this.properties.windowType = 'std-window';
+			}
+			
 		},
 		
 		/**
@@ -614,3 +629,71 @@ var Validate = {
 		return valid;
 	}
 };
+
+// *****************************************
+// *** Aktion zum start der Seite **********
+// *****************************************
+window.onload = function() {
+	
+	var stdWnd;
+	var nfoWnd;
+	
+	// Schließen Aktion für Standard Fenster
+	var standardCloseAction = function(e) {
+		document.body.removeEventListener("keydown", standardCloseAction, false );
+		if( e.keyCode === 27 ) {
+			stdWnd.close();
+		}
+	}
+	
+	// Schließen Aktion für Informationsfenster
+	var informationCloseAction = function(e) {
+		e.preventDefault();
+		document.body.removeEventListener("keydown", informationCloseAction, false );
+		document.getElementById('close-wnd').removeEventListener("click", informationCloseAction, false );
+		if( e.keyCode === 27 ) {
+			nfoWnd.close();
+		} else if( e.keyCode === 0 ) {
+			nfoWnd.close();
+		}
+	}
+	
+	// Aktion für Standard Fenster
+	$('.std-btn').each(
+		function(btn){
+			btn.click(function(e){
+				e.preventDefault();
+				wnd = null;
+				var obj = { 'url': btn.attr('href') };
+				$.ajax(obj, function( resp ){
+					stdWnd = crmWindow();
+					stdWnd.addOverlay();
+					stdWnd.update(resp);
+					stdWnd.draw();
+					
+					document.body.addEventListener("keydown", standardCloseAction, false);
+				});
+			});
+		}
+	);
+	
+	// Aktion für Informationsfenster
+	$('.msg-btn').each(
+		function(btn){
+			btn.click(function(e){
+				e.preventDefault();
+				nfoWnd = null;
+				var obj = { 'url': btn.attr('href') };
+				$.ajax(obj, function( resp ){
+					nfoWnd = crmWindow({windowType:'msg-window'});
+					nfoWnd.addOverlay();
+					nfoWnd.update(resp);
+					nfoWnd.draw();
+					
+					document.body.addEventListener("keydown", informationCloseAction, false);
+					document.getElementById('close-wnd').addEventListener("click", informationCloseAction, false);
+				});
+			});
+		}
+	);	
+}
