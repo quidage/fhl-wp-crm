@@ -308,7 +308,7 @@ class SqlRepository {
      * @return void
      */
     public function updateOneById($id, $propertiesValues) {
-        $query = $this->buildUpdateQuery($this->table, $propertiesValues, "deleted = 0 id = " . intval($id));
+        $query = $this->buildUpdateQuery($this->table, $propertiesValues, "id = " . intval($id));
         $this->mysqli->query($query);
     }
 
