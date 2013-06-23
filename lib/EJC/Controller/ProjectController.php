@@ -6,6 +6,7 @@ namespace EJC\Controller;
  * Controller fuer die Projects
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author @author Julian Hilbers <hilbers.julian@gmail.com>
  * @package wp-crm
  */
 class ProjectController extends AbstractController {
@@ -114,6 +115,31 @@ class ProjectController extends AbstractController {
         $this->projectRepository->update($project);
         $this->forward('Project', 'listByUser');
     }
-
+	
+	
+	/**
+     * Gibt eine Information zum löschen eines Eintrages aus
+     *
+     * @author Julian Hilbers <hilbers.julian@gmail.com>
+     * @param \EJC\Model\User $user
+     * @return void
+     */
+    public function deleteMessageAction(\EJC\Model\Project $project) {
+		$this->view->assign('projectData', $project);
+        $this->view->render();
+    }
+	
+	/**
+     * Löscht ein Projekt aus der Datenbank
+     *
+     * @author Julian Hilbers <hilbers.julian@gmail.com>
+     * @param \EJC\Model\User $user
+     * @return void
+     */
+    public function deleteAction(\EJC\Model\Project $project) {
+		$this->view->assign('projectData', $project);
+        $this->view->render();
+    }
+	
 }
 ?>
