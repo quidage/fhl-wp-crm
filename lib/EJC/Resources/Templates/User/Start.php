@@ -28,6 +28,8 @@
                 <th>Kunde</th>
                 <th>Beschreibung</th>
                 <th></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -68,6 +70,7 @@
                 <th>Name</th>
                 <th>Projekt</th>
                 <th>Beschreibung</th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
