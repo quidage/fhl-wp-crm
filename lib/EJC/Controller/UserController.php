@@ -17,11 +17,17 @@ class UserController extends AbstractController {
      * @return void
      */
     public function startAction() {
-        $openProjects = $this->projectRepository->findOpenByUser($this->getCurrentUser());
-        $openTasks = $this->taskRepository->findOpenByuser($this->getCurrentUser());
+        $limitProject = isset($this->params['limitProject']) ? $this->params['limitProject'] : 0;
+        $limitTask = isset($this->params['limitTask']) ? $this->params['limitTask'] : 0;
+        $openProjects = $this->projectRepository->findOpenByUser($this->getCurrentUser(), $limitProject);
+        $openTasks = $this->taskRepository->findOpenByuser($this->getCurrentUser(), $limitTask);
+        $allOpenProjects = count($this->projectRepository->findOpenByUser($this->getCurrentUser()));
+        $allOpenTasks = count($this->taskRepository->findOpenByuser($this->getCurrentUser()));
         $this->view->assign('title', 'Startseite');
         $this->view->assign('openProjects', $openProjects);
+        $this->view->assign('allOpenProjects', $allOpenProjects);
         $this->view->assign('openTasks', $openTasks);
+        $this->view->assign('allOpenTasks', $allOpenTasks);
         $this->view->render();
     }
 

@@ -22,12 +22,16 @@ class CustomerController extends AbstractController {
         if ($user === NULL) {
             $user = $this->getCurrentUser();
         }
+        $limit = isset($this->params['limitCustomer']) ? $this->params['limitCustomer'] : 0;
         if (isset($this->params['filter']) && $this->params['filter'] !== '') {
-            $customers = $this->customerRepository->findByUserWithOrFilter($user, $this->params['filter']);
+            $customers = $this->customerRepository->findByUserWithOrFilter($user, $this->params['filter'], $limit);
+            $allCustomers = count($this->customerRepository->findByUserWithOrFilter($user, $this->params['filter']));
         } else {
-            $customers = $this->customerRepository->findByParent_id($user->getId());
+            $customers = $this->customerRepository->findByParent_id($user->getId(), $limit);
+            $allCustomers = count($this->customerRepository->findByParent_id($user->getId()));
         }
         $this->view->assign('customers', $customers);
+        $this->view->assign('allCustomers', $allCustomers);
         $this->view->assign('filterUrl', $this->request->getCurrentUrl());
         $this->view->assign('filter', $this->params['filter']);
         $this->view->assign('title', 'Kundenliste');
@@ -92,11 +96,7 @@ class CustomerController extends AbstractController {
      */
     public function createAction(\EJC\Model\Customer $newCustomer) {
         $this->customerRepository->add($newCustomer);
-        if ($this->ajax) {
-            echo json_encode(array('status' => 'ok'));
-        } else {
-            $this->forward('Customer', 'listByUser');
-        }
+        $this->redirect('Customer', 'listByUser');
     }
 
 }

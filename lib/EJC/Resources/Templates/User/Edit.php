@@ -1,9 +1,9 @@
 <?php
 /**
- * Template fuer \EJC\Controller\UserController->editAction()   
+ * Template fuer \EJC\Controller\UserController->editAction()
  *
- * Formular fuer die Aenderung der Benutzerdaten 
- * 
+ * Formular fuer die Aenderung der Benutzerdaten
+ *
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
@@ -11,7 +11,7 @@
 
 <h1>Benutzerdaten &auml;ndern</h1>
 
-<form name="edit" method="post" action="<?php $this->getUrl('user', 'update'); ?>">
+<form name="edit" method="post" action="<?php echo $this->getUrl('user', 'update'); ?>">
     <input type="hidden" name="user[id]" value="<?php echo $this->user->getId() ?>">
     <table>
         <tr>

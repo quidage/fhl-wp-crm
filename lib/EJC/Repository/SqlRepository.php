@@ -82,7 +82,7 @@ class SqlRepository {
 		if ($where !== NULL) $query .= " WHERE " . $where;
 		if ($groupBy !== NULL) $query .= " GROUP BY " . $groupBy;
 		if ($orderBy !== NULL) $query .= " ORDER BY " . $orderBy;
-		if ($limit !== NULL) $query .= " LIMIT " . $limit;
+		if ($limit !== NULL) $query .= " LIMIT " . $limit . ",10";
 		return $query;
 	}
 
@@ -178,9 +178,9 @@ class SqlRepository {
      * @param int $grandParent_id
      * @return array
      */
-    public function findByGrandParent_id($grandParent_id) {
+    public function findByGrandParent_id($grandParent_id, $limit = NULL) {
         $query = $this->buildSelectQuery("*", $this->getTable(), " parent_id  IN ("
-                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id) . ")");
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id) . ")", NULL, NULL, $limit);
         return $this->getResultArray($query);
     }
 
@@ -215,9 +215,9 @@ class SqlRepository {
      * @param int $grandParent_id
      * @return array
      */
-    public function findByGrandParent_idAndStatus($grandParent_id, $status) {
+    public function findByGrandParent_idAndStatus($grandParent_id, $status, $limit = NULL) {
         $query = $this->buildSelectQuery("*", $this->getTable(), " parent_id  IN ("
-                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id) . ") AND status = '" . $status . "'");
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id) . ") AND status = '" . $status . "'", NULL, NULL, $limit);
         return $this->getResultArray($query);
     }
 
@@ -228,10 +228,10 @@ class SqlRepository {
      * @param string $status
      * @return array
      */
-    public function findByGreatGrandParent_idAndStatus($greatGrandParent_id, $status) {
+    public function findByGreatGrandParent_idAndStatus($greatGrandParent_id, $status, $limit = NULL) {
         $query = $this->buildSelectQuery("*", $this->table, " parent_id  IN ("
                 . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id  IN ("
-                . $this->buildSelectQuery("id", $this->getParentRepository()->getParentRepository()->getTable(), " parent_id = " . $greatGrandParent_id) . ")) AND status = '" . $status . "'"));
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getParentRepository()->getTable(), " parent_id = " . $greatGrandParent_id) . ")) AND status = '" . $status . "'"), NULL, NULL, $limit);
         return $this->getResultArray($query);
     }
 
@@ -254,10 +254,22 @@ class SqlRepository {
 	 * @param string $value
      * @return array
 	 */
-	public function findByProperty($property, $value) {
-		$query = $this->buildSelectQuery("*", $this->table, $property . " = '" . $this->prepareString($value) . "'");
+	public function findByProperty($property, $value, $limit = NULL) {
+		$query = $this->buildSelectQuery("*", $this->table, $property . " = '" . $this->prepareString($value) . "'", NULL, NULL, $limit);
 		return $this->getResultArray($query);
 	}
+
+	/**
+	 * Zaehle alle Objekte zu einer Eigenschaft
+     *
+	 * @param string $property
+	 * @param string $value
+     * @return int
+	 */
+	public function countByProperty($property, $value) {
+		return count($this->findByProperty($property, $value));
+	}
+
 
 	/**
 	 * Finde alle Objekte in einem Repository
@@ -268,6 +280,7 @@ class SqlRepository {
 		$query = $this->buildSelectQuery("*", $this->table, "deleted = 0");
         return $this->getResultArray($query);
     }
+
 
     /**
      * Loesche ein Objekt aus dem Repository
@@ -326,10 +339,10 @@ class SqlRepository {
      * @param array $filter
      * @return array
      */
-    public function findByGrandParent_idWithOrFilter($grandParent_id, $filter) {
+    public function findByGrandParent_idWithOrFilter($grandParent_id, $filter, $limit = NULL) {
         $query = $this->buildSelectQuery("*", $this->getTable(), " parent_id  IN ("
                 . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id)
-                . ") AND deleted = 0 AND (" . $this->createFilterString($filter)) . ")";
+                . ") AND deleted = 0 AND (" . $this->createFilterString($filter) . ")", NULL, NULL, $limit);
         return $this->getResultArray($query);
     }
 

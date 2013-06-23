@@ -13,7 +13,7 @@
 
 <p>Sie haben ihr Passwort vergessen? Lassen Sie sich von uns ein Neues an ihre registrierte E-Mail-Adresse schicken.</p>
 
-<form name="requestNewPassword" method="post" action="<?php $this->getUrl('User', 'sendNewPassword'); ?>">
+<form name="requestNewPassword" method="post" action="<?php echo $this->getUrl('User', 'sendNewPassword'); ?>">
     <table>
         <tr>
                 <td>E-Mail-Adresse:</td>

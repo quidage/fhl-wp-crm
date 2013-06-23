@@ -62,8 +62,18 @@ class ProjectRepository extends AbstractRepository {
      * @param \EJC\Model\User $user
      * @return array
      */
-    public function findByUser(\EJC\Model\User $user) {
-        return $this->findByGrandParent_id($user->getId());
+    public function findByUser(\EJC\Model\User $user, $limit = NULL) {
+        return $this->findByGrandParent_id($user->getId(), $limit);
+    }
+
+    /**
+     * Zaehle alle Projects zu einem User
+     *
+     * @param \EJC\Model\User $user
+     * @return array
+     */
+    public function countByUser(\EJC\Model\User $user) {
+        return count($this->findByGrandParent_id($user->getId()));
     }
 
     /**
@@ -73,14 +83,14 @@ class ProjectRepository extends AbstractRepository {
      * @param string $filterString
      * @return array
      */
-    public function findByUserFiltered(\EJC\Model\User $user, $filterString) {
+    public function findByUserFiltered(\EJC\Model\User $user, $filterString, $limit = NULL) {
         $filter = array(
             'name' => $filterString,
             'id' => $filterString,
             'description' => $filterString,
             'status' => $filterString
             );
-        return $this->findByGrandParent_idWithOrFilter($user->getId(), $filter);
+        return $this->findByGrandParent_idWithOrFilter($user->getId(), $filter, $limit);
     }
 
     /**
@@ -89,8 +99,8 @@ class ProjectRepository extends AbstractRepository {
      * @param \EJC\Model\User $user
      * @return array
      */
-    public function findOpenByUser(\EJC\Model\User $user) {
-        return $this->findByGrandParent_idAndStatus($user->getId(), 'offen');
+    public function findOpenByUser(\EJC\Model\User $user, $limit = NULL) {
+        return $this->findByGrandParent_idAndStatus($user->getId(), 'offen', $limit);
     }
 
 }

@@ -51,7 +51,7 @@ class Request {
 			unset($getParams['ajax']);
 
 			// View initialisieren unter Beachtung des benötigten Layouts
-			$this->view = new \EJC\View($this->isAjax());
+			$this->view = new \EJC\View($this, $this->isAjax());
 
             // Fuege GET- und POST-Paramenter zusammen
             $this->params = array_merge($getParams, $postParams);

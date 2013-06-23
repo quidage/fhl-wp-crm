@@ -1,9 +1,9 @@
 <?php
 /**
  * Template fuer \EJC\Controller\ProjectController->editAction()
- * 
+ *
  * Formular zum Editieren des Project
- * 
+ *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */
@@ -11,7 +11,7 @@
 
 <h1>Projekt <?php echo $this->project->getName(); ?> editieren</h1>
 
-<form name="edit" method="post" action="<?php $this->getUrl('Project', 'update'); ?>">
+<form name="edit" method="post" action="<?php echo $this->getUrl('Project', 'update'); ?>">
     <input type="hidden" name="project[id]" value="<?php echo $this->project->getId() ?>">
     <table>
         <tr>

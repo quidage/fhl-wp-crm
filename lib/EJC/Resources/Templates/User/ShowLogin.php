@@ -11,10 +11,10 @@
 
  <h1>F&uuml;r Freelancer und Selbstst&auml;ndige</h1>
  <p>Zeitsparen bei der Kunden- und Projektverwaltung</p>
- <a href="<?php $this->getUrl('User', 'register'); ?>" class="button-link">Kostenlos registrieren</a>
+ <a href="<?php echo $this->getUrl('User', 'register'); ?>" class="button-link">Kostenlos registrieren</a>
 
  <div id="loginform">
-    <form name="login" method="post" action="<?php $this->getUrl('user', 'login'); ?>">
+    <form name="login" method="post" action="<?php echo $this->getUrl('user', 'login'); ?>">
         <fieldset>
         <legend>Anmelden</legend>
 	        <table>

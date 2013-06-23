@@ -11,7 +11,7 @@
 
 <h1>Registrierung</h1>
 
-<form name="registerUser" method="post" action="<?php $this->getUrl('User', 'createRegistered'); ?>">
+<form name="registerUser" method="post" action="<?php echo $this->getUrl('User', 'createRegistered'); ?>">
     <table>
         <tr>
                 <td>Username:</td>
