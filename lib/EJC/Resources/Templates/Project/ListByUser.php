@@ -45,8 +45,6 @@
                 <td>
                 	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
                 		<img src="images/iconset/information.png" /></a>
-                </td><td>
-                	<?php $this->getLink('<img src="images/iconset/writeNew_black.png" title="Bearbeiten"></a>','Project', 'edit', array('ajax' => true, 'project[id]' => $project->getId()), '.std-btn');?>
                 </td>
             </tr>
         <?php endforeach; ?>

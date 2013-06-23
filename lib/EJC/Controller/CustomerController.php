@@ -23,9 +23,9 @@ class CustomerController extends AbstractController {
             $user = $this->getCurrentUser();
         }
         if (isset($this->params['filter']) && $this->params['filter'] !== '') {
-            $customers = $this->customerRepository->findByParent_id($user->getId());
+            $customers = $this->customerRepository->findByUserWithOrFilter($user, $this->params['filter']);
         } else {
-            $customers = $this->customerRepository->findByUserWithOrFilter($user->getId(), $this->params['filter']);
+            $customers = $this->customerRepository->findByParent_id($user->getId());
         }
         $this->view->assign('customers', $customers);
         $this->view->assign('filterUrl', $this->request->getCurrentUrl());
