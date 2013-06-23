@@ -11,7 +11,7 @@
 
 <h1>Neues Projekt anlegen</h1>
 
-<form name="newProject" method="post" action="<?php $this->getUrl('Project', 'create'); ?>">
+<form name="newProject" method="post" action="<?php echo $this->getUrl('Project', 'create'); ?>">
     <table>
         <tr>
                 <td>Kunde:</td>

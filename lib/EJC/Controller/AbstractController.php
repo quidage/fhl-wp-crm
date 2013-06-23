@@ -110,18 +110,9 @@ class AbstractController {
         // Setze den Template Pfad
         $template = $this->request->getController() . '/' . ucwords($this->request->getAction()) . '.php';
 
-        // Setze das Limit
-        if (isset($this->params['limit'])) {
-            $this->limit = (int) $this->params['limit'];
-        } else {
-            $this->limit = 0;
-        }
-
         // Initialisiere den View
         if ($this->view === NULL) {
-            $this->view = new \EJC\View($this->ajax, $this->limit);
-        } else {
-            $this->view->setLimit($this->limit);
+            $this->view = new \EJC\View($this->request, $this->ajax);
         }
         $this->view->setTemplate($template);
     }

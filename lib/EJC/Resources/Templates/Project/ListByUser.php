@@ -42,11 +42,11 @@
                 <td><?php echo $project->getDescription(); ?></td>
                 <td><?php echo $project->getStatus(); ?></td>
                 <td>
-                	<a href="<?php $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
+                	<a href="<?php echo $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
                 		<img src="images/iconset/information.png" /></a>
                 </td>
                 <td>
-                	<a href="<?php $this->getUrl('Project', 'edit', array('project[id]' => $project->getId())); ?>" title="Bearbeiten">
+                	<a href="<?php echo $this->getUrl('Project', 'edit', array('project[id]' => $project->getId())); ?>" title="Bearbeiten">
                 		<img src="images/iconset/writeNew_black.png" /></a>
                 </td>
             </tr>
@@ -55,6 +55,6 @@
 </table>
 
 <div class="pagination-box">
-    <?php echo $this->getPagination($this->allProjects); ?>
+    <?php echo $this->getPagination($this->allProjects, 'limitProject'); ?>
 </div>
 

@@ -13,7 +13,7 @@
 
 <h1>Neue Aufgabe</h1>
 
-<form name="newTask" method="post" action="<?php $this->getUrl('Task', 'create'); ?>">
+<form name="newTask" method="post" action="<?php echo $this->getUrl('Task', 'create'); ?>">
     <table>
         <tr>
                 <td>Project:</td>

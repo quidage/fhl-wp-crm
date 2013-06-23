@@ -1,9 +1,9 @@
 <?php
 /**
  * Template fuer \EJC\Controller\TaskController->editAction()
- * 
+ *
  * Formular zum Editieren einer Aufgabe
- * 
+ *
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
  * @package wp-crm
  */
@@ -11,7 +11,7 @@
 
 <h1>Aufgabe <?php echo $this->task->getName(); ?> editieren</h1>
 
-<form name="edit" method="post" action="<?php $this->getUrl('Task', 'update'); ?>">
+<form name="edit" method="post" action="<?php echo $this->getUrl('Task', 'update'); ?>">
     <input type="hidden" name="task[id]" value="<?php echo $this->task->getId() ?>">
     <table>
         <tr>

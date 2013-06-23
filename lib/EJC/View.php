@@ -11,7 +11,7 @@ namespace EJC;
 class View {
 
 	/**
-	 *
+	 * Der Inhalt des Templates
 	 *
 	 * @var string
 	 */
@@ -80,13 +80,27 @@ class View {
 	 */
     public $errorMessages;
 
+    /**
+     * Der Request
+     *
+     * @var \EJC\Request
+     */
+    protected $request;
+
+    /**
+     * parameter
+     *
+     * @var array
+     */
+    protected $params;
 
     /**
      * Konstruktor
      *
      * @return void
      */
-    public function __construct($ajax = FALSE, $limit = 0) {
+    public function __construct(\EJC\Request $request, $ajax = FALSE) {
+        $this->request = $request;
         if (!isset($this->errorMessages)) $this->errorMessages = array();
         $this->initPaths();
         // Set layout to default value
@@ -95,7 +109,7 @@ class View {
         } else {
             $this->layoutFile = $this->layoutsPath . 'Default.php';
         }
-        $this->limit = $limit;
+        $this->params = $this->request->getGetParams();
     }
 
     /**
@@ -158,8 +172,9 @@ class View {
         ob_start();
         include $this->templateFile;
         $this->template = ob_get_clean();
-
+        ob_start();
         include $this->layoutFile;
+        echo ob_get_clean();
     }
 
 
@@ -178,11 +193,7 @@ class View {
     public function getLink($title, $controller, $action, $params = array(), $ident = '', $target = '') {
     	$fchar = substr($ident, 0, 1);
 		$iVal = substr($ident, 1, strlen($ident));
-
-    	ob_start();
-		$this->getUrl($controller, $action, $params);
-		$url = ob_get_clean();
-
+		$url = $this->getUrl($controller, $action, $params);
 		echo '<a '.($ident !== '' ? ( $fchar == '#' ? 'id' : 'class' ).'="'.$iVal.'"' : '').' href="'.$url.'"'.($target !== '' ? ' target="'.$target.'"':'').'>'.$title.'</a>';
     }
 
@@ -199,7 +210,7 @@ class View {
         foreach($params AS $key => $value) {
            $url .= '&' . $key . '=' . $value;
         }
-        echo $url;
+        return $url;
     }
 
     /**
@@ -207,17 +218,22 @@ class View {
      * @param string $numElements
      * @param string $limit
      */
-    public function getPagination($numElements) {
+    public function getPagination($numElements, $limitName) {
+        if(isset($this->params[$limitName])) {
+            $this->limit = (int) $this->params[$limitName];
+        } else {
+            $this->limit = 0;
+        }
         ob_start();
         if ($numElements > 10) {
             if ($this->limit >= 10) {
-                $this->getLink('Vorige', 'Project', 'listByUser', array('limit' => $this->limit - 10));
+                $this->getLink('Vorige', $this->request->getController(), $this->request->getAction(), array($limitName => $this->limit - 10));
             } else {
                 echo 'Vorige';
             }
             echo " - ";
             if ($numElements - $this->limit - 10 > 0) {
-                $this->getLink('N&auml;chste', 'Project', 'listByUser', array('limit' => $this->limit + 10));
+                $this->getLink('N&auml;chste', $this->request->getController(), $this->request->getAction(), array($limitName => $this->limit + 10));
             } else {
                 echo 'N&auml;chste';
             }

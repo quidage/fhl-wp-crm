@@ -90,7 +90,7 @@ class ProjectRepository extends AbstractRepository {
             'description' => $filterString,
             'status' => $filterString
             );
-        return $this->findByGrandParent_idWithOrFilter($user->getId(), $filter);
+        return $this->findByGrandParent_idWithOrFilter($user->getId(), $filter, $limit);
     }
 
     /**
@@ -99,8 +99,8 @@ class ProjectRepository extends AbstractRepository {
      * @param \EJC\Model\User $user
      * @return array
      */
-    public function findOpenByUser(\EJC\Model\User $user) {
-        return $this->findByGrandParent_idAndStatus($user->getId(), 'offen');
+    public function findOpenByUser(\EJC\Model\User $user, $limit = NULL) {
+        return $this->findByGrandParent_idAndStatus($user->getId(), 'offen', $limit);
     }
 
 }

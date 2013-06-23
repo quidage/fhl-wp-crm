@@ -35,7 +35,6 @@
             <th>Telefon/Fax</th>
             <th>Email</th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -48,12 +47,16 @@
                 <td><?php echo $customer->getPhone() . "<br>" . $customer->getFax(); ?></td>
                 <td><a href="mailto:<?php echo $customer->getEmail(); ?>"><?php echo $customer->getEmail(); ?></a></td>
                 <td>
-                	<a href="<?php $this->getUrl('Customer', 'edit', array('customer[id]' => $customer->getId())); ?>" title="Bearbeiten">
+                	<a href="<?php echo $this->getUrl('Customer', 'edit', array('customer[id]' => $customer->getId())); ?>" title="Bearbeiten">
                 		<img src="images/iconset/writeNew_black.png" /></a>
-                	<a href="<?php $this->getUrl('Project', 'new', array('customer[id]' => $customer->getId())); ?>" title="Neues Projekt">
+                	<a href="<?php echo $this->getUrl('Project', 'new', array('customer[id]' => $customer->getId())); ?>" title="Neues Projekt">
                 		<img src="images/iconset/plus_black.png" /></a>
                 </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<div class="pagination-box">
+    <?php echo $this->getPagination($this->allCustomers, 'limitCustomer'); ?>
+</div>

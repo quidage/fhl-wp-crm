@@ -42,11 +42,12 @@ class ProjectController extends AbstractController {
         if ($user === NULL) {
             $user = $this->getCurrentUser();
         }
+        $limit = isset($this->params['limitProject']) ? $this->params['limitProject'] : 0;
         if (isset($this->params['filter']) && $this->params['filter'] !== '') {
-            $projects = $this->projectRepository->findByUserFiltered($user, $this->params['filter'], $this->limit);
+            $projects = $this->projectRepository->findByUserFiltered($user, $this->params['filter'], $limit);
             $allProjects = count($this->projectRepository->findByUserFiltered($user, $this->params['filter']));
         } else {
-            $projects = $this->projectRepository->findByUser($user, $this->limit);
+            $projects = $this->projectRepository->findByUser($user, $limit);
             $allProjects = count($this->projectRepository->findByUser($user));
         }
         $this->view->assign('title', 'Projekte');

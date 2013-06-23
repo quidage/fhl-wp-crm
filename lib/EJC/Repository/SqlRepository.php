@@ -215,9 +215,9 @@ class SqlRepository {
      * @param int $grandParent_id
      * @return array
      */
-    public function findByGrandParent_idAndStatus($grandParent_id, $status) {
+    public function findByGrandParent_idAndStatus($grandParent_id, $status, $limit = NULL) {
         $query = $this->buildSelectQuery("*", $this->getTable(), " parent_id  IN ("
-                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id) . ") AND status = '" . $status . "'");
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id) . ") AND status = '" . $status . "'", NULL, NULL, $limit);
         return $this->getResultArray($query);
     }
 
@@ -228,10 +228,10 @@ class SqlRepository {
      * @param string $status
      * @return array
      */
-    public function findByGreatGrandParent_idAndStatus($greatGrandParent_id, $status) {
+    public function findByGreatGrandParent_idAndStatus($greatGrandParent_id, $status, $limit = NULL) {
         $query = $this->buildSelectQuery("*", $this->table, " parent_id  IN ("
                 . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id  IN ("
-                . $this->buildSelectQuery("id", $this->getParentRepository()->getParentRepository()->getTable(), " parent_id = " . $greatGrandParent_id) . ")) AND status = '" . $status . "'"));
+                . $this->buildSelectQuery("id", $this->getParentRepository()->getParentRepository()->getTable(), " parent_id = " . $greatGrandParent_id) . ")) AND status = '" . $status . "'"), NULL, NULL, $limit);
         return $this->getResultArray($query);
     }
 
@@ -342,7 +342,7 @@ class SqlRepository {
     public function findByGrandParent_idWithOrFilter($grandParent_id, $filter, $limit = NULL) {
         $query = $this->buildSelectQuery("*", $this->getTable(), " parent_id  IN ("
                 . $this->buildSelectQuery("id", $this->getParentRepository()->getTable(), " parent_id = " . $grandParent_id)
-                . ") AND deleted = 0 AND (" . $this->createFilterString($filter), NULL, NULL, $limit);
+                . ") AND deleted = 0 AND (" . $this->createFilterString($filter) . ")", NULL, NULL, $limit);
         return $this->getResultArray($query);
     }
 

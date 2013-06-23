@@ -11,7 +11,7 @@
 
 <h1>Neuen Benutzer anlegen</h1>
 
-<form name="newUser" method="post" action="<?php $this->getUrl('User', 'create'); ?>">
+<form name="newUser" method="post" action="<?php echo $this->getUrl('User', 'create'); ?>">
     <table>
         <tr>
                 <td>Username:</td>
