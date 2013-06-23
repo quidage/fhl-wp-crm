@@ -86,7 +86,7 @@ class User extends AbstractModel {
      * @param string $password
      */
     public function setPassword($password) {
-        if ($password === NULL) {
+        if ($password !== NULL) {
             $this->password = md5($password);
         }
     }

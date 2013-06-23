@@ -52,12 +52,14 @@ class UserController extends AbstractController {
      *
      * @return void
      */
-    public function newAction() {
+    public function newAction(\EJC\Model\User $newUser = NULL) {
         // Wenn es sich nicht um einen Admin handelt abbrechen
         if (!$this->getCurrentUser()->getAdmin()) exit;
-
-        $newUser = new \EJC\Model\User();
-        $this->view->assign('user', $newUser);
+        if ($newUser === NULL) {
+            $newUser = new \EJC\Model\User();
+        }
+        $this->view->assign('title', 'Neuen Benutzer anlegen');
+        $this->view->assign('newUser', $newUser);
         $this->view->render();
     }
 
@@ -72,16 +74,25 @@ class UserController extends AbstractController {
         if (!$this->getCurrentUser()->getAdmin()) exit;
 
         $params = $this->request->getParams();
-        if (md5($params['passwordConfirm']) === $newUser->getPassword()) {
-            $this->userRepository->add($newUser);
-            $this->forward('User', 'showSettings');
-            return;
-        } elseif(empty($params['passwordConfirm'])) {
+        if (empty($params['passwordConfirm']) || $newUser->getPassword() === NULL) {
             $this->view->addErrorMessage('Geben Sie ein Passwort an');
-        } else {
+        } elseif ($newUser->getName() === '') {
+            $this->view->addErrorMessage('Geben sie einen Usernamen an');
+        } elseif ($newUser->getFirst_name() === '') {
+            $this->view->addErrorMessage('Geben sie einen Vornamen an');
+        } elseif ($newUser->getLast_name() === '') {
+            $this->view->addErrorMessage('Geben sie einen Nachnamen an');
+        } elseif ($newUser->getEmail() === false) {
+            $this->view->addErrorMessage('Geben sie eine g&uuml;ltige E-Mail-Adress an');
+        } elseif (md5($params['passwordConfirm']) !== $newUser->getPassword()) {
             $this->view->addErrorMessage('Die Passw&ouml;rter stimmen nicht &uuml;berein');
         }
-        $this->forward('User', 'new', array('newUser' => $newUser));
+        if (empty($this->view->errorMessages)) {
+            $this->userRepository->add($newUser);
+            $this->forward('User', 'showSettings');
+        } else {
+            $this->forward('User', 'new', array('newUser' => $newUser));
+        }
     }
 
     /**
