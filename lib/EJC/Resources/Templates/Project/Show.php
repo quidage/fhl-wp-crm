@@ -16,6 +16,8 @@
 ?>
 
 <h1><?php echo $this->project->getName(); ?></h1>
+<a href="<?php $this->getUrl('Project', 'edit', array('project[id]' => $this->project->getId())); ?>" title="Bearbeiten">
+	<img src="images/iconset/writeNew_black.png">Projekt Bearbeiten</a>
 <p><strong>Status:</strong> <?php echo $this->project->getStatus(); ?><br />
 <strong>Beschreibung:</strong><br /><?php echo $this->project->getDescription(); ?></p>
 
