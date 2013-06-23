@@ -54,7 +54,7 @@
     </table>
 
     <div class="pagination-box">
-        <?php echo $this->getPagination($this->allOpenProjects, 'limitProjects'); ?>
+        <?php echo $this->getPagination($this->allOpenProjects, 'limitProject'); ?>
     </div>
 
     <?php else: ?>
@@ -98,7 +98,7 @@
     </table>
 
     <div class="pagination-box">
-        <?php echo $this->getPagination($this->allOpenTasks, 'limitTasks'); ?>
+        <?php echo $this->getPagination($this->allOpenTasks, 'limitTask'); ?>
     </div>
 
     <?php else: ?>

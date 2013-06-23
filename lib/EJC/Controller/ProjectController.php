@@ -6,7 +6,7 @@ namespace EJC\Controller;
  * Controller fuer die Projects
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
- * @author @author Julian Hilbers <hilbers.julian@gmail.com>
+ * @author Julian Hilbers <hilbers.julian@gmail.com>
  * @package wp-crm
  */
 class ProjectController extends AbstractController {
