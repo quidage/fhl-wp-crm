@@ -11,6 +11,7 @@ namespace EJC\Controller;
 class ProjectController extends AbstractController {
 
     /**
+     * Zeige alle Einzelheiten zu einem Project
      *
      * @param \EJC\Model\Project $project
      */

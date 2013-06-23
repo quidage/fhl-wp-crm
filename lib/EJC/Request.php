@@ -30,8 +30,14 @@ class Request {
             // Request wird ueber forward-Methode aus dem AbstractController aufgerufen
             $this->controller = $controller;
             $this->action = $action;
-            $this->params = $params;
             $this->view = $view;
+            foreach ($params AS $param) {
+                if (is_object($param)) {
+                    $this->actionParams[] = $param;
+                } else {
+                    $this->params[] = $param;
+                }
+            }
         } else {
             // HTTP-Request, der Request wird von der index.php instanziiert
             $getParams = $this->getGetParams();

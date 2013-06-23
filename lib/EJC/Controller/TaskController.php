@@ -10,10 +10,10 @@ namespace EJC\Controller;
  * @package wp-crm
  */
 class TaskController extends AbstractController {
-    
+
     /**
      * Zeige die Detailansicht zu einem Tasks
-     * 
+     *
      * @param \EJC\Model\Task $task
      */
     public function showAction(\EJC\Model\Task $task) {
@@ -24,7 +24,7 @@ class TaskController extends AbstractController {
 
     /**
      * Liste alle Tasks
-     * 
+     *
      * @return void
      */
     public function listAction() {
@@ -32,10 +32,10 @@ class TaskController extends AbstractController {
         $this->view->assign('tasks', $tasks);
         $this->view->render();
     }
-    
+
     /**
      * Liste alle Tasks zu einem User
-     * 
+     *
      * @return void
      */
     public function listByUserAction(\EJC\Model\User $user = NULL) {
@@ -47,32 +47,36 @@ class TaskController extends AbstractController {
         $this->view->assign('tasks', $tasks);
         $this->view->render();
     }
-    
+
     /**
      * Formular fuer einen neuen Taks
-     * 
+     *
      * @param \EJC\Model\Project $project
      * @return void
      */
      public function newAction(\EJC\Model\Project $project) {
+         $this->view->assign('title', 'Neue Aufgabe');
          $this->view->assign('project', $project);
          $this->view->assign('newTask', new \EJC\Model\Task());
          $this->view->render();
      }
-    
+
     /**
      * Erstelle einen neuen Task
-     * 
-     * @param \EJC\Model\Task $task
+     *
+     * @param \EJC\Model\Task $newTask
      * @return void
      */
-    public function createAction(\EJC\Model\Task $task) {
-        $this->taskRepository->add($task);
+    public function createAction(\EJC\Model\Task $newTask) {
+        $this->taskRepository->add($newTask);
+        $this->forward('Project', 'show', array(
+            'project' => $this->projectRepository->findById($newTask->getParent_id())
+             ));
     }
-    
+
     /**
      * Formular zum Aendern des Tasks
-     * 
+     *
      * @param \EJC\Model\Task $task
      * @return void
      */
@@ -80,7 +84,7 @@ class TaskController extends AbstractController {
         $this->view->assign('task', $task);
         $this->view->render();
     }
-    
+
     /**
     * Aktualisiere die Aufgabe
     *
@@ -92,6 +96,6 @@ class TaskController extends AbstractController {
     	$this->taskRepository->update($task);
     	$this->redirect('Project','show');
     }
-    
+
 }
 ?>

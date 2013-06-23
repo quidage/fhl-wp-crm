@@ -11,33 +11,25 @@
  */
 ?>
 
-<h1>Neues Projekt</h1>
+<h1>Neue Aufgabe</h1>
 
 <form name="newTask" method="post" action="<?php $this->getUrl('Task', 'create'); ?>">
     <table>
         <tr>
-                <td>Kunde:</td>
+                <td>Project:</td>
                 <td>
-                    <?php if (count($this->customers) > 1): ?>
-                        <select name="newTask[parent_id]">
-                            <?php foreach ($this->customers AS $customer): ?>
-                            <option value="<?php echo $customer->getId(); ?>"><?php echo $customer->getId() . ' ' . $customer->getName(); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    <?php else: ?>
-                        <?php echo $this->customers[0]->getId() . ' ' . $this->customers[0]->getName(); ?>
-                        <input type="hidden" name="newProject[parent_id]" value="<?php echo $this->customers[0]->getId(); ?>">
-                    <?php endif; ?>
+                    <?php echo $this->project->getId() . ' ' . $this->project->getName(); ?>
+                    <input type="hidden" name="newTask[parent_id]" value="<?php echo $this->project->getId(); ?>">
                 </td>
         </tr>
         <tr>
                 <td>Name:</td>
-                <td><input type="text" name="newProject[name]" value="" placeholder="Musterprojekt" /></td>
+                <td><input type="text" name="newTask[name]" value="" placeholder="Musteraufgabe" /></td>
         </tr>
         <tr>
                 <td>Beschreibung:</td>
                 <td>
-                    <textarea rows="4" columns="60" name="newProject[description]" placeholder="Musterbeschreibungstext" ></textarea>
+                    <textarea rows="4" columns="60" name="newTask[description]" placeholder="Musterbeschreibungstext" ></textarea>
                 </td>
         </tr>
         <tr>
@@ -47,8 +39,8 @@
                         // Die Statusse zum Project stehen als Array im Model des Projects
                         // in der Methode getPossibleStatus()
                     ?>
-                    <select name="newProject[status]">
-                        <?php foreach ($this->newProject->getPossibleStatus() AS $status): ?>
+                    <select name="newTask[status]">
+                        <?php foreach ($this->newTask->getPossibleStatus() AS $status): ?>
                         <option value="<?php echo $status; ?>"><?php echo $status; ?></option>
                         <?php endforeach; ?>
                     </select>
