@@ -19,8 +19,9 @@
         <thead>
             <caption>
                 Offene Projekte
-                <span class="new-object"><a href="<?php $this->getUrl('Project', 'new'); ?>" title="Neues Projekt">
-                	<img src="images/iconset/plus_white.png">Neues Projekt</a></span>
+                <span class="new-object">
+                	<?php $this->getLink('<img src="images/iconset/plus_white.png" alt="neues projekt">Neues Projekt ','Project', 'new', array('ajax' => true), '.std-btn');?>
+                </span>
             </caption>
             <tr>
                 <th>Name</th>
