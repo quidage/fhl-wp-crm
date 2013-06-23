@@ -67,11 +67,7 @@ class CustomerController extends AbstractController {
      */
     public function updateAction(\EJC\Model\Customer $customer) {
         $this->customerRepository->update($customer);
-        if ($this->ajax) {
-            echo json_encode(array('status' => 'ok'));
-        } else {
-            $this->forward('Customer', 'listByUser');
-        }
+        $this->redirect('Customer', 'listByUser', array('user' => $this->getCurrentUser()));
     }
 
     /**

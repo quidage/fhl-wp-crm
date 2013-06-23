@@ -81,7 +81,7 @@ class ProjectController extends AbstractController {
      */
     public function createAction(\EJC\Model\Project $project) {
         $this->projectRepository->add($project);
-        $this->forward('Project', 'listByUser');
+        $this->redirect('Project', 'listByUser');
     }
 
     /**
@@ -118,7 +118,7 @@ class ProjectController extends AbstractController {
      */
     public function updateAction(\EJC\Model\Project $project) {
         $this->projectRepository->update($project);
-        $this->forward('Project', 'listByUser');
+        $this->redirect('Project', 'listByUser');
     }
 
 

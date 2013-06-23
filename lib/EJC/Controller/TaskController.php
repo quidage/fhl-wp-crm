@@ -69,7 +69,7 @@ class TaskController extends AbstractController {
      */
     public function createAction(\EJC\Model\Task $newTask) {
         $this->taskRepository->add($newTask);
-        $this->forward('Project', 'show', array(
+        $this->redirect('Project', 'show', array(
             'project' => $this->projectRepository->findById($newTask->getParent_id())
              ));
     }
@@ -94,7 +94,9 @@ class TaskController extends AbstractController {
     */
     public function updateAction(\EJC\Model\Task $task) {
     	$this->taskRepository->update($task);
-    	$this->redirect('Project','show');
+    	$this->redirect('Project','show', array(
+            'project' => $this->projectRepository->findById($task->getParent_id())
+            ));
     }
 
 }

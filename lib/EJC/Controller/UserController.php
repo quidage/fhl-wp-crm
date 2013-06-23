@@ -156,7 +156,7 @@ class UserController extends AbstractController {
         }
         $this->userRepository->update($user);
         $_SESSION['user'] = serialize($user);
-        $this->forward('User', 'showSettings');
+        $this->redirect('User', 'showSettings');
     }
 
     /**
