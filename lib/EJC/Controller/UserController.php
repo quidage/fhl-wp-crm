@@ -244,6 +244,10 @@ class UserController extends AbstractController {
      */
     public function loginAction() {
         $login = $this->params['login'];
+        if (!isset($this->params['login']) || ($this->params['login']['name'] === '' || $this->params['login']['password'] === '')) {
+            session_destroy();
+            $this->forward('User', 'showLogin');
+        }
         // Hole passenden User aus dem Repository
         try {
             $user = $this->userRepository->findOneByName($login['name']);
