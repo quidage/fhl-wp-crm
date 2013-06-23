@@ -86,7 +86,7 @@ class View {
      *
      * @return void
      */
-    public function __construct($ajax = FALSE) {
+    public function __construct($ajax = FALSE, $limit = 0) {
         if (!isset($this->errorMessages)) $this->errorMessages = array();
         $this->initPaths();
         // Set layout to default value
@@ -95,6 +95,16 @@ class View {
         } else {
             $this->layoutFile = $this->layoutsPath . 'Default.php';
         }
+        $this->limit = $limit;
+    }
+
+    /**
+     * Setze das Limit
+     *
+     * @param int $limit
+     */
+    public function setLimit($limit) {
+        $this->limit = (int) $limit;
     }
 
     /**
@@ -190,6 +200,29 @@ class View {
            $url .= '&' . $key . '=' . $value;
         }
         echo $url;
+    }
+
+    /**
+     *
+     * @param string $numElements
+     * @param string $limit
+     */
+    public function getPagination($numElements) {
+        ob_start();
+        if ($numElements > 10) {
+            if ($this->limit >= 10) {
+                $this->getLink('Vorige', 'Project', 'listByUser', array('limit' => $this->limit - 10));
+            } else {
+                echo 'Vorige';
+            }
+            echo " - ";
+            if ($numElements - $this->limit - 10 > 0) {
+                $this->getLink('N&auml;chste', 'Project', 'listByUser', array('limit' => $this->limit + 10));
+            } else {
+                echo 'N&auml;chste';
+            }
+        }
+        return ob_get_clean();
     }
 
     /**

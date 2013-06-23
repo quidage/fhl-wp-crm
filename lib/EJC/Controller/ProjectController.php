@@ -43,14 +43,17 @@ class ProjectController extends AbstractController {
             $user = $this->getCurrentUser();
         }
         if (isset($this->params['filter']) && $this->params['filter'] !== '') {
-            $projects = $this->projectRepository->findByUserFiltered($user, $this->params['filter']);
+            $projects = $this->projectRepository->findByUserFiltered($user, $this->params['filter'], $this->limit);
+            $allProjects = count($this->projectRepository->findByUserFiltered($user, $this->params['filter']));
         } else {
-            $projects = $this->projectRepository->findByUser($user);
+            $projects = $this->projectRepository->findByUser($user, $this->limit);
+            $allProjects = count($this->projectRepository->findByUser($user));
         }
         $this->view->assign('title', 'Projekte');
         $this->view->assign('filter', $this->params['filter']);
         $this->view->assign('filterUrl', $this->request->getCurrentUrl());
         $this->view->assign('projects', $projects);
+        $this->view->assign('allProjects', $allProjects);
         $this->view->render();
     }
 
@@ -116,8 +119,8 @@ class ProjectController extends AbstractController {
         $this->projectRepository->update($project);
         $this->forward('Project', 'listByUser');
     }
-	
-	
+
+
 	/**
      * Gibt eine Information zum löschen eines Eintrages aus
      *
@@ -129,7 +132,7 @@ class ProjectController extends AbstractController {
 		$this->view->assign('projectData', $project);
         $this->view->render();
     }
-	
+
 	/**
      * Löscht ein Projekt aus der Datenbank
      *
@@ -141,6 +144,6 @@ class ProjectController extends AbstractController {
 		$this->view->assign('projectData', $project);
         $this->view->render();
     }
-	
+
 }
 ?>

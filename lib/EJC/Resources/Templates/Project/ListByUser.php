@@ -32,7 +32,6 @@
             <th>Beschreibung</th>
             <th>Status</th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -50,3 +49,8 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<div class="pagination-box">
+    <?php echo $this->getPagination($this->allProjects); ?>
+</div>
+

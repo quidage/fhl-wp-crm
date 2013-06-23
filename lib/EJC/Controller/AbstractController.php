@@ -33,6 +33,13 @@ class AbstractController {
     protected $ajax;
 
     /**
+     * Limit fuer die Darstellung in den Listen
+     *
+     * @var int
+     */
+    protected $limit;
+
+    /**
      *
      * @var \EJC\View
      */
@@ -75,11 +82,11 @@ class AbstractController {
      * @return void
      */
     public function __construct(\EJC\Request $request, \EJC\View $view = NULL) {
-        $this->view = $view;
         $this->request = $request;
+        $this->params = $this->request->getParams();
+        $this->view = $view;
         $this->initView();
         $this->initRepositories();
-        $this->params = $this->request->getParams();
     }
 
     /**
@@ -100,12 +107,21 @@ class AbstractController {
      * @return void
      */
     public function initView() {
-        // Get path to template File for action
+        // Setze den Template Pfad
         $template = $this->request->getController() . '/' . ucwords($this->request->getAction()) . '.php';
 
-        // Initialize the view
+        // Setze das Limit
+        if (isset($this->params['limit'])) {
+            $this->limit = (int) $this->params['limit'];
+        } else {
+            $this->limit = 0;
+        }
+
+        // Initialisiere den View
         if ($this->view === NULL) {
-            $this->view = new \EJC\View($this->ajax);
+            $this->view = new \EJC\View($this->ajax, $this->limit);
+        } else {
+            $this->view->setLimit($this->limit);
         }
         $this->view->setTemplate($template);
     }

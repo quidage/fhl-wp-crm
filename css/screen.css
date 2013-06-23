@@ -417,6 +417,14 @@ div#std-overlay img {
     text-align: right;
 }
 
+/**
+* eine Box fuer die Paginierung
+*/
+.pagination-box {
+    text-align: right;
+    padding: 10px;
+}
+
 /*
 * Formatierungen fuer den Footer
 * Dieser hat als optisches Highlight einen Inneren Schatten.
