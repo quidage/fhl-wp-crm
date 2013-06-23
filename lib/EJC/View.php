@@ -154,7 +154,7 @@ class View {
 
 
     /**
-     * @author Julian Hilbers
+     * @author Julian Hilbers <hilbers.julian@gmail.com>
      * Generiert &uuml;ber die Methode getUrl einen kompletten a Tag
 	 *
 	 * @param string $title
@@ -173,7 +173,7 @@ class View {
 		$this->getUrl($controller, $action, $params);
 		$url = ob_get_clean();
 
-		echo '<a '.($ident !== '' ? ( $fchar == '#' ? 'id' : 'class' ).'="'.$iVal.'".' : '').' href="'.$url.'"'.($target !== '' ? ' target="'.$target.'"':'').'>'.$title.'</a>';
+		echo '<a '.($ident !== '' ? ( $fchar == '#' ? 'id' : 'class' ).'="'.$iVal.'"' : '').' href="'.$url.'"'.($target !== '' ? ' target="'.$target.'"':'').'>'.$title.'</a>';
     }
 
     /**
