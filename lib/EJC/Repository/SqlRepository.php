@@ -315,7 +315,7 @@ class SqlRepository {
     public function findByParent_idWithOrFilter($parent_id, $filter) {
         $query = $this->buildSelectQuery("*", $this->table, " parent_id = $parent_id AND deleted = 0 AND (" . $this->createFilterString($filter)) . ")";
         return $this->getResultArray($query);
-    }        
+    }
 
 
     /**
