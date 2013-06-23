@@ -41,6 +41,8 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    <?php else: ?>
+    	<p>Es sind keine offenen Projekte vorhanden.</p>
 <?php endif; ?> 
 
 <?php 
@@ -71,4 +73,6 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    <?php else: ?>
+    	<p>Es sind keine offenen Aufgaben vorhanden.</p>
 <?php endif; ?> 

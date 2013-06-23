@@ -7,6 +7,7 @@ namespace EJC;
  * wird und was als Parameter an diese Action uebergeben wird
  *
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Julian Hilbers <hilbers.julian@gmail.com>
  * @package wp-crm
  */
 class Request {
@@ -15,6 +16,7 @@ class Request {
     protected $action;
     protected $params;
     protected $view;
+	protected $ajax;
 
     /**
      * Konstruktor
@@ -31,14 +33,18 @@ class Request {
             $this->view = $view;
         } else {
             // HTTP-Request, der Request wird von der index.php instanziiert
-            $this->view = new \EJC\View();
             $getParams = $this->getGetParams();
             $postParams = $this->getPostParams();
 
             $this->controller = ucwords(\EJC\Helper\StringHelper::cleanUp($getParams['controller']));
             $this->action = \EJC\Helper\StringHelper::cleanUp($getParams['action']);
+			$this->ajax = (isset($getParams['ajax']) ? (boolean)$getParams['ajax'] : false );
             unset($getParams['controller']);
             unset($getParams['action']);
+			unset($getParams['ajax']);
+			
+			// View initialisieren unter Beachtung des benötigten Layouts
+			$this->view = new \EJC\View($this->isAjax());
 
             // Fuege GET- und POST-Paramenter zusammen
             $this->params = array_merge($getParams, $postParams);
@@ -138,7 +144,7 @@ class Request {
      * @return boolean
      */
     public function isAjax() {
-        if (isset($_SERVER['XMLHttpRequest']) || isset($_GET['ajax'])) {
+        if (isset($_SERVER['XMLHttpRequest']) || $this->ajax) {
             return TRUE;
         } else {
             return FALSE;

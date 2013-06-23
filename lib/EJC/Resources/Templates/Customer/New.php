@@ -14,7 +14,7 @@
 <form name="newCustomer" method="post" action="<?php $this->getUrl('Customer', 'create'); ?>">
     <table>
         <tr>
-                <td>Vorname:</td>
+                <td>Name:</td>
                 <td><input type="text" name="customer[name]" placeholder="Musterkunde" value=""></td>
         </tr>
         <tr>
@@ -23,8 +23,8 @@
         </tr>
         <tr>
                 <td>Plz/Ort</td>
-                <td><input type="text" name="customer[zip]" style="width: 20%;" placeholder="PLZ" value="" />
-                <input type="text" name="customer[city]" style="width: 70%;" value="" placeholder="Musterstadt" /></td>
+                <td><input type="text" name="customer[zip]" style="width: 60px;" placeholder="PLZ" value="" />
+                <input type="text" name="customer[city]" style="width: 188px;" value="" placeholder="Musterstadt" /></td>
         </tr>
         <tr>
                 <td>Telefon:</td>

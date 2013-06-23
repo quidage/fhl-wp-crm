@@ -6,6 +6,7 @@
  * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+ * @author Julian Hilbers <hilbers.julian@gmail.com>
  * @package wp-crm
  */
 ?>
@@ -13,8 +14,10 @@
 <table width="100%">
     <thead>
     	<caption>Kunden
-    	<span class="new-object"><a href="<?php $this->getUrl('Customer', 'new'); ?>" title="Neuer Kunde">
-    		<img src="images/iconset/plus_white.png" />Neuer Kunde</a></span></caption>
+	    	<span class="new-object">
+	    		<?php $this->getLink('<img src="images/iconset/plus_white.png" alt="neuer kunde">Neuer Kunde ','Customer', 'new', array('ajax' => true), '.std-btn');?>
+	    	</span>
+    	</caption>
         <tr>
             <th>Kunden-Nr.</th>
             <th>Name</th>

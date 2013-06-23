@@ -90,7 +90,7 @@ class TaskController extends AbstractController {
     */
     public function updateAction(\EJC\Model\Task $task) {
     	$this->taskRepository->update($task);
-    	$this->forward('Project', 'listByUser');
+    	$this->redirect('Project','show');
     }
     
 }

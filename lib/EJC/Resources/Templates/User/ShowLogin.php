@@ -11,7 +11,7 @@
 
  <h1>F&uuml;r Freelancer und Selbstst&auml;ndige</h1>
  <p>Zeitsparen bei der Kunden- und Projektverwaltung</p>
- <a href="#" class="button-link">Kostenlos registrieren</a>
+ <a href="<?php $this->getUrl('User', 'register'); ?>" class="button-link">Kostenlos registrieren</a>
 
  <div id="loginform">
     <form name="login" method="post" action="<?php $this->getUrl('user', 'login'); ?>">

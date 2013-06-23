@@ -1,15 +1,16 @@
 /**
  * Selector for DOM elements inspired by jQuery
  * 
- * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>, Julian Hilbers <hilbers.juian@gmail.com>
+ * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
+ * @author Julian Hilbers <hilbers.juian@gmail.com>
  * @version 1.0 
  * 
  * 
  * -------------------------------------------------------------------------------------------|
- * DOM helper to interact with DOM elements
+ * DOM helfer um mit den Elementen des DOM zu interagieren
  * 
- * @param {object} window		Central window object
- * @param {*} undefined			For security reason, to get a clean undefined
+ * @param {object} window		window Objekt der Seite
+ * @param {*} undefined			Sicherheitsrelevante Variable um einen sauberen undefined Wert zu erhlaten
  */
 (function(window, undefined){
 	"strict mode"
@@ -21,19 +22,19 @@
 	var matches,
 		reSingleTag = /^<(\w*)\s*\/?>$/;
 	
-	// Call the contructor
+	// Konstruktor
 	var dHelper = function(selector) {
 		return new dHelper.dh.init( selector );
 	};
 	
-	// Append all the nice functionalities to dHelper.fn
+	// Alle Funktionen von dHelper zu dHelper.fn hinzufügen
 	dHelper.dh = dHelper.prototype = {
 		len: 0,		// Found results
 		
 		/**
 		 * Contructor
 		 * 
-		 * @param {string} selector		Element selectable by id or class 
+		 * @param {string} selector		Selektiertes Element, möglich sind Klassennamen oder Ids 
 		 */
 		init: function(selector) {
 			var elem, sType, sWork;
@@ -58,7 +59,7 @@
 	    	return this;
 	 	},
 	 	/**
-	     * Finds an html tag within an selected element
+	     * Findet einen html Tag innerhalb eines Elementes
 	     * 
 	     * @param {string} selector		Tag to find
 	     * @returns {dh}
@@ -69,19 +70,18 @@
 	    	return this;
 	    },
 	    /**
-	     * Works only with selected classes, delivers the element at the passed position
+	     * Auswahl eines von mehreren gefundenen Elementen 
 	     * 
-	     * @param {int} 	Position of the element
+	     * @param {int} 	Position des Elements
 	     * @returns {dh}
 	     */
 	    eq: function( no ) {
 	    	return this.matches[no];
 	    },
 	    /**
-	     * Works only with selected classes and find, runs through every element and
-	     * performs the passed event
+	     * Läuft durch jedes gefundene Element und führt an ihm eine Aktion durch
 	     * 
-	     * @param {function} callback		Something that should happen with this element
+	     * @param {function} callback		Aktion für gefundenen Elemente
 	     */
 	    each: function( callback ) {
 	    	var c = this.len;
@@ -92,9 +92,9 @@
 	    	}
 	    },
 	    /**
-	     * Appends the an array of results to dHelper
+	     * Fügt die gefundenen Elemente zu dHelper hinzu
 	     * 
-	     * @param {array} results		Array with found elements
+	     * @param {array} results		Array mit den gefundenen Elementen
 	     */
 	    pushToMatches: function( results ) {
 	    	var c = results.length;
@@ -109,18 +109,18 @@
 	    	}
 	    },
 	    /**
-	     * Trims a string
+	     * Entfernt alle Leerzeichen aus einem String
 	     * 
-	     * @param {string} uStr		Untrimmed string
+	     * @param {string} uStr		Ausgangswert
 	     * @return {string}
 	     */
 	    trim: function( uStr ) {
 	        return uStr.replace(/^\s+|\s+$/g, '');
 	    },
 	    /**
-	     * Fügt ein Element zum DOM hinzu
+	     * Fügt ein neues HTML Element zum DOM hinzu
 	     * 
-	     * @param {string} input		New content
+	     * @param {string} input		Neues Element
 	     */
 	    append: function( input ) {
 	    	// TO DO - Klasse bzw. ID erkennen und übergeben
@@ -129,9 +129,10 @@
 	    	this[0].appendChild(tmp);
 	    },
 	 	/**
-	     * Adds a class to an element
+	     * Fügt eine Klasse zu einem Element hinzu, ist bereits ein Klassenname vorhanden,
+	     * wird der angegebene Werz hinzugefügt
 	     * 
-	     * @param {string} className
+	     * @param {string} className	Name der Klasse
 	     * @return {dh}
 	     */
 	    addClass: function( className ) {
@@ -143,9 +144,9 @@
 	        return this;
 	    },
 	    /**
-	     * Remove class from an element
+	     * Entfernt eine Klasse von einem Element
 	     * 
-	     * @param {string} className
+	     * @param {string} className	Name der Klasse
 	     * @return {dh}
 	     */
 	    removeClass: function( className ) {
@@ -162,10 +163,11 @@
 	        return this;
 	    },
 	    /**
-		 * Reads or sets the attribute of an element
+		 * Ändert das Attribut eines HTML Elementes, wird kein Wert angegeben, liefert die Methode,
+		 * den inhalt des Attibuts
 		 * 
-		 * @param {string} attr		Attribute to find
-		 * @param {string} val		New Value
+		 * @param {string} attr		Gesuchtes Attribut
+		 * @param {string} val		Neuer Wert
 		 * 
 		 * @returns {string}
 		 */
@@ -181,18 +183,17 @@
 			return '';
 		},
 		/**
-	     * Read and write html
+	     * Liest bzw. schreibt den Inhalte eines Tags
 	     * 
-	     * @param {string} html		new html content
-	     * 
-	     * @return {string} if no argument is given
+	     * @param {string} html		neuer Inhalt
+	     * @return {string}
 	     */
 	    html: function( html ) {
 	    	if( html === undefined ) return this[0].innerHTML();
 	    	this[0].innerHTML = html;
 	    },
 	    /**
-	     * Adds an click event to the element
+	     * Belegt ein HTML Element mit einem Klick Event
 	     * 
 	     * @param {function} callback
 	     */
@@ -203,7 +204,7 @@
 	    },
 	    
 	    /**
-	     * Adds an mouseover event to the element
+	     * Belegt ein HTML Element mit einem Mouseover Event
 	     * 
 	     * @param {function} callback
 	     */
@@ -214,7 +215,7 @@
 	    },
 	    
 	    /**
-	     * Adds an on focus event to the element
+	     * Fügt einem HTML Element ein onFocus Event hinzu
 	     * 
 	     * @param {function} callback
 	     */
@@ -223,55 +224,71 @@
 	    		this[0].addEventListener('onfocus', callback, false);	
 	    	}
 	    },
-	     /**
-	     * Make an AJAX-Call
-	     * 
-	     * @param {object} parameter
-	     * @returns {string}
-	     */
-	    ajax: function(parameter) {
-	
-	        var request = null;
-	
-	        // Internet Explorer
-	        if (window.ActiveXObject) {
-	            request = new ActiveXObject("Microsoft.XMLHTTP");
-	        } else { // other browsers
-	            request = new XMLHttpRequest();
-	        }
-	
-	        var requestUri = parameter.url;
-	        
-	        for (i = 0; i < parameter.params.length; i++) {
-	
-	        }
-	        request.open("GET", requestUri, true);
-	        request.onreadystatechange = function() {
-	
-	            if (request.readyState !== 4 && parameter.loading() !== undefined) {
-	                parameter.loading();
-	            }
-	
-	            if (request.readyState === 4 && request.status === 200 && parameter.success(request.response) !== undefined) {
-	                if (parameter.type === 'json') {
-	                    parameter.success();
-	                } else {
-	                    parameter.success(request.responseText);
-	                }
-	            }
-	
-	        };
-	
-	        request.send(null);
-	    }
 	};
 	
+	/**
+	 * Führt eine AJAX Abfrage aus
+	 * 
+	 * @param {object} parameter		Zu sendene Parameter
+	 * @param {function} callback		Aktion nach Abschluss der Abfrage
+	 * 
+	 * @returns {string}
+	 */
+	dHelper.ajax = function(parameter, callback) {
 	
-	// Init obtains through dHelper prototype all it's functions for instantiation  
+	    var request = null;
+		var overlay;
+		
+	    // Internet Explorer
+	    if (window.ActiveXObject) {
+	        request = new ActiveXObject("Microsoft.XMLHTTP");
+	    } else { // other browsers
+	        request = new XMLHttpRequest();
+	    }
+	
+	    var requestUri = parameter.url;
+	    
+	    if( parameter.params != undefined ) {
+	    	// TO DO - Parameter erkennen und in Objekt für Versand einbinden
+	    	/*
+	    	for (i = 0; i < parameter.params.length; i++) {
+	    		
+	    	}
+	    	*/
+	    }
+	
+	    request.open("POST", requestUri, true);
+	    request.onloadstart = function() {
+	    	// Overlay während des Ladevorganges hinzufügen
+        	var ovl = document.getElementById('std-overlay');
+			if( !ovl ) {
+				var ovImg = document.createElement('img');
+				ovImg.src = 'images/loader.gif';
+				
+				overlay = document.createElement('div');
+				overlay.setAttribute('id', 'std-overlay');
+				overlay.appendChild(ovImg);
+				document.body.appendChild(overlay);
+			}
+	    }
+	    request.onreadystatechange = function() {
+	        if (request.readyState === 4 && request.status === 200 ) {
+	        	document.body.removeChild(document.getElementById('std-overlay'));
+	        	if( typeof(callback) === 'function' ) callback(request.responseText);
+	        }
+	    };
+	
+	    request.send(null);
+	}
+	
+	
+	// Der Initialisierung Methode alle Funktionen von dHelper zuweisen  
 	dHelper.dh.init.prototype = dHelper.dh;
 	
-	// Expose for gloabel use 
+	// dHelper über $ erreichbar machen 
 	window.$ = dHelper;
+	
+	
 	
 	
 	// *************************************
@@ -299,6 +316,7 @@
 		activ: false,		// Flag für die den Zastand
 		wndObj: null,		// Objekt des Fensters selbst
 		ovlObj: null,		// Objekt der Shader Fläche im Hintergrund
+		windowId:'',		// Interne Id des Fensters
 		fadeStep: 0.05,		// Schritte mit denen das Fenster eingeblenden wird
 		fadeSpeed: 10,		// Geschwindigkeit der wiederholungen in milli sekunden
 		properties: {},		// Objekt mit den aktuellen Eigenschaften des Fensters
@@ -340,8 +358,11 @@
 		 */
 		close: function() {
 			var _this = this;
-			this.fadeOut(1, function() {
-				// TO DO
+			var bdy = document.body;
+			this.fadeOut(1, function(){
+				//alert('check');
+				bdy.removeChild(_this.getWindowElement('std-overlay'));
+				bdy.removeChild(_this.getWindowElement('wnd-'+_this.wId));
 			});
 		},
 		/**
@@ -429,7 +450,7 @@
 			
 			if( val < 1 ) { 
 				setTimeout( function(){
-					_this.fadeIn( val+= _this.fadeStep );
+					_this.fadeIn( val+= _this.fadeStep, callback );
 				}, this.fadeSpeed );
 			} else {
 				if( typeof(callback) === 'function' ) callback();
@@ -447,7 +468,7 @@
 			
 			if( val > 0 ) { 
 				setTimeout( function(){
-					_this.fadeOut( val-= _this.fadeStep );
+					_this.fadeOut( val-= _this.fadeStep, callback );
 				}, this.fadeSpeed );
 			} else {
 				if( typeof(callback) === 'function' ) callback();
@@ -460,8 +481,7 @@
 	
 	// Dem System den Namen des Objektes bekannt machen
 	window.crmWindow = wndHelper;
-	
-	
+
 })(window);
 
 
