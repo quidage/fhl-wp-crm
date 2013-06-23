@@ -4,17 +4,17 @@ namespace EJC\Controller;
 
 /**
  * Methoden fuer den Customer
- * 
+ *
  * Listen, Darstellen und Bearbeiten der Customer Daten
  *
  * @author Chrstian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */
 class CustomerController extends AbstractController {
-    
+
     /**
      * Liste alle Customer zu einem User
-     * 
+     *
      * @param \EJC\Model\User $user
      * @return void
      */
@@ -22,15 +22,21 @@ class CustomerController extends AbstractController {
         if ($user === NULL) {
             $user = $this->getCurrentUser();
         }
-        $customers = $this->customerRepository->findByParent_id($user->getId());
+        if (isset($this->params['filter']) && $this->params['filter'] !== '') {
+            $customers = $this->customerRepository->findByParent_id($user->getId());
+        } else {
+            $customers = $this->customerRepository->findByUserWithOrFilter($user->getId(), $this->params['filter']);
+        }
         $this->view->assign('customers', $customers);
+        $this->view->assign('filterUrl', $this->request->getCurrentUrl());
+        $this->view->assign('filter', $this->params['filter']);
         $this->view->assign('title', 'Kundenliste');
-        $this->view->render();        
+        $this->view->render();
     }
-    
+
     /**
      * Zeige alle Daten zu einem Customer
-     * 
+     *
      * @param string $customerID
      * @return void
      */
@@ -41,7 +47,7 @@ class CustomerController extends AbstractController {
 
     /**
      * Formular zum aendern der Customer-Daten
-     * 
+     *
      * @param \EJC\Model\Customer $customer
      * @return void
      */
@@ -49,10 +55,10 @@ class CustomerController extends AbstractController {
         $this->view->assign('customer', $customer);
         $this->view->render();
     }
-    
+
     /**
      * Aktualisiere die Daten des Customer
-     * 
+     *
      * @param array $customer
      */
     public function updateAction(\EJC\Model\Customer $customer) {
@@ -63,10 +69,10 @@ class CustomerController extends AbstractController {
             $this->forward('Customer', 'listByUser');
         }
     }
-    
+
     /**
      * Formular um einen Customer anzulegen
-     * 
+     *
      * @return void
      */
     public function newAction(\EJC\Model\User $user = NULL) {
@@ -77,10 +83,10 @@ class CustomerController extends AbstractController {
         $this->view->assign('newCustomer', new \EJC\Model\Customer());
         $this->view->render();
     }
-    
+
     /**
      * Erstelle einen neuen Customer
-     * 
+     *
      * @param \EJC\Model\Customer $customer
      * @return void
      */
@@ -90,9 +96,9 @@ class CustomerController extends AbstractController {
             echo json_encode(array('status' => 'ok'));
         } else {
             $this->forward('Customer', 'listByUser');
-        }        
+        }
     }
-    
+
 }
 
 ?>

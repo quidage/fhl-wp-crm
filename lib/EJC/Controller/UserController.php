@@ -242,8 +242,8 @@ class UserController extends AbstractController {
      *
      * @return void
      */
-    public function loginAction(array $login) {
-
+    public function loginAction() {
+        $login = $this->params['login'];
         // Hole passenden User aus dem Repository
         try {
             $user = $this->userRepository->findOneByName($login['name']);
