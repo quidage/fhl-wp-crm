@@ -10,6 +10,15 @@
  */
 ?>
 
+<div class="filter-box">
+    <form name="filterProject" method="get" action="<?php echo $this->filterUrl; ?>">
+        <input type="hidden" name="controller" value="Project" />
+        <input type="hidden" name="action" value="listByUser" />
+        <input type="text" name="filter" value="<?php echo $this->filter; ?>" placeholder="Filtertext" />
+        <input type="submit" value="Filtern" class="submit button-link" />
+    </form>
+</div>
+
 <table>
     <thead>
         <caption>Projekte
