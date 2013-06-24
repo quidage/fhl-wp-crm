@@ -79,6 +79,7 @@ class UserController extends AbstractController {
         // Wenn es sich nicht um einen Admin handelt abbrechen
         if (!$this->getCurrentUser()->getAdmin()) exit;
 
+        // Pruefe ob username schon vergeben
         $existingUser = $this->userRepository->findOneByName($newUser->getName());
         if (is_object($existingUser)) {
             $this->view->addErrorMessage('Der Username ist schon vergeben');
@@ -162,6 +163,8 @@ class UserController extends AbstractController {
             exit;
         }
         $existingUser = $this->userRepository->findOneByName($user->getName());
+
+        // Pruefe ob username schon vergeben
         if (is_object($existingUser) && $existingUser->getId() !== $user->getId()) {
             $this->view->addErrorMessage('Der Username ist schon vergeben');
             $this->forward('User', 'edit', array('user' => $user));
@@ -272,6 +275,7 @@ class UserController extends AbstractController {
         // Hole passenden User aus dem Repository
         try {
             $user = $this->userRepository->findOneByName($login['name']);
+            if ($user->getDisable()) $user = NULL;
         } catch (EJC\Exception\RepositoryException $e) {
             $user = NULL;
         }
@@ -318,6 +322,7 @@ class UserController extends AbstractController {
      * @return void
      */
     public function createRegisteredAction(\EJC\Model\User $newUser) {
+        // Pruefe ob username schon vergeben
         $existingUser = $this->userRepository->findOneByName($newUser->getName());
         if (is_object($existingUser)) {
             $this->view->addErrorMessage('Der Username ist schon vergeben');
@@ -337,11 +342,38 @@ class UserController extends AbstractController {
             if (!empty($this->view->errorMessages)) {
                 $this->forward('User', 'register', array('newUser', $newUser));
             } else {
+                $newUser->setConfirm_hash(md5(time() . $newUser->getName() . $newUser->getPassword()));
+                $newUser->setDisable(TRUE);
                 $this->userRepository->add($newUser);
+
+                // Versende eine Email mit den Link zum Bestaetigen der Reegistrierung
+                $content = "Klicken sie auf den unten angegebenen Link oder kopieren sie die URL in ihren Browser um die Registrierung zu bestaetigen:\r\n\r\n"
+                        . "http://" . $_SERVER['HTTP_HOST'] . "/index.php?controller=user&action=confirmRegistration&hash=" . $newUser->getConfirmHash();
+                $this->sendMail($newUser->getEmail(), 'Bestaetigen der Registrierung', $content);
+
                 $this->view->assign('title', 'Registrierung gestartet');
                 $this->view->render();
             }
         }
+    }
+
+    /**
+     * Bestaetige die Registreirung ueber die Pruefung eines hash
+     *
+     * @return void
+     */
+    public function confirmRegistrationAction() {
+        if(isset($this->params['hash'])) {
+            $user = $this->userRepository->findOneByConfirm_hash($this->params['hash']);
+            $user->setDisable(FALSE);
+            $this->userRepository->update($user);
+            $this->view->assign('title', 'Registrierung best&auml;tigt');
+            $this->view->assign('registered', TRUE);
+        } else {
+            $this->view->assign('title', 'Registrierung kann nicht best&auml;tigt werden');
+            $this->view->assign('registered', FALSE);
+        }
+        $this->view->render();
     }
 
     /**
