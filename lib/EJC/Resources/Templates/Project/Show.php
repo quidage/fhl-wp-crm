@@ -53,7 +53,7 @@
                         	
                         	<?php $this->getLink('<img src="images/iconset/writeNew_black.png" title="Bearbeiten">','Task', 'edit', array('ajax' => true,'task[id]' => $task->getId()), '.std-btn');?>
                         	
-                        	<?php $this->getLink('<img src="images/iconset/check-not-ok.png" title="Löschen" alt="eintrag löschen">','Task', 'deleteMessage', array('ajax' => true,'task[id]' => $task->getId()), '.msg-btn');?>
+                        	<?php $this->getLink('<img src="images/iconset/check-not-ok.png" title="L&ouml;schen" alt="eintrag l&ouml;schen">','Task', 'deleteMessage', array('ajax' => true,'task[id]' => $task->getId()), '.msg-btn');?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

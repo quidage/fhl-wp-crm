@@ -27,7 +27,10 @@
             <td><?php echo $user->getFirst_name(); ?></td>
             <td><?php echo $user->getLast_name(); ?></td>
             <td><?php echo $user->getEmail(); ?></td>
-            <td><?php $this->getLink('Bearbeiten', 'User', 'edit', array('user[id]' => $user->getId())); ?></td>
+            <td>
+            	<a href="<?php echo $this->getUrl('User', 'edit', array('user[id]' => $user->getId())); ?>" title="Bearbeiten">
+            		<img src="images/iconset/writeNew_black.png" /></a>
+            </td>
         </tr>
         <?php endforeach; ?>
     </tbody>

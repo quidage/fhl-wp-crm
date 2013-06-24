@@ -32,7 +32,6 @@
             <th>Beschreibung</th>
             <th>Status</th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -45,12 +44,10 @@
                 <td>
                 	<a href="<?php echo $this->getUrl('Project', 'show', array('project[id]' => $project->getId())); ?>" title="Details">
                 		<img src="images/iconset/information.png" /></a>
-                </td>
-                <td>
+
                 	<?php $this->getLink('<img src="images/iconset/writeNew_black.png" title="Eintrag bearbeiten" alt="bearbeiten">','Project', 'edit', array('ajax' => true,'project[id]' => $project->getId()), '.std-btn');?>
-                </td>
-                <td>
-                	<?php $this->getLink('<img src="images/iconset/check-not-ok.png" title="Eintrag löschen" alt="eintrag löschen">','Project', 'deleteMessage', array('ajax' => true,'project[id]' => $project->getId()), '.msg-btn');?>
+
+                	<?php $this->getLink('<img src="images/iconset/check-not-ok.png" title="Eintrag l&ouml;schen" alt="eintrag l&ouml;schen">','Project', 'deleteMessage', array('ajax' => true,'project[id]' => $project->getId()), '.msg-btn');?>
                 </td>
             </tr>
         <?php endforeach; ?>
