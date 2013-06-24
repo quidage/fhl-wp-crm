@@ -79,25 +79,32 @@ class UserController extends AbstractController {
         // Wenn es sich nicht um einen Admin handelt abbrechen
         if (!$this->getCurrentUser()->getAdmin()) exit;
 
-        $params = $this->request->getParams();
-        if (empty($params['passwordConfirm']) || $newUser->getPassword() === NULL) {
-            $this->view->addErrorMessage('Geben Sie ein Passwort an');
-        } elseif ($newUser->getName() === '') {
-            $this->view->addErrorMessage('Geben sie einen Usernamen an');
-        } elseif ($newUser->getFirst_name() === '') {
-            $this->view->addErrorMessage('Geben sie einen Vornamen an');
-        } elseif ($newUser->getLast_name() === '') {
-            $this->view->addErrorMessage('Geben sie einen Nachnamen an');
-        } elseif ($newUser->getEmail() === false) {
-            $this->view->addErrorMessage('Geben sie eine g&uuml;ltige E-Mail-Adress an');
-        } elseif (md5($params['passwordConfirm']) !== $newUser->getPassword()) {
-            $this->view->addErrorMessage('Die Passw&ouml;rter stimmen nicht &uuml;berein');
-        }
-        if (empty($this->view->errorMessages)) {
-            $this->userRepository->add($newUser);
-            $this->forward('User', 'showSettings');
-        } else {
+        // Pruefe ob username schon vergeben
+        $existingUser = $this->userRepository->findOneByName($newUser->getName());
+        if (is_object($existingUser)) {
+            $this->view->addErrorMessage('Der Username ist schon vergeben');
             $this->forward('User', 'new', array('newUser' => $newUser));
+        } else {
+            $params = $this->request->getParams();
+            if (empty($params['passwordConfirm']) || $newUser->getPassword() === NULL) {
+                $this->view->addErrorMessage('Geben Sie ein Passwort an');
+            } elseif ($newUser->getName() === '') {
+                $this->view->addErrorMessage('Geben sie einen Usernamen an');
+            } elseif ($newUser->getFirst_name() === '') {
+                $this->view->addErrorMessage('Geben sie einen Vornamen an');
+            } elseif ($newUser->getLast_name() === '') {
+                $this->view->addErrorMessage('Geben sie einen Nachnamen an');
+            } elseif ($newUser->getEmail() === false) {
+                $this->view->addErrorMessage('Geben sie eine g&uuml;ltige E-Mail-Adress an');
+            } elseif (md5($params['passwordConfirm']) !== $newUser->getPassword()) {
+                $this->view->addErrorMessage('Die Passw&ouml;rter stimmen nicht &uuml;berein');
+            }
+            if (empty($this->view->errorMessages)) {
+                $this->userRepository->add($newUser);
+                $this->forward('User', 'showSettings');
+            } else {
+                $this->forward('User', 'new', array('newUser' => $newUser));
+            }
         }
     }
 
@@ -119,6 +126,7 @@ class UserController extends AbstractController {
             }
         }
         $this->view->assign('user', $user);
+        $this->view->assign('admin', $this->getCurrentUser()->getAdmin());
         $this->view->render();
     }
 
@@ -149,14 +157,24 @@ class UserController extends AbstractController {
      * @param \EJC\Model\User $user
      */
     public function updateAction(\EJC\Model\User $user) {
-        if ($user->getId() !== $this->getCurrentUser()->getId() || !$this->getCurrentUser()->getAdmin()) {
+        if ($user->getId() !== $this->getCurrentUser()->getId() && !$this->getCurrentUser()->getAdmin()) {
             // wenn kein Admin duerfen keine fremden Userdaten editiert werden
             header('HTTP/1.1 403 Forbidden');
             exit;
         }
-        $this->userRepository->update($user);
-        $_SESSION['user'] = serialize($user);
-        $this->redirect('User', 'showSettings');
+        $existingUser = $this->userRepository->findOneByName($user->getName());
+
+        // Pruefe ob username schon vergeben
+        if (is_object($existingUser) && $existingUser->getId() !== $user->getId()) {
+            $this->view->addErrorMessage('Der Username ist schon vergeben');
+            $this->forward('User', 'edit', array('user' => $user));
+        } else {
+            $this->userRepository->update($user);
+            if ($this->getCurrentUser()->getId() === $user->getId()) {
+                $_SESSION['user'] = serialize($user);
+            }
+            $this->redirect('User', 'showSettings');
+        }
     }
 
     /**
@@ -257,6 +275,7 @@ class UserController extends AbstractController {
         // Hole passenden User aus dem Repository
         try {
             $user = $this->userRepository->findOneByName($login['name']);
+            if ($user->getDisable()) $user = NULL;
         } catch (EJC\Exception\RepositoryException $e) {
             $user = NULL;
         }
@@ -287,9 +306,12 @@ class UserController extends AbstractController {
      *
      * @return void
      */
-    public function registerAction() {
+    public function registerAction(\EJC\Model\User $newUser = NULL) {
+        if ($newUser === NULL) {
+            $newUser = new \EJC\Model\User();
+        }
         $this->view->assign('title', 'Registrieren');
-        $this->view->assign('newUser', new \EJC\Model\User());
+        $this->view->assign('newUser', $newUser);
         $this->view->render();
     }
 
@@ -300,24 +322,58 @@ class UserController extends AbstractController {
      * @return void
      */
     public function createRegisteredAction(\EJC\Model\User $newUser) {
-        $params = $this->request->getParams();
-        // Fehlermeldungen ausgeben
-        if ($newUser->getName() === '') $this->view->addErrorMessage('Geben sie einen Usernamen an');
-        if ($newUser->getFirst_name() === '') $this->view->addErrorMessage('Geben sie einen Vornamen an');
-        if ($newUser->getLast_name() === '') $this->view->addErrorMessage('Geben sie einen Nachnamen an');
-        if ($newUser->getEmail() === FALSE) $this->view->addErrorMessage('Geben sie eine g&uuml;ltige E-Mail-Adresse an');
-        if ($newUser->getPassword() === NULL) {
-            $this->view->addErrorMessage('Geben sie ein Passwort an');
-        } elseif (md5($params['passwordConfirm']) !== $newUser->getPassword()) {
-            $this->view->addErrorMessage('Die Passw&ouml;rter stimmen nicht &uuml;berein');
-        }
-        if (!empty($this->view->errorMessages)) {
-            $this->forward('User', 'register', array('newUser', $newUser));
+        // Pruefe ob username schon vergeben
+        $existingUser = $this->userRepository->findOneByName($newUser->getName());
+        if (is_object($existingUser)) {
+            $this->view->addErrorMessage('Der Username ist schon vergeben');
+            $this->forward('User', 'register', array('newUser' => $newUser));
         } else {
-            $this->userRepository->add($newUser);
-            $this->view->assign('title', 'Registrierung gestartet');
-            $this->view->render();
+            $params = $this->request->getParams();
+            // Fehlermeldungen ausgeben
+            if ($newUser->getName() === '') $this->view->addErrorMessage('Geben sie einen Usernamen an');
+            if ($newUser->getFirst_name() === '') $this->view->addErrorMessage('Geben sie einen Vornamen an');
+            if ($newUser->getLast_name() === '') $this->view->addErrorMessage('Geben sie einen Nachnamen an');
+            if ($newUser->getEmail() === FALSE) $this->view->addErrorMessage('Geben sie eine g&uuml;ltige E-Mail-Adresse an');
+            if ($newUser->getPassword() === NULL) {
+                $this->view->addErrorMessage('Geben sie ein Passwort an');
+            } elseif (md5($params['passwordConfirm']) !== $newUser->getPassword()) {
+                $this->view->addErrorMessage('Die Passw&ouml;rter stimmen nicht &uuml;berein');
+            }
+            if (!empty($this->view->errorMessages)) {
+                $this->forward('User', 'register', array('newUser', $newUser));
+            } else {
+                $newUser->setConfirm_hash(md5(time() . $newUser->getName() . $newUser->getPassword()));
+                $newUser->setDisable(TRUE);
+                $this->userRepository->add($newUser);
+
+                // Versende eine Email mit den Link zum Bestaetigen der Reegistrierung
+                $content = "Klicken sie auf den unten angegebenen Link oder kopieren sie die URL in ihren Browser um die Registrierung zu bestaetigen:\r\n\r\n"
+                        . "http://" . $_SERVER['HTTP_HOST'] . "/index.php?controller=user&action=confirmRegistration&hash=" . $newUser->getConfirmHash();
+                $this->sendMail($newUser->getEmail(), 'Bestaetigen der Registrierung', $content);
+
+                $this->view->assign('title', 'Registrierung gestartet');
+                $this->view->render();
+            }
         }
+    }
+
+    /**
+     * Bestaetige die Registreirung ueber die Pruefung eines hash
+     *
+     * @return void
+     */
+    public function confirmRegistrationAction() {
+        if(isset($this->params['hash'])) {
+            $user = $this->userRepository->findOneByConfirm_hash($this->params['hash']);
+            $user->setDisable(FALSE);
+            $this->userRepository->update($user);
+            $this->view->assign('title', 'Registrierung best&auml;tigt');
+            $this->view->assign('registered', TRUE);
+        } else {
+            $this->view->assign('title', 'Registrierung kann nicht best&auml;tigt werden');
+            $this->view->assign('registered', FALSE);
+        }
+        $this->view->render();
     }
 
     /**
