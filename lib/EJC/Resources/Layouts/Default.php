@@ -11,6 +11,10 @@
     <head>
         <title><?php echo $this->title; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="author" content="Christian Hansen, Julian Hilbers, Enrico Lauterschlag" />
+        <meta name="description" content="Sparen Sie Zeit bei der Kunden- und Projektverwaltung. Mit der Applikation FHL-WP-CRM werden die sonst m&uuml;seligen Verwaltungsaufgaben zum Kinderspiel." />
+        <meta name="keywords" content="Kundenverwaltung, Projektverwaltung" />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="stylesheet" type="text/css" href="css/screen.css" media="all" />
         <link rel="stylesheet" type="text/css" href="css/menue.css" media="all" />
         <link href='http://fonts.googleapis.com/css?family=Voces' rel='stylesheet' type='text/css' />
