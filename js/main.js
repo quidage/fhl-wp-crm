@@ -640,8 +640,12 @@ window.onload = function() {
 	
 	// Schließen Aktion für Standard Fenster
 	var standardCloseAction = function(e) {
+		e.preventDefault();
 		document.body.removeEventListener("keydown", standardCloseAction, false );
+		document.getElementById('std-close-wnd').removeEventListener("click", standardCloseAction, false );
 		if( e.keyCode === 27 ) {
+			stdWnd.close();
+		} else if( e.keyCode === 0 ) {
 			stdWnd.close();
 		}
 	}
@@ -672,6 +676,7 @@ window.onload = function() {
 					stdWnd.draw();
 					
 					document.body.addEventListener("keydown", standardCloseAction, false);
+					document.getElementById('std-close-wnd').addEventListener("click", standardCloseAction, false);
 				});
 			});
 		}

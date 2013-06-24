@@ -35,7 +35,10 @@
                 </td>
         </tr>
         <tr>
-                <td colspan="2" style="text-align: left;"><input type="submit" value="Speichern" class="submit button-link" /></td>
+                <td colspan="2" class="btn-field">
+                	<input type="submit" value="Speichern" class="submit button-link" />
+                	<input id="std-close-wnd" type="submit" value="Abbrechen" class="submit button-link" />
+                </td>
         </tr>
     </table>
 </form>
