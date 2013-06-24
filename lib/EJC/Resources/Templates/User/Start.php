@@ -89,8 +89,7 @@
                     		<img src="images/iconset/information.png"></a>
                     </td>
                     <td>
-                    	<a href="<?php echo $this->getUrl('Task', 'edit', array('task[id]' => $task->getID())); ?>" title="Bearbeiten">
-                    		<img src="images/iconset/writeNew_black.png"></a>
+                    	<?php $this->getLink('<img src="images/iconset/writeNew_black.png" title="Eintrag bearbeiten" alt="bearbeiten">','Task', 'edit', array('ajax' => true,'task[id]' => $task->getId()), '.std-btn');?>
                    	</td>
                 </tr>
             <?php endforeach; ?>
