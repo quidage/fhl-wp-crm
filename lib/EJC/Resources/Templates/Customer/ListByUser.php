@@ -47,10 +47,11 @@
                 <td><?php echo $customer->getPhone() . "<br>" . $customer->getFax(); ?></td>
                 <td><a href="mailto:<?php echo $customer->getEmail(); ?>"><?php echo $customer->getEmail(); ?></a></td>
                 <td>
-                	<a href="<?php echo $this->getUrl('Customer', 'edit', array('customer[id]' => $customer->getId())); ?>" title="Bearbeiten">
-                		<img src="images/iconset/writeNew_black.png" /></a>
-                	<a href="<?php echo $this->getUrl('Project', 'new', array('customer[id]' => $customer->getId())); ?>" title="Neues Projekt">
-                		<img src="images/iconset/plus_black.png" /></a>
+                	<?php $this->getLink('<img src="images/iconset/writeNew_black.png" title="Eintrag bearbeiten" alt="bearbeiten">','Customer', 'edit', array('ajax' => true,'customer[id]' => $customer->getId()), '.std-btn');?>	
+                	
+                	<?php $this->getLink('<img src="images/iconset/plus_black.png" title="Neues Projekt" alt="neues projekt">','Project', 'new', array('ajax' => true,'customer[id]' => $customer->getId()), '.std-btn');?>
+                	
+                	<?php $this->getLink('<img src="images/iconset/check-not-ok.png" title="Eintrag löschen" alt="eintrag löschen">','Customer', 'deleteMessage', array('ajax' => true,'customer[id]' => $customer->getId()), '.msg-btn');?>
                 </td>
             </tr>
         <?php endforeach; ?>

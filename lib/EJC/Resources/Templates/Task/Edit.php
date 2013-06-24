@@ -5,6 +5,7 @@
  * Formular zum Editieren einer Aufgabe
  *
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+ * @author Julian Hilbers <hilbers.juian@gmail.com>
  * @package wp-crm
  */
 ?>
@@ -35,10 +36,8 @@
                 </td>
         </tr>
         <tr>
-                <td colspan="2" class="btn-field">
-                	<input type="submit" value="Speichern" class="submit button-link" />
-                	<input id="std-close-wnd" type="submit" value="Abbrechen" class="submit button-link" />
-                </td>
+                <td class="btn-field"><input type="submit" value="Speichern" class="submit button-link" /></td>
+                <td class="btn-field"><input id="std-close-wnd" type="submit" value="Abbrechen" class="submit button-link" /></td>
         </tr>
     </table>
 </form>
