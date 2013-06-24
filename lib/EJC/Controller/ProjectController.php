@@ -135,7 +135,7 @@ class ProjectController extends AbstractController {
     }
 
 	/**
-     * Löscht ein Projekt aus der Datenbank
+     * Löscht ein Projekt
      *
      * @author Julian Hilbers <hilbers.julian@gmail.com>
      * @param \EJC\Model\User $user

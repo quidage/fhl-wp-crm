@@ -94,6 +94,31 @@ class CustomerController extends AbstractController {
         $this->customerRepository->add($newCustomer);
         $this->redirect('Customer', 'listByUser', array('user' => $this->getCurrentUser()));
     }
+	
+	/**
+     * Gibt eine Information zum löschen eines Eintrages aus
+     *
+     * @author Julian Hilbers <hilbers.julian@gmail.com>
+     * @param \EJC\Model\Customer $customer
+     * @return void
+     */
+    public function deleteMessageAction(\EJC\Model\Customer $customer) {
+		$this->view->assign('customerData', $customer);
+        $this->view->render();
+    }
+
+	/**
+     * Löscht einen Kunden
+     *
+     * @author Julian Hilbers <hilbers.julian@gmail.com>
+     * @param \EJC\Model\Customer $customer
+     * @return void
+     */
+    public function deleteAction(\EJC\Model\Customer $customer) {
+    	//$this->customerRepository->remove($customer);
+		$this->view->assign('customerData', $customer);
+        $this->view->render();
+    }
 
 }
 
