@@ -516,21 +516,29 @@ function valid(selector, options){
 }
 
 /**
- * Namespace to validate Formular inputs 
+ * Objekt zur Validierung von Formularen 
  */
 var Validate = {
-	// Default values
+	// Standardwerte
 	defaults : { name: '', required: false, type: 'text', maxLen: 0, minLen: 0, errMsg: 'Ihre Eingabe ist nicht korrekt!' },
-	fields: {},		// All field to check
-	vForm: null,	// Formular to check
+	fields: {},		// Enthält alle zu prüfenden Felder
+	vForm: null,	// Objekt des zu prüfenden Formulars
 	
+	/**
+	 * Initiiert den Validator
+	 * 
+	 * @param {object} vf		Objekt des Formulars
+	 * @param {object} entrys	Liste mit den zu prüfenden einträgen
+	 */
 	init: function( vf, entrys ) {
 		this.combineWithDefaults( entrys );
 		this.vForm = vf;
 	},
 	/**
+	 * Fügt die internen Einstellungen mit den Einstellungen des Nutzers sowie
+	 * den Standardwerten zusammen 
 	 * 
- 	 * @param {Object} list		List with entrys
+ 	 * @param {Object} list		Liste mit den zu prüfenden einträgen
 	 */
 	combineWithDefaults: function( list ) {
 		this.list = [];
@@ -543,12 +551,12 @@ var Validate = {
 		}
 	},
 	/**
-	 * Tests an value of its predefined parameters
+	 * Prüft einen Wert entsprechend der Einstellungen
 	 * 
-	 * @param {*} value			Value for testing
-	 * @param {object} opt		Conditions for this value
+	 * @param {*} value			Testwert
+	 * @param {object} opt		Vorgaben für disen Eintrag
 	 * 
-	 * @return {string} Error Message
+	 * @return {string} Fehlermeldung
 	 */
 	investigate: function( value, opt ) {
 		var strLen = value.length;
@@ -556,17 +564,17 @@ var Validate = {
 		var maL = ( opt.maxLen == 0 ? strLen : opt.maxLen );
 		var miL = ( opt.minLen == 0 ? strLen : opt.minLen );
 		
-		// End if it's required but empty
+		// Endpunkt für Pflichtfelder, falls diese leer sind
 		if( opt.required && strLen < 1 ) {
 			return 'Fehlende Eingabe im Feld: '+opt.name+'.';
 		}
 		
-		// End if value have wrong length
+		// Endpunkt, falls ein Wert die falsche Länge hat
 		if( strLen > maL ) return 'Ihr Eintrag im Feld '+opt.name+' ist '+( strLen-maL )+' Zeichen zu lang.';
 		if( strLen < miL ) return 'Ihr Eintrag im Feld '+opt.name+' ist '+( miL-strLen )+' Zeichen zu kurz.';
 		
 		
-		// Compare to regular expression
+		// Einträge mit Regulären ausdrücken prüfen 
 		var msg = '';
 		switch( opt.type ) {
 			case 'email': regExp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -580,10 +588,10 @@ var Validate = {
 		return msg;
 	},
 	/**
-	 * Checks a value depending to a regular expression
+	 * Prüft einen Wert anhand eines regulären Ausdrucks
 	 * 
-	 * @param {*} value				Value for testing
-	 * @param {string} regExp		Regular expression
+	 * @param {*} value				Zu testender Wert
+	 * @param {string} regExp		Regulärer Ausdruck
 	 * 
 	 * @return {boolean}
 	 */
@@ -591,11 +599,11 @@ var Validate = {
 		return regExp.test(value);
 	},
 	/**
-	 * Appends an informative message to an element 
+	 * Fügt einem Element eine Fehlermeldung hinzu 
 	 * 
-	 * @param {string} pName	Name of this field to identify the error message
-	 * @param {object} elem		Element within the error will be displayed
-	 * @param {string} msg		Error message
+	 * @param {string} pName	Bezeichner des Feldes, für das die Meldung bestimmt ist
+	 * @param {object} elem		Element innerhalb dessen die Fehlermeldung ausgegeben werden soll
+	 * @param {string} msg		Fehlermeldung
 	 */
 	addErrorMessage: function( pName, elem, msg ) {
 		var tmpID = 'err_'+pName;
@@ -603,7 +611,7 @@ var Validate = {
 	},
 	
 	/**
-	 * Investigates all within "this.list" stored fields
+	 * Prüft alle in "this.list" enthaltenen Felder
 	 * 
 	 * @return {boolean} 
 	 */
@@ -615,7 +623,7 @@ var Validate = {
 		var del = false;
 		for( var x in this.list ) {
 			if( !del ) {
-				$(this.list[x].errTo).html('');		// Remove existing Messages
+				$(this.list[x].errTo).html('');		// Entfernt überflüssige Fehlermeldungen
 				del = true;
 			} 
 			
