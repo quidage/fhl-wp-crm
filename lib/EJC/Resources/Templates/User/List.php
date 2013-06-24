@@ -1,9 +1,9 @@
 <?php
 /**
- * Template fuer \EJC\Controller\UserController->listAction()  
+ * Template fuer \EJC\Controller\UserController->listAction()
  *
  * Liste alle User im System - nur fuer den Admin vorgesehen
- * 
+ *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */
@@ -27,9 +27,8 @@
             <td><?php echo $user->getFirst_name(); ?></td>
             <td><?php echo $user->getLast_name(); ?></td>
             <td><?php echo $user->getEmail(); ?></td>
-            <td><?php $this->getLink('Bearbeiten', 'User', 'edit', array('user' => $user->getId())); ?></td>
+            <td><?php $this->getLink('Bearbeiten', 'User', 'edit', array('user[id]' => $user->getId())); ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
- 

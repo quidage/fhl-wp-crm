@@ -62,6 +62,13 @@ class User extends AbstractModel {
     protected $confirm_hash;
 
     /**
+     * Ob User deaktiviert ist
+     *
+     * @var boolean
+     */
+    protected $disable;
+
+    /**
      * Sorge dafuer, dass die Eigenschaften die richtigen Datentypen bekommen
      * @return void
      */
@@ -69,6 +76,7 @@ class User extends AbstractModel {
         parent::__construct();
         $this->last_login = new \DateTime($this->last_login);
         $this->admin = filter_var($this->admin, FILTER_VALIDATE_BOOLEAN);
+        $this->disable = filter_var($this->deleted, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**
@@ -220,6 +228,24 @@ class User extends AbstractModel {
      */
     public function setConfirm_hash($confirm_hash) {
         $this->confirm_hash = trim($confirm_hash);
+    }
+
+    /**
+     * Hole den Deaktiviert-Status
+     *
+     * @return boolean
+     */
+    public function getDisable() {
+        return $this->disable;
+    }
+
+    /**
+     * Setze den Deaktiviert-Status
+     *
+     * @param boolean $disable
+     */
+    public function setDisable($disable) {
+        $this->disable = filter_var($disable, FILTER_VALIDATE_BOOLEAN);
     }
 
 }
