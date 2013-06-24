@@ -130,7 +130,6 @@ class ProjectController extends AbstractController {
      * @return void
      */
     public function deleteMessageAction(\EJC\Model\Project $project) {
-    	$this->projectRepository->remove($project);
 		$this->view->assign('projectData', $project);
         $this->view->render();
     }
@@ -143,6 +142,7 @@ class ProjectController extends AbstractController {
      * @return void
      */
     public function deleteAction(\EJC\Model\Project $project) {
+    	$this->projectRepository->remove($project);
 		$this->view->assign('projectData', $project);
         $this->view->render();
     }
