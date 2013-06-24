@@ -272,7 +272,7 @@ class UserController extends AbstractController {
             if ($user->getPassword() === md5($login['password'])) {
                 $_SESSION['user'] = serialize($user);
                 $_SESSION['login'] = time();
-                $this->forward('User', 'start');
+                $this->redirect('User', 'start');
             } else {
                 // Falsches Passwort - Fehlermeldung anzeigen
                 $this->view->addErrorMessage('Falsches Passwort');
