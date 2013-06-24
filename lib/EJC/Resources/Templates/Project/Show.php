@@ -25,8 +25,9 @@
         <thead>
             <caption>
                 Offene Aufgaben
-                <span class="new-object"><a href="<?php echo $this->getUrl('Task', 'new', array('project[id]' => $this->project->getId())); ?>" title="Neue Aufgabe">
-                	<img src="images/iconset/plus_white.png">Neue Aufgabe</a></span>
+                <span class="new-object">
+                	<?php $this->getLink('<img src="images/iconset/plus_white.png" title="Neuer Eintrag">Neue Aufgabe','Task', 'new', array('ajax' => true,'project[id]' => $this->project->getId()), '.std-btn');?>
+                </span>
             </caption>
             <?php if (!empty($tasks)): ?>
                 <tr>
@@ -49,8 +50,10 @@
                         <td>
                         	<a href="<?php echo $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
                         		<img src="images/iconset/information.png" /></a>
-                        	<a href="<?php echo $this->getUrl('Task', 'edit', array('task[id]' => $task->getId())); ?>" title="Bearbeiten">
-                				<img src="images/iconset/writeNew_black.png" /></a>
+                        	
+                        	<?php $this->getLink('<img src="images/iconset/writeNew_black.png" title="Bearbeiten">','Task', 'edit', array('ajax' => true,'task[id]' => $task->getId()), '.std-btn');?>
+                        	
+                        	<?php $this->getLink('<img src="images/iconset/check-not-ok.png" title="Löschen" alt="eintrag löschen">','Task', 'deleteMessage', array('ajax' => true,'task[id]' => $task->getId()), '.msg-btn');?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

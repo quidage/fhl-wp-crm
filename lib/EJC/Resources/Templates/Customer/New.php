@@ -42,7 +42,8 @@
                 <td><input type="text" name="newCustomer[email]" value="<?php echo $this->newCustomer->getEmail(); ?>" placeholder="max.mustermann@musterkunde.de" /></td>
         </tr>
         <tr>
-                <td colspan="2" style="text-align: left;"><input type="submit" value="Speichern" class="submit button-link" /></td>
+                <td class="btn-field"><input type="submit" value="Speichern" class="submit button-link" /></td>
+                <td class="btn-field"><input id="std-close-wnd" type="submit" value="Abbrechen" class="submit button-link" /></td>
         </tr>
     </table>
 </form>

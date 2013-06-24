@@ -40,7 +40,8 @@
                 <td><input type="text" name="customer[email]" value="<?php echo $this->customer->getEmail(); ?>" /></td>
         </tr>
         <tr>
-                <td colspan="2" style="text-align: left;"><input type="submit" value="Speichern" class="submit button-link" /></td>
+                <td class="btn-field"><input type="submit" value="Speichern" class="submit button-link" /></td>
+                <td class="btn-field"><input id="std-close-wnd" type="submit" value="Abbrechen" class="submit button-link" /></td>
         </tr>
     </table>
 </form>

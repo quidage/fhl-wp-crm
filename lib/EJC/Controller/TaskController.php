@@ -7,6 +7,7 @@ namespace EJC\Controller;
  *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @author Enrico Lauterschlag <enrico.lauterschlag@web.de>
+ * @author Julian Hilbers <hilbers.julian@gmail.com>
  * @package wp-crm
  */
 class TaskController extends AbstractController {
@@ -99,5 +100,30 @@ class TaskController extends AbstractController {
             ));
     }
 
+
+	/**
+     * Gibt eine Information zum löschen eines Eintrages aus
+     *
+     * @author Julian Hilbers <hilbers.julian@gmail.com>
+     * @param \EJC\Model\Task $task
+     * @return void
+     */
+    public function deleteMessageAction(\EJC\Model\Task $task) {
+		$this->view->assign('taskData', $task);
+        $this->view->render();
+    }
+
+	/**
+     * Löscht eine Aufgabe
+     *
+     * @author Julian Hilbers <hilbers.julian@gmail.com>
+     * @param \EJC\Model\Task $task
+     * @return void
+     */
+    public function deleteAction(\EJC\Model\Task $task) {
+    	//$this->taskRepository->remove($task);
+		$this->view->assign('taskData', $task);
+        $this->view->render();
+    }
 }
 ?>
