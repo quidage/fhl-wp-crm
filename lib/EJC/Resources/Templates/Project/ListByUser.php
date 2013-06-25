@@ -29,7 +29,7 @@
         <tr>
             <th>Name</th>
             <th>Kunde</th>
-            <th>Beschreibung</th>
+            <th class="descProject">Beschreibung</th>
             <th>Status</th>
             <th></th>
         </tr>

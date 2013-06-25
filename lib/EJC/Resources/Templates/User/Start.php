@@ -26,7 +26,7 @@
             <tr>
                 <th>Name</th>
                 <th>Kunde</th>
-                <th>Beschreibung</th>
+                <th class="descUserStart">Beschreibung</th>
                 <th></th>
             </tr>
         </thead>
@@ -67,7 +67,7 @@
             <tr>
                 <th>Name</th>
                 <th>Projekt</th>
-                <th>Beschreibung</th>
+                <th class="descTaskStart">Beschreibung</th>
                 <th></th>
             </tr>
         </thead>
