@@ -32,7 +32,8 @@
             <?php if (!empty($tasks)): ?>
                 <tr>
                     <th>Name</th>
-                    <th>Beschreibung</th>
+                    <th class="descTask">Beschreibung</th>
+                    <th>Status</th>
                     <th></th>
                 </tr>
             <?php endif; ?>
@@ -47,6 +48,7 @@
                     <tr>
                         <td><?php echo $task->getName(); ?></td>
                         <td><?php echo $task->getDescription(); ?></td>
+                        <td><?php echo $task->getStatus(); ?></td>
                         <td>
                         	<a href="<?php echo $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
                         		<img src="images/iconset/information.png" /></a>
