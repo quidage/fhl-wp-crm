@@ -646,27 +646,51 @@ window.onload = function() {
 	var stdWnd;
 	var nfoWnd;
 	
-	// Schließen Aktion für Standard Fenster
+	/**
+	 * Schließen Aktion für Standard Fenster
+	 * 
+ 	 * @param {object} e	Event Informationen
+ 	 * @param returns {boolean}
+	 */
 	var standardCloseAction = function(e) {
 		e.preventDefault();
 		document.body.removeEventListener("keydown", standardCloseAction, false );
 		document.getElementById('std-close-wnd').removeEventListener("click", standardCloseAction, false );
-		if( e.keyCode === 27 ) {
-			stdWnd.close();
-		} else if( e.keyCode === 0 ) {
-			stdWnd.close();
-		}
+		
+		windowCloseAction( stdWnd, e.keyCode );
+		
+		return false;
 	}
 	
-	// Schließen Aktion für Informationsfenster
+	/**
+	 * Schließen Aktion für Informationsfenster
+	 * 
+ 	 * @param {object} e	Event Informationen
+ 	 * @param returns {boolean}
+	 */
 	var informationCloseAction = function(e) {
 		e.preventDefault();
 		document.body.removeEventListener("keydown", informationCloseAction, false );
 		document.getElementById('close-wnd').removeEventListener("click", informationCloseAction, false );
-		if( e.keyCode === 27 ) {
-			nfoWnd.close();
-		} else if( e.keyCode === 0 ) {
-			nfoWnd.close();
+		
+		windowCloseAction( nfoWnd, e.keyCode );
+		
+		return false;
+	}
+	
+	/**
+	 * Enthält die möglichen Varianten das Fenster zu schließen
+	 * 
+ 	 * @param {object} wnd			Objekt des zu schließenden Fensters
+ 	 * @param {object} keyCode		Gedrückter Knopf auf der Tastatur
+	 */
+	function windowCloseAction( wnd, keyCode ) {
+		keyCode = keyCode || 0;
+		
+		if( keyCode === 27 ) {
+			wnd.close();
+		} else if( keyCode === 0 ) {
+			wnd.close();
 		}
 	}
 	
