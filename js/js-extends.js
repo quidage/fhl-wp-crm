@@ -1,16 +1,16 @@
 /**
- * File with useful JavaScript extensions
+ * Datei mit nützlichen JavaScript Erweiterungen
  * 
  * @author Julian Hilbers <hilbers.juian@gmail.com>
  * 
  */
 
 /**
- * Slightly modified version of an script from a guy called KorRedDevil (member of forum.devshed) to
- * extend the functionality of this default JavaScript function 
+ * Etwas modifizierte Version von einem Benutzer Namens KorRedDevil (Miglied bei forum.devshed),
+ * erweitert die Funktion zum ermitteln von Elementen anhand Ihrer Klasse
  * 
- * @param {string} className	Name of your class
- * @return {array} Containing all elements with this class name
+ * @param {string} className	Name der Klasse
+ * @return {array}
  */
 document.getElementsByClassName = function( className ) {
 	var hasClass  = new RegExp("(?:^|\\s)"+className+"(?:$|\\s)");
@@ -29,10 +29,10 @@ document.getElementsByClassName = function( className ) {
 }
 
 /**
- * Copyes the content of one object into an other
+ * Kopiert den Inhalt eines Objektes in ein anderes
  * 
- * @param {object} target	 		File to update
- * @param {object} source			New Data
+ * @param {object} target	 		Zieldobjekt
+ * @param {object} source			Neue Daten
  */
 Object.extend = function( target, source ) {
 	for( var x in source ) {

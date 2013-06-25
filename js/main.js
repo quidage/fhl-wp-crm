@@ -1,5 +1,5 @@
 /**
- * Selector for DOM elements inspired by jQuery
+ * Selector fuer DOM Elemente inspiriert durch jQuery
  * 
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @author Julian Hilbers <hilbers.juian@gmail.com>
@@ -16,7 +16,7 @@
 	"strict mode"
 	
 	// *************************************
-	// *** Selector ************************
+	// *** Selektor ************************
 	// *************************************
 	
 	var matches,
@@ -27,14 +27,14 @@
 		return new dHelper.dh.init( selector );
 	};
 	
-	// Alle Funktionen von dHelper zu dHelper.fn hinzufügen
+	// Alle Funktionen von dHelper zu dHelper.fn hinzufuegen
 	dHelper.dh = dHelper.prototype = {
 		len: 0,		// Found results
 		
 		/**
 		 * Contructor
 		 * 
-		 * @param {string} selector		Selektiertes Element, möglich sind Klassennamen oder Ids 
+		 * @param {string} selector		Selektiertes Element, moeglich sind Klassennamen oder Ids 
 		 */
 		init: function(selector) {
 			var elem, sType, sWork;
@@ -79,9 +79,9 @@
 	    	return this.matches[no];
 	    },
 	    /**
-	     * Läuft durch jedes gefundene Element und führt an ihm eine Aktion durch
+	     * Laeuft durch jedes gefundene Element und fuehrt an ihm eine Aktion durch
 	     * 
-	     * @param {function} callback		Aktion für gefundenen Elemente
+	     * @param {function} callback		Aktion fuer gefundenen Elemente
 	     */
 	    each: function( callback ) {
 	    	var c = this.len;
@@ -92,7 +92,7 @@
 	    	}
 	    },
 	    /**
-	     * Fügt die gefundenen Elemente zu dHelper hinzu
+	     * Fuegt die gefundenen Elemente zu dHelper hinzu
 	     * 
 	     * @param {array} results		Array mit den gefundenen Elementen
 	     */
@@ -118,19 +118,19 @@
 	        return uStr.replace(/^\s+|\s+$/g, '');
 	    },
 	    /**
-	     * Fügt ein neues HTML Element zum DOM hinzu
+	     * Fuegt ein neues HTML Element zum DOM hinzu
 	     * 
 	     * @param {string} input		Neues Element
 	     */
 	    append: function( input ) {
-	    	// TO DO - Klasse bzw. ID erkennen und übergeben
+	    	// TO DO - Klasse bzw. ID erkennen und uebergeben
 
 	    	var tmp = document.createElement(input);
 	    	this[0].appendChild(tmp);
 	    },
 	 	/**
-	     * Fügt eine Klasse zu einem Element hinzu, ist bereits ein Klassenname vorhanden,
-	     * wird der angegebene Werz hinzugefügt
+	     * Fuegt eine Klasse zu einem Element hinzu, ist bereits ein Klassenname vorhanden,
+	     * wird der angegebene Werz hinzugefuegt
 	     * 
 	     * @param {string} className	Name der Klasse
 	     * @return {dh}
@@ -215,7 +215,7 @@
 	    },
 	    
 	    /**
-	     * Fügt einem HTML Element ein onFocus Event hinzu
+	     * Fuegt einem HTML Element ein onFocus Event hinzu
 	     * 
 	     * @param {function} callback
 	     */
@@ -227,7 +227,7 @@
 	};
 	
 	/**
-	 * Führt eine AJAX Abfrage aus
+	 * Fuehrt eine AJAX Abfrage aus
 	 * 
 	 * @param {object} parameter		Zu sendene Parameter
 	 * @param {function} callback		Aktion nach Abschluss der Abfrage
@@ -249,7 +249,7 @@
 	    var requestUri = parameter.url;
 	    
 	    if( parameter.params != undefined ) {
-	    	// TO DO - Parameter erkennen und in Objekt für Versand einbinden
+	    	// TO DO - Parameter erkennen und in Objekt fuer Versand einbinden
 	    	/*
 	    	for (i = 0; i < parameter.params.length; i++) {
 	    		
@@ -259,7 +259,7 @@
 	
 	    request.open("POST", requestUri, true);
 	    request.onloadstart = function() {
-	    	// Overlay während des Ladevorganges hinzufügen
+	    	// Overlay waehrend des Ladevorganges hinzufuegen
         	var ovl = document.getElementById('std-overlay');
 			if( !ovl ) {
 				var ovImg = document.createElement('img');
@@ -285,7 +285,7 @@
 	// Der Initialisierung Methode alle Funktionen von dHelper zuweisen  
 	dHelper.dh.init.prototype = dHelper.dh;
 	
-	// dHelper über $ erreichbar machen 
+	// dHelper ueber $ erreichbar machen 
 	window.$ = dHelper;
 	
 	
@@ -313,16 +313,16 @@
 	 */
 	wndHelper.wnd = wndHelper.prototype = {
 		wId: 0,						// Einmalige ID des Fenster
-		activ: false,				// Flag für die den Zastand
+		activ: false,				// Flag fuer die den Zastand
 		wndObj: null,				// Objekt des Fensters selbst
-		ovlObj: null,				// Objekt der Shader Fläche im Hintergrund
+		ovlObj: null,				// Objekt der Shader Flaeche im Hintergrund
 		windowId:'',				// Interne Id des Fensters
 		fadeStep: 0.05,				// Schritte mit denen das Fenster eingeblenden wird
 		fadeSpeed: 10,				// Geschwindigkeit der wiederholungen in milli sekunden
 		properties: {},				// Objekt mit den aktuellen Eigenschaften des Fensters
 		defaults: {			
 			w: 0,						// Breite des Fensters
-			h: 0,						// Höhe des Fensters
+			h: 0,						// Hoehe des Fensters
 			x: 0,						// X-Position des Fensters
 			y: 0,						// Y-Position des Fensters
 			windowType: 'std-window',	// Art des Fensters
@@ -331,20 +331,20 @@
 		/**
 		 * Initiiert das neue Fenster
 		 * 
-		 * @param {object} settings		// Objekt mit Einstellungen für das Fentser
+		 * @param {object} settings		// Objekt mit Einstellungen fuer das Fentser
 		 * 
 		 * @returns {wndHelper}
 		 */	
 		init: function( settings ) {
-			Object.extend( this.properties, this.defaults );	// Properties mit den Werten von Default befüllen
-			Object.extend( this.properties, settings );			// Properties mit den Settings des Nutezrs überschreiben
+			Object.extend( this.properties, this.defaults );	// Properties mit den Werten von Default befuellen
+			Object.extend( this.properties, settings );			// Properties mit den Settings des Nutezrs ueberschreiben
 			
 			this.newWindow();
 			return this;
 		},
 		
 		/**
-		 * Fügt ein Fenster zum DOM hinzu
+		 * Fuegt ein Fenster zum DOM hinzu
 		 */
 		draw: function() {
 			var bdy = document.body;
@@ -390,7 +390,7 @@
 		},
 		
 		/**
-		 * Generiert eine Einmalige ID für das Fenster.
+		 * Generiert eine Einmalige ID fuer das Fenster.
 		 */
 		newWindowId: function() {
 			var rID = (1 + Math.random()).toString(32).substr(2);
@@ -405,7 +405,7 @@
 		},
 		
 		/**
-		 * Fürt alle nötigen Methoden zum erstellen des Fensters aus
+		 * Fuert alle noetigen Methoden zum erstellen des Fensters aus
 		 */
 		newWindow: function() {
 			var _this = this;
@@ -433,7 +433,7 @@
 		},
 		
 		/**
-		 * Legt ein Overlay über die Seite
+		 * Legt ein Overlay ueber die Seite
 		 */
 		addOverlay: function() {
 			var ovl = this.getWindowElement('std-overlay');
@@ -456,7 +456,7 @@
 		/**
 		 * Blendet ein Fenster mit den per Variabel festgelegten Schritten ein
 		 * 
-		 * @param {number} val		// Nächster Schritt für den rekursiven Aufruf
+		 * @param {number} val		// Naechster Schritt fuer den rekursiven Aufruf
 		 */
 		fadeIn: function( val, callback ) {
 			var _this = this;
@@ -474,7 +474,7 @@
 		/**
 		 * Blendet ein Fenster mit den per Variabel festgelegten Schritten aus
 		 * 
-		 * @param {number} val		// Nächster Schritt für den rekursiven Aufruf
+		 * @param {number} val		// Naechster Schritt fuer den rekursiven Aufruf
 		 */
 		fadeOut: function( val, callback ) {
 			var _this = this;
@@ -491,7 +491,7 @@
 		}
 	};
 	
-	// Alle Funktionen und Parameter an das Window prototyp Objekt übergeben
+	// Alle Funktionen und Parameter an das Window prototyp Objekt uebergeben
 	wndHelper.wnd.init.prototype = wndHelper.wnd;
 	
 	// Dem System den Namen des Objektes bekannt machen
@@ -521,24 +521,24 @@ function valid(selector, options){
 var Validate = {
 	// Standardwerte
 	defaults : { name: '', required: false, type: 'text', maxLen: 0, minLen: 0, errMsg: 'Ihre Eingabe ist nicht korrekt!' },
-	fields: {},		// Enthält alle zu prüfenden Felder
-	vForm: null,	// Objekt des zu prüfenden Formulars
+	fields: {},		// Enthaelt alle zu pruefenden Felder
+	vForm: null,	// Objekt des zu pruefenden Formulars
 	
 	/**
 	 * Initiiert den Validator
 	 * 
 	 * @param {object} vf		Objekt des Formulars
-	 * @param {object} entrys	Liste mit den zu prüfenden einträgen
+	 * @param {object} entrys	Liste mit den zu pruefenden eintraegen
 	 */
 	init: function( vf, entrys ) {
 		this.combineWithDefaults( entrys );
 		this.vForm = vf;
 	},
 	/**
-	 * Fügt die internen Einstellungen mit den Einstellungen des Nutzers sowie
+	 * Fuegt die internen Einstellungen mit den Einstellungen des Nutzers sowie
 	 * den Standardwerten zusammen 
 	 * 
- 	 * @param {Object} list		Liste mit den zu prüfenden einträgen
+ 	 * @param {Object} list		Liste mit den zu pruefenden eintraegen
 	 */
 	combineWithDefaults: function( list ) {
 		this.list = [];
@@ -551,10 +551,10 @@ var Validate = {
 		}
 	},
 	/**
-	 * Prüft einen Wert entsprechend der Einstellungen
+	 * Prueft einen Wert entsprechend der Einstellungen
 	 * 
 	 * @param {*} value			Testwert
-	 * @param {object} opt		Vorgaben für disen Eintrag
+	 * @param {object} opt		Vorgaben fuer disen Eintrag
 	 * 
 	 * @return {string} Fehlermeldung
 	 */
@@ -564,17 +564,17 @@ var Validate = {
 		var maL = ( opt.maxLen == 0 ? strLen : opt.maxLen );
 		var miL = ( opt.minLen == 0 ? strLen : opt.minLen );
 		
-		// Endpunkt für Pflichtfelder, falls diese leer sind
+		// Endpunkt fuer Pflichtfelder, falls diese leer sind
 		if( opt.required && strLen < 1 ) {
 			return 'Fehlende Eingabe im Feld: '+opt.name+'.';
 		}
 		
-		// Endpunkt, falls ein Wert die falsche Länge hat
+		// Endpunkt, falls ein Wert die falsche Laenge hat
 		if( strLen > maL ) return 'Ihr Eintrag im Feld '+opt.name+' ist '+( strLen-maL )+' Zeichen zu lang.';
 		if( strLen < miL ) return 'Ihr Eintrag im Feld '+opt.name+' ist '+( miL-strLen )+' Zeichen zu kurz.';
 		
 		
-		// Einträge mit Regulären ausdrücken prüfen 
+		// Eintraege mit Regulaeren ausdruecken pruefen 
 		var msg = '';
 		switch( opt.type ) {
 			case 'email': regExp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -588,10 +588,10 @@ var Validate = {
 		return msg;
 	},
 	/**
-	 * Prüft einen Wert anhand eines regulären Ausdrucks
+	 * Prueft einen Wert anhand eines regulaeren Ausdrucks
 	 * 
 	 * @param {*} value				Zu testender Wert
-	 * @param {string} regExp		Regulärer Ausdruck
+	 * @param {string} regExp		Regulaerer Ausdruck
 	 * 
 	 * @return {boolean}
 	 */
@@ -599,9 +599,9 @@ var Validate = {
 		return regExp.test(value);
 	},
 	/**
-	 * Fügt einem Element eine Fehlermeldung hinzu 
+	 * Fuegt einem Element eine Fehlermeldung hinzu 
 	 * 
-	 * @param {string} pName	Bezeichner des Feldes, für das die Meldung bestimmt ist
+	 * @param {string} pName	Bezeichner des Feldes, fuer das die Meldung bestimmt ist
 	 * @param {object} elem		Element innerhalb dessen die Fehlermeldung ausgegeben werden soll
 	 * @param {string} msg		Fehlermeldung
 	 */
@@ -611,7 +611,7 @@ var Validate = {
 	},
 	
 	/**
-	 * Prüft alle in "this.list" enthaltenen Felder
+	 * Prueft alle in "this.list" enthaltenen Felder
 	 * 
 	 * @return {boolean} 
 	 */
@@ -623,7 +623,7 @@ var Validate = {
 		var del = false;
 		for( var x in this.list ) {
 			if( !del ) {
-				$(this.list[x].errTo).html('');		// Entfernt überflüssige Fehlermeldungen
+				$(this.list[x].errTo).html('');		// Entfernt ueberfluessige Fehlermeldungen
 				del = true;
 			} 
 			
@@ -647,7 +647,7 @@ window.onload = function() {
 	var nfoWnd;
 	
 	/**
-	 * Schließen Aktion für Standard Fenster
+	 * Schließen Aktion fuer Standard Fenster
 	 * 
  	 * @param {object} e	Event Informationen
  	 * @param returns {boolean}
@@ -663,7 +663,7 @@ window.onload = function() {
 	}
 	
 	/**
-	 * Schließen Aktion für Informationsfenster
+	 * Schließen Aktion fuer Informationsfenster
 	 * 
  	 * @param {object} e	Event Informationen
  	 * @param returns {boolean}
@@ -679,10 +679,10 @@ window.onload = function() {
 	}
 	
 	/**
-	 * Enthält die möglichen Varianten das Fenster zu schließen
+	 * Enthaelt die moeglichen Varianten das Fenster zu schließen
 	 * 
  	 * @param {object} wnd			Objekt des zu schließenden Fensters
- 	 * @param {object} keyCode		Gedrückter Knopf auf der Tastatur
+ 	 * @param {object} keyCode		Gedrueckter Knopf auf der Tastatur
 	 */
 	function windowCloseAction( wnd, keyCode ) {
 		keyCode = keyCode || 0;
@@ -694,7 +694,7 @@ window.onload = function() {
 		}
 	}
 	
-	// Aktion für Standard Fenster
+	// Aktion fuer Standard Fenster
 	$('.std-btn').each(
 		function(btn){
 			btn.click(function(e){
@@ -714,7 +714,7 @@ window.onload = function() {
 		}
 	);
 	
-	// Aktion für Informationsfenster
+	// Aktion fuer Informationsfenster
 	$('.msg-btn').each(
 		function(btn){
 			btn.click(function(e){
