@@ -115,7 +115,7 @@ class CustomerController extends AbstractController {
      * @return void
      */
     public function deleteAction(\EJC\Model\Customer $customer) {
-    	//$this->customerRepository->remove($customer);
+    	$this->customerRepository->remove($customer);
 		$this->view->assign('customerData', $customer);
         $this->view->render();
     }

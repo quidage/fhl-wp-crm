@@ -121,7 +121,7 @@ class TaskController extends AbstractController {
      * @return void
      */
     public function deleteAction(\EJC\Model\Task $task) {
-    	//$this->taskRepository->remove($task);
+    	$this->taskRepository->remove($task);
 		$this->view->assign('taskData', $task);
         $this->view->render();
     }
