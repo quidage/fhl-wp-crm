@@ -32,7 +32,7 @@
             <?php if (!empty($tasks)): ?>
                 <tr>
                     <th>Name</th>
-                    <th>Beschreibung</th>
+                    <th class="descTask">Beschreibung</th>
                     <th></th>
                 </tr>
             <?php endif; ?>

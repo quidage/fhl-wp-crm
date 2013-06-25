@@ -139,6 +139,13 @@ table.half {
     width: 50%;
 }
 
+/* Klassen zur Beschränkung der Breite des Beschreibungsfeldes */
+th.descUserStart { width: 335px; }
+th.descTaskStart { width: 275px; }
+th.descProject { width: 280px; }
+th.descTask { width: 340px; }
+
+
 table img {
 	padding:0px;
 	margin-right:5px;
