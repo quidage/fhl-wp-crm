@@ -1,9 +1,9 @@
 <?php
 /**
  * Template fuer \EJC\Controller\CustomerController->editAction()
- * 
+ *
  * Formular zum Aendern der Daten des Customer
- * 
+ *
  * @author Christian Hansen <christian.hansen@stud.fh-luebeck.de>
  * @package wp-crm
  */
@@ -11,7 +11,7 @@
 
 <h1>Kunde <?php echo $this->customer->getName(); ?> editieren</h1>
 
-<form name="edit" method="post" action="<?php $this->getUrl('Customer', 'update'); ?>">
+<form name="editCustomer" method="post" action="<?php echo $this->getUrl('Customer', 'update'); ?>">
     <input type="hidden" name="customer[id]" value="<?php echo $this->customer->getId() ?>">
     <table>
         <tr>
