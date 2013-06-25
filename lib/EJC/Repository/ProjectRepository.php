@@ -103,6 +103,20 @@ class ProjectRepository extends AbstractRepository {
         return $this->findByGrandParent_idAndStatus($user->getId(), 'offen', $limit);
     }
 
+    /**
+     * Loesche Project mitsamt dessen Tasks
+     *
+     * @param \EJC\Model\Project $project
+     */
+    public function removeAction(\EJC\Model\Project $project) {
+        $taskRepository = new \EJC\Repository\TaskRepository();
+        $tasks = $taskRepository->findByParent_id($project->getId());
+        foreach ($tasks AS $task) {
+            $taskRepository->remove($task);
+        }
+        parent::remove($project);
+    }
+
 }
 
 ?>

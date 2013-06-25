@@ -43,6 +43,20 @@ class CustomerRepository extends AbstractRepository {
         return $this->findByParent_idWithOrFilter($user->getId(), $filter);
     }
 
+    /**
+     * Loesche Customer mitsamt dessen Projekten
+     *
+     * @param \EJC\Model\Customer $customer
+     */
+    public function removeAction(\EJC\Model\Customer $customer) {
+        $projectRepository = new \EJC\Repository\ProjectRepository();
+        $projects = $projectRepository->findByParent_id($customer->getId());
+        foreach ($projects AS $project) {
+            $projectRepository->remove($project);
+        }
+        parent::remove($customer);
+    }
+
 }
 
 ?>
