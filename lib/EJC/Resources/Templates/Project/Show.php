@@ -33,6 +33,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Beschreibung</th>
+                    <th>Status</th>
                     <th></th>
                 </tr>
             <?php endif; ?>
@@ -47,12 +48,13 @@
                     <tr>
                         <td><?php echo $task->getName(); ?></td>
                         <td><?php echo $task->getDescription(); ?></td>
+                        <td><?php echo $task->getStatus(); ?></td>
                         <td>
                         	<a href="<?php echo $this->getUrl('Task', 'show', array('task[id]' => $task->getId())); ?>" title="Details">
                         		<img src="images/iconset/information.png" /></a>
-                        	
+
                         	<?php $this->getLink('<img src="images/iconset/writeNew_black.png" title="Bearbeiten">','Task', 'edit', array('ajax' => true,'task[id]' => $task->getId()), '.std-btn');?>
-                        	
+
                         	<?php $this->getLink('<img src="images/iconset/check-not-ok.png" title="L&ouml;schen" alt="eintrag l&ouml;schen">','Task', 'deleteMessage', array('ajax' => true,'task[id]' => $task->getId()), '.msg-btn');?>
                         </td>
                     </tr>
