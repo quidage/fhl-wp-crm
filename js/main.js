@@ -27,7 +27,7 @@
 		return new dHelper.dh.init( selector );
 	};
 	
-	// Alle Funktionen von dHelper zu dHelper.fn hinzufuegen
+	// Alle Funktionen von dHelper zu dHelper.dh hinzufuegen
 	dHelper.dh = dHelper.prototype = {
 		len: 0,		// Found results
 		
